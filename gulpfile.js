@@ -3,13 +3,19 @@ const gulp = require('gulp'),
     watch = require('gulp-watch'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cssmin = require('gulp-cssmin'),
+    rename = require('gulp-rename'),
+    sourcemaps = require('gulp-sourcemaps'),
+    concat = require('gulp-concat'),
+    cleanCSS = require('gulp-clean-css'),
     connect = require('gulp-connect');
 
 const srcPath = {
     'src': './src',
     'html': './src/**/*.html',
     'img': './src/**/*.+(jpg|png|svg|gif)',
-    'css': './src/**/*.css',
+    'css': ['./src/font/**/*.css', './src/css/reveal.css', './src/css/reveal.theme.css', './src/!(css|font)*/**/*.css'],
     'js': './src/**/*.js',
     'font': './src/font/**/*.*'
 };
@@ -18,7 +24,7 @@ const distPath = {
     'dist': './dist/',
     'html': './dist/',
     'img': './dist/',
-    'css': './dist/',
+    'css': './dist/css/',
     'js': './dist/',
     'font': './dist/font/',
 };
@@ -35,6 +41,17 @@ gulp.task('html', () => {
 
 gulp.task('css', () => {
     return gulp.src(srcPath.css)
+        .pipe(sourcemaps.init())
+        .pipe(concat('bundle.css'))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions']
+        }))
+        .pipe(cssmin())
+        //.pipe(cleanCSS({compatibility: '*'}))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(distPath.css));
 });
 
