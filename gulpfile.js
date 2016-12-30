@@ -6,17 +6,21 @@ const gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     cssmin = require('gulp-cssmin'),
     rename = require('gulp-rename'),
+    gulpif = require('gulp-if'),
     sourcemaps = require('gulp-sourcemaps'),
     concat = require('gulp-concat'),
     cleanCSS = require('gulp-clean-css'),
+    useref = require('gulp-useref'),
+    uglify = require('gulp-uglify'),
+    pipe = require('multipipe'),
     connect = require('gulp-connect');
 
 const srcPath = {
     'src': './src',
     'html': './src/**/*.html',
     'img': './src/**/*.+(jpg|png|svg|gif)',
-    'css': ['./src/font/**/*.css', './src/css/reveal.css', './src/css/reveal.theme.css', './src/!(css|font)*/**/*.css'],
-    'js': './src/**/*.js',
+    'css': ['./src/!(css|js)*/**/*.css'],
+    'js': './src/!(js)*/**/*.js',
     'font': './src/font/**/*.*'
 };
 
@@ -35,23 +39,26 @@ gulp.task('clean', () => {
 
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
+        .pipe(useref())
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css',
+            pipe(
+                autoprefixer({
+                    browsers: ['last 2 versions']
+                }),
+                cssmin()
+            )
+        ))
         .pipe(gulp.dest(distPath.html))
         .pipe(connect.reload());
 });
 
 gulp.task('css', () => {
     return gulp.src(srcPath.css)
-        .pipe(sourcemaps.init())
-        .pipe(concat('bundle.css'))
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
         .pipe(cssmin())
-        //.pipe(cleanCSS({compatibility: '*'}))
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest(distPath.css));
 });
 

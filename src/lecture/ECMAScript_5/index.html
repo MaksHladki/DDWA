@@ -9,9 +9,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="../css/bundle.min.css">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
 	<!--[if lt IE 9]>
-		<script src="../lib/js/html5shiv.js"></script>
+		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
@@ -3805,56 +3805,14 @@ myWorker.port.onmessage = function(e) {
 			</section>
 		</div>
 	</div>
+
 	<aside id="presentable-icon" class="revealjs">
 		<a title="Содержание лекции" href="#/0/1">
 			<i class="fa fa-list-ul fa-2x"></i>
 		</a>
 	</aside>
-	<script src="../lib/js/head.min.js"></script>
-	<script src="../js/reveal.js"></script>
-	<script>
-		Reveal.initialize({
-			controls: true,
-			progress: true,
-			history: true,
-			center: true,
-			slideNumber: true,
-			transition: 'slide', // none/fade/slide/convex/concave/zoom
-			dependencies: [{
-				src: '../lib/js/classList.js',
-				condition: function () {
-					return !document.body.classList;
-				}
-			}, {
-				src: '../plugin/markdown/marked.js',
-				condition: function () {
-					return !!document.querySelector('[data-markdown]');
-				}
-			}, {
-				src: '../plugin/markdown/markdown.js',
-				condition: function () {
-					return !!document.querySelector('[data-markdown]');
-				}
-			}, {
-				src: '../plugin/highlight/highlight.js',
-				async: true,
-				callback: function () {
-					hljs.initHighlightingOnLoad();
-				}
-			}, {
-				src: '../plugin/zoom-js/zoom.js',
-				async: true
-			}, {
-				src: '../plugin/presentable/presentable.min.js',
-				async: true,
-				callback: function () {
-					presentable.toc({
-						framework: "revealjs"
-					});
-				}
-			}]
-		});
-	</script>
+
+	<script src="../../js/bundle.min.js"></script>
 </body>
 
 </html>
