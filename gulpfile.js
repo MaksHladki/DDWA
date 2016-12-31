@@ -1,19 +1,20 @@
 const gulp = require('gulp'),
+    gulpif = require('gulp-if'),
     gulpSequence = require('gulp-sequence'),
-    watch = require('gulp-watch'),
+    autoprefixer = require('gulp-autoprefixer'),
+    concat = require('gulp-concat'),
+    connect = require('gulp-connect'),
+    cssmin = require('gulp-cssmin'),
+    cleanCSS = require('gulp-clean-css'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
-    autoprefixer = require('gulp-autoprefixer'),
-    cssmin = require('gulp-cssmin'),
     rename = require('gulp-rename'),
-    gulpif = require('gulp-if'),
-    sourcemaps = require('gulp-sourcemaps'),
-    concat = require('gulp-concat'),
-    cleanCSS = require('gulp-clean-css'),
-    useref = require('gulp-useref'),
-    uglify = require('gulp-uglify'),
     pipe = require('multipipe'),
-    connect = require('gulp-connect');
+    sourcemaps = require('gulp-sourcemaps'),
+    uglify = require('gulp-uglify'),
+    useref = require('gulp-useref'),
+    watch = require('gulp-watch');
+
 
 const srcPath = {
     'src': './src',
@@ -21,7 +22,8 @@ const srcPath = {
     'img': './src/**/*.+(jpg|png|svg|gif)',
     'css': ['./src/!(css|js)*/**/*.css'],
     'js': './src/!(js)*/**/*.js',
-    'font': './src/font/**/*.*'
+    'font': './src/font/**/*.*',
+    'task': './src/task/**/*.pdf'
 };
 
 const distPath = {
@@ -31,7 +33,9 @@ const distPath = {
     'css': './dist/css/',
     'js': './dist/',
     'font': './dist/font/',
+    'task': './dist/task/'
 };
+
 
 gulp.task('clean', () => {
     return del([distPath.dist]);
@@ -78,6 +82,11 @@ gulp.task('font', () => {
         .pipe(gulp.dest(distPath.font));
 });
 
+gulp.task('task', () => {
+    return gulp.src(srcPath.task)
+        .pipe(gulp.dest(distPath.task));
+})
+
 gulp.task('connect', () => {
     return connect.server({
         root: distPath.dist,
@@ -86,7 +95,14 @@ gulp.task('connect', () => {
     });
 });
 
-gulp.task('build', gulpSequence('clean', ['html', 'img', 'js', 'css', 'font']));
+gulp.task('build', gulpSequence('clean', [
+    'html',
+    'img',
+    'js',
+    'css',
+    'font',
+    'task'
+]));
 
 gulp.task('watch', () => {
     watch(srcPath.css, () => gulp.start('css'));
@@ -94,6 +110,7 @@ gulp.task('watch', () => {
     watch(srcPath.js, () => gulp.start('js'));
     watch(srcPath.img, () => gulp.start('img'));
     watch(srcPath.font, () => gulp.start('font'));
+    watch(srcPath.task, () => gulp.start('task'));
 });
 
-gulp.task('default', ['watch', 'build', 'connect']);
+gulp.task('default', gulpSequence('build', ['watch', 'connect']));
