@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Название лекции</title>
+	<title>ECMADcript 6</title>
 	<meta name="description" content="">
 	<meta name="author" content="Maks Hladki">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,7 +20,7 @@
 		<div class="slides">
 			<section>
 				<section>
-					<h1>Название лекции</h1>
+					<h1>ECMAScript 6</h1>
 					<h3>Разработка динамичесих веб приложений</h3>
 					<p>
 						<small>Гладкий Максим Валерьевич / <a href="https://github.com/MaksHladki">github:MaksHladki</a></small>
@@ -226,7 +226,7 @@ x[5](); // 5
 					<code class="hljs">
 const name1 = value1 [, name2 = value2 [, ... [, nameN = valueN]]];
 
-//nameN - имя константы. Подчиняется тем же правилам, что и идентификаторы переменных
+//nameN - имя константы (те же правила, что и для идентификаторов переменных)
 //valueN - значение константы
 					</code>
 				</pre>
@@ -254,7 +254,7 @@ user = 5; // ошибка
 					<h3>Пример</h3>
 					<pre>
 					<code class="hljs">
-						const lit = 4;
+const lit = 4;
 lit = 5; // TypeError: Литерал изменить нельзя
 
 const obj = { a: 1 };
@@ -269,6 +269,302 @@ obj = [4, 3, 2, 1]; // TypeError: Ссылку менять нельзя
 					</code>
 				</pre>
 				</section>
+			</section>
+			<section>
+				<h1>Деструктуризация (destructuring assignment)</h1>
+			</section>
+			<section>
+				<h2>Деструктуризация</h2>
+				<blockquote>
+					Деструктуризация – особый синтаксис присваивания, при котором можно присвоить массив или объект сразу нескольким переменным,
+					разбив его на части
+				</blockquote>
+				<ul>
+					<li>Деструктуризация позволяет привязывать данные при совпадении паттерна</li>
+					<li>Поддерживается для массивов и объектов</li>
+					<li>Деструктуризация устойчива к ошибкам и во многом похожа на поиск поля в объеке</li>
+					<li>Возвращает undefined, если что-то пошло не так</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h2>Деструктуризация массива</h2>
+					<pre>
+					<code class="hljs">
+let [firstName, lastName] = ['Иван', 'Иванов'];
+
+console.log(firstName); // Иван
+console.log(lastName);  // Иванов
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h2>
+						Пропуск элементов
+					</h2>
+					<pre>
+					<code class="hlljs">				
+// первый и второй элементы не нужны
+let [, , middleName] = "Иванов Иван Иванович (1971)".split(" ");
+
+console.log(middleName); // Иванович
+					</code>
+				</pre>
+					<p>Первый и второй, а также все элементы после третьего никуда не записались, они были отброшены</p>
+				</section>
+				<section>
+					<h3>Оператор spread</h3>
+					<pre>
+					<code class="hljs">
+let [fisrt, last, ...rest] = "Все ЛР должны быть сданы".split(" ");
+
+console.log(first); // Все
+console.log(last);  // ЛР
+console.log(rest);  // должны быть сданы (массив из 3х элементов)
+					</code>
+				</pre>
+					<ul>
+						<li>Значением rest будет массив из оставшихся элементов</li>
+						<li>Вместо rest можно использовать другое имя переменной</li>
+						<li>Оператор spread - троеточие</li>
+						<li>Spread должн стоять только последним элементом</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Значения по умолчанию</h3>
+					<pre>
+						<code class="hljs">
+let [firstName, lastName] = [];
+console.log(firstName); // undefined
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+let [firstName="Гость", lastName="Анонимный"] = [];
+
+console.log(firstName); // Гость
+console.log(lastName);  // Анонимный
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Еще пример</h3>
+					<pre>
+						<code class="hljs">
+function defaultLastName() {
+  return Date.now() + '-visitor';
+}
+
+// lastName получит значение, соответствующее текущей дате:
+let [firstName, lastName=defaultLastName()] = ["Вася"];
+
+console.log(firstName); // Вася
+console.log(lastName);  // 1436...-visitor
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Отделение объявления от присваивания</h3>
+					<pre>
+						<code class="hljs">
+let a, b;
+
+[a, b] = [1, 2];
+console.log(a); // 1
+console.log(b); // 2
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Swapping</h3>
+					<pre>
+						<code class="hljs">
+var a = 1;
+var b = 3;
+
+[a, b] = [b, a];
+console.log(a); // 3
+console.log(b); // 1
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Использование возвращающей функции</h3>
+					<pre>
+						<code class="hljs">
+function f() {
+  return [1, 2];
+}
+
+var a, b; 
+[a, b] = f(); 
+console.log(a); // 1
+console.log(b); // 2
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Работа c другими коллекциями</h3>
+					<pre>
+						<code class="hljs">
+// Строки
+var [a, b, c] = 'xyz';
+console.log(a, b, b); // x y z
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+// Коллекции DOM элементов
+var [link1, link2] = document.links;
+console.log(link1.tagName); // a
+console.log(link2.textContent); // Пример
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Деструктуризация объектов</h2>
+					<pre>
+						<code class="hljs">
+let {var1, var2} = {var1:…, var2…}
+						</code>
+					</pre>
+					<ul>
+						<li>Указываем, какие свойства в какие переменные должны «идти»</li>
+						<li>Объект справа – существующий объект</li>
+						<li>Список слева – список переменных, в которые записываются соответствующие свойства</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Использование возвращающей функции</h3>
+					<pre>
+						<code class="hljs">
+var calc = function(num) {
+  return Math.pow(num, 2);
+};
+
+var { prop: x, pow: y = calc(x)} = { prop: 4 };
+console.log(x, y); // 4 16
+
+var { prop: x, pow: y = calc(x)} = { prop: 4, pow: 10 };
+console.log(x, y); // 4 10
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Простой пример</h3>
+					<pre>
+						<code class="hljs">
+let options = {
+  title: "Меню",
+  width: 100,
+  height: 200
+};
+
+let {title, width, height} = options;
+
+console.log(title);  // Меню
+console.log(width);  // 100
+console.log(height); // 200
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Другое имя переменной</h3>
+					<pre>
+						<code class="hljs">
+let options = {
+  title: "Меню",
+  width: 100,
+  height: 200
+};
+
+let {width: w, height: h, title} = options;
+
+console.log(title);  // Меню
+console.log(w);      // 100
+console.log(h);      // 200
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Значение по умолчанию</h3>
+					<pre>
+						<code class="hljs">
+let options = {
+  title: "Меню"
+};
+
+let {width=100, height=200, title} = options;
+
+console.log(title);  // Меню
+console.log(width);  // 100
+console.log(height); // 200
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Combo: новое имя + значение по умолчанию</h3>
+					<pre>
+						<code class="hljs">
+let options = {
+  title: "Меню"
+};
+
+let {width:w=100, height:h=200, title} = options;
+
+console.log(title);  // Меню
+console.log(w);      // 100
+console.log(h);      // 200
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Отделение объявления от присваивания</h3>
+					<pre>
+						<code class="hljs">
+var width, height;
+({width, height} = {width: 100,height: 200});
+console.log(width);// 100
+console.log(height);// 200
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Использование конкретного имени</h3>
+					<pre>
+						<code class="hljs">
+let key = "title";
+let { [key]: t } = {title: "Меню"};
+
+console.log(t); // Меню
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h2>Вложенные деструктуризации</h2>
+				<pre>
+					<code class="hljs">
+let options = {
+  size: {
+    width: 100,
+    height: 200
+  },
+  items: ["Пончик", "Пирожное"]
+}
+
+let { title="Меню", size: {width, height}, items: [item1, item2] } = options;
+
+// Меню 100 200 Пончик Пирожное
+console.log(title);  // Меню
+console.log(width);  // 100
+console.log(height); // 200
+console.log(item1);  // Пончик
+console.log(item2);  // Пирожное
+					</code>
+				</pre>
 			</section>
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
