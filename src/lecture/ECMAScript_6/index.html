@@ -686,7 +686,7 @@ getRandomInt(0, 10);//ReferenceError: getRandomInt is not defined
 						(param1, param2, paramN) => expression
 					</code>
 						</pre>
-						<small>
+					<small>
 					<ul>
 						<li>Лексическое связывание. Значения this, super и arguments определяются не тем, как стрелочные
 							функции были вызваны, а тем, как они были созданы</li>
@@ -721,7 +721,6 @@ let square = x => x*x;
 console.log(square(3));//9
 						</code>
 					</pre>
-
 					<pre>
 						<code class="hljs">
 let sum => (x, y) => x + y;
@@ -734,7 +733,6 @@ let getObject = () => ({ brand: 'BMW' });
 console.log(getObject());//Object {brand: "BMW"}
 						</code>
 					</pre>
-
 					<pre>
 						<code class="hljs">
 let func = () => 77;
@@ -782,6 +780,239 @@ var a = new (function() {});
 
 var b = new (() => {}); 
 //TypeError: (intermediate value) is not a constructor
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h1>Строки</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Шаблонные строки</h2>
+					<blockquote>
+						Выглядят как обычные строки за исключением того, что обернуты символами обратных кавычек <span class="highlight-blue"><b>`</b></span>
+					</blockquote>
+					<pre>
+						<code class="hljs">
+`строка текста`
+
+`строка текста 1
+ строка текста 2`
+
+`строка текста ${выражение} строка текста`
+
+tag `строка текста ${выражение} строка текста`
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Многострочные литералы</h3>
+					<pre>
+						<code class="hljs">
+console.log(`string text line 1
+string text line 2`);
+// "string text line 1
+//  string text line 2"
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Интерполяция выражений</h3>
+					<pre>
+						<code class="hljs">
+let apples = 2;
+let oranges = 3;
+
+console.log(`${apples} + ${oranges} = ${apples + oranges}`); // 2 + 3 = 5
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Еще примеры</h3>
+					<pre>
+						<code class="hljs">
+function authorize(user, action) {
+  if (!user.hasPrivilege(action)) {
+    throw new Error(
+      `Пользователю ${user.name} не разрешено ${action}.`);
+  }
+}
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+const up = (str) => str.toUpperCase();
+let str = `this is ${ up('sting') } in uppercase`;
+console.log(str); // this is STRING in uppercase
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Вложенная Интерполяция</h3>
+					<pre>
+						<code class="hljs">
+const up = (str) => str.toUpperCase();
+let user = 'user';
+let str = `these ${up(`${user}s`)} are great`;
+console.log(str); // these USERS are great
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Улучшеная поддержка юникода</h3>
+					<p>UTF-16 = символ состоит из 2 байт</p>
+					<pre>
+						<code class="hljs">
+console.log( '我'.length ); // 1
+console.log( '𩷶'.length ); // 2
+//расширенная поодерэка метасимволов, математических символов и смайликов
+console.log( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
+console.log( '😂'.length ); // 2, FACE WITH TEARS OF JOY
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Новые методы</h3>
+					<ul>
+						<li>str.includes(s)</li>
+						<li>str.endsWith(s)</li>
+						<li>str.startsWith(s)</li>
+						<li>str.repeat(times)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Метод includes</h3>
+					<blockquote>
+Проверяет, включает ли одна строка в себя другую, возвращает true/false
+					</blockquote>
+					<pre>
+						<code class="hljs">
+str.includes(searchString[, position])
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.includes('To be'));       // true
+console.log(str.includes('question'));    // true
+console.log(str.includes('nonexistent')); // false
+console.log(str.includes('To be', 1));    // false
+console.log(str.includes('TO BE'));       // false
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод endsWith</h3>
+					<blockquote>
+						Возвращает true, если строка str заканчивается подстрокой searchString
+					</blockquote>
+					<pre>
+						<code class="hljs">
+str.endsWith(searchString[, position])
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.endsWith('question.')); // true
+console.log(str.endsWith('to be'));     // false
+console.log(str.endsWith('to be', 19)); // true
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод startsWith</h3>
+					<blockquote>
+						Возвращает true, если строка str начинается со строки searchString
+					</blockquote>
+					<pre>
+						<code class="hljs">
+str.startsWith(searchString[, position])
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.startsWith('To be'));         // true
+console.log(str.startsWith('not to be'));     // false
+console.log(str.startsWith('not to be', 10)); // true
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод repeat</h3>
+					<blockquote>
+						Повторяет строку str count раз
+					</blockquote>
+					<pre>
+						<code class="hljs">
+str.repeat(count)
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+'abc'.repeat(-1);   // RangeError
+'abc'.repeat(0);    // ''
+'abc'.repeat(1);    // 'abc'
+'abc'.repeat(2);    // 'abcabc'
+'abc'.repeat(3.5);  // 'abcabcabc' (count will be converted to integer)
+'abc'.repeat(1/0);  // RangeError
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Функции шаблонизации</h2>
+					<p>Использование свой функции шаблонизации для строк</p>
+					<pre>
+					<code class="hljs">
+let str = func`моя строка`;
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+function f(strings, ...values) {
+  console.log(JSON.stringify(strings));     // ["Sum of "," + "," =\n ","!"]
+  console.log(JSON.stringify(strings.raw)); // ["Sum of "," + "," =\\n ","!"]
+  console.log(JSON.stringify(values));      // [3,5,8]
+}
+
+let apples = 3;
+let oranges = 5;
+
+//          |  s[0] | v[0] |s[1]| v[1]  |s[2]  |      v[2]      |s[3]
+let str = f`Sum of ${apples} + ${oranges} =\n ${apples + oranges}!`;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Необрабатываемые строки</h3>
+					<blockquote>
+						Статический метод, является теговой функцией для шаблонных строк и используется для получения необработанной строки из шаблона
+					</blockquote>
+					<pre>
+						<code class="hljs">
+String.raw(callSite, ...substitutions)
+
+String.raw`templateString`
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+function tag(strings, ...values) {
+  return strings.raw[0];
+}
+
+tag`string text line 1 \n string text line 2`;
+// "string text line 1 \\n string text line 2"
 						</code>
 					</pre>
 				</section>
