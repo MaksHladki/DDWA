@@ -567,6 +567,226 @@ console.log(item2);  // Пирожное
 				</pre>
 			</section>
 			<section>
+				<h1>Функции</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Параметры по умолчанию</h2>
+					<pre>
+					<code class="hljs">
+function [name]([param1[ = defaultValue1 ][, ..., paramN[ = defaultValueN ]]]) {
+   //function's body
+}
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+function multiply(a, b = 1) {
+  return a*b;
+}
+
+multiply(5); // 5
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример с undefined</h3>
+					<blockquote>
+						Даже при явном указании undefined параметру присваивается значение по умолчанию
+					</blockquote>
+					<pre>
+						<code class="hljs">
+function multiply(a, b = 1) {
+  return a*b;
+}
+
+multiply(5, undefined); // 5		
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Вычисление во время вызова</h3>
+					<pre>
+						<code class="hljs">
+function append(value, array = []) {
+  array.push(value);
+  return array;
+}
+
+append(1); //[1]
+append(2); //[2]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример с функцией</h3>
+					<pre>
+						<code class="hljs">
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function print(number = getRandomInt(10, 100)){
+   console.log(number);
+}
+print();//29
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Оператор spread</h3>
+					<blockquote>
+						В отличии от arguments, rest - массив, а значит, можно использовать методы map, forEach и другие
+					</blockquote>
+					<pre>
+						<code class="hljs">
+function printName(firstName, lastName, ...rest) {
+  console.log(firstName + ' ' + lastName + ' - ' + rest);
+  console.log(rest);
+}
+printName('Иван', 'Иванов', 'Иванович', '1959');
+//Иван Иванов - Иванович,1959
+//["Иванович", "1959"]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Свойство name</h3>
+					function getRandomInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; } console.log(getRandomInt.name);//getRandomInt
+					getRandomInt.name = 'f'; console.log(getRandomInt.name); //getRandomInt console.log(f.name);// ReferenceError: f is
+					not defined
+				</section>
+				<section>
+					<h3>Блочная модель видимости</h3>
+					<pre>
+						<code class="hljs">
+if(something){
+getRandomInt(0, 10);//4
+	function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+}
+
+getRandomInt(0, 10);//ReferenceError: getRandomInt is not defined
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Стрелочные функции</h2>
+					<blockquote>
+						Выражения имеют более короткий синтаксис и лексически привязаны к значению this, всегда анонимные
+					</blockquote>
+					<pre>
+					<code class="hljs" data-trim>
+						(param1, param2, paramN) => expression
+					</code>
+						</pre>
+						<small>
+					<ul>
+						<li>Лексическое связывание. Значения this, super и arguments определяются не тем, как стрелочные
+							функции были вызваны, а тем, как они были созданы</li>
+						<li>Неизменяемые this, super и arguments. Значения этих переменных внутри стрелочных функций остаются неизменными на протяжении
+							всего жизненного цикла функции</li>
+						<li>Стрелочные функции не могут быть использованы как конструктор</li>
+						<li>Недоступность «собственного» значения переменной arguments</li>
+					</ul>
+					</small>
+				</section>
+				<section>
+					<h3>Короткая запись</h3>
+					<pre>
+					<code class="hljs">
+var faculties = [
+  "ИТ",
+  "ИЭФ",
+  "ХТИТ"
+];
+
+var a = faculties.map(function(s){ return s.length });//[2,3,4]
+
+var b = faculties.map( s => s.length);//[2,3,4]
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Еще примеры</h3>
+					<pre>
+						<code class="hljs">
+let square = x => x*x;
+console.log(square(3));//9
+						</code>
+					</pre>
+
+					<pre>
+						<code class="hljs">
+let sum => (x, y) => x + y;
+console.log(sum(3,4));//7
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+let getObject = () => ({ brand: 'BMW' });
+console.log(getObject());//Object {brand: "BMW"}
+						</code>
+					</pre>
+
+					<pre>
+						<code class="hljs">
+let func = () => 77;
+console.log(func());//77
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Отсутствие this</h3>
+					<pre>
+					<code class="hljs">
+ var handler = {
+    id: "123456",
+    init: function() {
+        document.addEventListener("click", ev => this.doSomething(ev.type));
+        //this указывает на внешний контекст
+    },
+    doSomething: function(type) { 
+        console.log("Handling " + type  + " for " + this.id);
+    }
+};
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Отсутствие arguments</h3>
+					<pre>
+						<code class="hljs">
+function foo() {
+  var f = (i) => arguments[0]+i;
+  //возмет arguments из функции foo
+  console.log(f(2));
+}
+
+foo(1); // 3
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Отсутсвие запуска с new</h3>
+					<pre>
+						<code class="hljs">
+var a = new (function() {}); 
+// переменной a будет присвоено значение экземпляра анонимной функции
+
+var b = new (() => {}); 
+//TypeError: (intermediate value) is not a constructor
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
 				<img src="img/thanks.jpg" alt="" height="600">
 			</section>
