@@ -1072,9 +1072,10 @@ console.log(user[isAdmin]); // true
 				</section>
 				<section>
 					<h3>Еще один</h3>
-				<blockquote>
-					Свойство объявленное через символ не будет видно в for-in, Object.keys, Object.getOwnPropertyNames, также не будет добавлено при использовании JSON.stringify
-				</blockquote>
+					<blockquote>
+						Свойство объявленное через символ не будет видно в for-in, Object.keys, Object.getOwnPropertyNames, также не будет добавлено
+						при использовании JSON.stringify
+					</blockquote>
 					<pre>
 						<code class="hljs">
 let user = {
@@ -1159,6 +1160,155 @@ console.log(Symbol.for("name") == name); // true
 					</tr>
 				</table>
 				</small>
+			</section>
+			<section>
+				<h1>Объекты и прототипы</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Короткое свойство</h2>
+					<blockquote>
+						При объявлении свойства объекта достаточно указать только его имя, а значение будет взято из переменной с аналогичным именем
+					</blockquote>
+					<pre>
+						<code class="hljs">
+let name = "Вася";
+let isAdmin = true;
+
+let user = {
+  name,
+  isAdmin
+};
+console.log(JSON.stringify(user)); // {"name": "Вася", "isAdmin": true}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Вычисляемые свойства</h3>
+					<pre>
+						<code class="hljs">
+let propName = "firstName";
+
+let user = {
+  [propName]: "Вася"
+};
+
+console.log(user.firstName); // Вася
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+let a = "Зелёный ";
+let b = "Крокодил";
+
+let user = {
+  [(a + b).toLowerCase()]: "Петя"
+};
+
+console.log( user["зелёный крокодил"] ); // Петя
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод setPrototypeOf</h3>
+					<blockquote>
+						Метод устанавливает прототип (внутреннее свойство [[Prototype]]) указанного объекта в другой объект или null
+					</blockquote>
+					<pre>
+						<code class="hljs">
+Object.setPrototypeOf(obj, prototype);
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+var dict = Object.setPrototypeOf({}, null);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Object.assign</h3>
+					<blockquote>
+						Метод используется для копирования значений всех собственных перечисляемых свойств из одного или более исходных объектов
+						в целевой объект
+					</blockquote>
+					<pre>
+						<code class="hljs">
+Object.assign(target, src1, src2...)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+var o1 = { a: 1 };
+var o2 = { b: 2 };
+var o3 = { c: 3 };
+
+var obj = Object.assign(o1, o2, o3);
+console.log(obj); // { a: 1, b: 2, c: 3 }
+console.log(o1);  // { a: 1, b: 2, c: 3 }
+// изменился и сам целевой объект
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Object.is</h3>
+					<blockquote>
+						Метод определяет, являются ли два значения одинаковыми значениями
+					</blockquote>
+					<pre>
+						<code class="hljs">
+var isSame = Object.is(value1, value2);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+Object.is('foo', 'foo');     // true
+Object.is(window, window);   // true
+
+Object.is('foo', 'bar');     // false
+Object.is([], []);           // false
+
+var test = { a: 1 };
+Object.is(test, test);       // true
+
+Object.is(null, null);       // true
+
+// Специальные случаи
+Object.is(0, -0);            // false
+Object.is(-0, -0);           // true
+Object.is(NaN, 0/0);         // true
+Object.is(NaN, NaN);         // true
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Объявление метода</h3>
+					<p>Более короткий и удобный синтаксис</p>
+					<pre>
+						<code class="hljs">
+let name = "Вася";
+let user = {
+  name,
+  //something: function()
+  //{
+  //console.log(this.name);
+  //}	  
+  something() {
+    console.log(this.name);
+  }
+};
+user.something(); // Вася
+						</code>
+					</pre>
+				</section>
 			</section>
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
