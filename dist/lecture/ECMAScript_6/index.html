@@ -1590,7 +1590,11 @@ Bar.classMethod(); // 'hello, too'
 					</blockquote>
 					<pre>
 						<code class="hljs">
-class B extends A, M {}  
+class B extends A, M {}//множественного наследования нет  
+
+const mixin = base => class extends base {
+  /* свойства и методы */
+}
 						</code>
 					</pre>
 				</section>
@@ -1627,6 +1631,216 @@ class MyClass extends MyMixin(MyBaseClass) {
 
 let c = new MyClass();  
 c.test(); // test from MyMixin
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h1>Итераторы</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Всемогущественный for...of</h2>
+					<blockquote>
+						Оператор выполняет цикл обхода итерируемых объектов, вызывая на каждом
+						шаге итерации операторы для каждого значения из различных свойств объекта
+					</blockquote>
+					<pre>
+						<code class="hljs">
+for (переменная of объект)
+  оператор
+						</code>
+					</pre>
+					<ul>
+						<li>При итерациях используется значение, а не ключ</li>
+						<li>Можно использовать continue и break</li>
+						<li>Используется с Array, Map, Set, Object и т.д.</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+let arr = [ 3, 5, 7 ];
+arr.foo = "hello";
+
+for (let i in arr) {
+   console.log(i); // "0", "1", "2", "foo"
+}
+
+for (let i of arr) {
+   console.log(i); // "3", "5", "7"
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Разные типы данных</h3>
+					<pre>
+						<code class="hljs">
+// Строки
+let result = '';
+for (let chr of 'this is string') {
+  result += chr.trim();
+}
+console.log(result); // thisisstring
+
+// Коллекции DOM элементов
+let result = [];
+for (let link of document.links) {
+  result.push(link.href);
+}
+console.log(result); // ['http://google.com', 'http://jsraccoon.ru', ...]
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Понятие итератора</h2>
+					<blockquote>
+						Объект является итератором, если он умеет обращаться к элементам коллекции по одному за раз, при этом отслеживая свое текущее
+						положение внутри этой последовательности
+					</blockquote>
+					<blockquote>
+						В JavaScript итератор - это объект, который предоставляет метод next(), возвращающий следующий элемент последовательности.
+						Этот метод возвращает объект с двумя свойствами: done и value
+					</blockquote>
+				</section>
+				<section>
+					<h3>Спецификация</h3>
+					<pre>
+						<code class="hljs">
+interface Iterable {
+    [Symbol.iterator]() : Iterator;
+}
+
+interface Iterator {
+    next() : IteratorResult;
+}
+
+interface IteratorResult {
+    value: any;
+    done: boolean;
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Итерируемые значения</h3>
+					<ul>
+						<li>Arrays</li>
+						<li>Strings</li>
+						<li>Maps</li>
+						<li>Sets</li>
+						<li>DOM data structures</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Сфера применения</h3>
+					<img src="img/iterator.jpg" alt="">
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+function makeIterator(array){
+    var nextIndex = 0;
+    
+    return {
+       next: function(){
+           return nextIndex < array.length ?
+               {value: array[nextIndex++], done: false} :
+               {done: true};
+       }
+    }
+}
+
+var it = makeIterator(['yo', 'ya']);
+console.log(it.next().value); // 'yo'
+console.log(it.next().value); // 'ya'
+console.log(it.next().done);  // true
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Добавление к существующему объекту</h3>
+					<pre>
+						<code class="hljs" data-trim>
+let range = {
+  from: 1,
+  to: 5
+}
+
+range[Symbol.iterator] = function() {
+  let current = this.from;
+  let last = this.to;
+
+  return {
+    next() {
+      if (current <= last) {
+        return {done: false, value: current++};
+      } else {
+        return {done: true};
+      }
+    }
+  }
+};
+//for (let num of range)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Бесконечный итератор</h3>
+					<pre>
+						<code class="hljs">
+function idMaker(){
+    var index = 0;
+    
+    return {
+       next: function(){
+           return {value: index++, done: false};
+       }
+    }
+}
+
+var it = idMaker();
+
+console.log(it.next().value); // '0'
+console.log(it.next().value); // '1'
+console.log(it.next().value); // '2'
+//.....
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Встроенный итератор</h3>
+					<pre>
+						<code class="hljs">
+let str = "Hello";
+
+let iterator = str[Symbol.iterator]();
+
+while(true) {
+  let result = iterator.next();
+  if (result.done) break;
+  console.log(result.value); // 'H' 'e' 'l' 'l' 'o'
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Еще пример</h3>
+					<pre>
+						<code class="hljs">
+var someString = "hi";
+var iterator = someString[Symbol.iterator]();
+
+console.log(iterator + "");    // "[object String Iterator]"
+ 
+console.log(iterator.next());  // { value: "h", done: false }
+console.log(iterator.next());  // { value: "i", done: false }
+console.log(iterator.next());  // { value: undefined, done: true }
 						</code>
 					</pre>
 				</section>
