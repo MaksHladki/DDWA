@@ -1311,6 +1311,327 @@ user.something(); // Вася
 				</section>
 			</section>
 			<section>
+				<h1>Классы</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Объявление класса</h2>
+					<pre>
+							<code class="hljs">
+class Название [extends Родитель]  {
+  constructor
+  методы
+}
+							</code>
+						</pre>
+					<pre>
+						<code class="hljs">
+class Polygon {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Выражение класса</h3>
+					<pre>
+							<code class="hljs">
+// безымянный
+var Polygon = class {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+};
+
+// именованный
+var Polygon = class Polygon {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+};
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h3>Создание объекта и прототип</h3>
+					<blockquote>
+						Constructor запускается при создании new Object, остальные методы записываются в Object.prototype
+					</blockquote>
+					<pre>
+							<code class="hljs">
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+  sayHi() { console.log(this.name);}
+}
+let user = new User("Вася");
+							</code>
+						</pre>
+					<pre>
+							<code class="hljs">
+function User(name) {
+  this.name = name;
+}
+User.prototype.sayHi = function() {
+	console.log(this.name);
+};
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h3>Подъем (hoisting)</h3>
+					<p class="text">Разница между объявлением функции (function declaration) и объявлением класса (class declaration) в том, что объявление
+						функции совершает подъём (hoisted), в то время как объявление класса — нет</p>
+					<pre>
+						<code class="hljs">
+var p = new Polygon(); // ReferenceError
+
+class Polygon {}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Статические методы</h3>
+					<pre>
+						<code class="hljs">
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    static distance(a, b) {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+
+        return Math.sqrt(dx*dx + dy*dy);
+    }
+}
+
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
+
+console.log(Point.distance(p1, p2));
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Геттеры, сеттеры</h3>
+					<pre>
+						<code class="hljs">
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  set fullName(newValue) {
+    [this.firstName, this.lastName] = newValue.split(' ');
+  }
+};
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Вычисляемые имена методов</h3>
+					<pre>
+					<code class="hljs">
+class Foo() {
+    myMethod() {}
+}
+					</code>
+				</pre>
+					<pre>
+					<code class="hljs">
+class Foo() {
+    ['my'+'Method']() {}
+}
+					</code>
+				</pre>
+					<pre>
+					<code class="hljs">
+const m = 'myMethod';
+class Foo() {
+    [m]() {}
+}
+					</code>
+				</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Наследование</h2>
+					<blockquote>
+						Только один конструктор, прототип, базовый класс!
+					</blockquote>
+					<pre>
+						<code class="hljs">
+class Child extends Parent {
+  //TODO logic
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    toString() {
+        return '(' + this.x + ', ' + this.y + ')';
+    }
+}
+
+class ColorPoint extends Point {
+    constructor(color) {
+        this.color = color;
+    }
+    toString() {
+        return super.toString() + ' in ' + this.color;
+    }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Наследование статических методов</h3>
+					<pre>
+						<code class="hljs">
+class Foo {
+    static classMethod() {
+        return 'hello';
+    }
+}
+
+class Bar extends Foo {
+	//TODO
+}
+Bar.classMethod(); // 'hello'
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Super</h2>
+					<blockquote>
+						Используется для вызова функций, принадлежащих родителю объекта
+					</blockquote>
+					<pre>
+					<code class="hljs">
+super([arguments]); //вызов родительского конструктора 
+super.functionOnParent([arguments]);
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Вызов конструктора</h3>
+					<pre>
+					<code class="hljs">
+class Polygon {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+
+class Square extends Polygon {
+  constructor(length) {
+    super(length, length);
+  }
+
+  get area() {
+    return this.height * this.width;
+  }
+}
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Вызов метода</h3>
+					<pre>
+						<code class="hljs">
+class Foo {
+    static classMethod() {
+        return 'hello';
+    }
+}
+
+class Bar extends Foo {
+    static classMethod() {
+        return super.classMethod() + ', too';
+    }
+}
+Bar.classMethod(); // 'hello, too'
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Mixins</h2>
+					<blockquote>
+						Абстрактные подклассы (mix-ins) — это шаблоны для классов. У класса в ECMAScript может быть только один родительский класс,
+						поэтому множественное наследование невозможно. Функциональность должен предоставлять родительскй класс
+					</blockquote>
+					<pre>
+						<code class="hljs">
+class B extends A, M {}  
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+class Person { ··· }
+
+const Storage = Sup => class extends Sup {
+    save(database) { ··· }
+};
+const Validation = Sup => class extends Sup {
+    validate(schema) { ··· }
+};
+
+class Employee extends Storage(Validation(Person)) { ··· }
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Еще пример</h3>
+					<pre>
+						<code class="hljs">
+let MyMixin = (superclass) => class extends superclass {  
+  test() {
+    console.log('test from MyMixin');
+  }
+};
+
+class MyClass extends MyMixin(MyBaseClass) {  
+  /* ... */
+}
+
+let c = new MyClass();  
+c.test(); // test from MyMixin
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
 				<img src="img/thanks.jpg" alt="" height="600">
 			</section>
