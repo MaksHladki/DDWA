@@ -2023,7 +2023,7 @@ console.log(str); // 0..9A..Za..z
 				<section>
 					<h3>Использование throw</h3>
 					<blockquote>
-						 Внешний код может вернуть генератору в качестве результата yield любое значение, в том числе и ошибку
+						Внешний код может вернуть генератору в качестве результата yield любое значение, в том числе и ошибку
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -2039,6 +2039,293 @@ let generator = gen();
 let question = generator.next().value;
 console.log(question);//Сколько будет 2 + 2?
 generator.throw(new Error("fatal error")); // (1)
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h1>Коллекции Set, Map, WeakSet и WeakMap</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Set</h2>
+					<blockquote>
+						Коллекция для хранения множества значений, причём каждое значение может встречаться лишь один раз
+					</blockquote>
+					<pre>
+						<code class="hljs">
+new Set([iterable]);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Основные свойства и методы</h3>
+					<table>
+						<tr>
+							<td>add(item)</td>
+							<td>добавляет в коллекцию item, возвращает set</td>
+						</tr>
+						<tr>
+							<td>delete(item)</td>
+							<td>удаляет item из коллекции, возвращает true, если он там был</td>
+						</tr>
+						<tr>
+							<td>has(item)</td>
+							<td>возвращает true, если item есть в коллекции</td>
+						</tr>
+						<tr>
+							<td>clear()</td>
+							<td>очищает set</td>
+						</tr>
+						<tr>
+							<td>keys()/values()</td>
+							<td>возвращает объект-итератор на все значения множества</td>
+						</tr>
+						<tr>
+							<td>size</td>
+							<td>возвращает количество элементов</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+var mySet = new Set();
+
+mySet.add(1);
+mySet.add(5);
+mySet.add("some text");
+
+mySet.has(1); // true
+mySet.has(3); // false
+mySet.has(Math.sqrt(25));  // true
+mySet.has("Some Text".toLowerCase()); // true
+
+mySet.size; // 3
+
+mySet.delete(5); // удаляет 5 из set
+mySet.has(5);    // false, 5 было удалено
+
+mySet.size; // 2, было удалено одно значение
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Обход множества</h3>
+					<pre>
+						<code class="hljs" data-trim>
+for (let item of mySet) console.log(item);
+// 1, "some text" 
+
+for (let item of mySet.keys()) console.log(item);
+//1, "some text" 
+ 
+for (let item of mySet.values()) console.log(item);
+//1, "some text"
+
+// преобразует set в Array
+var myArr = [v for (v of mySet)]; // [1, "some text"]
+
+// преобразования из Set в Array и обратно
+mySet2 = new Set([1,2,3,4]);
+[...mySet2]; // [1,2,3,4]
+
+mySet.forEach(function(value) {
+  console.log(value);
+});
+// 1 2 3 4
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Map</h2>
+					<blockquote>
+						Коллекция для хранения записей вида ключ:значение
+					</blockquote>
+					<pre>
+						<code class="hljs">
+new Map([iterable])
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Основные свойства и методы</h3>
+					<small>
+					<table>
+						<tr>
+							<td>size</td>
+							<td>возвращает общее количество записей</td>
+						</tr>
+						<tr>
+							<td>delete(key)</td>
+							<td>удаляет запись с ключом key, возвращает true, если такая запись была</td>
+						</tr>
+						<tr>
+							<td>clear()</td>
+							<td>очищает словарь</td>
+						</tr>
+						<tr>
+							<td>has(key)</td>
+							<td>возвращает true, если ключ есть в словаре</td>
+						</tr>
+						<tr>
+							<td>keys()</td>
+							<td>возвращает итерируемый объект для ключей</td>
+						</tr>
+						<tr>
+							<td>values()</td>
+							<td> возвращает итерируемый объект для значений</td>
+						</tr>
+						<tr>
+							<td>get(key)</td>
+							<td>возвращает значение элемента по ключу</td>
+						</tr>
+						<tr>
+							<td>set(key, value)</td>
+							<td>устанавливает новое значение для ключа</td>
+						</tr>
+					</table>
+					</small>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs" data-trim>
+var myMap = new Map();
+
+var keyObj = {},
+    keyFunc = function () {},
+    keyString = "a string";
+
+myMap.set(keyString, "value associated with 'a string'");
+myMap.set(keyObj, "value associated with keyObj");
+myMap.set(keyFunc, "value associated with keyFunc");
+
+myMap.size; // 3
+
+myMap.get(keyString);    // "value associated with 'a string'"
+myMap.get(keyObj);       // "value associated with keyObj"
+myMap.get(keyFunc);      // "value associated with keyFunc"
+
+myMap.get("a string");   // "value associated with 'a string'"
+                         // потому что keyString === 'a string'
+myMap.get({});           // undefined, потому что keyObj !== {}
+myMap.get(function() {}) // undefined, потому что keyFunc !== function () {}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Использование NaN в качестве ключей</h3>
+					<pre>
+						<code class="hljs">
+var myMap = new Map();
+myMap.set(NaN, "not a number");
+
+myMap.get(NaN); // "not a number"
+
+var otherNaN = Number("foo");
+myMap.get(otherNaN); // "not a number"
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Обход словаря</h3>
+					<pre>
+						<code class="hljs" data-trim>
+var myMap = new Map();
+myMap.set(0, "zero");
+myMap.set(1, "one");
+for (var [key, value] of myMap) {
+  console.log(key + " = " + value);
+}
+// "0 = zero" и "1 = one"
+for (var key of myMap.keys()) {
+  console.log(key);
+}
+// "0" и "1"
+for (var value of myMap.values()) {
+  console.log(value);
+}
+// "zero" и "one"
+myMap.forEach(function(value, key, myMap) {
+  console.log(key + " = " + value);
+})
+// "0 = zero" и "1 = one"
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>WeakSet</h2>
+					<blockquote>
+						 Коллекция, элементами которой могут быть только объекты. Ссылки на эти объекты в WeakSet являются слабыми. Каждый объект может быть добавлен в WeakSet только один раз
+					</blockquote>
+					<pre>
+						<code class="hljs">
+new WeakSet([iterable]);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">	
+var ws = new WeakSet();
+var obj = {};
+var foo = {};
+
+ws.add(window);
+ws.add(obj);
+
+ws.has(window); // true
+ws.has(foo);    // false, foo не добавлен в WeakSet
+
+ws.delete(window); // удаляет window из WeakSet
+ws.has(window);    // false, window был удалён
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>WeakMap</h2>
+					<blockquote>
+						 Коллекция пар ключ-значение. В качестве ключей могут быть использованы только объекты, а значения могут быть произвольных типов.
+					</blockquote>
+					<pre>
+						<code class="hljs">
+new WeakMap([iterable])
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs" data-trim>
+var wm1 = new WeakMap(),
+    wm2 = new WeakMap();
+var o1 = {},
+    o2 = function(){},
+    o3 = window,
+    o4 = [1, 2, 3];
+
+wm1.set(o1, 37);
+wm1.set(o2, "azerty");
+wm2.set(o1, o2); // значением может быть что угодно, включая объект или функцию
+wm2.set(o3, undefined);
+wm2.set(wm1, wm2); // ключами и значениями могут быть другие WeakMap
+
+wm1.get(o2); // "azerty"
+wm2.get(o2); // undefined, потому что нет значения для o2 в wm2
+wm2.get(o3); // undefined, потому что это установленное значение
+
+wm1.has(o2); // true
+wm2.has(o2); // false
+wm2.has(o3); // true (даже если значение равно 'undefined')
 						</code>
 					</pre>
 				</section>
