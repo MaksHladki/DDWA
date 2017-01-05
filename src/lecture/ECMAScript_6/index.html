@@ -1642,8 +1642,8 @@ c.test(); // test from MyMixin
 				<section>
 					<h2>Всемогущественный for...of</h2>
 					<blockquote>
-						Оператор выполняет цикл обхода итерируемых объектов, вызывая на каждом
-						шаге итерации операторы для каждого значения из различных свойств объекта
+						Оператор выполняет цикл обхода итерируемых объектов, вызывая на каждом шаге итерации операторы для каждого значения из различных
+						свойств объекта
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -1841,6 +1841,204 @@ console.log(iterator + "");    // "[object String Iterator]"
 console.log(iterator.next());  // { value: "h", done: false }
 console.log(iterator.next());  // { value: "i", done: false }
 console.log(iterator.next());  // { value: undefined, done: true }
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h1>Генераторы</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Понятие генератора</h2>
+					<blockquote>
+						Генераторы являются функциями с возможностью повторного входа после выхода. Их контекст исполнения (значения переменных)
+						сохраняется при последующих входах
+					</blockquote>
+					<pre>
+						<code class="hljs">
+function* gen(i){
+  while(true){
+    yield i++;
+    yield* anotherGenerator(i);
+  }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Алгоритм работы</h2>
+					<ol>
+						<li>При вызове функции-генератора (тело исполняется не сразу) возвращается объект-итератор</li>
+						<li>При вызове метода next() итератора, тело генератора исполняется до первого встреченного оператора yield</li>
+						<li>Оператор yield определяет возвращаемое значение (либо делегирует возврат другому генератору при помощи yield*)</li>
+						<li>Метод next() возвращает объект со свойством value (содержащим значение) и свойством done (указывает, что отдано последнее
+							значение)
+						</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Простой пример</h3>
+					<pre>
+						<code class="hljs">
+function* idMaker(){
+    var index = 0;
+    while(true)
+        yield index++;
+}
+
+var gen = idMaker();
+
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+// ...
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Развернутый пример</h2>
+					<pre>
+						<code class="hljs">
+function* generateSequence() {
+  yield 1;
+  yield 2;
+  return 3;
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Шаг 1: замороженный вызов функции</h3>
+					<pre>
+						<code class="hljs">
+// generator function создаeт generator
+let generator = generateSequence();
+						</code>
+					</pre>
+					<img src="img/generator-1.png" alt="">
+				</section>
+				<section>
+					<h3>Шаг 2: yield 1</h3>
+					<pre>
+						<code class="hljs">
+let one = generator.next();
+console.log(JSON.stringify(one)); // {value: 1, done: false}
+						</code>
+					</pre>
+					<img src="img/generator-2.png" alt="">
+				</section>
+				<section>
+					<h3>Шаг 3: yield 2</h3>
+					<pre>
+						<code class="hljs">
+let two = generator.next();
+console.log(JSON.stringify(two)); // {value: 2, done: false}
+						</code>
+					</pre>
+					<img src="img/generator-3.png" alt="">
+				</section>
+				<section>
+					<h3>Шаг 4: return 3</h3>
+					<pre>
+						<code class="hljs" data-trim>
+let three = generator.next();
+console.log(JSON.stringify(three)); // {value: 3, done: true}
+						</code>
+					</pre>
+					<img src="img/generator-4.png" alt="">
+					<blockquote>
+						Новые вызовы generator.next() не имеют смысла. Они будут возвращать один и тот же объект
+					</blockquote>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Генератор – итератор</h2>
+					<pre>
+						<code class="hljs">
+function* generateSequence() {
+  yield 1;
+  yield 2;
+  return 3;
+};
+
+let generator = generateSequence();
+
+for(let value of generator) {
+  console.log(value); // 1, затем 2
+}
+//Cтандартный перебор итератора игнорирует value на последнем значении,
+// при done: true
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Более сложный пример</h3>
+					<pre>
+						<code class="hljs">
+function *foo(x) {
+    var y = 2 * (yield (x + 1));
+    var z = yield (y / 3);
+    return (x + y + z);
+}
+
+var it = foo( 5 );
+
+// note: not sending anything into `next()` here
+console.log( it.next() );       // { value:6, done:false }
+console.log( it.next( 12 ) );   // { value:8, done:false }
+console.log( it.next( 13 ) );   // { value:42, done:true }
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Композиция генераторов</h3>
+					<pre>
+						<code class="hljs" data-trim>
+function* generateSequence(start, end) {
+  for (let i = start; i <= end; i++) yield i;
+}
+
+function* generateAlphaNum() {
+  // 0..9
+  yield* generateSequence(48, 57);
+  // A..Z
+  yield* generateSequence(65, 90);
+  // a..z
+  yield* generateSequence(97, 122);
+}
+
+let str = '';
+for(let code of generateAlphaNum()) {
+  str += String.fromCharCode(code);
+}
+
+console.log(str); // 0..9A..Za..z
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Использование throw</h3>
+					<blockquote>
+						 Внешний код может вернуть генератору в качестве результата yield любое значение, в том числе и ошибку
+					</blockquote>
+					<pre>
+						<code class="hljs">
+function* gen() {
+  try {
+    let result = yield "Сколько будет 2 + 2?"; // (2)
+  } catch(e) {
+    console.log(e); // fatal error
+  }
+}
+
+let generator = gen();
+let question = generator.next().value;
+console.log(question);//Сколько будет 2 + 2?
+generator.throw(new Error("fatal error")); // (1)
 						</code>
 					</pre>
 				</section>
