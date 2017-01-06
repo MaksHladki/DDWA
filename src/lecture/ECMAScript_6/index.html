@@ -1443,6 +1443,26 @@ class User {
 					</pre>
 				</section>
 				<section>
+					<h3>Еще пример</h3>
+					<pre>
+						<code class="hljs">
+class Rectangle {
+    constructor (width, height) {
+        this._width  = width
+        this._height = height
+    }
+    set width  (width)  { this._width = width}
+    get width  ()       { return this._width}
+    set height (height) { this._height = height}
+    get height ()       { return this._height}
+    get area   ()       { return this._width * this._height }
+}
+var test = new Rectangle(50, 20)
+console.log(test.area);//1000
+						</code>
+					</pre>
+				</section>
+				<section>
 					<h3>Вычисляемые имена методов</h3>
 					<pre>
 					<code class="hljs">
@@ -1995,6 +2015,29 @@ console.log( it.next( 13 ) );   // { value:42, done:true }
 					</pre>
 				</section>
 				<section>
+					<h3>Пример с числами Фибоначчи</h3>
+					<pre>
+						<code class="hljs">
+let fibonacci = {
+    *[Symbol.iterator]() {
+        let pre = 0, cur = 1
+        for (;;) {
+            [ pre, cur ] = [ cur, pre + cur ]
+            yield cur
+        }
+    }
+}
+
+for (let n of fibonacci) {
+    if (n > 1000)
+        break
+    console.log(n)
+}
+//1 2 3 5 8 13...
+						</code>
+					</pre>
+				</section>
+				<section>
 					<h3>Композиция генераторов</h3>
 					<pre>
 						<code class="hljs" data-trim>
@@ -2262,7 +2305,8 @@ myMap.forEach(function(value, key, myMap) {
 				<section>
 					<h2>WeakSet</h2>
 					<blockquote>
-						 Коллекция, элементами которой могут быть только объекты. Ссылки на эти объекты в WeakSet являются слабыми. Каждый объект может быть добавлен в WeakSet только один раз
+						Коллекция, элементами которой могут быть только объекты. Ссылки на эти объекты в WeakSet являются слабыми. Каждый объект
+						может быть добавлен в WeakSet только один раз
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -2294,7 +2338,8 @@ ws.has(window);    // false, window был удалён
 				<section>
 					<h2>WeakMap</h2>
 					<blockquote>
-						 Коллекция пар ключ-значение. В качестве ключей могут быть использованы только объекты, а значения могут быть произвольных типов.
+						Коллекция пар ключ-значение. В качестве ключей могут быть использованы только объекты, а значения могут быть произвольных
+						типов.
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -2329,6 +2374,353 @@ wm2.has(o3); // true (даже если значение равно 'undefined')
 						</code>
 					</pre>
 				</section>
+			</section>
+			<section>
+				<h1>Другое</h1>
+			</section>
+			<section>
+				<h2>Поддержка bin/oct литералов</h2>
+				<p>Было</p>
+				<pre>
+						<code class="hljs">
+parseInt("111110111", 2) === 503;
+parseInt("767", 8) === 503;
+0767 === 503; 
+						</code>
+					</pre>
+				<p>Стало</p>
+				<pre>
+						<code class="hljs">
+0b111110111 === 503
+0o767 === 503
+						</code>
+					</pre>
+			</section>
+			<section>
+				<section>
+					<h2>Работа с бинарными данными</h2>
+					<img src="img/arraybuffer.jpg" alt="">
+				</section>
+				<section>
+					<h3>ArrayBuffer</h3>
+					<blockquote>
+						Используется для работы с бинарными данными. Он представляет собой ссылку на поток двоичных данных, однако работать с ними
+						напрямую возможности не дает. Вместо этого, необходимо создать типизированный массив или объект DataView
+					</blockquote>
+					<pre>
+						<code class="hljs">
+new ArrayBuffer(length)//длина буфера в байтах
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+var buffer = new ArrayBuffer(12);
+var dataView = new DataView(buffer);
+var int8View = new Int8Array(buffer);
+dataView.setInt32(0, 0x1234ABCD);
+
+console.log(dataView.getInt32(0).toString(16));// 1234abcd
+console.log(dataView.getInt8(0).toString(16)); // 12
+console.log(int8View[0].toString(16));         //12
+
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Типизированный массив</h2>
+					<pre>
+						<code class="hljs" data-trim>
+new TypedArray(length);
+new TypedArray(typedArray);
+new TypedArray(object);
+new TypedArray(buffer [, byteOffset [, length]]);
+
+где TypedArray() это одно из следующих значений:
+Int8Array(), 
+Uint8Array(), 
+Uint8ClampedArray(), 
+Int16Array(), 
+Uint16Array(), 
+Int32Array(), 
+Uint32Array(), 
+Float32Array(), 
+Float64Array()
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+let typedArray = new Uint8Array([0,1,2]);
+console.log(typedArray.length); // 3
+typedArray[0] = 5;
+let normalArray = [...typedArray]; // [5,1,2]
+
+console.log(ArrayBuffer.isView(new Int32Array()));// true
+console.log(ArrayBuffer.isView(typedArray)); //true
+console.log(ArrayBuffer.isView(normalArray)); //false
+
+let dataView = new DataView(typedArray.buffer);
+console.log(dataView.getUint8(0)); // 5
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+var buffer = new ArrayBuffer(12);
+var x = new DataView(buffer, 0);
+
+x.setInt8(0, 22);
+x.setFloat32(1, Math.PI);
+
+console.log(x.getInt8(0));  //22
+console.log(x.getFloat32(1)); //3.1415927410125732
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+let ui8 = Uint8Array.of(0,1,2);
+for (let byte of ui8) {
+    console.log(byte);
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 4</h3>
+					<pre>
+						<code class="hljs">
+function ab2str(buf) {
+  return String.fromCharCode.apply(null, new Uint16Array(buf));
+}
+
+function str2ab(str) {
+  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i=0, strLen=str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+}							
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример использования 1</h3>
+					<pre>
+						<code class="hljs">
+let fileInput = document.getElementById('fileInput');
+let file = fileInput.files[0];
+let reader = new FileReader();
+reader.readAsArrayBuffer(file);
+reader.onload = function () {
+    let arrayBuffer = reader.result;
+    //···
+};
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример использования 2</h3>
+					<pre>
+						<code class="hljs">
+let xhr = new XMLHttpRequest();
+xhr.open('GET', someUrl);
+xhr.responseType = 'arraybuffer';
+    
+xhr.onload = function () {
+    let arrayBuffer = xhr.response;
+    //···
+};
+    
+xhr.send();
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример использования 3</h3>
+					<pre>
+						<code class="hljs">
+let socket = new WebSocket('ws://127.0.0.1:8081');
+socket.binaryType = 'arraybuffer';
+    
+socket.addEventListener('open', function (event) {
+    let typedArray = new Uint8Array(4);
+    socket.send(typedArray.buffer);
+});
+    
+socket.addEventListener('message', function (event) {
+    let arrayBuffer = event.data;
+    //...
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Новый метод: find</h2>
+					<p>Было</p>
+					<pre>
+							<code class="hljs">
+[ 1, 3, 4, 2 ].find(x => x > 3) // 4	
+							</code>
+					</pre>
+					<p>Стало</p>
+					<pre>
+							<code class="hljs">
+[ 1, 3, 4, 2 ].filter(function (x) { return x > 3; })[0]; // 4
+							</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Новые методы: isNaN/isFinite</h2>
+					<p>Было</p>
+					<pre>
+							<code class="hljs" data-trim>
+var isNaN = function (n) {return n !== n;};
+var isFinite = function (v) {
+    return (typeof v === "number" 
+	&& !isNaN(v) && v !== Infinity && v !== -Infinity);
+};
+isNaN(42); // false;
+isNaN(NaN); // true;
+isFinite(Infinity); // false;
+							</code>
+					</pre>
+					<p>Стало</p>
+					<pre>
+							<code class="hljs" data-trim>
+Number.isNaN(42); // false
+Number.isNaN(NaN) // true
+Number.isFinite(-Infinity); // false
+Number.isFinite(NaN); // false
+Number.isFinite(123); // true
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h2>Новый метод: isSafeInteger</h2>
+					<p>Было</p>
+					<pre>
+							<code class="hljs" data-trim>
+function isSafeInteger (n) {
+    return (
+           typeof n === 'number'
+        && Math.round(n) === n
+        && -(Math.pow(2, 53) - 1) <= n
+        && n <= (Math.pow(2, 53) - 1)
+    );
+}
+isSafeInteger(42) === true;
+isSafeInteger(9007199254740992) === false;
+							</code>
+					</pre>
+					<p>Стало</p>
+					<pre>
+							<code class="hljs" data-trim>
+Number.isSafeInteger(42) === true
+Number.isSafeInteger(9007199254740992) === false
+							</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Новое свойство: EPSILON</h2>
+					<p>Было</p>
+					<pre>
+							<code class="hljs" data-trim>
+console.log(0.1 + 0.2 === 0.3); // false
+console.log(Math.abs((0.1 + 0.2) - 0.3) < 2.220446049250313e-16); // true
+							</code>
+					</pre>
+					<p>Стало</p>
+					<pre>
+							<code class="hljs" data-trim>
+console.log(0.1 + 0.2 === 0.3) // false
+console.log(Math.abs((0.1 + 0.2) - 0.3) < Number.EPSILON) // true
+							</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Новый метод: trunc</h2>
+					<p>Было</p>
+					<pre>
+							<code class="hljs" data-trim>
+function mathTrunc (x) {
+    return (x < 0 ? Math.ceil(x) : Math.floor(x));
+}
+console.log(mathTrunc(42.7)) // 42
+console.log(mathTrunc( 0.1)) // 0
+console.log(mathTrunc(-0.1)) // -0
+							</code>
+					</pre>
+					<p>Стало</p>
+					<pre>
+							<code class="hljs" data-trim>
+console.log(Math.trunc(42.7)) // 42
+console.log(Math.trunc( 0.1)) // 0
+console.log(Math.trunc(-0.1)) // -0
+							</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Новый метод: sign</h2>
+					<p>Было</p>
+					<pre>
+							<code class="hljs" data-trim>
+function mathSign (x) {
+    return ((x === 0 || isNaN(x)) ? x : (x > 0 ? 1 : -1));
+}
+console.log(mathSign(7));   // 1
+console.log(mathSign(0));   // 0
+console.log(mathSign(-0));  // -0
+console.log(mathSign(-7));  // -1
+console.log(mathSign(NaN)); // NaN
+							</code>
+					</pre>
+					<p>Стало</p>
+					<pre>
+							<code class="hljs" data-trim>
+console.log(Math.sign(7));   // 1
+console.log(Math.sign(0));   // 0
+console.log(Math.sign(-0));  // -0
+console.log(mathSign(-7));  // -1
+console.log(Math.sign(NaN)); // NaN
+							</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h2>Локализация</h2>
+				<pre>
+					<code class="hljs">
+var l10nEN = new Intl.NumberFormat("en-US");
+var l10nDE = new Intl.NumberFormat("de-DE");
+l10nEN.format(1234567.89);// 1,234,567.89
+l10nDE.format(1234567.89);// 1.234.567,89
+
+var l10nUSD = new Intl.NumberFormat("en-US", 
+	{ style: "currency", currency: "USD" });
+var l10nEUR = new Intl.NumberFormat("de-DE", 
+	{ style: "currency", currency: "EUR" });
+l10nUSD.format(100200300.40);// $100,200,300.40
+l10nEUR.format(100200300.40);// 100.200.300,40 €
+
+var l10nEN = new Intl.DateTimeFormat("en-US");
+var l10nDE = new Intl.DateTimeFormat("de-DE");
+l10nEN.format(new Date("2015-01-02"));// 1/2/2015
+l10nDE.format(new Date("2015-01-02"));// 2.1.2015
+					</code>
+				</pre>
 			</section>
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
