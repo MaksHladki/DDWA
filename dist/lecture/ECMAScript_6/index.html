@@ -2376,7 +2376,284 @@ wm2.has(o3); // true (даже если значение равно 'undefined')
 				</section>
 			</section>
 			<section>
-				<h1>Другое</h1>
+				<h1>Proxy</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Прокси (proxy)</h2>
+					<blockquote>
+						Особый объект, который перехватывает обращения к другому объекту и, при необходимости, модифицирует их
+					</blockquote>
+					<pre>
+						<code class="hljs" data-trim>
+let proxy = new Proxy(target, handler)
+						</code>
+					</pre>
+					<ul>
+						<li>target – объект, обращения к которому надо перехватывать</li>
+						<li>handler – объект с функциями-перехватчиками для операций к target</li>
+					</ul>
+					<p class="highlight-blue">Если функции-перехватчика нет – операция идет над target</p>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+var target = {};
+
+var superhero = new Proxy(target, {
+   get: function(target, name, receiver) {
+       console.log('get was called for: ', name);
+       return target[name];
+   }
+});
+
+superhero.power = 'Flight';
+console.log(superhero.power);
+//get was called for:  power
+//Flight
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Виды перехватчиков</h2>
+					<small>
+					<table>
+						<tr>
+							<td>getPrototypeOf</td>
+							<td>перехватывает обращение к методу getPrototypeOf</td>
+						</tr>
+						<tr>
+							<td>setPrototypeOf</td>
+							<td>перехватывает обращение к методу setPrototypeOf</td>
+						</tr>
+						<tr>
+							<td>isExtensible</td>
+							<td>перехватывает обращение к методу isExtensible</td>
+						</tr>
+						<tr>
+							<td>preventExtensions</td>
+							<td>перехватывает обращение к методу preventExtensions</td>
+						</tr>
+						<tr>
+							<td>getOwnPropertyDescriptor</td>
+							<td>перехватывает обращение к методу getOwnPropertyDescriptor</td>
+						</tr>
+						<tr>
+							<td>defineProperty</td>
+							<td>перехватывает обращение к методу defineProperty</td>
+						</tr>
+						<tr>
+							<td>has</td>
+							<td>перехватывает проверку существования свойства, которая используется в операторе in и в некоторых других методах встроенных
+								объектов</td>
+						</tr>
+						<tr>
+							<td>get</td>
+							<td>перехватывает чтение свойства</td>
+						</tr>
+						<tr>
+							<td>set</td>
+							<td>перехватывает запись свойства</td>
+						</tr>
+						<tr>
+							<td>deleteProperty</td>
+							<td> перехватывает удаление свойства оператором delete</td>
+						</tr>
+						<tr>
+							<td>enumerate </td>
+							<td> срабатывает при вызове for..in или for..of, возвращает итератор для свойств объекта</td>
+						</tr>
+						<tr>
+							<td>ownKeys</td>
+							<td>перехватывает обращения к методу getOwnPropertyNames</td>
+						</tr>
+						<tr>
+							<td>apply</td>
+							<td>перехватывает вызовы target()</td>
+						</tr>
+						<tr>
+							<td>construct</td>
+							<td>перехватывает вызовы new target()</td>
+						</tr>
+					</table>
+					</small>
+				</section>
+				<section>
+					<h3>Перехватчики get/set</h3>
+					<pre>
+						<code class="hljs" data-trim>
+							get(target, property, receiver)
+						</code>
+					</pre>
+					<ul>
+						<li>target – целевой объект</li>
+						<li>property – имя свойства</li>
+						<li>receiver – объект, к которому было применено присваивание. Обычно сам прокси, либо прототипно наследующий от него</li>
+					</ul>
+					<pre>
+						<code class="hljs" data-trim>
+						set(target, property, value, receiver)
+						</code>
+					</pre>
+					<ul>
+						<li>target – целевой объект</li>
+						<li>property – имя свойства</li>
+						<li>value – значение свойства</li>
+						<li>receiver – объект, к которому было применено присваивание</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Пример get/set перехватчика</h3>
+					<pre>
+						<code class="hljs" data-trim>
+							let user = {};
+
+let proxy = new Proxy(user, {
+  get(target, prop) {
+    console.log(`Чтение ${prop}`);
+    return target[prop];
+  },
+  set(target, prop, value) {
+    console.log(`Запись ${prop} ${value}`);
+    target[prop] = value;
+    return true;
+  }
+});
+
+proxy.firstName = "Maks"; // запись
+proxy.firstName; // чтение
+console.log(user.firstName); // Maks
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Перехватчик has</h3>
+					<pre>
+						<code class="hljs">
+let dictionary = {
+  'Hello': 'Привет'
+};
+
+dictionary = new Proxy(dictionary, {
+  has(target, phrase) {
+	//target - исходный объект
+	//phrase - имя проверяймого свойства
+    return true;
+  }
+});
+
+console.log("Hey" in dictionary); // true	
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Перехватчик deleteProperty</h3>
+					<pre>
+						<code class="hljs">
+let dictionary = {
+  'Hello': 'Привет'
+};
+
+let proxy = new Proxy(dictionary, {
+  deleteProperty(target, phrase) {
+	//target - исходный объект
+	//phrase - имя удаляемого свойства
+    return true; 
+  }
+});
+
+// не удалит свойство
+delete proxy['Hello'];
+console.log("Hello" in dictionary); // true
+
+// так как нет ловушки has, операция in сработает на исходном объекте
+console("Hello" in proxy); // true
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Перехватчик enumerate</h3>
+					<pre>
+						<code class="hljs" data-trim>
+let user = {
+  name: "Maks",
+  _surname: 'Hladki',
+  _version: "1.0.0.0
+};
+
+let proxy = new Proxy(user, {
+  enumerate(target) {
+	//target – исходный объект
+    let props = Object.keys(target).filter(function(prop) {
+      return prop[0] != '_';
+    });
+
+    return props[Symbol.iterator]();
+  }
+});
+
+for(let prop in proxy) {
+  console.log(prop); // "Maks"
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Перехватчик apply</h3>
+					<pre>
+						<code class="hljs">
+function sum(a, b) {
+  return a + b;
+}
+
+let proxy = new Proxy(sum, {
+  // передаст вызов в target, предварительно сообщив о нём
+  apply: function(target, thisArg, argumentsList) {
+	//target – исходный объект.
+	//thisArgument – контекст this вызова.
+	//argumentsList – аргументы вызова в виде массива.
+    console.log(`Сумма: ${argumentsList}`);
+    return target.apply(thisArg, argumentsList);
+  }
+});
+
+console.log(proxy(1, 2));
+//Сумма 1,2
+//3
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Перехватчик construct</h3>
+					<pre>
+						<code class="hljs">
+function User(name, surname) {
+  this.name = name;
+  this.surname = surname;
+}
+
+let UserProxy = new Proxy(User, {
+  construct: function(target, argumentsList, newTarget) {
+	//target – исходный объект.
+	//argumentsList – аргументы вызова в виде массива
+	//newTarget - конструктор, который был вызван
+	console.log(newTarget);
+    console.log(`Запуск new с аргументами: ${argumentsList}`);
+    return new target(...argumentsList);
+  }
+});
+
+let user = new UserProxy("Maksim", "Hladki");
+//Запуск new с аргументами: Maksim,Hladki
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h1>Другие особенности</h1>
 			</section>
 			<section>
 				<h2>Поддержка bin/oct литералов</h2>
