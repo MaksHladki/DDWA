@@ -3,8 +3,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>ECMADcript 6</title>
-	<meta name="description" content="">
+	<title>ECMAScript 6</title>
+	<meta name="description" content="ECMAScript 6">
+	<meta name="keywords" content="ECMAScript 6, es6, область видимости, let, const, ООП, наследование, модули, Promise">
 	<meta name="author" content="Maks Hladki">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,6 +33,7 @@
 				</section>
 			</section>
 			<!-- Содержимое лекции -->
+			<!-- Вступление -->
 			<section>
 				<h2>Долгие 10 лет</h2>
 				<img src="img/history.png" alt="">
@@ -39,7 +41,7 @@
 			<section>
 				<h2>Как вдруг...</h2>
 				<blockquote>
-					17 июня 2015 года генеральное собрание Ecma International официально одобрило стандарт ECMA-262 6 версии
+					17 июня 2015 года генеральное собрание Ecma International официально одобрило стандарт ECMA-262 версии 6.0
 				</blockquote>
 				<ul>
 					<li>Стандарт ECMA-262</li>
@@ -49,6 +51,7 @@
 					<li>ECMAScript.next: кодовое название ECMAScript 6</li>
 				</ul>
 			</section>
+			<!-- Блочная область видимости -->
 			<section>
 				<h1>Блочная область видимости (let и const)</h1>
 			</section>
@@ -56,7 +59,7 @@
 				<section>
 					<h2>Обасть видимости ES5 - функция</h2>
 					<pre>
-				<code class="hljs" data-trim="">
+						<code class="hljs">
 var num = 10;
 
 var func = function() {
@@ -65,36 +68,38 @@ var func = function() {
 };
 
 console.log(num); // 10
-				</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Глобальное окружение</h3>
+					<p>es5</p>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 if (true) {
     var a = 10;
 }
 
 console.log(a); // 10
-					</code>
-				</pre>
+						</code>
+					</pre>
+					<p>es6</p>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 var a;
 if (false) {
     a = 10;
 }
 
 console.log(a); // undefined
-					</code>
-				</pre>
+					   </code>
+					</pre>
 				</section>
 			</section>
 			<section>
 				<h2>Оператор let</h2>
 				<blockquote>
-					Позволяет объявить локальную переменную с областью видимости, ограниченной текущим блоком кода .
+					Позволяет объявить локальную переменную с областью видимости, ограниченной текущим блоком кода
 				</blockquote>
 				<pre>
 					<code class="hljs">
@@ -103,16 +108,14 @@ let var1 [= value1] [, var2 [= value2]] [, ..., varN [= valueN]];
 //var1, var2, …, varN - имя переменной (любой допустимый идентификатор)
 //value1, value2, …, valueN - значение переменной (любое допустимое выражение)
 					</code>
-					</pre>
+				</pre>
 			</section>
 			<section>
 				<section>
-					<h2>Особенности let</h2>
-					<p>
-						Область видимости переменной let – блок {...}
-					</p>
+					<h2>Особенности let: блочная область видимости</h2>
+					<p>es5</p>
 					<pre>
-					<code class="hljs">
+						<code class="hljs" data-trim>
 var apples = 5;
 
 if (true) {
@@ -120,10 +123,11 @@ if (true) {
   console.log(apples); // 10 (внутри блока)
 }
 console.log(apples); // 10 (снаружи блока то же самое)
-					</code>
-				</pre>
+						</code>
+					</pre>
+					<p>es6</p>
 					<pre>
-					<code class="hljs">
+						<code class="hljs" data-trim>
 let apples = 5;
 
 if (true) {
@@ -131,60 +135,56 @@ if (true) {
   console.log(apples); // 10 (внутри блока)
 }
 console.log(apples); // 5 (снаружи блока значение не изменилось)
-					</code>
-				</pre>
-				</section>
-				<section>
-					<h3>Особенности let</h3>
-					<pre>
-						<code class="hljs">
-if (true) {
-  let apples = 10;
-  console.log(apples); // 10 (внутри блока)
-}
-
-console.log(apples); // ReferenceError: apples is not defined
 						</code>
 					</pre>
 				</section>
 				<section>
-					<h3>Особенности let</h3>
-					<p>Переменная let видна только после объявления</p>
+					<h3>Особенности let: видимость после объявления</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs" data-trim>
 console.log(a); // undefined
 var a = 5;
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs" data-trim>
 console.log(a); // ReferenceError: a is not defined
 let a = 5;
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs" data-trim>
 let x;
 let x; // SyntaxError: Identifier 'x' has already been declared
 						</code>
 					</pre>
+					<pre>
+						<code class="hljs" data-trim>
+if (true) {
+  let apples = 10;
+  console.log(apples); // 10 (внутри блока)
+}
+console.log(apples); // ReferenceError: apples is not defined
+						</code>
+					</pre>
 				</section>
 				<section>
-					<h3>Особенности let</h3>
-					<p>При использовании в цикле, для каждой итерации создаётся своя переменная</p>
+					<h3>Особенности let: использование в цикле</h3>
+					<p>es5</p>
 					<pre>
 						<code class="hljs">
 for(var i=0; i<10; i++) { 
-	console.log(i); // 0, 1, 2, 3, 4 ... 9
+   console.log(i); // 0, 1, 2, 3, 4 ... 9
 }
 
 console.log(i); // 10
 						</code>
 					</pre>
+					<p>es6</p>
 					<pre>
 						<code class="hljs">
 for (let i = 0; i<10; i++) {
-  console.log(i); // 0, 1, 2, 3, 4 ... 9
+   console.log(i); // 0, 1, 2, 3, 4 ... 9
 }
 
 console.log(i); // i is not defined	
@@ -192,7 +192,7 @@ console.log(i); // i is not defined
 					</pre>
 				</section>
 				<section>
-					<h3>Особенности let</h3>
+					<h3>Особенности let: замыкания</h3>
 					<pre>
 						<code class="hljs">
 function shooterBuilder() {
@@ -210,7 +210,7 @@ function shooterBuilder() {
 var x = shooterBuilder();
 x[0](); // 0
 x[5](); // 5
-//c var было бы 10 10
+//При использовании var было бы 10 10
 						</code>
 					</pre>
 				</section>
@@ -219,41 +219,41 @@ x[5](); // 5
 				<section>
 					<h2>Оператор const</h2>
 					<blockquote>
-						Значение констант не может быть изменено новым присваиванием, а также не может быть переопределено. Константы (const) подчиняются
-						области видимости уровня блока.
+						Значение констант не может быть изменено новым присваиванием и не может быть переопределено. Константы подчиняются области
+						видимости уровня блока
 					</blockquote>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 const name1 = value1 [, name2 = value2 [, ... [, nameN = valueN]]];
 
-//nameN - имя константы (те же правила, что и для идентификаторов переменных)
+//nameN - имя константы (те же правила, что и для переменных)
 //valueN - значение константы
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
-					<h3>Пример</h3>
+					<h3>Пример 1</h3>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 const apple = 5;
-apple = 10; // ошибка
-					</code>
-				</pre>
+apple = 10; // Uncaught TypeError: Assignment to constant variable
+						</code>
+					</pre>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 const user = {
   name: "Alex"
 };
 
 user.name = "Maks"; // допустимо
-user = 5; // ошибка
-					</code>
-				</pre>
+user = 5; // Uncaught TypeError: Assignment to constant variable
+						</code>
+					</pre>
 				</section>
 				<section>
-					<h3>Пример</h3>
+					<h3>Пример 2</h3>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 const lit = 4;
 lit = 5; // TypeError: Литерал изменить нельзя
 
@@ -266,18 +266,18 @@ const arr = [1, 2, 3];
 arr.push(4); // Значения внутри массива изменить можно
 console.log(arr); // [1, 2, 3, 4]
 obj = [4, 3, 2, 1]; // TypeError: Ссылку менять нельзя
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 			</section>
+			<!-- Деструктуризация -->
 			<section>
 				<h1>Деструктуризация (destructuring assignment)</h1>
 			</section>
 			<section>
 				<h2>Деструктуризация</h2>
 				<blockquote>
-					Деструктуризация – особый синтаксис присваивания, при котором можно присвоить массив или объект сразу нескольким переменным,
-					разбив его на части
+					Особый синтаксис присваивания, при котором можно присвоить массив или объект сразу нескольким переменным, разбив его на части
 				</blockquote>
 				<ul>
 					<li>Деструктуризация позволяет привязывать данные при совпадении паттерна</li>
@@ -290,45 +290,43 @@ obj = [4, 3, 2, 1]; // TypeError: Ссылку менять нельзя
 				<section>
 					<h2>Деструктуризация массива</h2>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 let [firstName, lastName] = ['Иван', 'Иванов'];
 
 console.log(firstName); // Иван
 console.log(lastName);  // Иванов
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
-					<h2>
-						Пропуск элементов
-					</h2>
+					<h3>Пропуск элементов</h3>
 					<pre>
-					<code class="hlljs">				
+						<code class="hljs">				
 // первый и второй элементы не нужны
 let [, , middleName] = "Иванов Иван Иванович (1971)".split(" ");
 
 console.log(middleName); // Иванович
-					</code>
-				</pre>
+						</code>
+					</pre>
 					<p>Первый и второй, а также все элементы после третьего никуда не записались, они были отброшены</p>
 				</section>
 				<section>
 					<h3>Оператор spread</h3>
-					<pre>
-					<code class="hljs">
-let [fisrt, last, ...rest] = "Все ЛР должны быть сданы".split(" ");
-
-console.log(first); // Все
-console.log(last);  // ЛР
-console.log(rest);  // должны быть сданы (массив из 3х элементов)
-					</code>
-				</pre>
 					<ul>
 						<li>Значением rest будет массив из оставшихся элементов</li>
 						<li>Вместо rest можно использовать другое имя переменной</li>
 						<li>Оператор spread - троеточие</li>
 						<li>Spread должн стоять только последним элементом</li>
 					</ul>
+					<pre>
+						<code class="hljs">
+let [fisrt, last, ...rest] = "Все ЛР должны быть сданы".split(" ");
+
+console.log(first); // Все
+console.log(last);  // ЛР
+console.log(rest);  // должны быть сданы (массив из 3х элементов)
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Значения по умолчанию</h3>
@@ -417,24 +415,25 @@ console.log(a, b, b); // x y z
 // Коллекции DOM элементов
 var [link1, link2] = document.links;
 console.log(link1.tagName); // a
-console.log(link2.textContent); // Пример
+console.log(link2.textContent); // Пример ссылки
 						</code>
 					</pre>
 				</section>
 			</section>
+			<!-- деструктуризации объектов -->
 			<section>
 				<section>
 					<h2>Деструктуризация объектов</h2>
+					<ul>
+						<li>Указываем, какие свойства в какие переменные должны перейти</li>
+						<li>Объект справа – существующий объект</li>
+						<li>Список слева – список переменных, в которые записываются соответствующие свойства</li>
+					</ul>
 					<pre>
 						<code class="hljs">
 let {var1, var2} = {var1:…, var2…}
 						</code>
 					</pre>
-					<ul>
-						<li>Указываем, какие свойства в какие переменные должны «идти»</li>
-						<li>Объект справа – существующий объект</li>
-						<li>Список слева – список переменных, в которые записываются соответствующие свойства</li>
-					</ul>
 				</section>
 				<section>
 					<h3>Использование возвращающей функции</h3>
@@ -453,7 +452,7 @@ console.log(x, y); // 4 10
 					</pre>
 				</section>
 				<section>
-					<h3>Простой пример</h3>
+					<h3>Еще пример</h3>
 					<pre>
 						<code class="hljs">
 let options = {
@@ -566,6 +565,7 @@ console.log(item2);  // Пирожное
 					</code>
 				</pre>
 			</section>
+			<!-- Функции -->
 			<section>
 				<h1>Функции</h1>
 			</section>
@@ -573,29 +573,29 @@ console.log(item2);  // Пирожное
 				<section>
 					<h2>Параметры по умолчанию</h2>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 function [name]([param1[ = defaultValue1 ][, ..., paramN[ = defaultValueN ]]]) {
    //function's body
 }
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
-					<h3>Пример</h3>
+					<h3>Простой пример</h3>
 					<pre>
 						<code class="hljs">
 function multiply(a, b = 1) {
   return a*b;
 }
 
-multiply(5); // 5
+console.log(multiply(5)); // 5
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>Пример с undefined</h3>
 					<blockquote>
-						Даже при явном указании undefined параметру присваивается значение по умолчанию
+						Даже при явном указании 'undefined' параметру присваивается значение по умолчанию
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -639,7 +639,7 @@ print();//29
 				<section>
 					<h3>Оператор spread</h3>
 					<blockquote>
-						В отличии от arguments, rest - массив, а значит, можно использовать методы map, forEach и другие
+						В отличии от arguments, rest - это массив, а значит, можно использовать методы map, forEach и т.д.
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -647,6 +647,7 @@ function printName(firstName, lastName, ...rest) {
   console.log(firstName + ' ' + lastName + ' - ' + rest);
   console.log(rest);
 }
+
 printName('Иван', 'Иванов', 'Иванович', '1959');
 //Иван Иванов - Иванович,1959
 //["Иванович", "1959"]
@@ -655,19 +656,30 @@ printName('Иван', 'Иванов', 'Иванович', '1959');
 				</section>
 				<section>
 					<h3>Свойство name</h3>
-					function getRandomInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; } console.log(getRandomInt.name);//getRandomInt
-					getRandomInt.name = 'f'; console.log(getRandomInt.name); //getRandomInt console.log(f.name);// ReferenceError: f is
-					not defined
+					<pre>
+						<code class="hljs">
+function getRandomInt(min, max) 
+{ 
+    return Math.floor(Math.random() * (max - min)) + min; 
+} 
+
+console.log(getRandomInt.name);//getRandomInt
+getRandomInt.name = 'f'; 
+
+console.log(getRandomInt.name); //getRandomInt 
+console.log(f.name);// ReferenceError: f is not defined
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Блочная модель видимости</h3>
 					<pre>
 						<code class="hljs">
 if(something){
-getRandomInt(0, 10);//4
-	function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+    getRandomInt(0, 10);//4
+    function getRandomInt(min, max) {
+       return Math.floor(Math.random() * (max - min)) + min;
+    }
 }
 
 getRandomInt(0, 10);//ReferenceError: getRandomInt is not defined
@@ -675,32 +687,34 @@ getRandomInt(0, 10);//ReferenceError: getRandomInt is not defined
 					</pre>
 				</section>
 			</section>
+			<!-- Стрелочные функции -->
 			<section>
 				<section>
 					<h2>Стрелочные функции</h2>
 					<blockquote>
-						Выражения имеют более короткий синтаксис и лексически привязаны к значению this, всегда анонимные
+						Выражения имеют более короткий синтаксис, всегда анонимные и лексически привязаны к значению this
 					</blockquote>
 					<pre>
-					<code class="hljs" data-trim>
-						(param1, param2, paramN) => expression
-					</code>
-						</pre>
-					<small>
+						<code class="hljs">
+(param1, param2, paramN) => expression
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Особенности</h3>
 					<ul>
-						<li>Лексическое связывание. Значения this, super и arguments определяются не тем, как стрелочные
-							функции были вызваны, а тем, как они были созданы</li>
+						<li>Лексическое связывание. Значения this, super и arguments определяются не тем, как стрелочные функции были вызваны,
+							а тем, как они были созданы</li>
 						<li>Неизменяемые this, super и arguments. Значения этих переменных внутри стрелочных функций остаются неизменными на протяжении
 							всего жизненного цикла функции</li>
 						<li>Стрелочные функции не могут быть использованы как конструктор</li>
-						<li>Недоступность «собственного» значения переменной arguments</li>
+						<li>Недоступность «собственного» значения переменной arguments, this ...</li>
 					</ul>
-					</small>
 				</section>
 				<section>
 					<h3>Короткая запись</h3>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 var faculties = [
   "ИТ",
   "ИЭФ",
@@ -710,11 +724,11 @@ var faculties = [
 var a = faculties.map(function(s){ return s.length });//[2,3,4]
 
 var b = faculties.map( s => s.length);//[2,3,4]
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
-					<h3>Еще примеры</h3>
+					<h3>Еще пример</h3>
 					<pre>
 						<code class="hljs">
 let square = x => x*x;
@@ -743,7 +757,7 @@ console.log(func());//77
 				<section>
 					<h3>Отсутствие this</h3>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
  var handler = {
     id: "123456",
     init: function() {
@@ -754,8 +768,8 @@ console.log(func());//77
         console.log("Handling " + type  + " for " + this.id);
     }
 };
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Отсутствие arguments</h3>
@@ -784,6 +798,7 @@ var b = new (() => {});
 					</pre>
 				</section>
 			</section>
+			<!-- Строки -->
 			<section>
 				<h1>Строки</h1>
 			</section>
@@ -821,15 +836,15 @@ string text line 2`);
 					<h3>Интерполяция выражений</h3>
 					<pre>
 						<code class="hljs">
-let apples = 2;
-let oranges = 3;
+let arg1 = 2;
+let arg2 = 3;
 
-console.log(`${apples} + ${oranges} = ${apples + oranges}`); // 2 + 3 = 5
+console.log(`${arg1} + ${arg2} = ${arg1 + arg2}`); // 2 + 3 = 5
 						</code>
 					</pre>
 				</section>
 				<section>
-					<h3>Еще примеры</h3>
+					<h3>Еще пример</h3>
 					<pre>
 						<code class="hljs">
 function authorize(user, action) {
@@ -849,7 +864,7 @@ console.log(str); // this is STRING in uppercase
 					</pre>
 				</section>
 				<section>
-					<h3>Вложенная Интерполяция</h3>
+					<h3>Вложенная интерполяция</h3>
 					<pre>
 						<code class="hljs">
 const up = (str) => str.toUpperCase();
@@ -861,7 +876,9 @@ console.log(str); // these USERS are great
 				</section>
 				<section>
 					<h3>Улучшеная поддержка юникода</h3>
-					<p>UTF-16 = символ состоит из 2 байт</p>
+					<blockquote>
+						Ипользуется кодировка UTF-16. На хранение одного символа необходимо 2 байта
+					</blockquote>
 					<pre>
 						<code class="hljs">
 console.log( '我'.length ); // 1
@@ -878,13 +895,13 @@ console.log( '😂'.length ); // 2, FACE WITH TEARS OF JOY
 						<li>str.includes(s)</li>
 						<li>str.endsWith(s)</li>
 						<li>str.startsWith(s)</li>
-						<li>str.repeat(times)</li>
+						<li>str.repeat(count)</li>
 					</ul>
 				</section>
 				<section>
 					<h3>Метод includes</h3>
 					<blockquote>
-						Проверяет, включает ли одна строка в себя другую, возвращает true/false
+						Проверяет, включает ли одна строка str в себя другую строку searchString, возвращает true/false
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -965,15 +982,18 @@ str.repeat(count)
 					</pre>
 				</section>
 			</section>
+			<!-- Функции шаблониазции -->
 			<section>
 				<section>
 					<h2>Функции шаблонизации</h2>
-					<p>Использование свой функции шаблонизации для строк</p>
+					<blockquote>
+						Процесс использования своей функции шаблонизации для строк
+					</blockquote>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 let str = func`моя строка`;
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Пример</h3>
@@ -985,11 +1005,10 @@ function f(strings, ...values) {
   console.log(JSON.stringify(values));      // [3,5,8]
 }
 
-let apples = 3;
-let oranges = 5;
+let arg1 = 3;
+let arg2 = 5;
 
-//          |  s[0] | v[0] |s[1]| v[1]  |s[2]  |      v[2]      |s[3]
-let str = f`Sum of ${apples} + ${oranges} =\n ${apples + oranges}!`;
+let str = f`Sum of ${arg1} + ${arg2} =\n ${arg1 + arg2}!`;
 						</code>
 					</pre>
 				</section>
@@ -1017,6 +1036,7 @@ tag`string text line 1 \n string text line 2`;
 					</pre>
 				</section>
 			</section>
+			<!-- Тип данных Symbol -->
 			<section>
 				<h1>Symbol</h1>
 			</section>
@@ -3333,7 +3353,8 @@ getData(function(a){
 				</section>
 				<section>
 					<h3>Пример</h3>
-					<p>При запуске в chrome видем ошибку index.js:1 Uncaught SyntaxError: Unexpected token import. Слабая поддержка браузеров. Необходимо использовать babel.js либо аналогичный инструмент</p>
+					<p>При запуске в chrome видем ошибку index.js:1 Uncaught SyntaxError: Unexpected token import. Слабая поддержка браузеров.
+						Необходимо использовать babel.js либо аналогичный инструмент</p>
 					<pre>
 						<code class="hljs">
 lib/math.js
@@ -3381,7 +3402,7 @@ export { import1 as name1, import2 as name2, …, nameN } from …;
 					<h3>export переменных</h3>
 					<ul>
 						<li>перед объявлением переменных, функций и классов.
-						<li>отдельно, при этом в фигурных скобках указывается, что именно экспортируется.</li>
+							<li>отдельно, при этом в фигурных скобках указывается, что именно экспортируется.</li>
 					</ul>
 					<pre>
 						<code class="hljs">
@@ -3405,7 +3426,8 @@ export {two};
 				<section>
 					<h3>Ключевое слово AS</h3>
 					<blockquote>
-						При помощи ключевого слова as можно указать, что переменная one будет доступна снаружи (экспортирована) под именем once, а two – под именем twice:
+						При помощи ключевого слова as можно указать, что переменная one будет доступна снаружи (экспортирована) под именем once,
+						а two – под именем twice:
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -3435,7 +3457,8 @@ export function sayHi() {
 				<section>
 					<h3>Экспорт по умолчанию</h3>
 					<blockquote>
-						Иногда модуль экспортирует только одно значение (большой класс, например). В таком случае удобно определить это значение как экспортируемое по умолчанию
+						Иногда модуль экспортирует только одно значение (большой класс, например). В таком случае удобно определить это значение
+						как экспортируемое по умолчанию
 					</blockquote>
 					<pre>
 						<code class="hljs">
@@ -3538,18 +3561,9 @@ alert( `${numbers.one} and ${numbers.two}` ); // 1 and 2
 						<code class="hljs">
 
 						</code>
-					</pre>
-			System.import(
-    ['module1', 'module2'],
-    function (module1, module2) {  // успешное выполнение
-        …
-    },
-    function (err) {  // ошибка
-        …
-    }
-);	</section>
+					</pre> System.import( ['module1', 'module2'], function (module1, module2) { // успешное выполнение … }, function
+					(err) { // ошибка … } ); </section>
 			</section>
-	
 			<section>
 				<h1>Другие особенности</h1>
 			</section>
