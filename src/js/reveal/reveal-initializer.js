@@ -13,10 +13,12 @@
     });
 
     Reveal.addEventListener('ready', function (event) {
-        hljs.initHighlightingOnLoad();
+        //hljs.initHighlightingOnLoad(); //There is a bug, the method doesn't call sometimes
         presentable.toc({
             framework: "revealjs"
         });
     });
+
+    hljs.initHighlightingOnLoad();
 
 })();
