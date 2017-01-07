@@ -2653,6 +2653,904 @@ let user = new UserProxy("Maksim", "Hladki");
 				</section>
 			</section>
 			<section>
+				<h1>Обещание (Promise)</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Понятие промиса</h2>
+					<blockquote>
+						Объект, используемый как заглушка для результата некоего отложенного (и возможно асинхронного) вычисления
+					</blockquote>
+					<img src="img/promise.png" alt="">
+				</section>
+				<section>
+					<h3>Синтаксис</h3>
+					<pre>
+						<code class="hljs">
+new Promise(executor);
+new Promise(function(resolve, reject) { ... });
+						</code>
+					</pre>
+					<ul>
+						<li>onFulfilled – срабатывают, когда promise в состоянии «выполнен успешно»</li>
+						<li>onRejected – срабатывают, когда promise в состоянии «выполнен с ошибкой»</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Алгоритм</h3>
+					<ol>
+						<li>Код, которому надо сделать что-то асинхронно, создаёт объект promise и возвращает его</li>
+						<li>Внешний код, получив promise, навешивает на него обработчики</li>
+						<li>По завершении процесса асинхронный код переводит promise в состояние fulfilled (с результатом) или rejected (с ошибкой).
+							При этом автоматически вызываются соответствующие обработчики во внешнем коде</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Навешивание обработчиков</h3>
+					<pre>
+						<code class="hljs">
+							promise.then(onFulfilled, onRejected)
+							//onFulfilled – функция, которая будет вызвана с результатом при resolve.
+onRejected – функция, которая будет вызвана с ошибкой при reject.
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+							// onFulfilled сработает при успешном выполнении
+promise.then(onFulfilled)
+// onRejected сработает при ошибке
+promise.then(null, onRejected)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод then</h3>
+					<blockquote>
+						Метод then() возвращает Promise (обещание). Метод принимает два аргумента, колбэк-функции для случаев выполнения и отказа
+						соответственно.
+					</blockquote>
+					<pre>
+						<code class="hljs">
+							p.then(onFulfilled, onRejected);
+
+p.then(function(value) {
+   // выполнение
+  }, function(reason) {
+  // отказ
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод catch</h3>
+					<p class="text">Для того, чтобы поставить обработчик только на ошибку, вместо .then(null, onRejected) можно написать .catch(onRejected)
+						– это то же самое</p>
+					<pre>
+						<code class="hljs">
+promise.catch(onRejected);
+
+promise.catch(function(reason) {
+   // отказ
+});
+						</code>
+					</pre>
+					<blockquote>
+						catch всегда возвращает положительный промис
+					</blockquote>
+				</section>
+				<section>
+					<h3>throw в промисах</h3>
+					<blockquote>
+						Синхронный throw – то же самое, что reject
+					</blockquote>
+					<pre>
+						<code class="hljs">
+let p = new Promise((resolve, reject) => {
+  // то же что reject(new Error("Ошибка"))
+  throw new Error("Ошибка");
+});
+
+p.catch(console.log); // Ошибка
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Эмуляция асинхронности</h3>
+					<pre>
+						<code class="hljs">
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("result");
+  }, 1000);
+});
+
+promise
+  .then(
+    result => {
+      console.log("Fulfilled: " + result); // result - аргумент resolve
+    },
+    error => {
+      console.log("Rejected: " + error); // error - аргумент reject
+    }
+  );
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+							var promise = new Promise(function(resolve, reject) {
+  console.log('in Promise constructor function');
+  setTimeout(function() {
+    console.log('in setTimeout callback');
+    resolve('foo');
+  }, 100);
+});
+console.log('created promise');
+
+promise.then(function(result) {
+  console.log('promise returned: ' + result);
+});
+console.log('hooked promise.then()');
+
+
+//in Promise constructor function
+created promise
+hooked promise.then()
+in setTimeout callback
+promise returned: foo
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Промисификация</h3>
+					<blockquote>
+						Промисификация – это когда берут асинхронный функционал и делают для него обёртку, возвращающую промис.
+					</blockquote>
+					<pre>
+						<code class="hljs">
+							function httpGet(url) {
+
+  return new Promise(function(resolve, reject) {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+
+    xhr.onload = function() {
+      if (this.status == 200) {
+        resolve(this.response);
+      } else {
+        var error = new Error(this.statusText);
+        error.code = this.status;
+        reject(error);
+      }
+    };
+
+    xhr.onerror = function() {
+      reject(new Error("Network Error"));
+    };
+
+    xhr.send();
+  });
+
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>fetch api</h3>
+					<blockquote>
+						Метод fetch: замена XMLHttpRequest
+					</blockquote>
+					<pre>
+						<code class="hljs">
+							let promise = fetch(url[, options]);
+							//url – URL, на который сделать запрос,
+options – необязательный объект с настройками запроса.
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>
+						Свойства options
+					</h3>
+					<table>
+						<tr>
+							<td>method </td>
+							<td> метод запроса</td>
+						</tr>
+						<tr>
+							<td>headers </td>
+							<td>заголовки запроса (объект)</td>
+						</tr>
+						<tr>
+							<td>body </td>
+							<td>тело запроса: FormData, Blob, строка и т.п response.arrayBuffer() response.blob() response.formData() response.json()
+								response.text()
+							</td>
+						</tr>
+						<tr>
+							<td>mode </td>
+							<td> одно из: «same-origin», «no-cors», «cors», указывает, в каком режиме кросс-доменности предполагается делать запрос</td>
+						</tr>
+						<tr>
+							<td>credentials </td>
+							<td>одно из: «omit», «same-origin», «include», указывает, пересылать ли куки и заголовки авторизации вместе с запросом</td>
+						</tr>
+						<tr>
+							<td>cache </td>
+							<td>одно из «default», «no-store», «reload», «no-cache», «force-cache», «only-if-cached», указывает, как кешировать запрос</td>
+						</tr>
+						<tr>
+							<td>redirect </td>
+							<td>можно поставить «follow» для обычного поведения при коде 30x (следовать редиректу) или «error» для интерпретации редиректа
+								как ошибки</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>
+						Пример 1
+					</h3>
+					<pre>
+						<code class="hljs">
+							fetch('/article/fetch/user.json')
+  .then(function(response) {
+    alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
+    alert(response.status); // 200
+
+    return response.json();
+   })
+  .then(function(user) {
+    alert(user.name); // iliakan
+  })
+  .catch( alert );
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+							var myImage = document.querySelector('img');
+
+fetch('flowers.jpg')
+.then(function(response) {
+  return response.blob();
+})
+.then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>
+						Пример 3
+					</h3>
+					<pre>
+						<code class="hljs">
+							var myHeaders = new Headers();
+
+var myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors',
+               cache: 'default' };
+
+fetch('flowers.jpg',myInit)
+.then(function(response) {
+  return response.blob();
+})
+.then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Метод Promise.all</h2>
+					<blockquote>
+						возвращает обещание, которое выполнится тогда, когда будут выполнены все обещания, переданные в виде перечисляемого аргумента,
+						или отклонено любое из переданных обещаний
+					</blockquote>
+					<pre>
+						<code class="hljs">
+							Promise.all(iterable);
+							//iterable - Перечисляемый объект, например, массив (Array)
+						</code>
+					</pre>
+					<p>Promise который будет выполнен когда будут выполнены все обещания, переданные в виде перечисляемого аргумента, или отклонен,
+						если будет отклонено хоть одно из переданных обещаний.</p>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+var p1 = Promise.resolve(3);
+var p2 = 1337;
+var p3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, "foo");
+}); 
+
+Promise.all([p1, p2, p3]).then(values => { 
+  console.log(values); 
+});
+
+//Выведет: 
+// [3, 1337, "foo"] 
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+							var p1 = new Promise((resolve, reject) => { 
+  setTimeout(resolve, 1000, "one"); 
+}); 
+var p2 = new Promise((resolve, reject) => { 
+  setTimeout(resolve, 2000, "two"); 
+});
+var p3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 3000, "three");
+});
+var p4 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 4000, "four");
+});
+var p5 = new Promise((resolve, reject) => {
+// Это обещание прервет Promise.all
+  reject("reject");
+});
+
+Promise.all([p1, p2, p3, p4, p5]).then(value => { 
+  console.log(value);
+}, reason => {
+  console.log(reason)
+});
+
+//Выведет:
+//"reject"
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+function fetchAsync (url, timeout, onData, onError) {
+    …
+}
+let fetchPromised = (url, timeout) => {
+    return new Promise((resolve, reject) => {
+        fetchAsync(url, timeout, resolve, reject)
+    })
+}
+Promise.all([
+    fetchPromised("http://backend/foo.txt", 500),
+    fetchPromised("http://backend/bar.txt", 500),
+    fetchPromised("http://backend/baz.txt", 500)
+]).then((data) => {
+    let [ foo, bar, baz ] = data
+    console.log(`success: foo=${foo} bar=${bar} baz=${baz}`)
+}, (err) => {
+    console.log(`error: ${err}`)
+});
+
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Метод Promise.race</h2>
+					<blockquote>
+						Метод Promise.race(iterable) возвращает выполненое или отклоненое обещание, в зависимости от того, с каким результатом завершится
+						первое из переданных обещаний, со значением или причиной отклонения этого обещания.
+					</blockquote>
+					<pre>
+						<code class="hljs">
+Promise.race(iterable);
+//iterable
+Итерируемый объект, такой как (Array)
+						</code>
+					</pre>
+					<p>Выполненный или отклоненный Promise в зависимости от результата первого завершенного из переданных в итерируемом объекте
+						обещаний
+					</p>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+var p1 = new Promise(function(resolve, reject) { 
+    setTimeout(resolve, 500, "один"); 
+});
+var p2 = new Promise(function(resolve, reject) { 
+    setTimeout(resolve, 100, "два"); 
+});
+
+Promise.race([p1, p2]).then(function(value) {
+  console.log(value); // "два"
+  // Оба вернули resolve, однако p2 вернул результат первым
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+							var p3 = new Promise(function(resolve, reject) { 
+    setTimeout(resolve, 100, "три");
+});
+var p4 = new Promise(function(resolve, reject) { 
+    setTimeout(reject, 500, "четыре"); 
+});
+
+Promise.race([p3, p4]).then(function(value) {
+  console.log(value); // "три"
+  // p3 быстрее, поэтому выведется значение его resolve               
+}, function(reason) {
+  // Не вызывается
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+							var p5 = new Promise(function(resolve, reject) { 
+    setTimeout(resolve, 500, "пять"); 
+});
+var p6 = new Promise(function(resolve, reject) { 
+    setTimeout(reject, 100, "шесть");
+});
+
+Promise.race([p5, p6]).then(function(value) {
+  // Не вызывается
+}, function(reason) {
+  console.log(reason); // "шесть"
+  // p6 быстрее, выводится его rejects
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Метод Promise.resolve</h2>
+					<blockquote>
+						Метод Promise.resolve(value) возвращает Promise выполненый с переданным значением. Если переданное значение является thenable
+						- обьект (т.е. имеет метод "then" method), возвращаемое обещание будет следовать thenable - обьекту, принимая свое
+						состояние; в ином случае возвращаемое обещание будет выполнено с переданным значением.
+					</blockquote>
+					<pre>
+						<code class="hljs">
+Promise.resolve(value);
+Promise.resolve(promise);
+Promise.resolve(thenable);
+						</code>
+					</pre>
+					<p>Метод Promise.resolve возвращает выполненое обещание (Promise)</p>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+							Promise.resolve("Success").then(function(value) {
+  console.log(value); // "Success"
+}, function(value) {
+  // не будет вызванна
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+							var p = Promise.resolve([1,2,3]);
+p.then(function(v) {
+  console.log(v[0]); // 1
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+							var original = Promise.resolve(true);
+var cast = Promise.resolve(original);
+cast.then(function(v) {
+  console.log(v); // true
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Метод Promise.reject</h2>
+					<blockquote>
+						Метод Promise.reject(reason) возвращает объект Promise, который был отклонен по указанной причине.
+					</blockquote>
+					<pre>
+						<code class="hljs">
+							Promise.reject(reason);
+						</code>
+					</pre>
+					<p>Возвращает Отклоненный с указаной причиной Promise.</p>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+							Promise.reject("Проверка статического reject").then(function(reason) {
+  // не вызывается
+}, function(reason) {
+  console.log(reason); // "Проверка статического reject"
+});
+
+Promise.reject(new Error("провал")).then(function(error) {
+  // не вызывается
+}, function(error) {
+  console.log(error); // "провал"
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Цепочки промисов</h2>
+					<pre>
+						<code class="hljs">
+something(...)
+  .then(...)
+  .then(...)
+  .then(...)
+						</code>
+					</pre>
+					<blockquote>
+						Если очередной then вернул промис, то далее по цепочке будет передан не сам этот промис, а его результат
+					</blockquote>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+Promise.reject("A")  
+    .then(x =>  { console.log("THEN1", x);  })
+    .catch(x => { console.log("CATCH1", x); })
+    .then(x =>  { console.log("THEN2", x);  })
+    .catch(x => { console.log("CATCH2", x); });
+	//CATCH1 A
+//THEN2 undefined
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+Promise.reject("A")  
+    .catch(x => {
+        console.log("CATCH1", x);
+        return Promise.reject("B");
+    })
+    .then(x =>  { console.log("THEN1", x);  })
+    .catch(x => { console.log("CATCH2", x); })
+    .then(x =>  { console.log("THEN2", x);  });
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Callback hell</h2>
+					<pre>
+					<code class="hljs">
+getData(function(a){  
+    getMoreData(a, function(b){
+        getMoreData(b, function(c){ 
+            getMoreData(c, function(d){ 
+                getMoreData(d, function(e){ 
+                    ...
+                });
+            });
+        });
+    });
+});
+//CATCH1 A
+//CATCH2 B
+//THEN2 undefined
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Async/Await</h3>
+					<pre>
+						<code class="hljs">
+							async function unicorn() {
+  try {
+    let rainbow = await getRainbow();
+    return rainbow.data.colors;
+  } catch(e) {
+    return {
+      message: e.data.message,
+      somaText: 'Упс, ошибочка'
+    }
+  }
+}
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h1>Модули </h1>
+			</section>
+			<section>
+				<h2>Модули в es5</h2>
+				<p>CommonJS (CJS)</p>
+				<ul>
+					<li>компактный синтаксис</li>
+					<li>предназначен для синхронной загрузки</li>
+					<li>преимущественно используется на стороне сервера</li>
+				</ul>
+				<p>Asynchronous Module Definition (AMD)</p>
+				<ul>
+					<li>синтаксис немного сложнее, что позволяет AMD работать без eval() или этапа компиляции</li>
+					<li>предназначен для асинхронной загрузки</li>
+					<li>преимущественно используется на стороне клиента</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h2>Модули в es6</h2>
+					<blockquote>
+						Модулем считается файл с кодом. В этом файле ключевым словом export помечаются переменные и функции, которые могут быть использованы
+						снаружи. Другие модули могут подключать их через вызов import.
+					</blockquote>
+					<p>Цель Целью модулей ECMAScript 6 (ES6) было создание формата, удобного как для пользователей CJS, так и для пользователей
+						AMD. В связи с этим они имеют такой же компактный синтаксис, как и модули CJS. С другой стороны, они не такие динамичные
+						(например, вы не сможете условно загрузить модуль с помощью обычного синтаксиса). Это дает два основных преимущества:</p>
+				</section>
+				<section>
+					<h2>Особенности</h2>
+					<ul>
+						<li>на этапе компиляции вы получите ошибки, если попытаетесь импортировать что-то, что не было предварительно экспортировано</li>
+						<li>вы можете легко осуществить асинхронную загрузку модулей ES6</li>
+						<li>декларативный синтаксис (для импорта и экспорта)</li>
+						<li>программной загрузки (чтобы задать конфигурацию загрузки модулей и для условной загрузки модулей</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<p>При запуске в chrome видем ошибку index.js:1 Uncaught SyntaxError: Unexpected token import. Слабая поддержка браузеров. Необходимо использовать babel.js либо аналогичный инструмент</p>
+					<pre>
+						<code class="hljs">
+lib/math.js
+index.js
+other.js
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+//  lib/math.js
+export function sum (x, y) { return x + y }
+export var pi = 3.141593
+
+//  index.js
+import * as math from "lib/math"
+console.log("2π = " + math.sum(math.pi, math.pi))
+
+//  other.js
+import { sum, pi } from "lib/math"
+console.log("2π = " + sum(pi, pi))
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>export</h3>
+					<pre>
+						<code class="hljs">
+							export { name1, name2, …, nameN };
+export { variable1 as name1, variable2 as name2, …, nameN };
+export let name1, name2, …, nameN; // или var
+export let name1 = …, name2 = …, …, nameN; // или var, const
+
+export default выражение;
+export default function (…) { … } // или class, function*
+export default function name1(…) { … } // или class, function*
+export { name1 as default, … };
+
+export * from …;
+export { name1, name2, …, nameN } from …;
+export { import1 as name1, import2 as name2, …, nameN } from …;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>export переменных</h3>
+					<ul>
+						<li>перед объявлением переменных, функций и классов.
+						<li>отдельно, при этом в фигурных скобках указывается, что именно экспортируется.</li>
+					</ul>
+					<pre>
+						<code class="hljs">
+							// экспорт прямо перед объявлением
+export let one = 1;
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+let two = 2;
+
+export {two};
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+							export {one, two};
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Ключевое слово AS</h3>
+					<blockquote>
+						При помощи ключевого слова as можно указать, что переменная one будет доступна снаружи (экспортирована) под именем once, а two – под именем twice:
+					</blockquote>
+					<pre>
+						<code class="hljs">
+							export {one as once, two as twice};
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>export функции и классов</h3>
+					<pre>
+						<code class="hljs">
+							export class User {
+  constructor(name) {
+    this.name = name;
+  }
+};
+
+export function sayHi() {
+  alert("Hello!");
+};
+
+// отдельно от объявлений было бы так:
+// export {User, sayHi}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Экспорт по умолчанию</h3>
+					<blockquote>
+						Иногда модуль экспортирует только одно значение (большой класс, например). В таком случае удобно определить это значение как экспортируемое по умолчанию
+					</blockquote>
+					<pre>
+						<code class="hljs">
+//user.js
+export default class User {
+  constructor(name) {
+    this.name = name;
+  }
+};
+
+// login.js:
+import User from './user';
+
+new User("Вася");
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Import</h3>
+					<blockquote>
+						Другие модули могут подключать экспортированные значения при помощи ключевого слова import
+					</blockquote>
+					<pre>
+						<code class="hljs">
+							import defaultMember from "module-name"; 
+import * as name from "module-name"; 
+import { member } from "module-name"; 
+import { member as alias } from "module-name"; 
+import { member1 , member2 } from "module-name"; 
+import { member1 , member2 as alias2 , [...] } from "module-name"; 
+import defaultMember, { member [ , [...] ] } from "module-name"; 
+import defaultMember, * as name from "module-name"; 
+import "module-name";
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+							//nums.js:
+							export let one = 1;
+export let two = 2;
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+							import {one, two} from "./nums";
+
+alert( `${one} and ${two}` ); // 1 and 2
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+							//использование as
+							// импорт one под именем item1, а two – под именем item2
+import {one as item1, two as item2} from "./nums";
+
+alert( `${item1} and ${item2}` ); // 1 and 2
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Импорт всех значений в виде объекта</h3>
+					<pre>
+						<code class="hljs">
+							import * as numbers from "./nums";
+
+// теперь экспортированные переменные - свойства numbers
+alert( `${numbers.one} and ${numbers.two}` ); // 1 and 2
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Встроенные модули</h3>
+					<p>Было</p>
+					<pre>
+						<code class="hljs">
+<script>
+    (function () {  // начало самовызывающейся функции
+        var tmp = …;  // не станет глобальной
+    }());  // конец самовызывающейся функции
+</script>
+						</code>
+					</pre>
+					<p>Стало</p>
+					<pre>
+						<code class="hljs">
+					<script>
+    module {  // анонимный внутренний модуль
+        let tmp = …;  // не станет глобальной
+    }
+</script>		
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Импорт модулей и загрузка скриптов</h3>
+					<pre>
+						<code class="hljs">
+
+						</code>
+					</pre>
+			System.import(
+    ['module1', 'module2'],
+    function (module1, module2) {  // успешное выполнение
+        …
+    },
+    function (err) {  // ошибка
+        …
+    }
+);	</section>
+			</section>
+	
+			<section>
 				<h1>Другие особенности</h1>
 			</section>
 			<section>
