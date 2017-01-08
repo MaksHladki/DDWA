@@ -425,7 +425,7 @@ $ npm list -g --depth=0
 								<td>набор ключевых слов</td>
 							</tr>
 							<tr>
-								<td>authors</td>
+								<td>author</td>
 								<td>информация об авторе пакета</td>
 							</tr>
 							<tr>
@@ -523,7 +523,173 @@ $ npm list -g --depth=0
 				<h1>bower</h1>
 			</section>
 			<section>
-				<h2>http://nano.sapegin.ru/all/bower</h2>
+				<section>
+					<h2>Bower</h2>
+					<blockquote>
+						Менеджер пакетов, ориентированный на использовании в разработке клиентской части веб-приложений с использование JS библиотек
+						и фреймворков
+					</blockquote>
+					<pre>
+					<code class="hljs">
+npm install -g bower
+					</code>
+				</pre>
+					<pre>
+					<code class="hljs">
+//установка пакета angular
+bower install angular
+
+//установка пакета из репозитория
+bower install git://github.com/angular/angular.js/
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+bower install jquery
+bower cloning git://github.com/components/jquery.git
+bower cached git://github.com/components/jquery.git
+bower fetching jquery
+bower checking out jquery#2.0.0
+bower copying /Users/danheberden/.bower/cache/jquery/29cb...
+bower installing jquery#2.0.0
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Плюсы использования</h3>
+					<ul>
+						<li>Делает установку зависимостей более легкой</li>
+						<li>Легкая настройка с использованием bower.json</li>
+						<li>Все пакеты загружаются в единую директорию /bower_components (если зависимость уже загружена, заново она не загружается
+							в отличии от npm)</li>
+						<li>Механизм разрешения конфликтных ситуаций</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Основные команды</h3>
+					<table>
+						<tr>
+							<td>search</td>
+							<td>поиск пакета по имени</td>
+						</tr>
+						<tr>
+							<td>install</td>
+							<td>установка пакета</td>
+						</tr>
+						<tr>
+							<td>list</td>
+							<td>список установленных пакетов</td>
+						</tr>
+						<tr>
+							<td>update</td>
+							<td>обновление выбранного пакета</td>
+						</tr>
+						<tr>
+							<td>uninstall</td>
+							<td>удаление пакета</td>
+						</tr>
+						<tr>
+							<td>init</td>
+							<td>инициализация конфигурационного файла bower.json</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Команда search</h3>
+					<pre>
+						<code class="hljs">
+bower search jquery
+Search results:
+    jQuery https://github.com/jquery/jquery.git
+    jquery https://github.com/jquery/jquery-dist.git
+    jquery.x https://github.com/jljLabs/jquery.x.git
+    jt_jquery https://github.com/vicanso/jt_jquery.git
+    jquery.Q https://github.com/jsbuzz/jQuery_Q.git
+    jquery-m https://github.com/meetup/jquery.git
+    jquery.j2d https://github.com/fsggs/jquery.j2d.git
+    jquery.hx https://github.com/millennialmedia/jquery.hx.git
+    jquery-ts https://github.com/andraaspar/jquery-ts.git
+    jquery-tm https://github.com/trymore/jquery-tm.git
+    jquery.gk https://github.com/ezoapp/jquery.gk.git
+    jquery-jec https://github.com/RaYell/jquery-jec.git
+	........
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Команда install</h3>
+					<pre>
+						<code class="hljs">
+bower install jquery#2.0.0
+//result
+bower jquery#2.0.0  not-cached https://github.com/jquery/jquery-dist.git#2.0.0
+bower jquery#2.0.0  resolve https://github.com/jquery/jquery-dist.git#2.0.0
+bower jquery#2.0.0  download https://github.com/jquery/jquery-dist/archive/2.0.0.tar.gz
+bower jquery#2.0.0  extract archive.tar.gz
+bower jquery#2.0.0  resolved https://github.com/jquery/jquery-dist.git#2.0.0
+jquery#2.0.0 bower_components\jquery
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Команда List</h3>
+					<pre>
+						<code class="hljs">
+bower list
+//result
+bower check-new     Checking for new versions of the project dependencies...
+HP C:\Users\HP
+└── jquery#3.1.1 extraneous
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Команда uninstall</h3>
+					<pre>
+						<code class="hljs">
+bower uninstall jquery
+//result
+bower uninstall     jquery
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Команда Init</h3>
+					<pre>
+						<code class="hljs" data-trim>
+bower init
+//bower.json
+{
+  name: 'Maks Hladki',
+  authors: [
+    'Maks Hladki &ltMaksHladki@gmail.com&gt'
+  ],
+  description: 'test project',
+  main: 'index.html',
+  keywords: [
+    'js',
+    'frontend'
+  ],
+  license: 'MIT',
+  homepage: 'https://github.com/MaksHladki/DDWA'.
+  dependencies: {
+        "jquery": "~3.1.1",
+  },
+  devDependencies: {}
+}
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h2>Bower и VS Code</h2>
+				<p>ext install bower (Bower - Don Jayamanne)</p>
+				<img src="img/vs-code-bower.png" alt="">
 			</section>
 			<section>
 				<h1>Gulp</h1>
