@@ -1078,6 +1078,297 @@ gulp.src('./client/templates/*.jade')
 			</section>
 			<section>
 				<section>
+					<h2>browser-sync</h2>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs" data-trim>
+const gulp = require('gulp'),
+      browserSync = require('browser-sync').create();
+gulp.task('html', () => {
+    return gulp.src('src/**/*.html').pipe(gulp.dest('dist/'));
+});
+gulp.task('css', () => {
+    return gulp.src("src/css/*.css")
+        .pipe(gulp.dest("dist/css"))
+        .pipe(browserSync.stream());//*
+});
+gulp.task('serve', ['html' ,'css'], () => {
+    browserSync.init({ server: "./dist" });
+});
+gulp.task('watch', () => {
+  gulp.watch('src/css/*.css', ['css']);
+  gulp.watch('src/**/*.html', ['html']).on('change', browserSync.reload);//*
+});
+gulp.task('default', ['serve', 'watch']);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод reload</h3>
+					<pre>
+						<code class="hljs">
+browserSync.reload();
+
+browserSync.reload("styles.css");
+
+browserSync.reload(["styles.css", "ie.css"]);
+
+browserSync.reload("*.css");
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод stream</h3>
+					<pre>
+						<code class="hljs">
+//возвращает трансформированный поток данных, 
+//автоматически вставляемых в браузер
+
+gulp.task('sass', function () {
+    return gulp.src('scss/styles.scss')
+        .pipe(sass({includePaths: ['scss']}))
+        .pipe(gulp.dest('css'))
+        .pipe(browserSync.stream());
+        //автоматически вставляет трансформированный поток данных в браузер
+});
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+.pipe(browserSync.stream({once: true}));
+// перегружает только один раз для потока данных 
+//(исходных файлов может быть несколько)
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+.pipe(browserSync.stream({match: "**/*.css"}));
+//фидьтр для остановки отслеживания изменений и обновления некоторых файлов
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод exit</h3>
+					<pre>
+						<code class="hljs">
+var browserSync = require("browser-sync").create();
+
+// запускаем сервер
+browserSync.init({server: "./app"});
+
+// останавливаем сервер через 5 секунд
+setTimeout(function () {
+    browserSync.exit();
+}, 5000);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод init</h3>
+					<pre>
+						<code class="hljs">
+browserSync.init({
+    server: "./dist",
+    port: 8000,
+    index: 'index.html',
+    //proxy: "localhost:8888",
+    browser: ["firefox"]
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-connect</h2>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs" data-trim>
+const gulp = require('gulp'),
+    connect = require('gulp-connect');
+
+gulp.task('html', () => {
+    return gulp.src('src/**/*.html')
+        .pipe(gulp.dest('dist/'))
+        .pipe(connect.reload()); //*
+})
+
+gulp.task('serve', ['html'], () => {
+    connect.server({
+        root: 'dist', livereload: true //*
+    });
+});
+
+gulp.task('watch', () => {
+    gulp.watch('src/**/*.html', ['html']);
+});
+
+gulp.task('default', ['serve', 'watch']);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Запуск и остановка</h3>
+					<pre>
+						<code class="hljs">
+gulp.task('something', function() {
+  connect.server({
+    port: 8888
+  });
+  
+  //BODY
+
+  connect.serverClose();
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Параметры инициализации</h3>
+					<pre>
+						<code class="hljs">
+gulp.task('serve', ['html'], () => {
+    connect.server({
+        name: 'Test application',
+        root: ['dist', 'tmp'],
+        port: 8000,
+        livereload: true,
+        index: 'index.html'
+    });
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-autoprefixer</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      autoprefixer = require('gulp-autoprefixer');
+ 
+gulp.task('default', () =>
+    gulp.src('src/app.css')
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions']
+        }))
+        .pipe(gulp.dest('dist'))
+);
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+a {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
+const autoprefixer = require('gulp-autoprefixer');
+const concat = require('gulp-concat');
+ 
+gulp.task('default', () =>
+    gulp.src('src/**/*.css')
+        .pipe(sourcemaps.init())
+        .pipe(autoprefixer())
+        .pipe(concat('all.css'))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('dist'))
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Параметры инициализации</h3>
+					<pre>
+						<code class="hljs">
+autoprefixer(
+	{
+        browsers: ['last 2 versions', 'ie 9', '> 1%'],
+        cascade: true, //визуальный каскад, если css не сжат
+        supports: false,//добавлять префикс к @supports параметрам,
+        stats: { //собственная статистика
+                 "ie": {
+                         "6": 0.01,
+                         "7": 0.4,
+                         "8": 1.5
+                       },
+                 "chrome": {
+                      …
+                           },
+                      …
+                } 
+    }
+)					
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Browsers list</h3>
+					<small>
+						<ul>
+							<li>last 2 versions</li>
+							<li>last 2 Chrome versions</li>
+							<li>&gt 5%</li>
+							<li>&gt 5% in US</li>
+							<li>ie 6-8</li>
+							<li>ie 10</li>
+							<li>Firefox >= 20</li>
+							<li>iOS 7</li>
+							<li>not ie <= 8</li>
+						</ul>
+					</small>
+				</section>
+				<section>
+					<h3>Браузеры</h3>
+						<table>
+							<tr>
+								<td>
+									<ul>
+										<li>Chrome</li>
+										<li>Firefox</li>
+										<li>Explorer (ie)</li>
+										<li>Edge</li>
+										<li>iOS</li>
+										<li>Opera</li>
+										<li>Safari</li>
+										<li>ExplorerMobile</li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li>Android</li>
+										<li>BlackBerry</li>
+										<li>ChromeAndroid</li>
+										<li>FirefoxAndroid</li>
+										<li>OperaMobile</li>
+										<li>OperaMini</li>
+										<li>Samsung</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+				</section>
+			</section>
+			<section>
+				<section>
 					<h3>https://www.npmjs.com/package/gulp-load-plugins</h3>
 				</section>
 				<section>
@@ -1085,9 +1376,6 @@ gulp.src('./client/templates/*.jade')
 				</section>
 				<section>
 					<h3>gulp-sequence</h3>
-				</section>
-				<section>
-					<h3>browsersync</h3>
 				</section>
 				<section>
 					<h3>lazypipe</h3>
