@@ -340,7 +340,7 @@ npm update -g npm
 					</pre>
 				</section>
 				<section>
-					<h3>Команда Config</h3>
+					<h3>Команда config</h3>
 					<pre>
 						<code class="hljs">
 npm config set 'key' 'value' [--global] 
@@ -379,7 +379,7 @@ npm uninstall dtrace-provider --save-optional
 					</pre>
 				</section>
 				<section>
-					<h3>Команда List</h3>
+					<h3>Команда list</h3>
 					<pre>
 						<code class="hljs">
 npm list [--global] [--depth]
@@ -520,7 +520,7 @@ $ npm list -g --depth=0
 				</section>
 			</section>
 			<section>
-				<h1>bower</h1>
+				<h1>Менеджер пакетов Bower</h1>
 			</section>
 			<section>
 				<section>
@@ -629,7 +629,7 @@ bower install jquery#2.0.0
 //result
 bower jquery#2.0.0  not-cached https://github.com/jquery/jquery-dist.git#2.0.0
 bower jquery#2.0.0  resolve https://github.com/jquery/jquery-dist.git#2.0.0
-bower jquery#2.0.0  download https://github.com/jquery/jquery-dist/archive/2.0.0.tar.gz
+bower jquery#2.0.0  download https://github.com/jquery/jquery-dist/2.0.0.tar.gz
 bower jquery#2.0.0  extract archive.tar.gz
 bower jquery#2.0.0  resolved https://github.com/jquery/jquery-dist.git#2.0.0
 jquery#2.0.0 bower_components\jquery
@@ -637,12 +637,12 @@ jquery#2.0.0 bower_components\jquery
 					</pre>
 				</section>
 				<section>
-					<h3>Команда List</h3>
+					<h3>Команда list</h3>
 					<pre>
 						<code class="hljs">
 bower list
 //result
-bower check-new     Checking for new versions of the project dependencies...
+bower check-new  Checking for new versions of the project dependencies...
 HP C:\Users\HP
 └── jquery#3.1.1 extraneous
 						</code>
@@ -693,6 +693,154 @@ bower init
 			</section>
 			<section>
 				<h1>Gulp</h1>
+			</section>
+			<section>
+				<h2>Процесс front-end разработки</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Develop</th>
+							<th>Build</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Watch</td>
+							<td>Testing</td>
+						</tr>
+						<tr>
+							<td>Live Reload</td>
+							<td>Compile</td>
+						</tr>
+						<tr>
+							<td>ES6/TypeSctipt/Coffee</td>
+							<td>Concat</td>
+						</tr>
+						<tr>
+							<td>Sass/Less</td>
+							<td>Rename</td>
+						</tr>
+						<tr>
+							<td>JsHint</td>
+							<td>Minify</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Image optimization</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Deployment</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+				<section>
+					<h2>Gulp vs Grunt</h2>
+					<img src="img/gulp-grunt.png" alt="">
+				</section>
+				<section>
+					<h3>Сходства</h3>
+					<ul>
+						<li>Минификация кода</li>
+						<li>Анализ качества кода</li>
+						<li>Оптимизация изображений</li>
+						<li>Добавление вендорных (браузерных) префиксов</li>
+						<li>Тестирование</li>
+						<li>Многое другое</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Отличия</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>Gulp</th>
+								<th>Grunt</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>ориентирован на поток</td>
+								<td>ориентирован на файл</td>
+							</tr>
+							<tr>
+								<td>запускает задачи параллельно</td>
+								<td>запускает задачи последовательно</td>
+							</tr>
+							<tr>
+								<td>синтаксис более краток и лаконичен</td>
+								<td>основан на конфигурации</td>
+							</tr>
+							<tr>
+								<td>скорость выполнения выше</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h3>Ориентирован на поток</h3>
+					<img src="img/gulp-flow.png" alt="">
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Структура проекта</h2>
+					<pre>
+						<code class="hljs">
+├── app/
+      ├── css/
+      ├── fonts/
+      ├── images/ 
+      ├── index.html
+      ├── js/ 
+      └── scss/
+├── dist/
+├── gulpfile.js
+├── node_modules/
+└── package.json
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Еще пример</h3>
+					<pre>
+						<code class="hljs" data-trim>
+├── .tmp
+│   ├── app.css
+│   ├── app.js
+│   └── index.html
+├── bower_components
+│   └── angular
+├── dist
+│   ├── app.min.css
+│   ├── app.min.js
+│   └── index.html
+├── src
+    ├── app.scss
+    ├── app.ts
+    ├── components
+    └── index.html
+├── gulpfile.js
+├── node_modules/
+└── package.json
+						</code>
+					</pre>
+				</section>
 			</section>
 			<section>
 				<h1>Webpack</h1>
