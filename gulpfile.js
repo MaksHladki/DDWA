@@ -4,7 +4,6 @@ const gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     concat = require('gulp-concat'),
     connect = require('gulp-connect'),
-    cssmin = require('gulp-cssmin'),
     cleanCSS = require('gulp-clean-css'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
@@ -13,7 +12,8 @@ const gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    lazypipe = require('lazypipe');
 
 
 const srcPath = {
@@ -36,6 +36,13 @@ const distPath = {
     'task': './dist/task/'
 };
 
+const autoprefixerSettings = {
+        browsers: ['last 2 versions', 'ie 9', 'ie 10']
+    },
+    cleanCSSSettings = {
+        compatibility: 'ie9'
+    };
+
 
 gulp.task('clean', () => {
     return del([distPath.dist]);
@@ -43,26 +50,27 @@ gulp.task('clean', () => {
 
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
-        .pipe(useref())
+        .pipe(useref({}, lazypipe().pipe(sourcemaps.init, {
+            loadMaps: true
+        })))
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css',
             pipe(
-                autoprefixer({
-                    browsers: ['last 2 versions']
-                }),
-                cssmin()
+                autoprefixer(autoprefixerSettings),
+                cleanCSS(cleanCSSSettings)
             )
         ))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(distPath.html))
         .pipe(connect.reload());
 });
 
 gulp.task('css', () => {
     return gulp.src(srcPath.css)
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions']
-        }))
-        .pipe(cssmin())
+        .pipe(sourcemaps.init())
+        .pipe(autoprefixer(autoprefixerSettings))
+        .pipe(cleanCSS(cleanCSSSettings))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(distPath.css));
 });
 

@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Название лекции</title>
+	<title>Пакентные менеджеры и системы сборки модулей</title>
 	<meta name="description" content="Пакентные менеджеры и системы сборки модулей">
 	<meta name="keywords" content="npm, bower, nodejs, gulp, webpack">
 	<meta name="author" content="Maks Hladki">
@@ -752,7 +752,8 @@ bower init
 					</ul>
 				</section>
 				<section>
-					<h3>Отличия</h3>
+					<h3>Различия</h3>
+					<small>
 					<table>
 						<thead>
 							<tr>
@@ -774,27 +775,16 @@ bower init
 								<td>основан на конфигурации</td>
 							</tr>
 							<tr>
+								<td>проектировался для больших проектов</td>
+								<td>проектировался для средних и небольших проектов</td>
+							</tr>
+							<tr>
 								<td>скорость выполнения выше</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
 								<td></td>
 							</tr>
 						</tbody>
 					</table>
-				</section>
-				<section>
-					<h3>Ориентирован на поток</h3>
-					<img src="img/gulp-flow.png" alt="">
+					</small>
 				</section>
 			</section>
 			<section>
@@ -843,11 +833,284 @@ bower init
 				</section>
 			</section>
 			<section>
+				<section>
+					<h2>Подробнее о преимуществах</h2>
+					<ul>
+						<li>Легок в использовании</li>
+						<li>Эффективен</li>
+						<li>Высокая надежность</li>
+						<li>Просто изучить</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Легок в использовании</h3>
+					<blockquote>
+						Предпочитая код конфигурации, Gulp оставляет простые задачи простыми, а из сложных делает управляемые
+					</blockquote>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      coffee = require('gulp-coffee'),
+      concat = require('gulp-concat'),
+      cssmin = require('gulp-cssmin');
+
+gulp.task('coffee', () =>{
+    //TODO
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Эффективен</h3>
+					<blockquote>
+						Используя преимущества потока данных, процесс выполнения задач получается более быстрым, промежуточные файлы не создаются
+						и на диск не записываются
+					</blockquote>
+					<img src="img/gulp-flow.png" alt="">
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+gulp.task('html', () => {
+    return gulp.src(srcPath.html)// Считываем файл с диска
+        .pipe(useref()) //Обрабатываем в оперативной памяти
+        .pipe(gulpif('*.js', uglify())) //Обрабатываем в ОП
+        .pipe(gulpif('*.css',
+            pipe(
+                autoprefixer({
+                    browsers: ['last 2 versions']
+                }),
+                cssmin()
+            )
+        ))// Обрабатываем в оперативной памяти
+        .pipe(gulp.dest(distPath.html))// Записываем файл на диск
+        .pipe(connect.reload());
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Высокая надежность</h3>
+					<blockquote>
+						Все плагины для Gulp пишутся по специальным правилам. Этот процесс позволяет задачам оставаться простыми и работать так,
+						как вы этого ожидаете
+					</blockquote>
+					<p>Общее количество плагинов на декабрь 2016: <span class="highlight-blue">1100+</span></p>
+				</section>
+				<section>
+					<h3>Просто изучить</h3>
+					<blockquote>
+						Можно начать работать с Gulp с минимальными знаниями API. Нужно всего лишь понимать принцип работы основных четырех функций:
+						<span class="highlight-blue">task</span>, <span class="highlight-blue">watch</span>, <span class="highlight-blue">src</span>						и <span class="highlight-blue">dest</span>
+					</blockquote>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Установка и запуск Gulp</h2>
+					<ol>
+						<li>Создать package.json</li>
+						<li>Установить Gulp глобально</li>
+						<li>Установить Gulp локально как зависимость</li>
+						<li>Создать gulpfile.js</li>
+						<li>Выполнить команду gulp</li>
+					</ol>
+					<pre>
+					<code class="hljs">
+npm install --global gulp
+
+npm install --save-dev gulp
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Пример gulpfile.js</h3>
+					<pre>
+						<code class="hljs">
+var gulp  = require('gulp');
+
+gulp.task('default', function() {
+    console.log('Gulp is running!');
+});
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+>gulp
+
+[16:20:01] Using gulpfile G:\test\gulpfile.js
+[16:20:01] Starting 'default'...
+Gulp is running!
+[16:20:01] Finished 'default' after 200 µs
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Еще пример</h3>
+					<pre>
+						<code class="hljs">
+>gulp default
+//если имя задачи не установлено, вызывается задача с именем default
+[16:21:17] Using gulpfile G:\test\gulpfile.js
+[16:21:17] Starting 'default'...
+Gulp is running!
+[16:21:17] Finished 'default' after 181 µs
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Метод task</h2>
+					<pre>
+						<code class="hljs">
+gulp.task(name[, deps], fn)
+//name - required
+//deps - массив зависимых зависимостей
+//fn - callback вызова
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+gulp.task('hello', function() {
+   console.log('Hello world!'); 
+}); 
+
+gulp.task('css', ['greet'], function () {
+   //TODO
+}); 
+
+gulp.task('build', ['css', 'js', 'imgs']); 
+
+gulp.task('default', function () { 
+   //TODO default task
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод watch</h3>
+					<pre>
+						<code class="hljs">
+gulp.watch(glob[, opts, fn])
+//globs - строка или массив
+//options - доп. параметры или callback
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+gulp.watch('js/**/*.js', function(event) {
+  console.log('File ' + event.path + ' type ' + event.type);
+});
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+gulp.task('watch', function(){
+    gulp.watch('app/scss/**/*.scss', ['sass']); 
+	gulp.watch('app/css/**/*.css', ['css']); 
+	gulp.watch('app/js/**/*.js', ['js']); 
+    // Other watchers
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод src</h3>
+					<pre>
+						<code class="hljs">
+gulp.src(globs[, options])
+//globs - строка или массив
+//options - доп. параметры
+//возвращает входной поток
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+gulp.src('./*.jade')
+gulp.src('*.+(js|css)')
+gulp.src('*.{jpg,jpeg,png,gif}')
+gulp.src(['js/**/*.js', '!js/**/*.min.js'])
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод dest</h3>
+					<pre>
+						<code class="hljs">
+gulp.dest(path, [,options])
+//принимает путь к файлу и возвращает исходящий поток
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+gulp.task('css', () => {
+    return gulp.src(srcPath.css)
+        .pipe(sourcemaps.init())
+        .pipe(autoprefixer(autoprefixerSettings))
+        .pipe(cleanCSS(cleanCSSSettings))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(distPath.css));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод pipe</h3>
+					<pre>
+						<code class="hljs">
+.pipe(destination)
+//возвращает поток
+//destination - тоже поток
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+gulp.src('./client/templates/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('./app'))
+    .pipe(minify())
+    .pipe(gulp.dest('./dist'));
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>https://www.npmjs.com/package/gulp-load-plugins</h3>
+				</section>
+				<section>
+					<h3>https://www.npmjs.com/package/gulp-changed</h3>
+				</section>
+				<section>
+					<h3>gulp-sequence</h3>
+				</section>
+				<section>
+					<h3>browsersync</h3>
+				</section>
+				<section>
+					<h3>lazypipe</h3>
+				</section>
+				<section>
+					<h3>jsHint</h3>
+				</section>
+				<section>
+					<h3>gulp-csslint</h3>
+				</section>
+				<section>
+					<h3>gulp-sass</h3>
+				</section>
+				<section>
+					<h3>gulp-util</h3>
+				</section>
+			</section>
+			<section>
 				<h1>Webpack</h1>
 			</section>
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
-				<img src="img/thanks.jpg" alt="" height="600">
+				<img src="img/thanks.png" alt="" height="600">
 			</section>
 		</div>
 	</div>
