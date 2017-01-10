@@ -1099,7 +1099,8 @@ gulp.task('serve', ['html' ,'css'], () => {
 });
 gulp.task('watch', () => {
   gulp.watch('src/css/*.css', ['css']);
-  gulp.watch('src/**/*.html', ['html']).on('change', browserSync.reload);//*
+  gulp.watch('src/**/*.html', ['html'])
+      .on('change', browserSync.reload);//*
 });
 gulp.task('default', ['serve', 'watch']);
 						</code>
@@ -1131,7 +1132,7 @@ gulp.task('sass', function () {
         .pipe(sass({includePaths: ['scss']}))
         .pipe(gulp.dest('css'))
         .pipe(browserSync.stream());
-        //автоматически вставляет трансформированный поток данных в браузер
+        //автоматически вставляет трансформированный поток в браузер
 });
 						</code>
 					</pre>
@@ -1145,7 +1146,7 @@ gulp.task('sass', function () {
 					<pre>
 						<code class="hljs">
 .pipe(browserSync.stream({match: "**/*.css"}));
-//фидьтр для остановки отслеживания изменений и обновления некоторых файлов
+//фильтр обновления только определенных файлов
 						</code>
 					</pre>
 				</section>
@@ -1255,12 +1256,12 @@ gulp.task('serve', ['html'], () => {
 const gulp = require('gulp'),
       autoprefixer = require('gulp-autoprefixer');
  
-gulp.task('default', () =>
+gulp.task('css', () =>
     gulp.src('src/app.css')
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist/css/'))
 );
 						</code>
 					</pre>
@@ -1284,13 +1285,13 @@ const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
  
-gulp.task('default', () =>
+gulp.task('css', () =>
     gulp.src('src/**/*.css')
         .pipe(sourcemaps.init())
         .pipe(autoprefixer())
         .pipe(concat('all.css'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist/css/'))
 );
 						</code>
 					</pre>
@@ -1322,49 +1323,230 @@ autoprefixer(
 				</section>
 				<section>
 					<h3>Browsers list</h3>
-					<small>
-						<ul>
-							<li>last 2 versions</li>
-							<li>last 2 Chrome versions</li>
-							<li>&gt 5%</li>
-							<li>&gt 5% in US</li>
-							<li>ie 6-8</li>
-							<li>ie 10</li>
-							<li>Firefox >= 20</li>
-							<li>iOS 7</li>
-							<li>not ie <= 8</li>
-						</ul>
-					</small>
+					<table>
+						<tr>
+							<td>
+								<ul>
+									<li>last 2 versions</li>
+									<li>last 2 Chrome versions</li>
+									<li>&gt 5%</li>
+									<li>&gt 5% in US</li>
+									<li>ie 6-8</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>ie 10</li>
+									<li>Firefox >= 20</li>
+									<li>iOS 7</li>
+									<li>not ie
+										<=8 </li>
+								</ul>
+							</td>
+						</tr>
+					</table>
 				</section>
 				<section>
 					<h3>Браузеры</h3>
-						<table>
-							<tr>
-								<td>
-									<ul>
-										<li>Chrome</li>
-										<li>Firefox</li>
-										<li>Explorer (ie)</li>
-										<li>Edge</li>
-										<li>iOS</li>
-										<li>Opera</li>
-										<li>Safari</li>
-										<li>ExplorerMobile</li>
-									</ul>
-								</td>
-								<td>
-									<ul>
-										<li>Android</li>
-										<li>BlackBerry</li>
-										<li>ChromeAndroid</li>
-										<li>FirefoxAndroid</li>
-										<li>OperaMobile</li>
-										<li>OperaMini</li>
-										<li>Samsung</li>
-									</ul>
-								</td>
-							</tr>
-						</table>
+					<table>
+						<tr>
+							<td>
+								<ul>
+									<li>Chrome</li>
+									<li>Firefox (ff)</li>
+									<li>Explorer (ie)</li>
+									<li>Edge</li>
+									<li>iOS</li>
+									<li>Opera</li>
+									<li>Safari (ios_saf)</li>
+									<li>ExplorerMobile</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>Android</li>
+									<li>BlackBerry (bb)</li>
+									<li>ChromeAndroid</li>
+									<li>FirefoxAndroid</li>
+									<li>OperaMobile</li>
+									<li>OperaMini</li>
+									<li>Samsung</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-clean-css</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      cleanCSS = require('gulp-clean-css');
+
+gulp.task('css', () => {
+  return gulp.src('app/styles/*.css')
+    .pipe(cleanCSS({compatibility: 'ie8'}))//ie8, * или '' для ie9+
+    .pipe(gulp.dest('dist/'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      cleanCSS = require('gulp-clean-css');
+
+gulp.task('css', function() {
+    return gulp.src('app/styles/*.css')
+        .pipe(cleanCSS({debug: true}, (details) => {
+            console.log(details.name + ': ' + details.stats.originalSize);
+            console.log(details.name + ': ' + details.stats.minifiedSize);
+        }))
+        .pipe(gulp.dest('dist/css/'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      cleanCSS = require('gulp-clean-css'),
+	  sourcemaps = require('gulp-sourcemaps');
+
+gulp.task('css', function() {
+    return gulp.src('app/styles/*.css')
+        .pipe(sourcemaps.init())
+        .pipe(cleanCSS())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/css/'));
+    });
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-concat</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      concat = require('gulp-concat');
+ 
+gulp.task('scripts', () => {
+  return gulp.src('src/js/*.js')
+    .pipe(concat('bundle.js'))
+    .pipe(gulp.dest('dist/js/'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      concat = require('gulp-concat'),
+	  sourcemaps = require('gulp-sourcemaps');
+ 
+gulp.task('css', () => {
+  return gulp.src('src/**/*.css')
+    .pipe(sourcemaps.init())
+    .pipe(concat('bundle.css'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('dist/'));
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-imagemin</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      imagemin = require('gulp-imagemin');
+ 
+gulp.task('img', () =>
+    gulp.src('src/img/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/img/'))
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      imagemin = require('gulp-imagemin');
+ 
+gulp.task('img', () =>
+    gulp.src('src/img/*')
+        .pipe(imagemin(
+           [ imagemin.gifsicle(), 
+		     imagemin.jpegtran(), 
+		     imagemin.optipng(), 
+		     imagemin.svgo()
+		   ],
+           { verbose: true})
+        )
+        .pipe(gulp.dest('dist/img/'))
+);
+
+[10:43:01] gulp-imagemin: ✔ vs-code-bower.png (saved 2.97 kB - 11.1%)
+[10:43:01] gulp-imagemin: ✔ window.png (saved 11.6 kB - 13.3%)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Используемые пакеты по умолчанию</h3>
+					<ul>
+						<li>gifsicle — оптимизация GIF</li>
+						<li>jpegtran — оптимизация JPEG</li>
+						<li>optipng — оптимизация PNG</li>
+						<li>svgo — оптимизация SVG</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Добполнительные пакеты</h3>
+					<table>
+						<tr>
+							<td>
+								<ul>
+									<li>imagemin-pngquant</li>
+									<li>imagemin-giflossy</li>
+									<li>imagemin-jpeg-recompress</li>
+									<li>imagemin-gm</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>imagemin-mozjpeg</li>
+									<li>imagemin-webp</li>
+									<li>imagemin-pngout</li>
+									<li>imagemin-zopfli</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
 				</section>
 			</section>
 			<section>

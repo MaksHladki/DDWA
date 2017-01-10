@@ -40,7 +40,7 @@ const autoprefixerSettings = {
         browsers: ['last 2 versions', 'ie 9', 'ie 10']
     },
     cleanCSSSettings = {
-        compatibility: 'ie9'
+        compatibility: '*'
     };
 
 
