@@ -962,7 +962,10 @@ Gulp is running!
 			</section>
 			<section>
 				<section>
-					<h2>Метод task</h2>
+					<h2>Основные методы Gulp</h2>
+				</section>
+				<section>
+					<h3>Метод task</h3>
 					<pre>
 						<code class="hljs">
 gulp.task(name[, deps], fn)
@@ -1526,7 +1529,7 @@ gulp.task('img', () =>
 					</ul>
 				</section>
 				<section>
-					<h3>Добполнительные пакеты</h3>
+					<h3>Дополнительные пакеты</h3>
 					<table>
 						<tr>
 							<td>
@@ -1551,6 +1554,405 @@ gulp.task('img', () =>
 			</section>
 			<section>
 				<section>
+					<h2>gulp-rename</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      rename = require("gulp-rename");
+
+gulp.task('rename', () => {
+    return gulp.src('./src/css/main.css')
+                .pipe(rename('css/bundle.css'))
+                .pipe(gulp.dest('./dist')); 
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      rename = require("gulp-rename");
+
+gulp.task('rename', () => {
+    return gulp.src('./src/css/main.css')
+               .pipe(rename(function (path) {
+                     path.dirname += '/base';
+                     path.basename += '-bundle';
+                     path.extname = '.css'
+                }))
+               .pipe(gulp.dest('./dist')); 
+               //dist/css/base/ciao/main-bundle.css
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      rename = require("gulp-rename");
+
+gulp.task('rename', () => {
+    return gulp.src("./src/css/main.css")
+               .pipe(rename(
+                   {
+                      dirname: "main/",
+                      basename: "main",
+                      prefix: "style-",
+                      suffix: ".min",
+                      extname: ".css"
+                   }
+               ))
+               .pipe(gulp.dest("./dist"));
+               //dist/css/main/style-main.min.css
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-babel</h2>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-uglify (ES5)</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      uglify = require('gulp-uglify');
+
+gulp.task('compress', => {
+  return gulp.src('lib/*.js')
+             .pipe(uglify())
+             .pipe(gulp.dest('dist/'))
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs" data-trim>
+const gulp = require('gulp'),
+      uglify = require('gulp-uglify');
+
+gulp.task('compress', => {
+  return gulp.src('lib/*.js')
+             .pipe(uglify({
+                mangle: false,
+                output: {
+                   beautify: true,
+                   comments: true
+                },
+                compress: {
+                   drop_debugger : false,
+                   warnings : false,
+                   loops : true
+                }
+             }))
+             .pipe(gulp.dest('dist/'))
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Параметры output</h3>
+					<pre>
+						<code class="hljs">	
+indent_start : 0,    //start indentation on every line
+indent_level : 4,    //indentation level
+quote_keys   : false,//quote all keys in object literals?
+space_colon  : true, //add a space after colon signs?
+ascii_only   : false,//output ASCII-safe?
+inline_script: false,//escape "&lt/script"?
+width        : 80,   //informative maximum line width
+max_line_len : 32000,//maximum line length
+ie_proof     : true, //output IE-safe code?
+beautify     : false,//beautify output?
+source_map   : null, //output a source map
+bracketize   : false,//use brackets every time?
+comments     : false,//output comments?
+semicolons   : true, //use semicolons to separate statements?
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Параметры compressor</h3>
+					<pre>
+						<code class="hljs" data-trim>
+sequences    : true, //join consecutive statemets with “comma operator”
+properties   : true, //optimize property access: a["foo"] → a.foo
+dead_code    : true, //discard unreachable code
+drop_debugger: true, //discard “debugger” statements
+unsafe       : false,//some unsafe optimizations (see below)
+conditionals : true, //optimize if-s and conditional expressions
+comparisons  : true, //optimize comparisons
+evaluate     : true, //evaluate constant expressions
+booleans     : true, //optimize boolean expressions
+loops        : true, //optimize loops
+unused       : true, //drop unused variables/functions
+hoist_funs   : true, //hoist function declarations
+hoist_vars   : false,//hoist variable declarations
+if_return    : true, //optimize if-s followed by return/continue
+join_vars    : true, //join var declarations
+cascade      : true, //try to cascade `right` into `left` in sequences
+side_effects : true, //drop side-effect-free statements
+warnings     : true, //warn about potentially dangerous optimizations
+global_defs  : {}    //global definitions
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>del</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      del = require('del');
+
+gulp.task('clean', () => {
+    return del([distPath.dist]);
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      del = require('del');
+
+gulp.task('clean', () => {
+    return del(['dist/css/', 'dist/js/**/*.min.js']).then(paths => {
+        console.log('Deleted files and folders:\n', paths.join('\n'));
+    });
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			
+			<section>
+				<section>
+					<h2>gulp-if</h2>
+				</section>
+				<section>
+					<h3>Принцип работы</h3>
+					<img src="img/gulp-if.svg" alt="">
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      gulpif = require('gulp-if'),
+	  uglify = require('gulp-uglify');
+ 
+var condition = true; 
+// условие, может быть функция, паттерн и т.д
+
+gulp.task('task', function() {
+  gulp.src('./src/*.js')
+    .pipe(gulpif(condition, uglify()))
+    .pipe(gulp.dest('./dist/'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs" data-trim>
+const gulp = require('gulp'),
+      gulpIgnore = require('gulp-ignore'),
+      gulpif = require('gulp-if'),
+      autoprefixer = require('gulp-autoprefixer'),
+      cleanCSS = require('gulp-clean-css'),
+	  uglify = require('gulp-uglify');
+
+gulp.task('html', () => {
+    return gulp.src('src/**/*.*')
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css',
+            pipe(
+                autoprefixer(autoprefixerSettings),
+                cleanCSS(cleanCSSSettings)
+            )
+        ))
+        .pipe(gulp.dest('dist/'));
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-useref</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      useref = require('gulp-useref');
+ 
+gulp.task('html', function () {
+    return gulp.src('src/**/*.html')
+        .pipe(useref())
+        .pipe(gulp.dest('dist'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      useref = require('gulp-useref'),
+      gulpif = require('gulp-if'),
+      uglify = require('gulp-uglify'),
+      cleanCSS = require('gulp-clean-css');
+ 
+gulp.task('html', function () {
+    return gulp.src('src/*.html')
+        .pipe(useref())
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', cleanCSS()))
+        .pipe(gulp.dest('dist'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Изменения в html</h3>
+					<pre>
+						<code class="hljs">
+<!-- build:<type>(alternate search path) <path> <parameters> -->
+...список js или css файлов
+<!-- endbuild -->
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+&lt;!-- build:css css/bundle.min.css --&gt;
+    &lt;link rel="stylesheet" href="css/reveal.css"&gt;
+    &lt;link rel="stylesheet" href="css/reveal.font.css"&gt;
+    &lt;link rel="stylesheet" href="css/reveal.theme.css"&gt;
+    &lt;link rel="stylesheet" href="css/font-awesome.css"&gt;
+&lt;!-- endbuild --&gt;
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-sequence</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs" data-trim>
+const gulp = require('gulp'),
+      gulpSequence = require('gulp-sequence');
+ 
+gulp.task('a', () => { /* callback code */ });
+gulp.task('b', () => { /* callback code */ });
+gulp.task('c', () => { /* callback code */ });
+gulp.task('d', () => { /* callback code */ });
+gulp.task('e', () => { /* callback code */ });
+ 
+gulp.task('sequence-1', gulpSequence(['a', 'b'], 'c', ['d', 'e']));
+ 
+gulp.task('sequence-2', (cb) => {
+  gulpSequence('a', ['b', 'c', 'd'], 'e', cb);
+});
+ 
+gulp.task('sequence-3', (cb) => {
+  gulpSequence(['a', 'b', 'e'], 'd', 'c')(cb);
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+gulp.task('build', gulpSequence('clean', [
+    'html',
+    'img',
+    'js',
+    'css'
+]));
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+gulp.task('default', gulpSequence('build', ['watch', 'connect']));
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-watch</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      watch = require('gulp-watch');
+
+gulp.task('stream', () => {
+    return watch('css/**/*.css', { ignoreInitial: false })//*
+	//ignoreInitial event add/add folder будут вызваны
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('callback', () => {
+    return watch('css/**/*.css', () => {//*
+        gulp.src('css/**/*.css')
+            .pipe(gulp.dest('build'));
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+gulp.task('watch', () => {
+    watch(srcPath.css, () => gulp.start('css'));
+    watch(srcPath.html, () => gulp.start('html'));
+    watch(srcPath.js, () => gulp.start('js'));
+    watch(srcPath.img, () => gulp.start('img'));
+    watch(srcPath.font, () => gulp.start('font'));
+    watch(srcPath.task, () => gulp.start('task'));
+});							
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
 					<h3>https://www.npmjs.com/package/gulp-load-plugins</h3>
 				</section>
 				<section>
@@ -1561,6 +1963,33 @@ gulp.task('img', () =>
 				</section>
 				<section>
 					<h3>lazypipe</h3>
+					Lazypipe creates a function that initializes the pipe chain on use. This allows you to create a chain of events inside the
+					gulp-if condition. This scenario will run jshint analysis and reporter only if the linting flag is true.
+					<pre>
+						<code class="hljs">
+							var gulpif = require('gulp-if');
+var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
+var lazypipe = require('lazypipe');
+ 
+var linting = false;
+var compressing = false;
+ 
+var jshintChannel = lazypipe()
+  // adding a pipeline step 
+  .pipe(jshint) // notice the stream function has not been called! 
+  .pipe(jshint.reporter)
+  // adding a step with an argument 
+  .pipe(jshint.reporter, 'fail');
+ 
+gulp.task('scripts', function () {
+  return gulp.src(paths.scripts.src)
+    .pipe(gulpif(linting, jshintChannel()))
+    .pipe(gulpif(compressing, uglify()))
+    .pipe(gulp.dest(paths.scripts.dest));
+});
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>jsHint</h3>
