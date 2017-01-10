@@ -13,7 +13,13 @@ const gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
     watch = require('gulp-watch'),
-    lazypipe = require('lazypipe');
+    lazypipe = require('lazypipe'),
+    jshint = require('gulp-jshint'),
+    csslint = require('gulp-csslint'),
+    stylish = require('jshint-stylish'),
+    jshintReporter = require('gulp-jshint-html-reporter'),
+    csslintReporter = require('gulp-csslint-report');
+
 
 
 const srcPath = {
@@ -48,12 +54,34 @@ gulp.task('clean', () => {
     return del([distPath.dist]);
 });
 
+gulp.task('js:hint', () => {
+    return gulp.src('./src/**/*.js')
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter(stylish))
+        .pipe(jshint.reporter(jshintReporter, {
+            filename: 'jshint-output.html'
+        }))
+    //.pipe(jshint.reporter('fail'));
+});
+
+gulp.task('css:lint', () => {
+    return gulp.src('./src/**/*.css')
+        .pipe(csslint('.csslintrc'))
+        .pipe(csslintReporter({
+            filename: 'index.html',
+            'directory': './csslint-reports/'
+        }));
+    //.pipe(csslint.formatter('fail')); // Fail on error (or csslint.failFormatter())
+});
+
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
         .pipe(useref({}, lazypipe().pipe(sourcemaps.init, {
             loadMaps: true
         })))
-        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.js', pipe(
+            uglify()
+        )))
         .pipe(gulpif('*.css',
             pipe(
                 autoprefixer(autoprefixerSettings),

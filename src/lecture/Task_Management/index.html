@@ -1439,6 +1439,126 @@ gulp.task('css', function() {
 			</section>
 			<section>
 				<section>
+					<h2>gulp-sass</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      sass = require('gulp-sass');
+ 
+gulp.task('sass', () => {
+  return gulp.src('./sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./css'));
+});
+ 
+gulp.task('watch', () => {
+  gulp.watch('./sass/**/*.scss', ['sass']);
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      sass = require('gulp-sass');
+ 
+gulp.task('sass', () => {
+  return gulp.src('./sass/**/*.scss')
+    .pipe(sass.sync().on('error', sass.logError))
+	//выполняется синхронно
+    .pipe(gulp.dest('./css'));
+});
+ 
+gulp.task('watch', () => {
+  gulp.watch('./sass/**/*.scss', ['sass']);
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      sass = require('gulp-sass'),
+      sourcemaps = require('gulp-sourcemaps');
+ 
+gulp.task('sass', function () {
+ return gulp.src('./sass/**/*.scss')
+  .pipe(sourcemaps.init())
+  .pipe(sass().on('error', sass.logError))
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest('./css'));
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-less</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      less = require('gulp-less');
+
+gulp.task('less', () => {
+    return gulp.src('./less/**/*.less')
+               .pipe(less())
+               .pipe(gulp.dest('./public/css'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      less = require('gulp-less'),
+      LessAutoprefix = require('less-plugin-autoprefix');
+
+const autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
+
+gulp.task('less', () => {
+    return gulp.src('./less/**/*.less')
+               .pipe(less({
+                   plugins: [autoprefix]
+               }))
+               .pipe(gulp.dest('./public/css'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      less = require('gulp-less'),
+      sourcemaps = require('gulp-sourcemaps');
+
+gulp.task('less', () => {
+return gulp.src('./less/**/*.less')
+  .pipe(sourcemaps.init())
+  .pipe(less())
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest('./public/css'));
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
 					<h2>gulp-concat</h2>
 				</section>
 				<section>
@@ -1747,7 +1867,6 @@ gulp.task('clean', () => {
 					</pre>
 				</section>
 			</section>
-			
 			<section>
 				<section>
 					<h2>gulp-if</h2>
@@ -1953,56 +2072,126 @@ gulp.task('watch', () => {
 			</section>
 			<section>
 				<section>
-					<h3>https://www.npmjs.com/package/gulp-load-plugins</h3>
+					<h2>gulp-jshint</h2>
 				</section>
 				<section>
-					<h3>https://www.npmjs.com/package/gulp-changed</h3>
-				</section>
-				<section>
-					<h3>gulp-sequence</h3>
-				</section>
-				<section>
-					<h3>lazypipe</h3>
-					Lazypipe creates a function that initializes the pipe chain on use. This allows you to create a chain of events inside the
-					gulp-if condition. This scenario will run jshint analysis and reporter only if the linting flag is true.
+					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
-							var gulpif = require('gulp-if');
-var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
-var lazypipe = require('lazypipe');
+							<code class="hljs">
+const gulp = require('gulp'),
+      jshint = require('gulp-jshint');
  
-var linting = false;
-var compressing = false;
- 
-var jshintChannel = lazypipe()
-  // adding a pipeline step 
-  .pipe(jshint) // notice the stream function has not been called! 
-  .pipe(jshint.reporter)
-  // adding a step with an argument 
-  .pipe(jshint.reporter, 'fail');
- 
-gulp.task('scripts', function () {
-  return gulp.src(paths.scripts.src)
-    .pipe(gulpif(linting, jshintChannel()))
-    .pipe(gulpif(compressing, uglify()))
-    .pipe(gulp.dest(paths.scripts.dest));
+gulp.task('js:hint', function () {
+   return gulp.src('./src/js/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter());
 });
-						</code>
-					</pre>
+src\js\classList.min.js: line 2, col 95, Missing "use strict" statement.
+src\js\classList.min.js: line 2, col 1499, Unnecessary semicolon.
+src\js\classList.min.js: line 2, col 389, 'DOMException' is not defined.
+src\js\classList.min.js: line 2, col 1492, 'self' is not defined.
+							</code>
+						</pre>
 				</section>
 				<section>
-					<h3>jsHint</h3>
+					<h3>Пример 2</h3>
+					<pre>
+							<code class="hljs">
+const gulp = require('gulp'),
+      jshint = require('gulp-jshint');
+
+gulp.task('js:lint', () => {
+    return gulp.src('./src/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('jslint_xml'));
+});
+[22:00:39] Using gulpfile C:\Projects\DDWA\gulpfile.js
+[22:00:39] Starting 'js:lint'...
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;checkstyle version="4.3"&gt;
+        &lt;file name="src\js\classList.min.js"&gt;
+                &lt;error line="2" 
+                          column="95" 
+                          severity="error" 
+                          message="Missing &amp;quot;use strict&amp;quot; statement." 
+                          source="jshint.E007" /&gt;
+							</code>
+						</pre>
 				</section>
 				<section>
-					<h3>gulp-csslint</h3>
+					<h3>Пример 3</h3>
+					<pre>
+							<code class="hljs">
+gulp.task('js:lint', () => {
+    return gulp.src('./src/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('checkstyle'))
+        .pipe(jshint.reporter('fail'));//*
+});
+							</code>
+						</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>gulp-csslint</h2>
 				</section>
 				<section>
-					<h3>gulp-sass</h3>
+					<h3>Пример 1</h3>
+					<pre>
+							<code class="hljs">
+const gulp = require('gulp'),
+      csslint = require('gulp-csslint');
+	  			
+gulp.task('css:lint', () => {
+    return gulp.src('./src/**/*.css')
+        .pipe(csslint())
+        .pipe(csslint.formatter());
+});
+
+[22:12:31] Using gulpfile C:\Projects\DDWA\gulpfile.js
+[22:12:33] Starting 'css:lint'...
+csslint: There are 15 problems in C:\Projects\DDWA\src\css\font-awesome.css.
+font-awesome.css
+1: warning at line 7, col 1
+Rule doesn't have all its properties in alphabetical order.
+							</code>
+						</pre>
 				</section>
 				<section>
-					<h3>gulp-util</h3>
+					<h3>Пример 2</h3>
+					<pre>
+							<code class="hljs">	
+const gulp = require('gulp'),
+      csslint = require('gulp-csslint');
+
+gulp.task('css:lint', () => {
+    return gulp.src('./src/**/*.css')
+        .pipe(csslint())
+        .pipe(csslint.formatter('junit-xml'));
+});								
+							</code>
+						</pre>
 				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+							<code class="hljs">
+const gulp = require('gulp'),
+      csslint = require('gulp-csslint');
+
+gulp.task('css:lint', () => {
+    return gulp.src('./src/**/*.css')
+        .pipe(csslint())
+        .pipe(csslint.formatter());
+        .pipe(csslint.formatter('fail'));
+});
+							</code>
+						</pre>
+				</section>
+			</section>
+			<section>
+				<h3>gulp-util</h3>
 			</section>
 			<section>
 				<h1>Webpack</h1>
