@@ -1740,6 +1740,74 @@ gulp.task('rename', () => {
 				<section>
 					<h2>gulp-babel</h2>
 				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<p><a href="https://babeljs.io/">https://babeljs.io/</a></p>
+					<pre>
+						<code class="hljs">
+npm install --save-dev gulp-babel
+npm install --save-dev babel-preset-es2015 //*
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+
+gulp.task('default', () =>
+    gulp.src('src/app.js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist'))
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+							const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+
+gulp.task('default', () =>
+    gulp.src('src/**/*.js')
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(concat('all.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist'))
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 4</h3>
+					<pre>
+						<code class="hljs">
+							$ npm install --save-dev babel-plugin-transform-runtime
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+							const gulp = require('gulp');
+const babel = require('gulp-babel');
+
+gulp.task('default', () =>
+    gulp.src('src/app.js')
+        .pipe(babel({
+            plugins: ['transform-runtime']
+        }))
+        .pipe(gulp.dest('dist'))
+);
+						</code>
+					</pre>
+				</section>
 			</section>
 			<section>
 				<section>
@@ -2122,7 +2190,10 @@ gulp.task('js:lint', () => {
 					<h3>Пример 3</h3>
 					<pre>
 							<code class="hljs">
-gulp.task('js:lint', () => {
+const gulp = require('gulp'),
+      jshint = require('gulp-jshint');
+
+gulp.task('js:hint', () => {
     return gulp.src('./src/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('checkstyle'))
@@ -2130,6 +2201,94 @@ gulp.task('js:lint', () => {
 });
 							</code>
 						</pre>
+				</section>
+				<section>
+					<h3>Пример 4</h3>
+					<pre>
+						<code class="hljs">
+const gulp = require('gulp'),
+      jshint = require('gulp-jshint'),
+	  jshintReporter = require('gulp-jshint-html-reporter');
+
+gulp.task('js:hint', () => {
+    return gulp.src('./src/**/*.js')
+        .pipe(jshint('.jshintrc'))//*
+        .pipe(jshint.reporter(jshintReporter, {//*
+            filename: './src/code-analysis/js/jshint-output.html',
+            createMissingFolders : true
+        }));
+});						
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Файл .jshintrc</h3>
+					<p><a href="http://jshint.com/docs/options/">Описание параметров</a></p>
+					<pre>
+						<code class="hljs" data-trim>
+{
+    "bitwise": true,
+    "camelcase": true,
+    "curly": true,
+    "eqeqeq": true,
+    "es3": false,
+    "forin": true,
+    "freeze": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": "nofunc",
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonbsp": true,
+    "nonew": true,
+    "plusplus": false,
+    "quotmark": "single",
+    "undef": true,
+    "unused": false,
+    "strict": false,
+    "maxparams": 10,
+    "maxdepth": 5,
+    "maxstatements": 40,
+    "maxcomplexity": 8,
+    "maxlen": 120,
+
+    "asi": false,
+    "boss": false,
+    "debug": false,
+    "eqnull": true,
+    "esnext": false,
+    "evil": false,
+    "expr": false,
+    "funcscope": false,
+    "globalstrict": false,
+    "iterator": false,
+    "lastsemic": false,
+    "laxbreak": false,
+    "laxcomma": false,
+    "loopfunc": true,
+    "maxerr": false,
+    "moz": false,
+    "multistr": false,
+    "notypeof": false,
+    "proto": false,
+    "scripturl": false,
+    "shadow": false,
+    "sub": true,
+    "supernew": false,
+    "validthis": false,
+    "noyield": false,
+
+    "browser": true,
+    "node": true,
+
+    "globals": {
+        "angular": false,
+        "$": false
+    }
+}
+						</code>
+					</pre>
 				</section>
 			</section>
 			<section>
@@ -2191,7 +2350,65 @@ gulp.task('css:lint', () => {
 				</section>
 			</section>
 			<section>
-				<h3>gulp-util</h3>
+				<section>
+					<h2>gulp-util</h2>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+const gutil = require('gulp-util');
+
+gutil.log('something happened', 'in js:hint', gutil.colors.magenta('123'));
+
+gutil.replaceExtension('file.coffee', '.js'); // file.js
+
+var opt = {
+  name: 'todd',
+  file:   {
+        path: 'hi.js'
+      }
+};
+gutil.template('test <%= name %> <%= file.path %>', opt) // test todd hi.js
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<code class="hljs">
+const gutil = require('gulp-util');
+
+var err = new gutil.PluginError('test', {
+  message: 'something broke'
+});
+
+var err = new gutil.PluginError({
+  plugin: 'test',
+  message: 'something broke'
+});
+
+var err = new gutil.PluginError('test', 'something broke');
+var err = new gutil.PluginError('test', 'something broke', {showStack: true});
+
+var existingError = new Error('Error');
+var err = new gutil.PluginError('test', existingError, {showStack: true});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<code class="hljs">
+const gutil = require('gulp-util');
+
+gulp.task('scripts', function() {
+  gulp.src('./src/**/*.js')
+    .pipe(concat('script.js'))
+    .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())//*
+    .pipe(gulp.dest('dist/'));
+});
+						</code>
+					</pre>
+				</section>
 			</section>
 			<section>
 				<h1>Webpack</h1>

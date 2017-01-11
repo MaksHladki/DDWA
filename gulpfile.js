@@ -5,31 +5,31 @@ const gulp = require('gulp'),
     concat = require('gulp-concat'),
     connect = require('gulp-connect'),
     cleanCSS = require('gulp-clean-css'),
+    csslint = require('gulp-csslint'),
+    csslintReporter = require('gulp-csslint-report'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     pipe = require('multipipe'),
+    lazypipe = require('lazypipe'),
     sourcemaps = require('gulp-sourcemaps'),
+    jshint = require('gulp-jshint'),
+    jshintReporter = require('gulp-jshint-html-reporter'),
     uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
-    watch = require('gulp-watch'),
-    lazypipe = require('lazypipe'),
-    jshint = require('gulp-jshint'),
-    csslint = require('gulp-csslint'),
-    stylish = require('jshint-stylish'),
-    jshintReporter = require('gulp-jshint-html-reporter'),
-    csslintReporter = require('gulp-csslint-report');
-
-
+    watch = require('gulp-watch');
 
 const srcPath = {
     'src': './src',
     'html': './src/**/*.html',
     'img': './src/**/*.+(jpg|png|svg|gif)',
     'css': ['./src/!(css|js)*/**/*.css'],
+    'cssLint': './src/**/*.css',
     'js': './src/!(js)*/**/*.js',
+    'jsHint': './src/**/*.js',
     'font': './src/font/**/*.*',
-    'task': './src/task/**/*.pdf'
+    'task': './src/task/**/*.pdf',
+    'analysis': './src/code-analysis/',
 };
 
 const distPath = {
@@ -42,37 +42,27 @@ const distPath = {
     'task': './dist/task/'
 };
 
-const autoprefixerSettings = {
+const pluginSettings = {
+    autoprefixer: {
         browsers: ['last 2 versions', 'ie 9', 'ie 10']
     },
-    cleanCSSSettings = {
+    cleanCSS: {
         compatibility: '*'
-    };
-
+    },
+    csslint: {
+        filename: 'index.html',
+        directory: srcPath.analysis + '/css/'
+    },
+    jshint: {
+        filename: srcPath.analysis + '/js/index.html',
+        createMissingFolders: true
+    }
+};
 
 gulp.task('clean', () => {
-    return del([distPath.dist]);
+    return del([srcPath.analysis, distPath.dist]);
 });
 
-gulp.task('js:hint', () => {
-    return gulp.src('./src/**/*.js')
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter(stylish))
-        .pipe(jshint.reporter(jshintReporter, {
-            filename: 'jshint-output.html'
-        }))
-    //.pipe(jshint.reporter('fail'));
-});
-
-gulp.task('css:lint', () => {
-    return gulp.src('./src/**/*.css')
-        .pipe(csslint('.csslintrc'))
-        .pipe(csslintReporter({
-            filename: 'index.html',
-            'directory': './csslint-reports/'
-        }));
-    //.pipe(csslint.formatter('fail')); // Fail on error (or csslint.failFormatter())
-});
 
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
@@ -84,8 +74,8 @@ gulp.task('html', () => {
         )))
         .pipe(gulpif('*.css',
             pipe(
-                autoprefixer(autoprefixerSettings),
-                cleanCSS(cleanCSSSettings)
+                autoprefixer(pluginSettings.autoprefixer),
+                cleanCSS(pluginSettings.cleanCSS)
             )
         ))
         .pipe(sourcemaps.write())
@@ -96,16 +86,30 @@ gulp.task('html', () => {
 gulp.task('css', () => {
     return gulp.src(srcPath.css)
         .pipe(sourcemaps.init())
-        .pipe(autoprefixer(autoprefixerSettings))
-        .pipe(cleanCSS(cleanCSSSettings))
+        .pipe(autoprefixer(pluginSettings.autoprefixer))
+        .pipe(cleanCSS(pluginSettings.cleanCSS))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(distPath.css));
 });
+
+gulp.task('css:lint', () => {
+    return gulp.src(srcPath.cssLint)
+        .pipe(csslint('.csslintrc'))
+        .pipe(csslintReporter(pluginSettings.csslint));
+});
+
 
 gulp.task('js', () => {
     return gulp.src(srcPath.js)
         .pipe(gulp.dest(distPath.js));
 });
+
+gulp.task('js:hint', () => {
+    return gulp.src(srcPath.jsHint)
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter(jshintReporter, pluginSettings.jshint));
+});
+
 
 gulp.task('img', () => {
     return gulp.src(srcPath.img)
@@ -131,7 +135,7 @@ gulp.task('connect', () => {
     });
 });
 
-gulp.task('build', gulpSequence('clean', [
+gulp.task('build', gulpSequence('clean', ['js:hint', 'css:lint'], [
     'html',
     'img',
     'js',
