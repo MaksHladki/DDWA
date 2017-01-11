@@ -33,6 +33,7 @@
 				</section>
 			</section>
 			<!-- Содержимое лекции -->
+			<!-- Node JS -->
 			<section>
 				<h1>Node.js за 5 минут</h1>
 			</section>
@@ -42,21 +43,20 @@
 					<blockquote>
 						Программная платформа, основанная на движке V8 (транслирует JS в машинный код), превращающая JavaScript из узкоспециализированного
 						языка в язык общего назначения. Node.js добавляет возможность JavaScript взаимодействовать с устройствами ввода-вывода
-						через свой API (написанный на C++), подключать другие внешние библиотеки, написанные на разных языках, обеспечивая
-						вызовы к ним из JavaScript-кода
+						через свой API (на C++), подключать другие библиотеки, написанные на разных языках, обеспечивая вызовы к ним из JS-кода
 					</blockquote>
 				</section>
 				<section>
 					<h3>Цель проекта</h3>
 					<blockquote>
-						Предоставить естественную неблокирующую, событийно-ориентированную инфраструктуру для написания программ с высокой конкурентностью»
+						Предоставить естественную неблокирующую, событийно-ориентированную инфраструктуру для написания программ с высокой конкурентностью
 						(с) Ryan Dahl
 					</blockquote>
 				</section>
 				<section>
 					<h3>Особенности</h3>
 					<ul>
-						<li>Использует Google V8 (Chromium: Google Chrome, Chrome OS...)</li>
+						<li>Использует движок Google V8 (Chromium: Google Chrome, Chrome OS...)</li>
 						<li>Превращает V8 в мощную машину для серверных приложений</li>
 						<li>Сохраняет философию JavaScript </li>
 						<li>Event loop - неблокирующий ввод/вывод</li>
@@ -84,7 +84,7 @@
 					<img src="img/event-loop.png" alt="">
 				</section>
 				<section>
-					<h3>Пример</h3>
+					<h3>Пример кода</h3>
 					<pre>
 						<code class="hljs">
 // Загружаем модуль http
@@ -141,15 +141,16 @@ console.log('Hello World');
 					</pre>
 				</section>
 			</section>
+			<!-- NPM -->
 			<section>
-				<h1>Менеджер пакетов Node.js (NPM)</h1>
+				<h1>Менеджер пакетов Node (NPM)</h1>
 			</section>
 			<section>
 				<section>
-					<h2>Node.js Package Manage</h2>
+					<h2>Node Package Manager</h2>
 					<ul>
 						<li>Создан в 2009 года open source сообществом</li>
-						<li>Цель- помочь JS-разработчикам "шарить" модули с кодом</li>
+						<li>Цель - помочь JS-разработчикам "шарить" модули с кодом</li>
 						<li>Private/Public модули</li>
 						<li>Command-line клиент</li>
 						<li>Используется даже теми разработчиками, кто не работает с Node.js</li>
@@ -160,7 +161,7 @@ console.log('Hello World');
 					<h3>Минусы NPM</h3>
 					<ul>
 						<li>Установка небольшого пакета может привести к скачиванию еще 5-10 пакетов, на которые ссылается данный пакет</li>
-						<li>Удаление автором пакета может привести к "бездействию" программистов, зависимые пакеты нельзя будет скачать</li>
+						<li>Удаление автором пакета может привести к "бездействию" программистов, зависимые пакеты нельзя будет скачать/обновить</li>
 					</ul>
 				</section>
 				<section>
@@ -238,19 +239,19 @@ console.log('Hello World');
 					<h3>Команда install</h3>
 					<pre>
 						<code class="hljs">
-npm install 'package name'
-npm install -g 'package name'	
-npm install --global 'package name'
+>npm install 'package name'
+>npm install -g 'package name'	
+>npm install --global 'package name'
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-npm install -g gulp
+>npm install -g gulp
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-npm install gulp@3.9.1
+>npm install gulp@3.9.1
 						</code>
 					</pre>
 				</section>
@@ -285,7 +286,7 @@ npm install gulp@3.9.1
 					<h3>Команда search</h3>
 					<pre>
 						<code class="hljs">
-npm search 'package name'
+>npm search 'package name'
 //не удобно		
 
 //лучше использовать ui интерфейс
@@ -297,28 +298,28 @@ https://www.npmjs.com/search?q=gulp
 					<h3>Команда view</h3>
 					<pre>
 						<code class="hljs">
-npm view 'package name'
+>npm view 'package name'
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs" data-trim>
-npm view gulp
-//result
+>npm view gulp
+
  { name: 'gulp',
   description: 'The streaming build system',
-  'dist-tags': { latest: '3.9.1' },
+  dist-tags: { latest: '3.9.1' },
   versions:
    [ '0.0.1',
      '0.0.2',
      ......
    ]
   author: 'Fractal (http://wearefractal.com/)',
-  repository: { type: 'git', url: 'git+https://github.com/gulpjs/gulp.git' },
+  repository: { 
+      type: 'git',
+      url: 'git+https://github.com/gulpjs/gulp.git' },
   users:
-   { '6174': true,
-     jden: true,
+   { jden: true,
      stevelacy: true,
-     qubyte: true,
      .....
    }
  }
@@ -329,13 +330,13 @@ npm view gulp
 					<h3>Команда update</h3>
 					<pre>
 						<code class="hljs">
-npm update [-g] 'package name' //latest version
+>npm update [-g] 'package name' //latest version
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-npm update -g gulp
-npm update -g npm						
+>npm update -g gulp
+>npm update -g npm						
 						</code>
 					</pre>
 				</section>
@@ -343,20 +344,20 @@ npm update -g npm
 					<h3>Команда config</h3>
 					<pre>
 						<code class="hljs">
-npm config set 'key' 'value' [--global] 
-npm config get 'key' 
-npm config delete 'key' 
-npm config list 
-npm config edit npm c [set|get|delete|list] 
-npm get 'key' 
-npm set 'key' 'value' [--global]
+>npm config set 'key' 'value' [--global] 
+>npm config get 'key' 
+>npm config delete 'key' 
+>npm config list 
+>npm config edit npm c [set|get|delete|list] 
+>npm get 'key' 
+>npm set 'key' 'value' [--global]
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-npm set init.author.name "maks"
-npm set init.author.email "test@gmail.com"
-npm set init.author.url "https://google.com"
+>npm set init.author.name "maks"
+>npm set init.author.email "test@gmail.com"
+>npm set init.author.url "https://google.com"
 						</code>
 					</pre>
 				</section>
@@ -364,17 +365,17 @@ npm set init.author.url "https://google.com"
 					<h3>Команда uninstall</h3>
 					<pre>
 						<code class="hljs">
-npm uninstall 'package name' [@version] [--save| [--save-dev] [--global]
+>npm uninstall 'package name' [@version] [--save| [--save-dev] [--global]
 //--save пакет будет удален из dependencies
 //--save-dev пакет будет удален из devDependencies
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-npm uninstall sax --save
-npm uninstall gulp --global
-npm uninstall node-tap --save-dev
-npm uninstall dtrace-provider --save-optional
+>npm uninstall sax --save
+>npm uninstall gulp --global
+>npm uninstall node-tap --save-dev
+>npm uninstall dtrace-provider --save-optional
 						</code>
 					</pre>
 				</section>
@@ -382,12 +383,12 @@ npm uninstall dtrace-provider --save-optional
 					<h3>Команда list</h3>
 					<pre>
 						<code class="hljs">
-npm list [--global] [--depth]
+>npm list [--global] [--depth]
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-$ npm list -g --depth=0
+>npm list -g --depth=0
 //без лишних зависимостей
 ├── npm@3.7.5
 └── uglify-js@2.6.2
@@ -395,13 +396,13 @@ $ npm list -g --depth=0
 					</pre>
 				</section>
 			</section>
+			<!-- package.json -->
 			<section>
 				<section>
 					<h2>package.json</h2>
 					<blockquote>
-						Файл package.json содержит в себе информацию о вашем приложении: название, версия, зависимости и тому подобное. Любая директория,
-						в которой есть этот файл, интерпретируется как Node.js-пакет, даже если вы не собираетесь публиковать его. Способ использования
-						файла package.json зависит от того, собираетесь ли вы скачивать пакет или публиковать его.
+						Файл содержит в себе информацию о приложении: название, версия, зависимости и тому подобное. Любая директория, в которой
+						есть этот файл, интерпретируется как Node.js-пакет, даже если вы не собираетесь публиковать его
 					</blockquote>
 				</section>
 				<section>
@@ -437,11 +438,11 @@ $ npm list -g --depth=0
 								<td>тип лицензии</td>
 							</tr>
 							<tr>
-								<td>dependencies </td>
+								<td>dependencies</td>
 								<td>все пакеты, от которых зависит текущий пакет (production)</td>
 							</tr>
 							<tr>
-								<td>devDependencies </td>
+								<td>devDependencies</td>
 								<td>все пакеты, от которых зависит текущий пакет (development)</td>
 							</tr>
 							<tr>
@@ -506,8 +507,10 @@ $ npm list -g --depth=0
 						</code>
 					</pre>
 				</section>
+			</section>
+			<section>
 				<section>
-					<h3>Работа с npm в VS Code</h3>
+					<h2>NPM и VS Code</h2>
 					<ul>
 						<li>ext install vscode-npm (npm - Florian Knop)</li>
 						<li>ext install vscode-npm-script (npm - egamma)</li>
@@ -519,6 +522,7 @@ $ npm list -g --depth=0
 					<img src="img/vs-code-npm.png" alt="">
 				</section>
 			</section>
+			<!-- Bower -->
 			<section>
 				<h1>Менеджер пакетов Bower</h1>
 			</section>
@@ -530,31 +534,31 @@ $ npm list -g --depth=0
 						и фреймворков
 					</blockquote>
 					<pre>
-					<code class="hljs">
-npm install -g bower
-					</code>
-				</pre>
+						<code class="hljs">
+>npm install -g bower
+						</code>
+					</pre>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 //установка пакета angular
-bower install angular
+>bower install angular
 
 //установка пакета из репозитория
-bower install git://github.com/angular/angular.js/
-					</code>
-				</pre>
+>bower install git://github.com/angular/angular.js/
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Пример</h3>
 					<pre>
 						<code class="hljs">
-bower install jquery
-bower cloning git://github.com/components/jquery.git
-bower cached git://github.com/components/jquery.git
-bower fetching jquery
-bower checking out jquery#2.0.0
-bower copying /Users/danheberden/.bower/cache/jquery/29cb...
-bower installing jquery#2.0.0
+>bower install jquery
+>bower cloning git://github.com/components/jquery.git
+>bower cached git://github.com/components/jquery.git
+>bower fetching jquery
+>bower checking out jquery#2.0.0
+>bower copying /Users/danheberden/.bower/cache/jquery/29cb...
+>bower installing jquery#2.0.0
 						</code>
 					</pre>
 				</section>
@@ -571,7 +575,7 @@ bower installing jquery#2.0.0
 			</section>
 			<section>
 				<section>
-					<h3>Основные команды</h3>
+					<h2>Основные команды</h2>
 					<table>
 						<tr>
 							<td>search</td>
@@ -603,7 +607,7 @@ bower installing jquery#2.0.0
 					<h3>Команда search</h3>
 					<pre>
 						<code class="hljs">
-bower search jquery
+>bower search jquery
 Search results:
     jQuery https://github.com/jquery/jquery.git
     jquery https://github.com/jquery/jquery-dist.git
@@ -625,7 +629,7 @@ Search results:
 					<h3>Команда install</h3>
 					<pre>
 						<code class="hljs">
-bower install jquery#2.0.0
+>bower install jquery#2.0.0
 //result
 bower jquery#2.0.0  not-cached https://github.com/jquery/jquery-dist.git#2.0.0
 bower jquery#2.0.0  resolve https://github.com/jquery/jquery-dist.git#2.0.0
@@ -640,7 +644,7 @@ jquery#2.0.0 bower_components\jquery
 					<h3>Команда list</h3>
 					<pre>
 						<code class="hljs">
-bower list
+>bower list
 //result
 bower check-new  Checking for new versions of the project dependencies...
 HP C:\Users\HP
@@ -652,17 +656,15 @@ HP C:\Users\HP
 					<h3>Команда uninstall</h3>
 					<pre>
 						<code class="hljs">
-bower uninstall jquery
-//result
-bower uninstall     jquery
+>bower uninstall jquery
 						</code>
 					</pre>
 				</section>
 				<section>
-					<h3>Команда Init</h3>
+					<h3>Команда init</h3>
 					<pre>
 						<code class="hljs" data-trim>
-bower init
+>bower init
 //bower.json
 {
   name: 'Maks Hladki',
@@ -691,8 +693,9 @@ bower init
 				<p>ext install bower (Bower - Don Jayamanne)</p>
 				<img src="img/vs-code-bower.png" alt="">
 			</section>
+			<!-- Cистема сборки и задач -->
 			<section>
-				<h1>Gulp</h1>
+				<h1>Cистема сборки и выполнения задач</h1>
 			</section>
 			<section>
 				<h2>Процесс front-end разработки</h2>
@@ -734,6 +737,15 @@ bower init
 						</tr>
 					</tbody>
 				</table>
+			</section>
+			<section>
+				<h2>Популярные системы сборки</h2>
+				<ul>
+					<li>Grunt</li>
+					<li>Gulp</li>
+					<li>Webpack</li>
+					<li>Browserify</li>
+				</ul>
 			</section>
 			<section>
 				<section>
@@ -788,6 +800,9 @@ bower init
 				</section>
 			</section>
 			<section>
+				<h1>Gulp</h1>
+			</section>
+			<section>
 				<section>
 					<h2>Структура проекта</h2>
 					<pre>
@@ -839,7 +854,7 @@ bower init
 						<li>Легок в использовании</li>
 						<li>Эффективен</li>
 						<li>Высокая надежность</li>
-						<li>Просто изучить</li>
+						<li>Прост в изучении</li>
 					</ul>
 				</section>
 				<section>
@@ -854,7 +869,7 @@ const gulp = require('gulp'),
       concat = require('gulp-concat'),
       cssmin = require('gulp-cssmin');
 
-gulp.task('coffee', () =>{
+gulp.task('coffee', () => {
     //TODO
 });
 						</code>
@@ -894,12 +909,12 @@ gulp.task('html', () => {
 					<h3>Высокая надежность</h3>
 					<blockquote>
 						Все плагины для Gulp пишутся по специальным правилам. Этот процесс позволяет задачам оставаться простыми и работать так,
-						как вы этого ожидаете
+						как этого ожидает разработчик
 					</blockquote>
 					<p>Общее количество плагинов на декабрь 2016: <span class="highlight-blue">1100+</span></p>
 				</section>
 				<section>
-					<h3>Просто изучить</h3>
+					<h3>Прост в изучении</h3>
 					<blockquote>
 						Можно начать работать с Gulp с минимальными знаниями API. Нужно всего лишь понимать принцип работы основных четырех функций:
 						<span class="highlight-blue">task</span>, <span class="highlight-blue">watch</span>, <span class="highlight-blue">src</span>						и <span class="highlight-blue">dest</span>
@@ -917,12 +932,12 @@ gulp.task('html', () => {
 						<li>Выполнить команду gulp</li>
 					</ol>
 					<pre>
-					<code class="hljs">
-npm install --global gulp
+						<code class="hljs">
+>npm install --global gulp
 
-npm install --save-dev gulp
-					</code>
-				</pre>
+>npm install --save-dev gulp
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Пример gulpfile.js</h3>
@@ -1079,12 +1094,18 @@ gulp.src('./client/templates/*.jade')
 					</pre>
 				</section>
 			</section>
+			<!-- Пакеты Gulp -->
 			<section>
 				<section>
 					<h2>browser-sync</h2>
 				</section>
 				<section>
 					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+>npm install browser-sync gulp --save-dev
+						</code>
+					</pre>
 					<pre>
 						<code class="hljs" data-trim>
 const gulp = require('gulp'),
@@ -1191,6 +1212,11 @@ browserSync.init({
 				<section>
 					<h3>Пример</h3>
 					<pre>
+						<code class="hljs">
+>npm install --save-dev gulp-connect
+						</code>
+					</pre>
+					<pre>
 						<code class="hljs" data-trim>
 const gulp = require('gulp'),
     connect = require('gulp-connect');
@@ -1256,6 +1282,11 @@ gulp.task('serve', ['html'], () => {
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install --save-dev gulp-autoprefixer
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gulp = require('gulp'),
       autoprefixer = require('gulp-autoprefixer');
  
@@ -1269,7 +1300,7 @@ gulp.task('css', () =>
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs" data-trim>
 a {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1283,10 +1314,10 @@ a {
 					<h3>Пример 2</h3>
 					<pre>
 						<code class="hljs">
-const gulp = require('gulp');
-const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
-const concat = require('gulp-concat');
+const gulp = require('gulp'),
+      sourcemaps = require('gulp-sourcemaps'),
+      autoprefixer = require('gulp-autoprefixer'),
+      concat = require('gulp-concat');
  
 gulp.task('css', () =>
     gulp.src('src/**/*.css')
@@ -1388,6 +1419,11 @@ autoprefixer(
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install gulp-clean-css --save-dev
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gulp = require('gulp'),
       cleanCSS = require('gulp-clean-css');
 
@@ -1443,6 +1479,11 @@ gulp.task('css', function() {
 				</section>
 				<section>
 					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+>npm install gulp-sass --save-dev
+						</code>
+					</pre>
 					<pre>
 						<code class="hljs">
 const gulp = require('gulp'),
@@ -1507,6 +1548,11 @@ gulp.task('sass', function () {
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install gulp-less --save-dev
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gulp = require('gulp'),
       less = require('gulp-less');
 
@@ -1565,6 +1611,11 @@ return gulp.src('./less/**/*.less')
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install --save-dev gulp-concat
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gulp = require('gulp'),
       concat = require('gulp-concat');
  
@@ -1601,6 +1652,11 @@ gulp.task('css', () => {
 				</section>
 				<section>
 					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+>npm install --save-dev gulp-imagemin
+						</code>
+					</pre>
 					<pre>
 						<code class="hljs">
 const gulp = require('gulp'),
@@ -1680,6 +1736,11 @@ gulp.task('img', () =>
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install gulp-rename --save-dev
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gulp = require('gulp'),
       rename = require("gulp-rename");
 
@@ -1745,14 +1806,14 @@ gulp.task('rename', () => {
 					<p><a href="https://babeljs.io/">https://babeljs.io/</a></p>
 					<pre>
 						<code class="hljs">
-npm install --save-dev gulp-babel
-npm install --save-dev babel-preset-es2015 //*
+>npm install --save-dev gulp-babel
+>npm install --save-dev babel-preset-es2015 //*
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-const gulp = require('gulp');
-const babel = require('gulp-babel');
+const gulp = require('gulp'),
+      babel = require('gulp-babel');
 
 gulp.task('default', () =>
     gulp.src('src/app.js')
@@ -1768,10 +1829,10 @@ gulp.task('default', () =>
 					<h3>Пример 2</h3>
 					<pre>
 						<code class="hljs">
-							const gulp = require('gulp');
-const sourcemaps = require('gulp-sourcemaps');
-const babel = require('gulp-babel');
-const concat = require('gulp-concat');
+const gulp = require('gulp'),
+      sourcemaps = require('gulp-sourcemaps'),
+      babel = require('gulp-babel'),
+      concat = require('gulp-concat');
 
 gulp.task('default', () =>
     gulp.src('src/**/*.js')
@@ -1790,13 +1851,13 @@ gulp.task('default', () =>
 					<h3>Пример 4</h3>
 					<pre>
 						<code class="hljs">
-							$ npm install --save-dev babel-plugin-transform-runtime
+>npm install --save-dev babel-plugin-transform-runtime
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs">
-							const gulp = require('gulp');
-const babel = require('gulp-babel');
+const gulp = require('gulp'),
+      babel = require('gulp-babel');
 
 gulp.task('default', () =>
     gulp.src('src/app.js')
@@ -1815,6 +1876,11 @@ gulp.task('default', () =>
 				</section>
 				<section>
 					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+>npm install --save-dev gulp-uglify
+						</code>
+					</pre>
 					<pre>
 						<code class="hljs">
 const gulp = require('gulp'),
@@ -1910,6 +1976,11 @@ global_defs  : {}    //global definitions
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install --save del
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gulp = require('gulp'),
       del = require('del');
 
@@ -1945,6 +2016,11 @@ gulp.task('clean', () => {
 				</section>
 				<section>
 					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+>npm install gulp-if --save-dev
+						</code>
+					</pre>
 					<pre>
 						<code class="hljs">
 const gulp = require('gulp'),
@@ -1994,6 +2070,11 @@ gulp.task('html', () => {
 				</section>
 				<section>
 					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+>npm install --save-dev gulp-useref
+						</code>
+					</pre>
 					<pre>
 						<code class="hljs">
 const gulp = require('gulp'),
@@ -2055,6 +2136,11 @@ gulp.task('html', function () {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
+						<code class="hljs">
+>npm install --save-dev gulp-sequence
+						</code>
+					</pre>
+					<pre>
 						<code class="hljs" data-trim>
 const gulp = require('gulp'),
       gulpSequence = require('gulp-sequence');
@@ -2104,6 +2190,11 @@ gulp.task('default', gulpSequence('build', ['watch', 'connect']));
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install --save-dev gulp-watch
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gulp = require('gulp'),
       watch = require('gulp-watch');
 
@@ -2144,6 +2235,11 @@ gulp.task('watch', () => {
 				</section>
 				<section>
 					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+>npm install jshint gulp-jshint --save-dev
+						</code>
+					</pre>
 					<pre>
 							<code class="hljs">
 const gulp = require('gulp'),
@@ -2298,6 +2394,11 @@ gulp.task('js:hint', () => {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
+						<code class="hljs">
+>npm install --save-dev gulp-csslint
+						</code>
+					</pre>
+					<pre>
 							<code class="hljs">
 const gulp = require('gulp'),
       csslint = require('gulp-csslint');
@@ -2357,6 +2458,11 @@ gulp.task('css:lint', () => {
 					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
+>npm install gulp-util --save-dev
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
 const gutil = require('gulp-util');
 
 gutil.log('something happened', 'in js:hint', gutil.colors.magenta('123'));
@@ -2374,6 +2480,7 @@ gutil.template('test <%= name %> <%= file.path %>', opt) // test todd hi.js
 					</pre>
 				</section>
 				<section>
+					<h3>Пример 2</h3>
 					<pre>
 						<code class="hljs">
 const gutil = require('gulp-util');
@@ -2396,6 +2503,7 @@ var err = new gutil.PluginError('test', existingError, {showStack: true});
 					</pre>
 				</section>
 				<section>
+					<h3>Пример 3</h3>
 					<pre>
 						<code class="hljs">
 const gutil = require('gulp-util');
@@ -2410,6 +2518,170 @@ gulp.task('scripts', function() {
 					</pre>
 				</section>
 			</section>
+			<section>
+				<h2>Большой пример</h2>
+				<pre>
+					<code class="hljs" data-trim>
+const gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    gulpSequence = require('gulp-sequence'),
+    autoprefixer = require('gulp-autoprefixer'),
+    concat = require('gulp-concat'),
+    connect = require('gulp-connect'),
+    cleanCSS = require('gulp-clean-css'),
+    csslint = require('gulp-csslint'),
+    csslintReporter = require('gulp-csslint-report'),
+    del = require('del'),
+    imagemin = require('gulp-imagemin'),
+    rename = require('gulp-rename'),
+    pipe = require('multipipe'),
+    lazypipe = require('lazypipe'),
+    sourcemaps = require('gulp-sourcemaps'),
+    jshint = require('gulp-jshint'),
+    jshintReporter = require('gulp-jshint-html-reporter'),
+    uglify = require('gulp-uglify'),
+    useref = require('gulp-useref'),
+    watch = require('gulp-watch');
+
+const srcPath = {
+    'src': './src',
+    'html': './src/**/*.html',
+    'img': './src/**/*.+(jpg|png|svg|gif)',
+    'css': ['./src/!(css|js)*/**/*.css'],
+    'cssLint': './src/**/*.css',
+    'js': './src/!(js)*/**/*.js',
+    'jsHint': './src/**/*.js',
+    'font': './src/font/**/*.*',
+    'task': './src/task/**/*.pdf',
+    'analysis': './src/code-analysis/',
+};
+
+const distPath = {
+    'dist': './dist/',
+    'html': './dist/',
+    'img': './dist/',
+    'css': './dist/css/',
+    'js': './dist/',
+    'font': './dist/font/',
+    'task': './dist/task/'
+};
+
+const pluginSettings = {
+    autoprefixer: {
+        browsers: ['last 2 versions', 'ie 9', 'ie 10']
+    },
+    cleanCSS: {
+        compatibility: '*'
+    },
+    csslint: {
+        filename: 'index.html',
+        directory: srcPath.analysis + '/css/'
+    },
+    jshint: {
+        filename: srcPath.analysis + '/js/index.html',
+        createMissingFolders: true
+    }
+};
+
+gulp.task('clean', () => {
+    return del([srcPath.analysis, distPath.dist]);
+});
+
+
+gulp.task('html', () => {
+    return gulp.src(srcPath.html)
+        .pipe(useref({}, lazypipe().pipe(sourcemaps.init, {
+            loadMaps: true
+        })))
+        .pipe(gulpif('*.js', pipe(
+            uglify()
+        )))
+        .pipe(gulpif('*.css',
+            pipe(
+                autoprefixer(pluginSettings.autoprefixer),
+                cleanCSS(pluginSettings.cleanCSS)
+            )
+        ))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(distPath.html))
+        .pipe(connect.reload());
+});
+
+gulp.task('css', () => {
+    return gulp.src(srcPath.css)
+        .pipe(sourcemaps.init())
+        .pipe(autoprefixer(pluginSettings.autoprefixer))
+        .pipe(cleanCSS(pluginSettings.cleanCSS))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(distPath.css));
+});
+
+gulp.task('css:lint', () => {
+    return gulp.src(srcPath.cssLint)
+        .pipe(csslint('.csslintrc'))
+        .pipe(csslintReporter(pluginSettings.csslint));
+});
+
+
+gulp.task('js', () => {
+    return gulp.src(srcPath.js)
+        .pipe(gulp.dest(distPath.js));
+});
+
+gulp.task('js:hint', () => {
+    return gulp.src(srcPath.jsHint)
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter(jshintReporter, pluginSettings.jshint));
+});
+
+
+gulp.task('img', () => {
+    return gulp.src(srcPath.img)
+        .pipe(imagemin())
+        .pipe(gulp.dest(distPath.img));
+});
+
+gulp.task('font', () => {
+    return gulp.src(srcPath.font)
+        .pipe(gulp.dest(distPath.font));
+});
+
+gulp.task('task', () => {
+    return gulp.src(srcPath.task)
+        .pipe(gulp.dest(distPath.task));
+})
+
+gulp.task('connect', () => {
+    return connect.server({
+        root: distPath.dist,
+        port: 4000,
+        livereload: true
+    });
+});
+
+gulp.task('build', gulpSequence('clean', ['js:hint', 'css:lint'], [
+    'html',
+    'img',
+    'js',
+    'css',
+    'font',
+    'task'
+]));
+
+gulp.task('watch', () => {
+    watch(srcPath.css, () => gulp.start('css'));
+    watch(srcPath.html, () => gulp.start('html'));
+    watch(srcPath.js, () => gulp.start('js'));
+    watch(srcPath.img, () => gulp.start('img'));
+    watch(srcPath.font, () => gulp.start('font'));
+    watch(srcPath.task, () => gulp.start('task'));
+});
+
+gulp.task('default', gulpSequence('build', ['watch', 'connect']));
+					</code>
+				</pre>
+			</section>
+			<!-- Webpack -->
 			<section>
 				<h1>Webpack</h1>
 			</section>
