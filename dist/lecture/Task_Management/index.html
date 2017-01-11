@@ -879,7 +879,7 @@ gulp.task('coffee', () => {
 					<h3>Эффективен</h3>
 					<blockquote>
 						Используя преимущества потока данных, процесс выполнения задач получается более быстрым, промежуточные файлы не создаются
-						и на диск не записываются
+						и на диск не записываются (Vinul FS)
 					</blockquote>
 					<img src="img/gulp-flow.png" alt="">
 				</section>
@@ -1065,6 +1065,12 @@ gulp.dest(path, [,options])
 						<code class="hljs">
 gulp.task('css', () => {
     return gulp.src(srcPath.css)
+	 	.on('data', (file) => {
+            console.log({
+				path:file.path,
+				basename: file.basename
+			});
+        })
         .pipe(sourcemaps.init())
         .pipe(autoprefixer(autoprefixerSettings))
         .pipe(cleanCSS(cleanCSSSettings))
@@ -2684,6 +2690,27 @@ gulp.task('default', gulpSequence('build', ['watch', 'connect']));
 			<!-- Webpack -->
 			<section>
 				<h1>Webpack</h1>
+			</section>
+			<section>
+				<h2>Как работает webpack</h2>
+				<img src="img/webpack.png" alt="" height="500">
+			</section>
+			<section>
+				<h2>Плюсы</h2>
+				<ul>
+					<li>Всеобщая система сборки</li>
+					<li>Может быть интегрирован с Grunt или Gulp</li>
+					<li>Предоставляет динамическую подгрузку</li>
+					<li>Использует Chunk для общего фрагметов кода</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Минусы</h2>
+				<ul>
+					<li>Тяжел в освоении</li>
+					<li>Плохая документация</li>
+					<li>Вначале ориентирована только на работу с JS-файлами</li>
+				</ul>
 			</section>
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
