@@ -1106,7 +1106,7 @@ gulp.src('./client/templates/*.jade')
 					<h2>browser-sync</h2>
 				</section>
 				<section>
-					<h3>Пример</h3>
+					<h3>Пример 1</h3>
 					<pre>
 						<code class="hljs">
 >npm install browser-sync gulp --save-dev
@@ -1133,6 +1133,21 @@ gulp.task('watch', () => {
       .on('change', browserSync.reload);//*
 });
 gulp.task('default', ['serve', 'watch']);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+gulp.task('serve', () => {
+    browserSync.init({
+        server: distPath.dist,
+        port: 4000
+    });
+
+    browserSync.watch(distPath.dist).on('change', browserSync.reload);
+});
 						</code>
 					</pre>
 				</section>
@@ -2691,9 +2706,13 @@ gulp.task('default', gulpSequence('build', ['watch', 'connect']));
 			<section>
 				<h1>Webpack</h1>
 			</section>
-			<section>
+			<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
 				<h2>Как работает webpack</h2>
 				<img src="img/webpack.png" alt="" height="500">
+			</section>
+			<section>
+				<h2>Webpack vs Gulp</h2>
+				<img src="img/webpack-gulp.png" alt="">
 			</section>
 			<section>
 				<h2>Плюсы</h2>

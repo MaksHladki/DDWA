@@ -1,17 +1,19 @@
+//modules
+
 const gulp = require('gulp'),
     gulpif = require('gulp-if'),
     gulpSequence = require('gulp-sequence'),
     autoprefixer = require('gulp-autoprefixer'),
+    browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
-    connect = require('gulp-connect'),
     cleanCSS = require('gulp-clean-css'),
     csslint = require('gulp-csslint'),
     csslintReporter = require('gulp-csslint-report'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
+    newer = require('gulp-newer'),
     rename = require('gulp-rename'),
     pipe = require('multipipe'),
-    lazypipe = require('lazypipe'),
     sourcemaps = require('gulp-sourcemaps'),
     jshint = require('gulp-jshint'),
     jshintReporter = require('gulp-jshint-html-reporter'),
@@ -19,14 +21,16 @@ const gulp = require('gulp'),
     useref = require('gulp-useref'),
     watch = require('gulp-watch');
 
+//variables
+
 const srcPath = {
     'src': './src',
     'html': './src/**/*.html',
-    'img': './src/**/*.+(jpg|png|svg|gif)',
+    'img': './src/**/*.+(jpg|png|svg)',
     'css': ['./src/!(css|js)*/**/*.css'],
     'cssLint': './src/**/*.css',
     'js': './src/!(js)*/**/*.js',
-    'jsHint': './src/**/*.js',
+    'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
     'task': './src/task/**/*.pdf',
     'analysis': './src/code-analysis/',
@@ -59,16 +63,15 @@ const pluginSettings = {
     }
 };
 
+//tasks
+
 gulp.task('clean', () => {
     return del([srcPath.analysis, distPath.dist]);
 });
 
-
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
-        .pipe(useref({}, lazypipe().pipe(sourcemaps.init, {
-            loadMaps: true
-        })))
+        .pipe(useref({}, pipe(sourcemaps.init)))
         .pipe(gulpif('*.js', pipe(
             uglify()
         )))
@@ -79,8 +82,7 @@ gulp.task('html', () => {
             )
         ))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(distPath.html))
-        .pipe(connect.reload());
+        .pipe(gulp.dest(distPath.html));
 });
 
 gulp.task('css', () => {
@@ -98,21 +100,20 @@ gulp.task('css:lint', () => {
         .pipe(csslintReporter(pluginSettings.csslint));
 });
 
-
 gulp.task('js', () => {
     return gulp.src(srcPath.js)
         .pipe(gulp.dest(distPath.js));
 });
 
-gulp.task('js:hint', () => {
-    return gulp.src(srcPath.jsHint)
+gulp.task('js:lint', () => {
+    return gulp.src(srcPath.jsLint)
         .pipe(jshint('.jshintrc'))
         .pipe(jshint.reporter(jshintReporter, pluginSettings.jshint));
 });
 
-
 gulp.task('img', () => {
     return gulp.src(srcPath.img)
+        .pipe(newer(distPath.img))
         .pipe(imagemin())
         .pipe(gulp.dest(distPath.img));
 });
@@ -127,15 +128,16 @@ gulp.task('task', () => {
         .pipe(gulp.dest(distPath.task));
 })
 
-gulp.task('connect', () => {
-    return connect.server({
-        root: distPath.dist,
-        port: 4000,
-        livereload: true
+gulp.task('serve', () => {
+    browserSync.init({
+        server: distPath.dist,
+        port: 4000
     });
+
+    browserSync.watch(distPath.dist).on('change', browserSync.reload);
 });
 
-gulp.task('build', gulpSequence('clean', ['js:hint', 'css:lint'], [
+gulp.task('build', gulpSequence('clean', ['js:lint', 'css:lint'], [
     'html',
     'img',
     'js',
@@ -153,4 +155,4 @@ gulp.task('watch', () => {
     watch(srcPath.task, () => gulp.start('task'));
 });
 
-gulp.task('default', gulpSequence('build', ['watch', 'connect']));
+gulp.task('default', gulpSequence('build', ['watch', 'serve']));
