@@ -2732,6 +2732,312 @@ gulp.task('default', gulpSequence('build', ['watch', 'connect']));
 				</ul>
 			</section>
 			<section>
+				<h3>Начало работы</h3>
+				<pre>
+					<code class="hljs">
+>npm install webpack -g
+
+>npm install webpack --save-dev
+					</code>
+				</pre>
+			</section>
+			<section>
+				<section>
+					<h2>Простой пример</h2>
+				</section>
+				<section>
+					<h3>Список файлов</h3>
+					<pre>
+						<code class="hljs">
+├── index.html
+├── index.js
+├── home.js
+├── package.json
+└── webpack.config.js
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>webpack.config.js</h3>
+					<pre>
+						<code class="hljs">
+module.exports ={
+    entry: "./index.js",
+    output: {
+        path: __dirname + "/dist",
+        filename: "bundle.js"
+    }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Другие файлы</h3>
+					<p>home.js</p>
+					<pre>
+						<code class="hljs" data-trim>
+function logger(msg) {
+    console.log('home.js: ' + msg);
+}
+exports.logger = logger;
+						</code>
+					</pre>
+					<p>index.js</p>
+					<pre>
+						<code class="hljs" data-trim>
+const home = require('./home.js');
+home.logger('test message!');	
+						</code>
+					</pre>
+					<p>index.html</p>
+					<pre>
+						<code class="hljs" data-trim>
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;script src="dist/bundle.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;							
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Выполнение</h3>
+					<pre>
+							<code class="hljs">
+>webpack
+Hash: ae054f410e21ea4e91af
+Version: webpack 1.14.0
+Time: 57ms
+    Asset     Size  Chunks             Chunk Names
+bundle.js  1.63 kB       0  [emitted]  main
+   [0] ./index.js 69 bytes {0} [built]
+   [1] ./home.js 90 bytes {0} [built]
+							</code>
+						</pre>
+					<pre>
+							<code class="hljs">
+//index.html
+home.js: test message!
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h3>bundle.js</h3>
+					<pre>
+						<code class="hljs" data-trim>
+(function(modules) { 
+ 	var installedModules = {};
+ 	function __webpack_require__(moduleId) {
+ 		if(installedModules[moduleId])
+ 			return installedModules[moduleId].exports;
+ 		var module = installedModules[moduleId] = {
+ 			exports: {},id: moduleId,loaded: false
+ 		};
+ 		modules[moduleId].call(module.exports, module, module.exports);
+ 		module.loaded = true;
+ 		return module.exports;
+ 	}
+ 	return __webpack_require__(0);
+ })
+/*********************************************************************/
+ ([
+ // LIST OF MUDULES ***
+ ]);	
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Массив модулей</h3>
+					<pre>
+						<code class="hljs">
+([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+	const home = __webpack_require__(1);
+	home.logger('test message!');
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+	function logger(msg) {
+	    console.log('home.js: ' + msg);
+	}
+	exports.logger = logger;
+/***/ }
+ ]);
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Внешний доступ к модулям</h2>
+				</section>
+				<section>
+					<h3>webpack.config.js</h3>
+					<pre>
+						<code class="hljs">
+module.exports ={
+    entry: "./index.js",
+    output: {
+        path: __dirname + "/dist",
+        filename: "bundle.js",
+        library: 'webpack' //*
+    }
+}	
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>JS файлы</h3>
+					<p>home.js</p>
+					<pre>
+						<code class="hljs">
+function logger(msg) {
+    console.log('home.js: ' + msg);
+}
+
+exports.logger = logger;
+						</code>
+					</pre>
+					<p>index.js</p>
+					<pre>
+						<code class="hljs">
+const home = require('./home.js');
+home.logger('test message!');
+
+exports.logger = home.logger; //*
+						
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>index.html</h3>
+					<pre>
+						<code class="hljs">
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+
+&lt;body&gt;
+    &lt;script src="dist/bundle.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        webpack.logger('index.html');//*
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Выполнение</h3>
+					<pre>
+						<code class="hljs">
+>webpack
+Hash: 8cb5e92b5543b1c3cd00
+Version: webpack 1.14.0
+Time: 65ms
+    Asset     Size  Chunks             Chunk Names
+bundle.js  1.68 kB       0  [emitted]  main
+   [0] ./index.js 102 bytes {0} [built]
+   [1] ./home.js 90 bytes {0} [built]
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+home.js: test message!
+home.js: index.html
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Изменения в bundle.js</h3>
+					<pre>
+						<code class="hljs">
+var webpack =  //*** добавилась внешняя переменная
+ (function(modules) {
+ 	// The module cache
+ 	var installedModules = {};
+
+ 	// The require function
+ 	function __webpack_require__(moduleId) {
+
+ 		// Check if module is in cache
+ 		if(installedModules[moduleId])
+ 			return installedModules[moduleId].exports;
+//...................................................
+
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h2>Свойство watch</h2>
+				<blockquote>
+					Опция позволяет автоматически пересобирать файлы и запускать задачи при обнаружении изменений
+				</blockquote>
+				<pre>
+					<code class="js">
+module.exports ={
+    entry: "./index.js",
+    output: {
+        path: __dirname + "/dist",
+        filename: "bundle.js",
+        library: 'webpack'
+    },
+    watch: true
+}		
+					</code>
+				</pre>
+			</section>
+			<section>
+				<section>
+					<h2>Отладка скриптов</h2>
+				</section>
+				<section>
+					<h3>Проблема отладки</h3>
+					<p>До</p>
+					<img src="img/webpack-debugger-false.png" alt="">
+					<p>После</p>
+					<img src="img/webpack-debugger-true.png" alt="">
+				</section>
+				<section>
+					<h3>devtool</h3>
+					<img src="img/webpack-devtool.png" alt="">
+				</section>
+				<section>
+					<h3>Краткое описание</h3>
+					<small>
+						<ul>
+							<li>eval - каждый модуль выполняется с использованием eval и ссылки на карту кода</li>
+							<li>source-map - генерируются отладочные карты кода (файл *.js.map)</li>
+							<li>hidden-source-map - тоже, что и source-map, но не добавляется ссылка в JS-файл</li>
+							<li>inline-source-map - карта добавлятеся как sourceMappingURL в JS-файлы/li>
+							<li>eval-source-map - каждый модуль выполняется с использованием eval, карта добавляется как sourceMappingURL в eval</li>
+							<li>cheap-source-map - тоже, что и source-map, но номера строк некорректные (номера строк модифицированных файлов вместо оригинальных). Карты кода, подгружаемые загрузчиком (для внешних модулей), не используются</li>
+							<li>cheap-module-source-map - тоже, что и source-map, но при сопоставлении данных корректные номера имеют только строки. Загружает карты кода для внешних модулей</li>
+						</ul>
+					</small>
+				</section>
+				<section>
+					<h3>Пример</h3>
+					<pre>
+						<code class="hljs">
+module.exports ={
+    entry: "./index.js",
+    output: {
+        path: __dirname + "/dist",
+        filename: "bundle.js",
+        library: 'webpack'
+    },
+    watch: true,
+    devtool: 'source-map'
+}
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
 				<img src="img/thanks.png" alt="" height="600">
 			</section>
