@@ -1,0 +1,10 @@
+body {
+    background-color: red;
+}
+
+.main {
+    height: 100px;
+    margin: 50px;
+    border-radius: 5px;
+    background-image: url('logo.png');
+}
