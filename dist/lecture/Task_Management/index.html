@@ -2708,7 +2708,7 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 			<section>
 				<h1>Webpack</h1>
 			</section>
-			<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+			<section data-transition="slide" data-background="#b5533c">
 				<h2>Как работает webpack</h2>
 				<img src="img/webpack.png" alt="" height="500">
 			</section>
@@ -2763,14 +2763,13 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 						<li>Имеют доступ ко всем модулям (до и после трансформации)</li>
 						<li>Могут добавлять в упаковку свои модули (например, "runtime")</li>
 						<li>Имеют доступ ко всем ресурсам, создаваемым после упаковки</li>
-						<li>Применяются для изменения конфигурации сборки, оптимизации, горячего обновления
-							ресурсов
+						<li>Применяются для изменения конфигурации сборки, оптимизации, горячего обновления ресурсов
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section>
-				<h3>Начало работы</h3>
+				<h2>Начало работы</h2>
 				<pre>
 					<code class="hljs">
 >npm install webpack -g
@@ -2852,13 +2851,13 @@ bundle.js  1.63 kB       0  [emitted]  main
    [0] ./index.js 69 bytes {0} [built]
    [1] ./home.js 90 bytes {0} [built]
 							</code>
-						</pre>
+					</pre>
 					<pre>
 							<code class="hljs">
 //index.html
 home.js: test message!
 							</code>
-						</pre>
+					</pre>
 				</section>
 				<section>
 					<h3>bundle.js</h3>
@@ -2944,8 +2943,7 @@ exports.logger = logger;
 const home = require('./home.js');
 home.logger('test message!');
 
-exports.logger = home.logger; //*
-						
+exports.logger = home.logger; //*	
 						</code>
 					</pre>
 				</section>
@@ -3041,7 +3039,7 @@ module.exports = {
 						Опция позволяет автоматически пересобирать приложение, модули, файлы и запускать задачи при обнаружении изменений
 					</blockquote>
 					<pre>
-					<code class="js">
+						<code class="js">
 module.exports ={
     entry: "./index.js",
     output: {
@@ -3056,8 +3054,8 @@ module.exports ={
         poll: 1000
     }
 }	
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>watch options</h3>
@@ -3117,7 +3115,7 @@ module.exports ={
 			</section>
 			<section>
 				<section>
-					<h2>babel.js</h2>
+					<h2>Babel.js</h2>
 				</section>
 				<section>
 					<h3>Установка</h3>
@@ -3191,7 +3189,6 @@ import {logger} from './home.js';
 logger('test message!');
 
 export {logger};
-
 						</code>
 					</pre>
 				</section>
@@ -3227,13 +3224,13 @@ Time: 927ms
 bundle.js.map  1.96 kB       0  [emitted]  main
     + 2 hidden modules
 							</code>
-						</pre>
+					</pre>
 					<pre>
 							<code class="hljs">
 //index.html
 home.js: test message!
 							</code>
-						</pre>
+					</pre>
 				</section>
 				<section>
 					<h3>bundle.js (фрагмент)</h3>
@@ -3285,34 +3282,35 @@ module.exports = {
     })]
 }
 						</code>
-					</pre>
+				</pre>
 			</section>
 			<section>
 				<section>
 					<h2>Обнаружение общих модулей</h2>
 				</section>
 				<section>
+					<h3>Свойство chunkFilename</h3>
 					<pre>
 						<code class="hljs">
-    output: {
-        path: 'dist/',
-        filename: "[name]/[name].js",
-        library: '[name]',
-        chunkFilename: "[id].chunk.js"
-    },
+output: {
+    path: 'dist/',
+    filename: "[name]/[name].js",
+    library: '[name]',
+    chunkFilename: "[id].chunk.js"
+}
 						</code>
 					</pre>
 				</section>
 				<section>
-					<h3></h3>
+					<h3>Плагин CommonsChunkPlugin</h3>
 					<pre>
 						<code class="hljs">
 plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "commons",
-            filename: "[name].js"
-        })
-],
+    new webpack.optimize.CommonsChunkPlugin({
+        name: "commons",
+        filename: "[name].js"
+    })
+]
 						</code>
 					</pre>
 				</section>
@@ -3665,7 +3663,7 @@ module.exports = {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-					<code class="hljs">
+						<code class="hljs">
 const gulp = require('gulp'),
       webpack = require('webpack-stream');
 
@@ -3674,8 +3672,8 @@ gulp.task('default', function() {
     .pipe(webpack( require('./webpack.config.js') ))
     .pipe(gulp.dest('dist/'));
 });
-					</code>
-				</pre>
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Пример 2</h3>
