@@ -158,15 +158,15 @@ with (obj)
 			<section>
 				<section>
 					<h2>Глобальный объект window</h2>
-					<p class="text">
+					<blockquote>
 						В JavaScript все глобальные переменные и функции являются свойствами специального объекта, который называется «
 						<span class="highlight-blue">глобальный объект
 							</span>» (global object).
-					</p>
-					<p class="text fragment">
+					</blockquote>
+					<p class="text">
 						В браузере этот объект доступен под именем <span class="highlight-blue">window</span>.
 					</p>
-					<p class="text fragment">
+					<p class="text">
 						Объект window одновременно является глобальным объектом и содержит ряд свойств и методов для работы с окном браузера.
 					</p>
 				</section>
@@ -255,7 +255,7 @@ var res = N * i;
 				<section>
 					<h2>Лексическая область видимости</h2>
 					<ul>
-						<li>Функции имеют не динамическую, а лексическую область видимости. </li>
+						<li>Функции имеют не динамическую, а лексическую область видимости</li>
 						<li>Вложенная функция обладает возможностью доступа ко всем аргументам и локальным переменным объемлющей функции</li>
 						<li>Все переменные внутри функции – это свойства специального внутреннего объекта <span class="highlight-blue">LexicalEnvironment</span></li>
 					</ul>
@@ -367,11 +367,11 @@ console.log(counter2()); // 1
 					<h3>new Function</h3>
 					<pre>
 						<code class="hljs" data-trim>
-window.a = 1
+window.a = 1;
 function getFunc() {
-  var a = 2
-  var func = new Function('', 'alert(a)') 
-  return func
+  var a = 2;
+  var func = new Function('', 'alert(a)'); 
+  return func;
 }
  
 getFunc()();// 1
@@ -414,7 +414,7 @@ console.log(add());//???
 			<section>
 				<h1>ООП в JavaScript</h1>
 				<ul>
-					<li>ОПП в функциональном стиле</li>
+					<li>ООП в функциональном стиле</li>
 					<li>ООП в прототипном стиле</li>
 				</ul>
 			</section>
@@ -604,7 +604,7 @@ console.log(p1.getName == p2.getName); //true
 			</section>
 			<section>
 				<section>
-					<h3>Внутренний и внешний интерфейс</h3>
+					<h2>Внутренний и внешний интерфейс</h2>
 					<p>Публичное и приватное свойство</p>
 					<pre>
 						<code class="hljs" data-trim>
@@ -624,7 +624,7 @@ console.log(person.getAge());//20 лет
 						<pre>
 				</section>
 				<section>
-					<h2>Внутренний и внешний интерфейс</h2>
+					<h3>Внутренний и внешний интерфейс</h3>
 					<p>Публичный и приватный метод</p>
 					<pre>
 						<code class="hljs" data-trim>
@@ -773,7 +773,7 @@ console.log(student.getAge()); //20 лет
 				</section>
 			</section>
 			<section>
-				<h2>Вспомним</h2>
+				<h2>Запомним</h2>
 				<blockquote>
 					<b><span class="highlight-blue">THIS</span></b> в JS не привязывается к объекту, а зависит от контекста вызова. В случае
 					с конструктором <span class="highlight-blue">this</span> ссылается на созданный экземпляр при условии использования
@@ -811,18 +811,15 @@ console.log(student.name);//Alex
 			</section>
 			<section>
 				<h2>Особенности</h2>
-				<small>
 				<ul>
 					<li>Объекты можно организовать в цепочки (свойство, не найденное в одном объекте, автоматически ищется в другом)</li>
-					<li>Все объекты, созданные объектными литералами, имеют прототип Object.prototype</li>
-					<li>Объекты, созданные с помощью new и конструктора, имеют в качестве прототипа значение свойства
-						prototype
-					</li>
 					<li>Свойство __proto__ доступно во всех браузерах, кроме IE10-</li>
-					<li>Объект, на который указывает ссылка __proto__, называется «прототипом».</li>
+					<li>Объект, на который указывает ссылка __proto__, называется «прототипом»</li>
+					<li>Все объекты, созданные объектными литералами, имеют прототип Object.prototype</li>
+					<li>Объекты, созданные с помощью new и конструктора, имеют в качестве прототипа значение свойства prototype
+					</li>
 					<li>Прототип используется только при чтении</li>
 				</ul>
-				</small>
 			</section>
 			<section>
 				<h2>Proto: read only</h2>
@@ -858,7 +855,7 @@ console.log(person.age);//24
 				<p>Свойство prototype имеет смысл только у конструктора</p>
 				<pre>
 					<code class="hljs" data-trim>
-					var person = {
+var person = {
     age: 24,
     name: 'Alex'
 };
@@ -866,6 +863,7 @@ console.log(person.age);//24
 function Student(course, group) {
     this.course = course,
     this.group = group;
+    //this.__proto__ = person; не работает в IE10-
 };
 
 Student.prototype = person;//!!!
@@ -3806,13 +3804,11 @@ myWorker.port.onmessage = function(e) {
 			</section>
 		</div>
 	</div>
-
 	<aside id="presentable-icon" class="revealjs">
 		<a title="Содержание лекции" href="#/0/1">
 			<i class="fa fa-list-ul fa-2x"></i>
 		</a>
 	</aside>
-
 	<script src="../../js/bundle.min.js"></script>
 </body>
 
