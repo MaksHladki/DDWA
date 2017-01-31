@@ -3,8 +3,8 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Пакентные менеджеры и системы сборки модулей</title>
-	<meta name="description" content="Пакентные менеджеры и системы сборки модулей">
+	<title>Пакетные менеджеры и системы сборки модулей</title>
+	<meta name="description" content="Пакетные менеджеры и системы сборки модулей">
 	<meta name="keywords" content="npm, bower, nodejs, gulp, webpack">
 	<meta name="author" content="Maks Hladki">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,7 +21,7 @@
 		<div class="slides">
 			<section>
 				<section>
-					<h1>Пакентные менеджеры и системы сборки модулей</h1>
+					<h1>Пакетные менеджеры и системы сборки модулей</h1>
 					<h3>Разработка динамичесих веб приложений</h3>
 					<p>
 						<small>Гладкий Максим Валерьевич / <a href="https://github.com/MaksHladki/DDWA/">github:MaksHladki</a></small>
@@ -170,7 +170,7 @@ console.log('Hello World');
 						<li>Глобальные - {prefix}/lib/node_modules/ или %AppData%\npm\node_modules</li>
 						<li>Локальные - /node_modules (в той же директории, где запущен npm install)</li>
 					</ul>
-					<p class="text">По умолчанию npm будет устанавливать все пакеты в локальном каталоге, в которым вы сейчас работаете</p>
+					<p class="text">По умолчанию npm будет устанавливать все пакеты в локальном каталоге, в котором вы сейчас работаете</p>
 				</section>
 				<section>
 					<h3>Команды</h3>
@@ -202,7 +202,7 @@ console.log('Hello World');
 					</tr>
 					<tr>
 						<td>init</td>
-						<td>инициализация новго пакета</td>
+						<td>инициализация нового пакета</td>
 					</tr>
 					<tr>
 						<td>publish</td>
@@ -530,7 +530,7 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h2>Bower</h2>
 					<blockquote>
-						Менеджер пакетов, ориентированный на использовании в разработке клиентской части веб-приложений с использование JS библиотек
+						Менеджер пакетов, ориентированный на применении в разработке клиентской части веб-приложений с использованием JS библиотек
 						и фреймворков
 					</blockquote>
 					<pre>
@@ -3088,7 +3088,7 @@ module.exports ={
 							<li>eval - каждый модуль выполняется с использованием eval и ссылки на карту кода</li>
 							<li>source-map - генерируются отладочные карты кода (файл *.js.map)</li>
 							<li>hidden-source-map - тоже, что и source-map, но не добавляется ссылка в JS-файл</li>
-							<li>inline-source-map - карта добавлятеся как sourceMappingURL в JS-файлы/li>
+							<li>inline-source-map - карта добавляется как sourceMappingURL в JS-файлы/li>
 							<li>eval-source-map - каждый модуль выполняется с использованием eval, карта добавляется как sourceMappingURL в eval</li>
 							<li>cheap-source-map - тоже, что и source-map, но номера строк некорректные (номера строк модифицированных файлов вместо оригинальных). Карты кода, подгружаемые загрузчиком (для внешних модулей), не используются</li>
 							<li>cheap-module-source-map - тоже, что и source-map, но при сопоставлении данных корректные номера имеют только строки. Загружает карты кода для внешних модулей</li>
