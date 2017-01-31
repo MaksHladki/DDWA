@@ -15,7 +15,8 @@
 [Задание](https://makshladki.github.io/DDWA/dist/task/ECMAScript_6/ECMAScript_6.pdf "Задание")
 
 
-##Тема 3. Пакентные менеджеры и системы сборки модулей 
+
+##Тема 3. Пакетные менеджеры и системы сборки модулей 
 Понятие пакета и пакетного менеджера. Обзор пакетных менеджеров для создания динамических веб-приложений. Обзор основных возможностей системы сборки и выполнения задач Gulp. Сборщик модулей Webpack. Интеграция Gulp и Webpack. Инкрементальная сборка ресурсов. Запуск задач в синхронном и асинхронном режимах. Авто перезагрузка браузера c использованием пакета browser-sync.  
 [Лекция](https://makshladki.github.io/DDWA/dist/lecture/Task_Management/index.html "Лекция")  
 [Задание](https://makshladki.github.io/DDWA/dist/task/Task_Management/Task_Management.pdf "Задание")
