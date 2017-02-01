@@ -277,7 +277,7 @@ section.has-light-background h6 {
  *********************************************/
 
 .reveal section img {
-  margin: 15px 0;
+  margin: 10px 0;
   background: rgba(255, 255, 255, 0.12);
   border: 4px solid #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
