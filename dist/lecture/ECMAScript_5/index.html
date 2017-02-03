@@ -845,7 +845,7 @@ console.log(person.age);//24
 				</pre>
 			</section>
 			<section>
-				<h2>Совйство prototype</h2>
+				<h2>Свойство prototype</h2>
 				<small>
 					<ul>
 						<li>Объекты обычно создаются функцией-конструктором через new</li>
@@ -899,6 +899,14 @@ console.log(o2);
 			</section>
 			<section>
 				<h2>Метод create</h2>
+				<blockquote>
+					Cоздает новый объект с указанными объектом прототипа и свойствами
+				</blockquote>
+				<pre>
+					<code class="hljs">
+Object.create(proto[, propertiesObject])
+					</code>
+				</pre>
 				<pre>
 					<code class="hljs">
 var person = {
@@ -1358,10 +1366,14 @@ student2.print();//Max
 					<h2>Особенности this</h2>
 				</section>
 				<section>
-					<h3>Любая функция может иметь в себе this.</h3>
+					<h3>Любая функция может иметь в себе this</h3>
 					<pre>
-						<code class="hljs" data-trim>
-	function func(){ console.log(this); } func();//[object Window]
+						<code class="hljs">
+function func(){ 
+    console.log(this); 
+} 
+
+func();//[object Window]
 						</code>
 					</pre>
 				</section>
@@ -1393,7 +1405,7 @@ student.print();//Ivan
 				</section>
 			</section>
 			<section>
-				<h2>Яаное укзание и привязка контекста</h2>
+				<h2>Явное указание и привязка контекста</h2>
 				<ul>
 					<li>Call</li>
 					<li>Apply</li>
@@ -1403,10 +1415,10 @@ student.print();//Ivan
 			<section>
 				<section>
 					<h2>Метод Call</h2>
-					<p>Вызывает функцию с указанным значением this и предоставленными аргументами.</p>
+					<p>Вызывает функцию с указанным значением this и предоставленными аргументами</p>
 					<pre>
-						<code class="hljs" data-trim>
-						func.apply(context, [arg1, arg2])
+						<code class="hljs">
+fun.call(thisArg[, arg1[, arg2[, ...]]])
 					</code>
 					</pre>
 				</section>
@@ -1436,8 +1448,8 @@ showFullName.call(user) // "Василий Петров"
 					<h2>Метод Apply</h2>
 					<p>Вызывает функцию с указанным значением this и аргументами, предоставленными в виде массива</p>
 					<pre>
-						<code class="hljs" data-trim>
-						func.apply(context, [argsArray])
+						<code class="hljs">
+func.apply(context, [argsArray])
 					</code>
 					</pre>
 				</section>
@@ -1480,8 +1492,8 @@ var min = Math.min.apply(null, numbers);
 						<li>Bind не вызывает функцию, он только возвращает «обёртку»</li>
 					</ul>
 					<pre>
-						<code class="hljs" data-trim>
-						var wrapper = func.bind(context[, arg1, arg2...])
+						<code class="hljs">
+var wrapper = func.bind(context[, arg1, arg2...])
 					</code>
 					</pre>
 				</section>
@@ -1682,11 +1694,11 @@ interface Node {
 					<p>Только getter, запись без сохранения результата</p>
 					<pre>
 						<code class="hljs" data-trim>			
-    function head() {
-        console.log(document.head);
-        document.head = '<h1>Test</h1>';
-        console.log(document.head);
-    }
+function head() {
+    console.log(document.head);
+    document.head = '<h1>Test</h1>';
+    console.log(document.head);
+}
 						</code>
 					</pre>
 				</section>
@@ -1711,9 +1723,9 @@ interface Node {
 					<pre>
 						<code class="hljs" data-trim>		
  function links(){
-        console.log(document.links);
-        document.links = [];
-        console.log(document.links);
+    console.log(document.links);
+    document.links = [];
+    console.log(document.links);
 }
 						</code>
 					</pre>
@@ -1725,9 +1737,9 @@ interface Node {
 					<pre>
 						<code class="hljs" data-trim>		
  function images(){
-        console.log(document.images);
-        document.images = [];
-        console.log(document.images);
+    console.log(document.images);
+    document.images = [];
+    console.log(document.images);
 }
 						</code>
 					</pre>
@@ -1764,14 +1776,14 @@ console.log(document.documentElement);
 				<section>
 					<h3>Расширяем горизонты (forEach для HtmlCollection)</h3>
 					<pre>
-						<code class="hljs" data-trim>
-    function foreach(){
-        var collections = document.body.childNodes;
-        [].forEach.call(collections, function(item, index){
-            console.log(item);
-            console.log(index);
-        });
-    }
+						<code class="hljs">
+function foreach(){
+    var collections = document.body.childNodes;
+    [].forEach.call(collections, function(item, index){
+         console.log(item);
+        console.log(index);
+    });
+}
 						</code>
 					</pre>
 				</section>
@@ -2110,10 +2122,6 @@ function getElementsByClassName() {
 				<section>
 					<h3>Оптимизация запросов getElementsBy...</h3>
 					<p>Firefox + IE + Edge</p>
-					<blockquote>
-						Перебрать подэлементы document.body в порядке их появления в поддереве. Запоминать все найденные элементы во внутренней структуре
-						данных, чтобы при повторном обращении обойтись без поиска.
-					</blockquote>
 					<ol>
 						<li>Перебрать подэлементы document.body в порядке их появления в поддереве</li>
 						<li>Запоминать все найденные элементы во внутренней структуре данных, чтобы при повторном обращении обойтись без поиска</li>
@@ -2146,7 +2154,7 @@ console.log(elems.length);
 					<h3>Оптимизация запросов getElementsBy...</h3>
 					<p>Webkit (Chrome + Safari + Opera)</p>
 					<blockquote>
-						Перебирать подэлементы document.body. Запоминать только один, последний найденный, элемент, а также, по окончании перебора
+						Перебирать подэлементы body. Запоминать только один, последний найденный, элемент, а также, по окончании перебора
 						– длину коллекции.
 					</blockquote>
 					<p>Отличия от предыдущего способа</p>
@@ -3451,8 +3459,7 @@ g(21);
 				<section>
 					<h3>Алгоритм работы со стеком</h3>
 					<ol>
-						<li>При вызове <span class="highlight-blue">g</span>, создаётся область видимости, содержащая аргументы g и локальные
-							переменные.
+						<li>При вызове <span class="highlight-blue">g</span>, создаётся область видимости, содержащая аргументы g и локальные переменные.
 						</li>
 						<li>При вызове <span class="highlight-blue">f</span>, создаётся вторая область видимости и помещается в стэк вперед первой,
 							которая содержит аргументы f и её локальные переменные.</li>
