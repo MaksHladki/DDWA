@@ -25,7 +25,7 @@ const gulp = require('gulp'),
 
 const srcPath = {
     'src': './src',
-    'html': './src/**/*.html',
+    'html': ['./src/**/*.html', '!./src/code-analysis/**/*.html'],
     'img': './src/**/*.+(jpg|png|svg)',
     'css': ['./src/!(css|js)*/**/*.css'],
     'cssLint': './src/**/*.css',
@@ -33,7 +33,7 @@ const srcPath = {
     'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
     'task': './src/task/**/*.pdf',
-    'analysis': './src/code-analysis/',
+    'analysis': './src/code-analysis/'
 };
 
 const distPath = {
@@ -71,6 +71,7 @@ gulp.task('clean', () => {
 
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
+        .pipe(newer(distPath.html))
         .pipe(useref({}, pipe(sourcemaps.init)))
         .pipe(gulpif('*.js', pipe(
             uglify()
