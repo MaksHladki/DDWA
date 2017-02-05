@@ -2128,8 +2128,7 @@ function getElementsByClassName() {
 					</ol>
 				</section>
 				<section>
-					<h3>Оптимизация запросов getElementsBy...</h3>
-					<p>Firefox + IE + Edge Пример</p>
+					<h3>Пример</h3>
 					<pre>
 						<code class="hljs" data-trim>
 var elems = document.getElementsByTagName('div');
@@ -2141,10 +2140,10 @@ console.log(elems.length);
 					</pre>
 					<small>
 					<ol>
-						<li>Браузер создаёт пустую «живую коллекцию» elems. Пока ничего не ищет</li>
+						<li>Браузер создаёт пустую «живую коллекцию» elems, но ничего не ищет</li>
 						<li>Перебирает элементы, пока не найдёт первый div. Запоминает его и возвращает</li>
 						<li>Перебирает элементы дальше, пока не найдёт элемент с индексом 995. Запоминает все найденные</li>
-						<li>Возвращает ранее запомненный элемент с индексом 500, без дополнительного поиска</li>
+						<li>Возвращает ранее заполненный элемент с индексом 500, без дополнительного поиска</li>
 						<li>Продолжает обход поддерева с элемента, на котором остановился (995) и до конца. Запоминает найденные элементы и возвращает
 							их количество</li>
 					</ol>
@@ -2154,8 +2153,7 @@ console.log(elems.length);
 					<h3>Оптимизация запросов getElementsBy...</h3>
 					<p>Webkit (Chrome + Safari + Opera)</p>
 					<blockquote>
-						Перебирать подэлементы body. Запоминать только один, последний найденный, элемент, а также, по окончании перебора
-						– длину коллекции.
+						Перебирает подэлементы body. Запоминает только последний найденный элемент, а также, по окончании перебора – длину коллекции
 					</blockquote>
 					<p>Отличия от предыдущего способа</p>
 					<ul>
@@ -2166,8 +2164,7 @@ console.log(elems.length);
 					</ul>
 				</section>
 				<section>
-					<h3>Оптимизация запросов getElementsBy...</h3>
-					<p>Webkit (Chrome + Safari + Opera) Пример</p>
+					<h3>Пример</h3>
 					<pre>
 						<code class="hljs" data-trim>
 var elems = document.getElementsByTagName('div');
@@ -2488,13 +2485,15 @@ function replace() {
 				<h2>Браузерные события</h2>
 				<small>
 				<ul>
-					<li>Событие – это сигнал от браузера о том, что что-то произошло.</li>
-					<li>Тип события - это строка, определяющая тип действия, вызвавшего событие (mousemove, click..).</li>
-					<li>Цель события - это объект, в котором возникло событие или с которым это событие связано(Window, Document и Element).</li>
-					<li>Обработчик события - это функция, которая обрабатывает, или откликается на событие.</li>
-					<li>Объект события - это объект, связанный с определенным событием и содержащий информацию об этом событии. Объекты событий передаются функции обработчика события в виде аргумента.
-					<li>Распространение события - это процесс, в ходе которого браузер решает, в каких объектах следует вызвать обработчики событий.</li>
-				</ul>
+					<li>Событие – сигнал от браузера о том, что что-то произошло</li>
+					<li>Тип события - строка, определяющая тип действия, вызвавшего событие (mousemove, click..)</li>
+					<li>Цель события - объект, в котором возникло событие или с которым это событие связано(Window, Document и Element)</li>
+					<li>Обработчик события - функция, которая обрабатывает, или откликается на событие</li>
+					<li>Объект события - объект, связанный с определенным событием и содержащий информацию об этом событии. Объекты событий
+						передаются функции обработчика события в виде аргумента</li>
+					<li>Распространение события - процесс, в ходе которого браузер решает, в каких объектах следует вызвать обработчики событий
+					</li>
+				</ul>	
 				</small>
 			</section>
 			<section>
@@ -2511,18 +2510,18 @@ function replace() {
 						Использование атрибута HTML
 					</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs">
 <element onclick="script"></element>
 
 </code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs">
 <input value="click me" onclick="alert('Click!')" type="button">
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs">
 <p id="text" onclick="setColor()">Click me to change my text color</p>
 
 function myFunction() {
@@ -2534,8 +2533,8 @@ function myFunction() {
 				<section>
 					<h3>Использование свойства DOM-объекта</h3>
 					<pre>
-						<code class="hljs" data-trim>
-							<input id="elem" type="button" value="Нажми меня" />
+						<code class="hljs">
+<input id="elem" type="button" value="Нажми меня" />
 <script>
   elem.onclick = function() {
     alert( 'Спасибо' );
@@ -2544,8 +2543,8 @@ function myFunction() {
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
-							<input type="button" id="elem" onclick="alert('До')" value="Нажми меня" />
+						<code class="hljs">
+<input type="button" id="elem" onclick="alert('До')" value="Нажми меня" />
 <script>
   elem.onclick = function() { // перезапишет существующий обработчик
     alert( 'После' ); // выведется только это
@@ -2559,22 +2558,22 @@ function myFunction() {
 					<p class="text">Внутри обработчика события this ссылается на текущий элемент, то есть на тот, на котором он сработал. Это можно использовать,
 						чтобы получить свойства или изменить элемент.</p>
 					<pre>
-						<code class="hljs" data-trim>
-							<button onclick="alert(this.innerHTML)">Нажми меня</button>//Нажми меня
+						<code class="hljs">
+<button onclick="alert(this.innerHTML)">Нажми меня</button>//Нажми меня
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>addEventListener</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs">
 element.addEventListener(event, handler[, phase]);
 						</code>
 					</pre>
 					<ul>
-						<li>event - Имя события, например click</li>
-						<li>handler- Ссылка на функцию, которую надо поставить обработчиком</li>
-						<li>phase - Необязательный аргумент, «фаза», на которой обработчик должен сработать</li>
+						<li>event - имя события, например click</li>
+						<li>handler- ссылка на функцию, которую надо поставить обработчиком</li>
+						<li>phase - необязательный аргумент, «фаза», на которой обработчик должен сработать</li>
 					</ul>
 					<pre>
 						<code class="hljs" data-trim>
@@ -2617,34 +2616,26 @@ elem.addEventListener( "click" ,  thanks);
 					<h3>removeEventListener</h3>
 					<p>Передается таже функция-обработчик, которая была назначена на событие</p>
 					<pre>
-						<code class="hljs" data-trim>
-							// передать те же аргументы, что были у addEventListener
+						<code class="hljs">
+// передать те же аргументы, что были у addEventListener
 element.removeEventListener(event, handler[, phase]);
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
-							elem.addEventListener( "click" , function() {alert('Спасибо!')});
+						<code class="hljs">
+elem.addEventListener( "click" , function() {alert('Спасибо!')});
 // ....не сработает
 elem.removeEventListener( "click", function() {alert('Спасибо!')});
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
-							elem.addEventListener( "click" , function() {alert('Спасибо!')});
-// ....не сработает
-elem.removeEventListener( "click", function() {alert('Спасибо!')});
-						</code>
-					</pre>
-					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs">
 function handler() {
   alert( 'Спасибо!' );
 }
 input.addEventListener("click", handler);
 // ....
 input.removeEventListener("click", handler);
-
 						</code>
 					</pre>
 				</section>
@@ -2661,18 +2652,16 @@ input.removeEventListener("click", handler);
 				<section>
 					<h3>Event</h3>
 					<pre>
-						<code class="hljs" data-trim>
-							event = new Event(typeArg, eventInit);
+						<code class="hljs">
+event = new Event(typeArg, eventInit);
 						</code>
 					</pre>
 					<ul>
-						<li>Тип события – может быть как своим, так и встроенным, к примеру "click".</li>
-						<li>Флаги – объект вида { bubbles: true/false, cancelable: true/false }....</li>
+						<li>Тип события – может быть как своим, так и встроенным, к примеру "click"</li>
+						<li>Флаги – объект вида { bubbles: true/false, cancelable: true/false }...</li>
 					</ul>
 					<pre>
-						<code class="hljs" data-trim>
-							// create a look event that bubbles up and cannot be canceled
-
+						<code class="hljs">
 var ev = new Event("look", {"bubbles":true, "cancelable":false});
 document.dispatchEvent(ev);
 						</code>
@@ -3223,7 +3212,7 @@ function getChar(event) {
 					<h3>DataTransfer</h3>
 					<p>clipboardData использует объект dataTransfer</p>
 					<pre>
-					<code class="hljs" data-trim="">
+					<code class="hljs">
 void dataTransfer.setData(format, data);
 //text/plain
 //text/uri-list
@@ -3231,13 +3220,13 @@ void dataTransfer.setData(format, data);
 					</code>
 				</pre>
 					<pre>
-					<code class="hljs" data-trim>
-						 DataTransfer.clearData([format]);
+					<code class="hljs">
+DataTransfer.clearData([format]);
 					</code>
 				</pre>
 					<pre>
-					<code class="hljs" data-trim>
-						 DOMString dataTransfer.getData(format);
+					<code class="hljs">
+DOMString dataTransfer.getData(format);
 					</code>
 				</pre>
 				</section>
@@ -3793,7 +3782,7 @@ myWorker.port.onmessage = function(e) {
 				</section>
 			</section>
 			<section>
-				<h2>Web Worke имеет доступ к:</h2>
+				<h2>Web Worker имеет доступ к:</h2>
 				<ul>
 					<li>Объект navigator</li>
 					<li>Объект location (только чтение)</li>

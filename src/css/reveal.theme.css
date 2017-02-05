@@ -5,7 +5,7 @@ body {
 
 .reveal {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-size: 38px;
+  font-size: 34px;
   font-weight: normal;
   color: #fff;
 }
@@ -176,7 +176,7 @@ section.has-light-background h6 {
   width: 100%;
   margin: 15px auto;
   text-align: left;
-  font-size: 0.55em;
+  font-size: 0.65em;
   font-family: monospace;
   line-height: 0;
   word-wrap: break-word;
