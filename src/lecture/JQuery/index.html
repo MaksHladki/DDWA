@@ -37,13 +37,11 @@
 			<section>
 				<h2>Преимущества использования</h2>
 				<ul>
-					<li>Отделение кода разметки от поведения - Вынесение кода javascript из разметки во вне позволяет сделать саму разметку
-						html более чистой и понятной. Кроме того, разделить возможность разработки между веб-дзайнером, который создает визуальную
-						часть страницы, и программистом, который описывает поведение элементов на языке javascript</li>
-					<li>Упрощение работы с кодом - jQuery предлагает простой элегантный синтаксис для манипулирования элементами на веб-странице</li>
-					<li>Расширяемость - Весь код jQuery открыт для просмотра и изменения, и в случае, если что-то в библиотеке не устраивает,
-						ее можно модифицировать. А также можно создавать плагины jQuery</li>
-					<li>Кроссбраузерность - jQuery 3.0 имеет поддержку большинства известных браузеров, в том числе таких, как IE 9, 10</li>
+					<li>Отделение кода разметки от поведения - вынесение js из разметки позволяет сделать саму разметку более чистой и понятной.
+						Позволяет разделить возможность разработки между веб-дзайнером и программистом</li>
+					<li>Упрощение работы с кодом - jQuery предлагает простой и эффективный синтаксис для манипулирования элементами на веб-странице</li>
+					<li>Расширяемость - весь код jQuery открыт для просмотра и изменения. Также можно создавать свои плагины jQuery</li>
+					<li>Кроссбраузерность - jQuery 3.0 имеет поддержку большинства известных браузеров (<span class="highlight-blue">IE 9+</span>)</li>
 					<li>Собственная экосистема - объединяет целую коллекцию библиотек, построенных на основе jQuery (например, jQuery UI)</li>
 				</ul>
 			</section>
@@ -57,7 +55,7 @@
 			</section>
 
 			<section>
-				<h3>Browser Support</h3>
+				<h3>Поддержка браузерами</h3>
 				<p>Desktop</p>
 				<ul>
 					<li>Chrome: (Current - 1) and Current</li>
@@ -90,19 +88,11 @@
 					<li>jQuery.fn.load</li>
 					<li>jquery.each</li>
 					<li>jQuery.expr.filters.animated</li>
-					<li>ajax settings like jQuery.ajaxSettings.xhr, jQuery.ajaxPrefilter, jQuery.ajaxSetup, jQuery.ajaxPrefilter, jQuery.ajaxTransport,
-						jQuery.ajaxSetup
+					<li>ajax (jQuery.ajaxSettings.xhr, jQuery.ajaxPrefilter, jQuery.ajaxSetup, jQuery.ajaxPrefilter, jQuery.ajaxTransport, jQuery.ajaxSetup)
 					</li>
-					<li>xml parsing like jQuery.parseXML,</li>
-					<li>animation effects like jQuery.easing, jQuery.Animation, jQuery.speed</li>
+					<li>xml parsing (jQuery.parseXML)</li>
+					<li>animation effects (jQuery.easing, jQuery.Animation, jQuery.speed)</li>
 				</ul>
-				<blockquote cite="">
-					JQuery slim gets built with the exclusion of the following modules: -ajax, -ajax/jsonp, -ajax/load, -ajax/parseJSON, -ajax/parseXML,
-					-ajax/script, -ajax/var/location, -ajax/var/nonce, -ajax/var/rquery, -ajax/xhr, -manipulation/_evalUrl, -event/ajax,
-					-effects, -effects/Tween, -effects/animatedSelector and -deprecated. As of this writing, the minified libraries can
-					differ by a code size of about 6KB. In addition to that size difference, developers can replace any of the omitted modules
-					with a library that they may consider to be better or are more comfortable with.
-				</blockquote>
 			</section>
 			<section>
 				<section>
@@ -121,13 +111,12 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>ajax:</td>
-								<td>All AJAX functionality: $.ajax(), $.get(), $.post(), $.ajaxSetup(), .load(), transports, and ajax event shorthands
-									such as .ajaxStart().</td>
+								<td>ajax</td>
+								<td>Ajax-функционал: $.ajax(), $.get(), $.post(), $.ajaxSetup(), .load(), .ajaxStart() и т.д.</td>
 							</tr>
 							<tr>
-								<td></td>
-								<td>ajax/xhr:</td>
+								<td>ajax/xhr</td>
+								<td>Методы работы с XMLHTTPRequest</td>
 							</tr>
 							<tr>
 								<td>ajax/script</td>
@@ -232,6 +221,380 @@
 					</table>
 				</section>
 			</section>
+			<section>
+				<h2>Подключение библиотеки</h2>
+				<pre>
+					<code class="hljs">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;jQuery Hello World&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+					</code>
+				</pre>
+				<p>Использование CDN</p>
+				<pre>
+					<code class="hljs">
+&lt;script src="https://code.jquery.com/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h2>Функция jQuery</h2>
+				<pre>
+					<code class="hljs">
+jQuery(document).ready(function(){
+  // code
+});
+					</code>
+				</pre>
+				<pre>
+					<code class="hljs">
+$(document).ready(function(){
+  // code
+});
+					</code>
+				</pre>
+				<pre>
+					<code class="hljs">
+$(function(){
+  // code
+});
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h1>Выборка элементов</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Базовые селекторы</h2>
+				</section>
+				<section>
+					<h3 class="header-hide">Описание</h3>
+					<table>
+						<thead>
+							<tr>
+								<th style="max-width: 180px;">Шаблон</th>
+								<th>Описание</th>
+								<th style="max-width: 180px;">Пример</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>$("*")</td>
+								<td>Выборка всех элементов страницы</td>
+								<td>$("*").css('color', 'red')</td>
+							</tr>
+							<tr>
+								<td>$("element")</td>
+								<td>Выборка всех элементов с данным именем тега</td>
+								<td>$("img")</td>
+							</tr>
+							<tr>
+								<td>$("#id")</td>
+								<td>Выборка элемента с данным значением атрибута id</td>
+								<td>("#btn1")</td>
+							</tr>
+							<tr>
+								<td>$(".class")</td>
+								<td>Выборка всех элементов с данным значением атрибута class</td>
+								<td>$(".btn") </td>
+							</tr>
+							<tr>
+								<td>$("selector1, selector2")</td>
+								<td>Выборка всех элементов, соответствующих указанным селекторам</td>
+								<td>$("body, .btn")</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Селекторы отношения</h2>
+				</section>
+				<section>
+					<small>
+					<table>
+						<thead>
+							<tr>
+								<th>Шаблон</th>
+								<th>Описание</th>
+								<th style="min-width: 200px;">Пример</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>$(parentSelector>childSelector)</td>
+								<td>Выборка всех элементов, которые соответстуют второму селектору и являются дочерними для элементов первого селектора</td>
+								<td>$("#menu > a")</td>
+							</tr>
+							<tr>
+								<td>$(selector1+selector2)</td>
+								<td>Выборка элементов с селектором 'селектор2', которые располагаются непосредственно за элементами 'селектор1'. Причем
+									оба элемента должны находиться на одном уровне</td>
+								<td>$(".closed + .open")</td>
+							</tr>
+							<tr>
+								<td>$(selector1 ~ selector2)</td>
+								<td>Выборка элементов с селектором 'селектор2', которые располагаются на одном уровне с элементами с селектором 'селектор1'</td>
+								<td>$(".closed ~ .open")</td>
+							</tr>
+						</tbody>
+					</table>
+					</small>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Селекторы атрибутов</h2>
+				</section>
+				<section>
+					<h3>Описание</h3>
+					<small>
+					<table>
+						<thead>
+							<tr>
+								<th>Шаблон</th>
+								<th>Описание</th>
+								<th>Пример</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>[attr]</td>
+								<td>Выборка элементов с атрибутом attr</td>
+								<td>$("a[class]")</td>
+							</tr>
+							<tr>
+								<td>[attr='value']</td>
+								<td>Выборка элементов, у которых значение attr равно value</td>
+								<td>$("a[class='redStyle']")</td>
+							</tr>
+							<tr>
+								<td>[attr^='value']</td>
+								<td>Выборка элементов, у которых значение attr начинается со строки value</td>
+								<td>$("a[class^='red']")</td>
+							</tr>
+							<tr>
+								<td>[attr$='value']</td>
+								<td>Выборка элементов, у которых значение attr оканчивается на строку value</td>
+								<td>$("a[class$='Style']")</td>
+							</tr>
+							<tr>
+								<td>[attr~='value']</td>
+								<td>Выборка элементов, у которых attr имеет список значений, разделенных пробелом, и одно из этих значений равно value</td>
+								<td>$("a[class~='redStyle']")</td>
+							</tr>
+								<tr>
+								<td>[attr *= 'value']</td>
+								<td>Выборка элементов, у которых значение атрибута attr имеет имеет подстроку value</td>
+								<td> $("a[class *= 'Style']")</td>
+							</tr>
+							<tr>
+								<td>[attr|='value']</td>
+								<td>Выборка элементов, у которых значение атрибута attr представляет либо значение value, либо список значений, разделенных
+									дефисами, и первое значение в этом списке равно value</td>
+								<td>$("a[class|='red']")</td>
+							</tr>
+						</tbody>
+					</table>
+					</small>
+				</section>
+
+			</section>
+			<section>
+				<section>
+					<h2>Фильтры</h2>
+				</section>
+				<section>
+					<h3>Базовые фильтры</h3>
+					<small>
+					<table>
+						<thead>
+							<tr>
+								<th>Фильтр</th>
+								<th>Описание</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>:eq(n)</td>
+								<td>Выбирает n-й элемент выборки</td>
+							</tr>
+							<tr>
+								<td>:even</td>
+								<td>Выбирает элементы с четными номерами</td>
+							</tr>
+							<tr>
+								<td>:odd</td>
+								<td>Выбирает элементы с нечетными номерами</td>
+							</tr>
+							<tr>
+								<td>:first</td>
+								<td>Выбирает первый элемент выборки</td>
+							</tr>
+							<tr>
+								<td>:last</td>
+								<td>Выбирает последний элемент выборки</td>
+							</tr>
+							<tr>
+								<td>:gt(n)</td>
+								<td>Выбирает все элементы с номером, большим n</td>
+							</tr>
+							<tr>
+								<td>:lt(n)</td>
+								<td>Выбирает все элементы с номером, меньшим n</td>
+							</tr>
+							<tr>
+								<td>:header</td>
+								<td>Выбирает все заголовки (h1, h2...)</td>
+							</tr>
+							<tr>
+								<td>:not(селектор)</td>
+								<td>Выбирает все элементы, которые не соответствуют селектору</td>
+							</tr>
+						</tbody>
+					</table>
+					</small>
+				</section>
+				<section>
+					<h3>Фильтры контента</h3>
+					<small>
+					<table>
+						<thead>
+							<tr>
+								<th>Фильтр</th>
+								<th>Описание</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>:contains('text')</td>
+								<td>Получает все элементы, которые содержат текст text..</td>
+							</tr>
+							<tr>
+								<td>:has('селектор')</td>
+								<td>Получает все элементы, которые содержат хотя бы один дочерний элемент, соответствующий селектору</td>
+							</tr>
+							<tr>
+								<td>:empty</td>
+								<td>Получает все элементы, которые не имеют дочерних элементов</td>
+							</tr>
+							<tr>
+								<td>:first-child</td>
+								<td>Получает все элементы, которые являются первыми дочерними элементами в своих родителях</td>
+							</tr>
+							<tr>
+								<td>:last-child</td>
+								<td>Получает все элементы, которые являются последними дочерними элементами в своих родителях</td>
+							</tr>
+							<tr>
+								<td>:nth-child(n)</td>
+								<td>Получает все элементы, которые являются n-ными элементами в своих родителях (нумерация идет с единицы)</td>
+							</tr>
+							<tr>
+								<td>:nth-child(even)</td>
+								<td>Получает все элементы, которые являются четными элементами в своих родителях (нумерация идет с единицы)</td>
+							</tr>
+							<tr>
+								<td>:nth-child(odd)</td>
+								<td>Получает все элементы, которые являются нечетными элементами в своих родителях (нумерация идет с единицы)</td>
+							</tr>
+							<tr>
+								<td>:only-child</td>
+								<td>Получает все элементы, которые являются единственными дочерними элементами в своих родителях</td>
+							</tr>
+							<tr>
+								<td>:parent</td>
+								<td>Получает все элементы, которые имеют, как минимум, один дочерний элемент</td>
+							</tr>
+						</tbody>
+					</table>
+					</small>
+				</section>
+				<section>
+					<h3>Фильтры элементов форм</h3>
+					<small>
+					<table>
+						<thead>
+							<tr>
+								<th>Фильтр</th>
+								<th>Описание</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>:button</td>
+								<td>Получает все элементы button и элементы input с типом button</td>
+							</tr>
+							<tr>
+								<td>:checkbox</td>
+								<td>Получает все элементы checkbox</td>
+							</tr>
+							<tr>
+								<td>:checked</td>
+								<td>Получает все отмеченные элементы checkbox и radio</td>
+							</tr>
+							<tr>
+								<td>:disabled</td>
+								<td>Получает все элементы, которые находятся в неактивном состоянии</td>
+							</tr>
+							<tr>
+								<td>:enabled</td>
+								<td>Получает все элементы, которые находятся в активном состоянии</td>
+							</tr>
+							<tr>
+								<td>:file</td>
+								<td>Получает все элементы file</td>
+							</tr>
+							<tr>
+								<td>:input</td>
+								<td>Получает все элементы input</td>
+							</tr>
+							<tr>
+								<td>:hidden</td>
+								<td>Получает все скрытые элементы</td>
+							</tr>
+							<tr>
+								<td>:password</td>
+								<td>Получает все элементы password</td>
+							</tr>
+							<tr>
+								<td>:radio</td>
+								<td>Получает все элементы radio</td>
+							</tr>
+							<tr>
+								<td>:reset</td>
+								<td>Получает все элементы reset</td>
+							</tr>
+							<tr>
+								<td>:selected</td>
+								<td>Получает все отмеченные элементы option</td>
+							</tr>
+							<tr>
+								<td>:submit</td>
+								<td>Получает все элементы input с типом submit</td>
+							</tr>
+							<tr>
+								<td>:text</td>
+								<td>Получает все элементы input с типом text</td>
+							</tr>
+							<tr>
+								<td>:visible</td>
+								<td>Получает только видимые элементы</td>
+							</tr>
+						</tbody>
+					</table>
+					</small>
+				</section>
+			</section>
+
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
 				<img src="img/thanks.jpg" alt="" height="600">
