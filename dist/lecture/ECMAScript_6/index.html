@@ -1015,7 +1015,8 @@ let str = f`Sum of ${arg1} + ${arg2} =\n ${arg1 + arg2}!`;
 				<section>
 					<h3>Необрабатываемые строки</h3>
 					<blockquote>
-						Статический метод Raw является теговой функцией для шаблонных строк и используется для получения необработанной строки из шаблона
+						Статический метод Raw является теговой функцией для шаблонных строк и используется для получения необработанной строки из
+						шаблона
 					</blockquote>
 					<pre>
 						<code class="hljs javascript">
@@ -2502,10 +2503,6 @@ console.log(superhero.power);
 							<td> перехватывает удаление свойства оператором delete</td>
 						</tr>
 						<tr>
-							<td>enumerate </td>
-							<td> срабатывает при вызове for..in или for..of, возвращает итератор для свойств объекта</td>
-						</tr>
-						<tr>
 							<td>ownKeys</td>
 							<td>перехватывает обращения к методу getOwnPropertyNames</td>
 						</tr>
@@ -2614,29 +2611,20 @@ console("Hello" in proxy); // true
 					</pre>
 				</section>
 				<section>
-					<h3>Перехватчик enumerate</h3>
+					<h3>Перехватчик ownKeys</h3>
 					<pre>
-						<code class="hljs javascript" data-trim>
-let user = {
-  name: "Maks",
-  _surname: 'Hladki',
-  _version: "1.0.0.0
-};
+						<code class="hljs">
+var target = {};
 
-let proxy = new Proxy(user, {
-  enumerate(target) {
-    //target – исходный объект
-    let props = Object.keys(target).filter(function(prop) {
-      return prop[0] != '_';
-    });
-
-    return props[Symbol.iterator]();
+var proxy = new Proxy({}, {
+  ownKeys: function(target) {
+    console.log('ownKeys');
+    return ['a', 'b', 'c'];
   }
 });
 
-for(let prop in proxy) {
-  console.log(prop); // "Maks"
-}
+console.log(Object.getOwnPropertyNames(proxy)); // "ownKeys"
+// ["a", "b", "c"]
 						</code>
 					</pre>
 				</section>
