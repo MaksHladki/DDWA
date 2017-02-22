@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Название лекции</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Maks Hladki">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section>
+					<h1>Название лекции</h1>
+					<h3>Разработка динамичесих веб приложений</h3>
+					<p>
+						<small>Гладкий Максим Валерьевич / <a href="https://github.com/MaksHladki">github:MaksHladki</a></small>
+					</p>
+				</section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+
+			<!-- Содержимое лекции -->
+			<section>
+				<h2>Преимущества использования</h2>
+				<ul>
+					<li>Отделение кода разметки от поведения - Вынесение кода javascript из разметки во вне позволяет сделать саму разметку
+						html более чистой и понятной. Кроме того, разделить возможность разработки между веб-дзайнером, который создает визуальную
+						часть страницы, и программистом, который описывает поведение элементов на языке javascript</li>
+					<li>Упрощение работы с кодом - jQuery предлагает простой элегантный синтаксис для манипулирования элементами на веб-странице</li>
+					<li>Расширяемость - Весь код jQuery открыт для просмотра и изменения, и в случае, если что-то в библиотеке не устраивает,
+						ее можно модифицировать. А также можно создавать плагины jQuery</li>
+					<li>Кроссбраузерность - jQuery 3.0 имеет поддержку большинства известных браузеров, в том числе таких, как IE 9, 10</li>
+					<li>Собственная экосистема - объединяет целую коллекцию библиотек, построенных на основе jQuery (например, jQuery UI)</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Ветки</h2>
+				<ul>
+					<li>jQuery 3.11 поддержка IE 9+</li>
+					<li>jQuery 2.2 - поддержка IE 9+</li>
+					<li>jQuery 1.12 - поддержка IE 6+</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Browser Support</h3>
+				<p>Desktop</p>
+				<ul>
+					<li>Chrome: (Current - 1) and Current</li>
+					<li>Edge: (Current - 1) and Current</li>
+					<li>Firefox: (Current - 1) and Current</li>
+					<li>Internet Explorer: 9+</li>
+					<li>Safari: (Current - 1) and Current</li>
+					<li>Opera: Current</li>
+				</ul>
+				<p>Mobile</p>
+				<ul>
+					<li>Stock browser on Android 4.0+</li>
+					<li>Safari on iOS 7+</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Версии jQuery 3.1</h3>
+				<ul>
+					<li>Commpressed - 85KB</li>
+					<li>UnCommpressed - 261KB</li>
+					<li>Commpressed Slim - 68KB</li>
+					<li>UnCommpressed Slim - 209KB</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Особенности Slim-версии</h2>
+				<p class="highlight-blue">Удалено:</p>
+				<ul>
+					<li>jQuery.fn.extend</li>
+					<li>jQuery.fn.load</li>
+					<li>jquery.each</li>
+					<li>jQuery.expr.filters.animated</li>
+					<li>ajax settings like jQuery.ajaxSettings.xhr, jQuery.ajaxPrefilter, jQuery.ajaxSetup, jQuery.ajaxPrefilter, jQuery.ajaxTransport,
+						jQuery.ajaxSetup
+					</li>
+					<li>xml parsing like jQuery.parseXML,</li>
+					<li>animation effects like jQuery.easing, jQuery.Animation, jQuery.speed</li>
+				</ul>
+				<blockquote cite="">
+					JQuery slim gets built with the exclusion of the following modules: -ajax, -ajax/jsonp, -ajax/load, -ajax/parseJSON, -ajax/parseXML,
+					-ajax/script, -ajax/var/location, -ajax/var/nonce, -ajax/var/rquery, -ajax/xhr, -manipulation/_evalUrl, -event/ajax,
+					-effects, -effects/Tween, -effects/animatedSelector and -deprecated. As of this writing, the minified libraries can
+					differ by a code size of about 6KB. In addition to that size difference, developers can replace any of the omitted modules
+					with a library that they may consider to be better or are more comfortable with.
+				</blockquote>
+			</section>
+			<section>
+				<section>
+					<h2>Модули</h2>
+				</section>
+				<section>
+					<h3>Часть 1</h3>
+					<table>
+						<thead>
+							<thead>
+								<tr>
+									<th>Модуль</th>
+									<th>Описание</th>
+								</tr>
+							</thead>
+						</thead>
+						<tbody>
+							<tr>
+								<td>ajax:</td>
+								<td>All AJAX functionality: $.ajax(), $.get(), $.post(), $.ajaxSetup(), .load(), transports, and ajax event shorthands
+									such as .ajaxStart().</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>ajax/xhr:</td>
+							</tr>
+							<tr>
+								<td>ajax/script</td>
+								<td>The &lg;script> AJAX transport only; used to retrieve scripts.</td>
+							</tr>
+							<tr>
+								<td>ajax/jsonp</td>
+								<td>The JSONP AJAX transport only; depends on the ajax/script transport.</td>
+							</tr>
+							<tr>
+								<td>css: </td>
+								<td>The .css() method. Also removes all modules depending on css (including effects, dimensions, and offset).</td>
+							</tr>
+							<tr>
+								<td>css/showHide</td>
+								<td>Non-animated .show(), .hide() and .toggle(); can be excluded if you use classes or explicit .css() calls to set the
+									display property. Also removes the effects module.</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h3>Часть 2</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>Модуль</th>
+								<th>Описание</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>deprecated</td>
+								<td>Methods documented as deprecated but not yet removed.</td>
+							</tr>
+							<tr>
+								<td>dimensions</td>
+								<td>The .width() and .height() methods, including inner- and outer- variations.</td>
+							</tr>
+							<tr>
+								<td>effects</td>
+								<td>The .animate() method and its shorthands such as .slideUp() or .hide("slow").</td>
+							</tr>
+							<tr>
+								<td>event</td>
+								<td>The .on() and .off() methods and all event functionality. Also removes event/alias.</td>
+							</tr>
+							<tr>
+								<td>event/alias:</td>
+								<td>All event attaching/triggering shorthands like .click() or .mouseover().</td>
+							</tr>
+							<tr>
+								<td>event/focusin</td>
+								<td> Cross-browser support for the focusin and focusout events.</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h3>Часть 3</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>Модуль</th>
+								<th>Описание</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>event/trigger</td>
+								<td>The .trigger() and .triggerHandler() methods. Used by alias and focusin modules.</td>
+							</tr>
+							<tr>
+								<td>offset:</td>
+								<td>The .offset(), .position(), .offsetParent(), .scrollLeft(), and .scrollTop() methods.</td>
+							</tr>
+							<tr>
+								<td>wrap</td>
+								<td>The .wrap(), .wrapAll(), .wrapInner(), and .unwrap() methods.</td>
+							</tr>
+							<tr>
+								<td>core/ready</td>
+								<td>Exclude the ready module if you place your scripts at the end of the body. Any ready callbacks bound with jQuery()
+									will simply be called immediately. However, jQuery(document).ready() will not be a function and .on("ready", ...)
+									or similar will not be triggered.</td>
+							</tr>
+							<tr>
+								<td>deferred</td>
+								<td>Exclude jQuery.Deferred. This also removes jQuery.Callbacks. Note that modules that depend on jQuery.Deferred(AJAX,
+									effects, core/ready) will not be removed and will still expect jQuery.Deferred to be there. Include your own jQuery.Deferred
+									implementation or exclude those modules as well (grunt custom:-deferred,-ajax,-effects,-core/ready).</td>
+							</tr>
+							<tr>
+								<td>exports/global:</td>
+								<td>Exclude the attachment of global jQuery variables ($ and jQuery) to the window.</td>
+							</tr>
+							<tr>
+								<td>exports/amd</td>
+								<td> Exclude the AMD definition.</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+			<section>
+				<h2 class="header-hide">Спасибо за внимание</h2>
+				<img src="img/thanks.jpg" alt="" height="600">
+			</section>
+		</div>
+	</div>
+
+	<aside id="presentable-icon" class="revealjs">
+		<a title="Содержание лекции" href="#/0/1">
+			<i class="fa fa-list-ul fa-2x"></i>
+		</a>
+	</aside>
+
+	<script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>
