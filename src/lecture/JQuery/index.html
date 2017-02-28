@@ -3,9 +3,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Название лекции</title>
-	<meta name="description" content="">
-	<meta name="keywords" content="">
+	<title>Библиотека jQuery</title>
+	<meta name="description" content="Библиотека jQuery">
+	<meta name="keywords" content="jquery">
 	<meta name="author" content="Maks Hladki">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -21,7 +21,7 @@
 		<div class="slides">
 			<section>
 				<section>
-					<h1>Название лекции</h1>
+					<h1>Библиотека jQuery</h1>
 					<h3>Разработка динамичесих веб приложений</h3>
 					<p>
 						<small>Гладкий Максим Валерьевич / <a href="https://github.com/MaksHladki">github:MaksHladki</a></small>
@@ -35,10 +35,18 @@
 
 			<!-- Содержимое лекции -->
 			<section>
+				<h2>Определение</h2>
+				<blockquote>
+					jQuery — библиотека JavaScript, фокусирующаяся на взаимодействии JavaScript и HTML. Библиотека jQuery помогает легко получать
+					доступ к любому элементу DOM, обращаться к атрибутам и содержимому элементов DOM, манипулировать ими. Также библиотека
+					jQuery предоставляет удобный API для работы с AJAX
+				</blockquote>
+			</section>
+			<section>
 				<h2>Преимущества использования</h2>
 				<ul>
 					<li>Отделение кода разметки от поведения - вынесение js из разметки позволяет сделать саму разметку более чистой и понятной.
-						Позволяет разделить возможность разработки между веб-дзайнером и программистом</li>
+						Позволяет разделить возможность разработки между веб-дизайнером и программистом</li>
 					<li>Упрощение работы с кодом - jQuery предлагает простой и эффективный синтаксис для манипулирования элементами на веб-странице</li>
 					<li>Расширяемость - весь код jQuery открыт для просмотра и изменения. Также можно создавать свои плагины jQuery</li>
 					<li>Кроссбраузерность - jQuery 3.0 имеет поддержку большинства известных браузеров (<span class="highlight-blue">IE 9+</span>)</li>
@@ -55,7 +63,7 @@
 			</section>
 
 			<section>
-				<h3>Поддержка браузерами</h3>
+				<h2>Поддержка браузерами</h2>
 				<p>Desktop</p>
 				<ul>
 					<li>Chrome: (Current - 1) and Current</li>
@@ -72,7 +80,7 @@
 				</ul>
 			</section>
 			<section>
-				<h3>Версии jQuery 3.1</h3>
+				<h2>Версии jQuery 3.1</h2>
 				<ul>
 					<li>Commpressed - 85KB</li>
 					<li>UnCommpressed - 261KB</li>
@@ -84,142 +92,11 @@
 				<h2>Особенности Slim-версии</h2>
 				<p class="highlight-blue">Удалено:</p>
 				<ul>
-					<li>jQuery.fn.extend</li>
-					<li>jQuery.fn.load</li>
-					<li>jquery.each</li>
-					<li>jQuery.expr.filters.animated</li>
-					<li>ajax (jQuery.ajaxSettings.xhr, jQuery.ajaxPrefilter, jQuery.ajaxSetup, jQuery.ajaxPrefilter, jQuery.ajaxTransport, jQuery.ajaxSetup)
-					</li>
-					<li>xml parsing (jQuery.parseXML)</li>
-					<li>animation effects (jQuery.easing, jQuery.Animation, jQuery.speed)</li>
+					<li>Устаревший код</li>
+					<li>Ajax-функционал ($.ajax, $.get, $.post, $.ajaxSetup, .load, .ajaxStart и т.д.</li>
+					<li>Работа с XML и JSONP</li>
+					<li>Анимация ($.easing, $.Animation, $.speed)</li>
 				</ul>
-			</section>
-			<section>
-				<section>
-					<h2>Модули</h2>
-				</section>
-				<section>
-					<h3>Часть 1</h3>
-					<table>
-						<thead>
-							<thead>
-								<tr>
-									<th>Модуль</th>
-									<th>Описание</th>
-								</tr>
-							</thead>
-						</thead>
-						<tbody>
-							<tr>
-								<td>ajax</td>
-								<td>Ajax-функционал: $.ajax(), $.get(), $.post(), $.ajaxSetup(), .load(), .ajaxStart() и т.д.</td>
-							</tr>
-							<tr>
-								<td>ajax/xhr</td>
-								<td>Методы работы с XMLHTTPRequest</td>
-							</tr>
-							<tr>
-								<td>ajax/script</td>
-								<td>The &lg;script> AJAX transport only; used to retrieve scripts.</td>
-							</tr>
-							<tr>
-								<td>ajax/jsonp</td>
-								<td>The JSONP AJAX transport only; depends on the ajax/script transport.</td>
-							</tr>
-							<tr>
-								<td>css: </td>
-								<td>The .css() method. Also removes all modules depending on css (including effects, dimensions, and offset).</td>
-							</tr>
-							<tr>
-								<td>css/showHide</td>
-								<td>Non-animated .show(), .hide() and .toggle(); can be excluded if you use classes or explicit .css() calls to set the
-									display property. Also removes the effects module.</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
-				<section>
-					<h3>Часть 2</h3>
-					<table>
-						<thead>
-							<tr>
-								<th>Модуль</th>
-								<th>Описание</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>deprecated</td>
-								<td>Methods documented as deprecated but not yet removed.</td>
-							</tr>
-							<tr>
-								<td>dimensions</td>
-								<td>The .width() and .height() methods, including inner- and outer- variations.</td>
-							</tr>
-							<tr>
-								<td>effects</td>
-								<td>The .animate() method and its shorthands such as .slideUp() or .hide("slow").</td>
-							</tr>
-							<tr>
-								<td>event</td>
-								<td>The .on() and .off() methods and all event functionality. Also removes event/alias.</td>
-							</tr>
-							<tr>
-								<td>event/alias:</td>
-								<td>All event attaching/triggering shorthands like .click() or .mouseover().</td>
-							</tr>
-							<tr>
-								<td>event/focusin</td>
-								<td> Cross-browser support for the focusin and focusout events.</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
-				<section>
-					<h3>Часть 3</h3>
-					<table>
-						<thead>
-							<tr>
-								<th>Модуль</th>
-								<th>Описание</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>event/trigger</td>
-								<td>The .trigger() and .triggerHandler() methods. Used by alias and focusin modules.</td>
-							</tr>
-							<tr>
-								<td>offset:</td>
-								<td>The .offset(), .position(), .offsetParent(), .scrollLeft(), and .scrollTop() methods.</td>
-							</tr>
-							<tr>
-								<td>wrap</td>
-								<td>The .wrap(), .wrapAll(), .wrapInner(), and .unwrap() methods.</td>
-							</tr>
-							<tr>
-								<td>core/ready</td>
-								<td>Exclude the ready module if you place your scripts at the end of the body. Any ready callbacks bound with jQuery()
-									will simply be called immediately. However, jQuery(document).ready() will not be a function and .on("ready", ...)
-									or similar will not be triggered.</td>
-							</tr>
-							<tr>
-								<td>deferred</td>
-								<td>Exclude jQuery.Deferred. This also removes jQuery.Callbacks. Note that modules that depend on jQuery.Deferred(AJAX,
-									effects, core/ready) will not be removed and will still expect jQuery.Deferred to be there. Include your own jQuery.Deferred
-									implementation or exclude those modules as well (grunt custom:-deferred,-ajax,-effects,-core/ready).</td>
-							</tr>
-							<tr>
-								<td>exports/global:</td>
-								<td>Exclude the attachment of global jQuery variables ($ and jQuery) to the window.</td>
-							</tr>
-							<tr>
-								<td>exports/amd</td>
-								<td> Exclude the AMD definition.</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
 			</section>
 			<section>
 				<h2>Подключение библиотеки</h2>
@@ -287,27 +164,27 @@ $(function(){
 						<tbody>
 							<tr>
 								<td>$("*")</td>
-								<td>Выборка всех элементов страницы</td>
+								<td>выборка всех элементов страницы</td>
 								<td>$("*").css('color', 'red')</td>
 							</tr>
 							<tr>
 								<td>$("element")</td>
-								<td>Выборка всех элементов с данным именем тега</td>
+								<td>выборка всех элементов с данным именем тега</td>
 								<td>$("img")</td>
 							</tr>
 							<tr>
 								<td>$("#id")</td>
-								<td>Выборка элемента с данным значением атрибута id</td>
+								<td>выборка элемента с данным значением атрибута id</td>
 								<td>("#btn1")</td>
 							</tr>
 							<tr>
 								<td>$(".class")</td>
-								<td>Выборка всех элементов с данным значением атрибута class</td>
+								<td>выборка всех элементов с данным значением атрибута class</td>
 								<td>$(".btn") </td>
 							</tr>
 							<tr>
 								<td>$("selector1, selector2")</td>
-								<td>Выборка всех элементов, соответствующих указанным селекторам</td>
+								<td>выборка всех элементов, соответствующих указанным селекторам</td>
 								<td>$("body, .btn")</td>
 							</tr>
 						</tbody>
@@ -319,7 +196,7 @@ $(function(){
 					<h2>Селекторы отношения</h2>
 				</section>
 				<section>
-					<small>
+
 					<table>
 						<thead>
 							<tr>
@@ -330,24 +207,22 @@ $(function(){
 						</thead>
 						<tbody>
 							<tr>
-								<td>$(parentSelector>childSelector)</td>
-								<td>Выборка всех элементов, которые соответстуют второму селектору и являются дочерними для элементов первого селектора</td>
-								<td>$("#menu > a")</td>
+								<td>$(selector1 > selector2)</td>
+								<td>выборка элементов, которые соответстуют второму селектору и являются дочерними для элементов первого</td>
+								<td>$( "#menu > a")</td>
 							</tr>
 							<tr>
-								<td>$(selector1+selector2)</td>
-								<td>Выборка элементов с селектором 'селектор2', которые располагаются непосредственно за элементами 'селектор1'. Причем
-									оба элемента должны находиться на одном уровне</td>
+								<td>$(selector1 + selector2)</td>
+								<td>выборка элементов со вторым селектором, которые располагаются непосредственно за элементами первого</td>
 								<td>$(".closed + .open")</td>
 							</tr>
 							<tr>
 								<td>$(selector1 ~ selector2)</td>
-								<td>Выборка элементов с селектором 'селектор2', которые располагаются на одном уровне с элементами с селектором 'селектор1'</td>
+								<td>выборка элементов со вторым селектором, которые располагаются на одном уровне с элементами первого</td>
 								<td>$(".closed ~ .open")</td>
 							</tr>
 						</tbody>
 					</table>
-					</small>
 				</section>
 			</section>
 			<section>
@@ -594,10 +469,202 @@ $(function(){
 					</small>
 				</section>
 			</section>
+			<section>
+				<section>
+					<h2>Пример</h2>
+				</section>
+				<section>
+					<h3>Код страницы</h3>
+					<pre>
+						<code class="hljs" data-trim>
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Jquery&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+      &lt;section id="news" class="news"&gt;
+        &lt;div id="article_main" class="article" data-article-id="47"&gt;
+            &lt;div class="header"&gt;
+                &lt;p&gt;article #2&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="body"&gt;
+                &lt;p&gt;Hello&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="article" data-article-id="101"&gt;
+            &lt;div class="header"&gt;
+                &lt;p&gt;article #2&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="body"&gt;
+                &lt;p&gt;Hey&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var newsElement = $('#news');
+    console.log(newsElement);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_1.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var newsElement = $('.news');
+    console.log(newsElement);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_2.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs" data-trim>
+ $(function () {
+    var headers = $('.header');
+    console.log(headers);
+    for(let header of headers){
+        console.log(header);
+    }
+ });
+						</code>
+					</pre>
+					<img src="img/sel_3.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 4</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var headers = $('#article_main .header');
+    console.log(headers);
+    $.each(headers, (index, value) => {
+        console.log(value);
+    });
+ });
+						</code>
+					</pre>
+					<img src="img/sel_4.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 5</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var articles = $('#news > .article');
+    console.log(articles);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_5.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 6</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var headers = $('#news > .header');
+    console.log(headers);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_6.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 7</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+	var elements = $('div[class*="eade"]');
+    console.log(elements);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_7.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 8</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var article = $('*[data-article-id="101"]');
+    console.log(article);
+    var articleId = article.data("article-id");
+    console.log(articleId);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_8.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 9</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var article = $('.article:eq(1)');
+    console.log(article);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_9.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 10</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var articles = $('.article:not(#article_main)');
+    console.log(articles);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_10.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 11</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var body = $('.body:last');
+    console.log(body);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_11.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 12</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var body = $('.article .body>p:contains("Hey")').parent()[0];
+    console.log(body);
+ });
+						</code>
+					</pre>
+					<img src="img/sel_12.png" alt="">
+				</section>
+
+			</section>
 
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
-				<img src="img/thanks.jpg" alt="" height="600">
+				<img src="img/thanks.png" alt="" height="600">
 			</section>
 		</div>
 	</div>
