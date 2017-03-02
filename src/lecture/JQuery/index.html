@@ -470,6 +470,74 @@ $(function(){
 				</section>
 			</section>
 			<section>
+				<h2>Поиск в выборке</h2>
+				<table>
+					<tr>
+						<td>find(селектор)</td>
+						<td>поиск в выборке объектов, соответствующих селектору</td>
+					</tr>
+					<tr>
+						<td>find(элемент)</td>
+						<td>поиск в выборке объектов, соответствующих данному элементу html</td>
+					</tr>
+					<tr>
+						<td>find(jQuery)</td>
+						<td>поиск в выборке объектов, соответствующих объекту jQuery</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<h2></h2>
+				<table>
+					<tr>
+						<td>children([expression])</td>
+						<td>возвращает набор элементов, состоящий из всех прямых потомков каждого элемента исходного набора </td>
+					</tr>
+					<tr>
+						<td>next()</td>
+						<td>получения следующего по порядку элемента, находящегося на одном уровне с текущим</td>
+					</tr>
+					<tr>
+						<td>nextAll()</td>
+						<td>получить все следующие элементы одного уровня по отношению к текущему</td>
+					</tr>
+					<tr>
+						<td>prev()</td>
+						<td>имеет похожее действие на элементы одного уровня, только получает предыдущие элементы по отношению к текущему</td>
+					</tr>
+					<tr>
+						<td> prevAll</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>siblings();</td>
+						<td> представляет собой комбинацию методов nextAll и prevAll и позволяет получить всех сиблингов текущего элемента.</td>
+					</tr>
+					<tr>
+						<td>parent([селектор])</td>
+						<td> мы можем кнкретизировать родителя на соответствие данному селектору</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<h3>Метод closest</h3>
+				<table>
+					<tr>
+						<td>closest(селектор[, контекст])</td>
+						<td>возвращает ближайшего родителя, соответствующего селектору. В качестве необязательного параметра может принимать контекст,
+							в рамках которого будет проводиться поиск</td>
+					</tr>
+					<tr>
+						<td>closest(элемент)</td>
+						<td> возвращает ближайшего родителя, соответствующего элементу html</td>
+					</tr>
+					<tr>
+						<td>closest(jQuery)</td>
+						<td>возвращает ближайшего родителя, соответствующего объекту jQuery</td>
+					</tr>
+				</table>
+			</section>
+			<section>
 				<section>
 					<h2>Пример</h2>
 				</section>
@@ -659,7 +727,57 @@ $(function(){
 					</pre>
 					<img src="img/sel_12.png" alt="">
 				</section>
-
+				<section>
+					<h3>Пример 13</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var articles = $('div').filter(function(){
+        return $(this).hasClass('article');
+    });
+    console.log(articles);
+});
+						</code>
+					</pre>
+					<img src="img/sel_13.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 14</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var articles = $('.article');
+    var headers = articles.find('.header');
+    console.log(headers);
+});
+						</code>
+					</pre>
+					<img src="img/sel_14.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 15</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.children());
+});
+						</code>
+					</pre>
+					<img src="img/sel_15.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 16</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.children('.body'));
+});
+						</code>
+					</pre>
+					<img src="img/sel_16.png" alt="">
+				</section>
 			</section>
 
 			<section>
