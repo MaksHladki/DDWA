@@ -138,7 +138,7 @@ gulp.task('serve', () => {
     browserSync.watch(distPath.dist).on('change', browserSync.reload);
 });
 
-gulp.task('build', gulpSequence('clean', ['js:lint', 'css:lint'], [
+gulp.task('build', gulpSequence('clean', /*['js:lint', 'css:lint'],*/ [
     'html',
     'img',
     'js',
