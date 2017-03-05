@@ -1907,7 +1907,7 @@ gulp.task('default', () =>
 const gulp = require('gulp'),
       uglify = require('gulp-uglify');
 
-gulp.task('compress', => {
+gulp.task('compress', () => {
   return gulp.src('lib/*.js')
              .pipe(uglify())
              .pipe(gulp.dest('dist/'))
@@ -1922,7 +1922,7 @@ gulp.task('compress', => {
 const gulp = require('gulp'),
       uglify = require('gulp-uglify');
 
-gulp.task('compress', => {
+gulp.task('compress', () => {
   return gulp.src('lib/*.js')
              .pipe(uglify({
                 mangle: false,
