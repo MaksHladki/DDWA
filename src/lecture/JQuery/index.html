@@ -1298,6 +1298,161 @@ $(function () {
 					</pre>
 				</section>
 			</section>
+			<section>
+				<h1>Работа со структурой страницы</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Создание и добавление дочерних элементов</h2>
+				</section>
+				<section>
+					<h3>Метод append()</h3>
+					<table>
+						<tr>
+							<td>.append(htmlString)</td>
+							<td>вставляет указанную разметку html в конец элемента выборки</td>
+						</tr>
+						<tr>
+							<td>.append(element)</td>
+							<td>вставляет элемент в конец элемента выборки</td>
+						</tr>
+						<tr>
+							<td>.append(jQuery)</td>
+							<td>вставляет объект jQuery в конец элемента выборки</td>
+						</tr>
+						<tr>
+							<td>.append(function(index, value))</td>
+							<td>вставляет элемент в конец элемента выборки с помощью функции</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Метод prepend()</h3>
+					<table>
+						<tr>
+							<td>prepend(htmlString)</td>
+							<td>вставляет указанную в параметре разметку html в начало элемента выборки</td>
+						</tr>
+						<tr>
+							<td>prepend(element)</td>
+							<td>вставляет элемент в начало элемента выборки</td>
+						</tr>
+						<tr>
+							<td>prepend(jQuery)</td>
+							<td>вставляет объекта jQuery в начало элемента выборки</td>
+						</tr>
+						<tr>
+							<td>prepend(function (index, value))</td>
+							<td>вставляет элемент в начало элемента выборки с помощью функции</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Дополнительные методы</h3>
+					<table>
+						<tr>
+							<td>$(htmlString)</td>
+							<td>создает новый элемент с использованием функции jQuery</td>
+						</tr>
+						<tr>
+							<td>.clone( [withDataAndEvents ] [,deepWithDataAndEvents] )</td>
+							<td>клонирует разметрку уже существующего элемента</td>
+						</tr>
+						<tr>
+							<td>.appendTo(target)</td>
+							<td>добавляет объект в качестве дочернего к элементу (в конец), указанному в параметре метода</td>
+						</tr>
+						<tr>
+							<td>.prependTo(target)</td>
+							<td>добавляет объект в качестве дочернего к элементу (в начало), указанному в параметре метода</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Пример</h2>
+				</section>
+				<section>
+					<h3>Код страницы</h3>
+					<pre>
+						<code class="hljs">
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Jquery&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section id="news" class="news"&gt;
+        &lt;div class="article"&gt;
+            &lt;div class="header"&gt;
+                &lt;p&gt;article #1&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="body"&gt;
+                &lt;textarea rows="2" cols="60"&gt;Hello&lt;/textarea&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var article = $(
+        `<div class="article">
+            <div class="header">
+                <p></p>
+            </div>
+            <div class="body">
+                <textarea rows="2" cols="60"></textarea>
+            </div>
+        </div>`
+    );
+    $('#news').append(article);
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var template = 
+        `<div class="article">
+            <div class="header">
+                <p></p>
+            </div>
+            <div class="body">
+                <textarea rows="2" cols="60"></textarea>
+            </div>
+        </div>`;
+    
+    $(template).appendTo($('#news'));
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('.article');
+    var clone = article.clone();
+    console.log(clone[0]);
+});
+						</code>
+					</pre>
+					<img src="img/el_1.png" alt="">
+				</section>
+			</section>
 
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
