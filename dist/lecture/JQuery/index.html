@@ -839,7 +839,7 @@ $(function () {
 					<table>
 						<tr>
 							<td>.attr(attrName)</td>
-							<td>возвращает значение атрибута. Если выбрано несколько элементов, то значение будет взято у первого</td>
+							<td>возвращает значение атрибута первого элемента в наборе</td>
 						</tr>
 						<tr>
 							<td>.attr(attrName, value)</td>
@@ -927,6 +927,375 @@ $(function () {
 							<td>присваивает новые значения группе атрибутов</td>
 						</tr>
 					</table>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Изменение стилей</h2>
+				</section>
+				<section>
+					<h3>Базовые методы</h3>
+					<table>
+						<tr>
+							<td>.height()</td>
+							<td>возвращает/задает высоту элемента</td>
+						</tr>
+						<tr>
+							<td>.offset()</td>
+							<td>получает/задает координаты элемента на странице</td>
+						</tr>
+						<tr>
+							<td>.outerHeight()</td>
+							<td>возвращает высоту элемента (включая заполнение и границу)</td>
+						</tr>
+						<tr>
+							<td>.outerWidth()</td>
+							<td>возвращает ширину элемента с учетом внутренних отступов, границы и внешних отступов</td>
+						</tr>
+						<tr>
+							<td>.position()</td>
+							<td>получает значение позиции элемента top и left относительно отступов его родителя</td>
+						</tr>
+						<tr>
+							<td>.width()</td>
+							<td>получает/задает ширину элемента</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Метод css()</h3>
+					<table>
+						<tr>
+							<td>.css(property)</td>
+							<td>получает значение css-свойства</td>
+						</tr>
+						<tr>
+							<td>.css(property, value)</td>
+							<td>устанавливает для всех выбранных элементов css-свойство</td>
+						</tr>
+						<tr>
+							<td>.css(property, function(index, value))</td>
+							<td>присваивает css-свойству значение, возвращаемое функцией</td>
+						</tr>
+						<tr>
+							<td>.css(obj)</td>
+							<td>присваивает новые значения группе css-свойств</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<h2>Использование классов</h2>
+				<table>
+					<tr>
+						<td>.addClass()</td>
+						<td>добавляет класс(ы) выбранным элементам страницы</td>
+					</tr>
+					<tr>
+						<td>.hasClass(className)</td>
+						<td>проверяет наличие класса у выбранных элементов</td>
+					</tr>
+					<tr>
+						<td>.removeClass(className)</td>
+						<td>удаляет заданные классы у элементов</td>
+					</tr>
+					<tr>
+						<td>.toggleClass(className)</td>
+						<td>добавляет или удаляет заданный класс(ы) по принципу переключателя</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<section>
+					<h2>Содержимое элементов</h2>
+				</section>
+				<section>
+					<h3>Метод html()</h3>
+					<table>
+						<tr>
+							<td>.html()</td>
+							<td>получает разметку html первого элемента в наборе</td>
+						</tr>
+						<tr>
+							<td>.html(htmlString)</td>
+							<td>устанавливает в качестве разметки элемента код html, переданный в качестве параметра</td>
+						</tr>
+						<tr>
+							<td>.html(function(index, oldhtml)</td>
+							<td>устанавливает разметку с помощью функции</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Метод text()</h3>
+					<table>
+						<tr>
+							<td>.text()</td>
+							<td> получает текст первого элемента в наборе</td>
+						</tr>
+						<tr>
+							<td>.text(text)</td>
+							<td>устанавливает в качестве текста элемента строку, переданную в качестве параметра</td>
+						</tr>
+						<tr>
+							<td>.text(function(index, text))</td>
+							<td>устанавливает текст с помощью функции</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Пример</h2>
+				</section>
+				<section>
+					<h3>Код страницы</h3>
+					<pre>
+						<code class="hljs">
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Jquery&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section id="news" class="news"&gt;
+        &lt;div id="article_main" class="article" data-article-id="47" data-type="Main"&gt;
+            &lt;div class="header"&gt;
+                &lt;p&gt;article #2&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="body"&gt;
+                &lt;textarea rows="2" cols="60"&gt;Hello&lt;/textarea&gt;
+                &lt;input type="checkbox" checked="checked"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="article" data-article-id="101" data-type="Option"&gt;
+            &lt;div class="header"&gt;
+                &lt;p&gt;article #2&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="body"&gt;
+                &lt;textarea rows="2" cols="60"&gt;Hey&lt;/textarea&gt;
+                &lt;input type="checkbox" checked="checked"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.attr('class'));//article
+
+    article.attr('class', 'article-new');
+    console.log(article.attr('class'));//article-new
+            
+    article.removeAttr('class');
+    console.log(article.attr('class'));//undefined
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.prop('class'));//article
+
+    article.attr('class', 'article-new');
+    console.log(article.prop('class'));//article-new
+            
+    article.removeProp('class');
+    console.log(article.prop('class'));//article-new
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs">
+ $(function () {
+    var checkbox = $('.article input[type="checkbox"]');
+    console.log(checkbox.prop('checked'));//true
+
+    checkbox.prop('checked', false);
+    console.log(checkbox.prop('checked'));//false
+            
+    checkbox.removeProp('checked');
+    console.log(checkbox.prop('checked'));//false
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 4</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var checkbox = $('.article input[type="checkbox"]');
+    console.log(checkbox.prop('custom'));//undefined
+
+    checkbox.prop('custom', 1000);
+    console.log(checkbox.prop('custom'));//1000
+            
+    checkbox.removeProp('custom');
+    console.log(checkbox.prop('custom'));//undefined
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 5</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('.article').eq(1);
+    console.log(article.data());
+
+    article.data('article-id', 1000);
+    console.log(article.data('article-id'));
+            
+    article.data({articleId : 1, text : ["Hello", "World"]});
+    console.log(article.data());
+});
+						</code>
+					</pre>
+					<img src="img/man_1.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 6</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.css('margin'));//0px
+    article.css('margin-left', 10);
+    console.log(article.css('margin'));//0px 0px 0px 10px
+
+    article.css('color', function (index, oldValue) {
+        return oldValue == 'rgb(0, 0, 0)' 
+                    ? 'yellow' 
+                    : 'black';
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 7</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.height());//72
+    console.log(article.width());//1288
+
+    article.height(article.height() + 100); 
+    article.width(article.width() + 100);
+
+    console.log(article.height());//172
+    console.log(article.width());//1388
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 8</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.attr('class')); //article
+
+    article.addClass('class1 class2');
+    console.log(article.attr('class')); //article class1 class2
+
+    article.toggleClass('class1 class3');
+    console.log(article.attr('class')); //article class2 class3
+    console.log(article.hasClass('class1'));//false
+    console.log(article.hasClass('article'));//true
+    console.log(article.hasClass('article class2'));//true
+
+    article.removeClass('article class3');
+    console.log(article.attr('class')); //class2
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 9</h3>
+					<pre>
+					<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.offset()); //left: 8; top: 8;
+    console.log(article.position());//left: 8; top: 8;
+
+    article.css({
+        'margin' : '10px',
+        'paddign': '10px'
+    });
+
+    console.log(article.offset()); //left: 18; top: 16;
+    console.log(article.position());//left: 8; top: 6;
+});
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Пример 10</h3>
+					<pre>
+					<code class="hljs">
+$(function () {
+    var article = $('#article_main');
+    console.log(article.offset()); //left: 8; top: 8;
+    article.offset({
+        left: 100,
+        top: 100
+    });
+
+   console.log(article.offset()); //left: 100; top: 100;
+});
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Пример 11</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var header = $('#article_main .header > p');
+    console.log(header.text());
+    header.text('^_^');
+    console.log(header.text());
+    console.log(header.parent()[0]);
+});
+						</code>
+					</pre>
+					<img src="img/man_2.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 12</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    var header = $('#article_main .header');
+    console.log(header.html());// <p>article #2</p>
+    header.html('<a href="habrahabr.ru">Habr</a>');
+    console.log(header.html());
+    // <a href="habrahabr.ru">Habr</a>
+});
+						</code>
+					</pre>
 				</section>
 			</section>
 
