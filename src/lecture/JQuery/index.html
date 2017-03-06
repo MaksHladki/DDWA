@@ -1330,19 +1330,19 @@ $(function () {
 					<h3>Метод prepend()</h3>
 					<table>
 						<tr>
-							<td>prepend(htmlString)</td>
+							<td>.prepend(htmlString)</td>
 							<td>вставляет указанную в параметре разметку html в начало элемента выборки</td>
 						</tr>
 						<tr>
-							<td>prepend(element)</td>
+							<td>.prepend(element)</td>
 							<td>вставляет элемент в начало элемента выборки</td>
 						</tr>
 						<tr>
-							<td>prepend(jQuery)</td>
+							<td>.prepend(jQuery)</td>
 							<td>вставляет объекта jQuery в начало элемента выборки</td>
 						</tr>
 						<tr>
-							<td>prepend(function (index, value))</td>
+							<td>.prepend(function (index, value))</td>
 							<td>вставляет элемент в начало элемента выборки с помощью функции</td>
 						</tr>
 					</table>
@@ -1365,6 +1365,49 @@ $(function () {
 						<tr>
 							<td>.prependTo(target)</td>
 							<td>добавляет объект в качестве дочернего к элементу (в начало), указанному в параметре метода</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Обертывание элементов</h2>
+				</section>
+				<section>
+					<h3>Метод wrap()</h3>
+					<table>
+						<tr>
+							<td>.wrap(htmlString)</td>
+							<td>обертывает элементы выборки в элемент, создаваемый из разметки</td>
+						</tr>
+						<tr>
+							<td>.wrap(element)</td>
+							<td>обертывает элементы выборки в элемент html, переданный в качестве параметра</td>
+						</tr>
+						<tr>
+							<td>.wrap(selector)</td>
+							<td>обертывает элементы выборки в элемент документа, соответствующий селектору</td>
+						</tr>
+						<tr>
+							<td>.wrap(jQuery)</td>
+							<td>обертывает элементы выборки в объект jQuery</td>
+						</tr>
+						<tr>
+							<td>.wrap(function(index, value))</td>
+							<td>обертывает элементы выборки в объект, возвращаемый функцией</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Другие методы</h3>
+					<table>
+						<tr>
+							<td>.warpAll([htmlString| element|selector|jQuery| function])</td>
+							<td>обертывает все элементы выборки в один элемент</td>
+						</tr>
+						<tr>
+							<td>.wrapInner([htmlString| element|selector|jQuery| function])</td>
+							<td>обертывает содержимое элементов выборки в новый элемент</td>
 						</tr>
 					</table>
 				</section>
@@ -1451,6 +1494,32 @@ $(function () {
 						</code>
 					</pre>
 					<img src="img/el_1.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 4</h3>
+					<pre>
+						<code class="hljs">
+$(function(){
+    var  textarea = $('textarea');
+    textarea.wrap('<div class="text"></div>');
+    console.log(textarea.parent()[0]);
+});
+						</code>
+					</pre>
+					<img src="img/el_2.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 5</h3>
+					<pre>
+						<code class="hljs">
+$(function(){
+    var  paragraph = $('.header > p');
+    paragraph.wrapInner('<span></span>');
+    console.log(paragraph[0]);
+});
+						</code>
+					</pre>
+					<img src="img/el_3.png" alt="">
 				</section>
 			</section>
 
