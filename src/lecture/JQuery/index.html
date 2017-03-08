@@ -1414,6 +1414,125 @@ $(function () {
 			</section>
 			<section>
 				<section>
+					<h2>Добавление сестринских элементов</h2>
+				</section>
+				<section>
+					<h3>Метод before()</h3>
+						<table>
+							<tr>
+								<td>.before(htmlString)</td>
+								<td>добавляет в разметку перед каждым элементом выборки элемент, создаваемый из разметки html</td>
+							</tr>
+							<tr>
+								<td>.before(element)</td>
+								<td>добавляет в разметку перед каждым элементом выборки элемент html, переданный в качестве параметра</td>
+							</tr>
+							<tr>
+								<td>.before(jQuery)</td>
+								<td>добавляет в разметку перед каждым элементом выборки объект jQuery</td>
+							</tr>
+							<tr>
+								<td>.before( function(index, value))</td>
+								<td>добавляет в разметку перед каждым элементом выборки объект, возвращаемый функцией</td>
+							</tr>
+						</table>
+				</section>
+				<section>
+					<h3>Метод after()</h3>
+					<table>
+						<tr>
+							<td>.after(htmlString)</td>
+							<td> добавляет после каждого элемента выборки элемент, создаваемый из разметки html</td>
+						</tr>
+						<tr>
+							<td>.after(element)</td>
+							<td>добавляет после каждого элемента выборки элемент html, переданный в качестве параметра</td>
+						</tr>
+						<tr>
+							<td>.after(jQuery)</td>
+							<td>добавляет после каждого элемента выборки объект jQuery</td>
+						</tr>
+						<tr>
+							<td>.after( function(index, value))</td>
+							<td>добавляет после каждого элемента выборки объект, возвращаемый функцией</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Метод insertBefore()</h3>
+					<table>
+						<tr>
+							<td>.insertBefore(htmlString)</td>
+							<td>элемент добавляется перед элементом, создаваемым из разметки html</td>
+						</tr>
+						<tr>
+							<td>.insertBefore(element)</td>
+							<td>элемент добавляется перед элементом html, который передается в качестве параметра</td>
+						</tr>
+						<tr>
+							<td>.insertBefore(jQuery)</td>
+							<td>элемент добавляется перед объектом jQuery</td>
+						</tr>
+						<tr>
+							<td>.insertBefore(selector)</td>
+							<td>элемент добавляется перед объектом, который соответствует селектору</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Метод insertAfter()</h3>
+					<table>
+						<tr>
+							<td>.insertAfter(htmlString)</td>
+							<td> элемент добавляется после элемента, создаваемого из разметки html</td>
+						</tr>
+						<tr>
+							<td>.insertAfter(element)</td>
+							<td>элемент добавляется после элемента html, который передается в качестве параметра</td>
+						</tr>
+						<tr>
+							<td>.insertAfter(jQuery)</td>
+							<td>элемент добавляется после объекта jQuery</td>
+						</tr>
+						<tr>
+							<td>.insertAfter(selector)</td>
+							<td>элемент добавляется после элемента, который соответствует селектору</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<h2>Замена элементов</h2>
+				<table>
+					<tr>
+						<td>.replaceWith(htmlString| jQuery|element|function)</td>
+						<td>замещает внутренне содержимое элемента новым содержимым</td>
+					</tr>
+					<tr>
+						<td>.replaceAll(htmlString| jQuery|element|function)</td>
+						<td>замещает все элементы, определенные в параметре, новым элементом</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<h3>Удаление элементов</h3>
+				<table>
+					<tr>
+						<td>.remove([selector])</td>
+						<td>удаляет элементы из структуры DOM</td>
+					</tr>
+					<tr>
+						<td>.detach()</td>
+						<td>аналогичен методу remove, но при удалении объекта сохраняются все связанные с ним данные</td>
+					</tr>
+					<tr>
+						<td>.empty()</td>
+						<td>очищает содержимое элементов, делая их пустыми</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<section>
 					<h2>Пример</h2>
 				</section>
 				<section>
@@ -1520,6 +1639,65 @@ $(function(){
 						</code>
 					</pre>
 					<img src="img/el_3.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 6</h3>
+					<pre>
+						<code class="hljs">
+ $(function(){
+    var  paragraph = $('.header > p');
+    var dateItem = document.createElement('span');
+    dateItem.className = 'date';
+    dateItem.innerHTML = '01.03.2017';
+    paragraph.before(dateItem);
+    console.log(paragraph.parent()[0]);
+});
+						</code>
+					</pre>
+					<img src="img/el_4.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 7</h3>
+					<pre>
+						<code class="hljs">
+$(function(){
+    var paragraph = $('.header > p');
+    var template = '<span class="date">01.03.2017</span>';
+    $(template).insertAfter(paragraph);
+    console.log(paragraph.parent()[0]);
+});
+						</code>
+					</pre>
+					<img src="img/el_5.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 8</h3>
+					<pre>
+						<code class="hljs">
+$(function(){
+    var template = `<div>
+            <span>(@_@)</span>
+        </div>`;
+    $('.article').replaceWith(template);
+    console.log($('body').children().get(0));
+});
+						</code>
+					</pre>
+					<img src="img/el_6.png" alt="">
+				</section>
+				<section>
+					<h3>Пример 9</h3>
+					<pre>
+						<code class="hljs">
+$(function(){
+    var article = $('.article');
+    article.find('.header').remove();
+    article.find('.body').empty();
+    console.log(article.get(0));
+});
+						</code>
+					</pre>
+					<img src="img/el_7.png" alt="">
 				</section>
 			</section>
 
