@@ -1700,6 +1700,105 @@ $(function(){
 					<img src="img/el_7.png" alt="">
 				</section>
 			</section>
+			<section>
+				<h1>События</h1>
+			</section>
+			<section>
+				<section>
+					<h2>Регистрация и удаление обработчиков</h2>
+				</section>
+				<section>
+					<h3>Метод bind()</h3>
+					<p class="highlight-blue">Метод bind добавляет обработчики событий только к тем элементам, которые на момент его действия уже существуют в структуре DOM</p>
+					<pre>
+						<code class="hljs">
+.bind(eventType [, eventData ], handler)
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+$(function(){
+    $('button').bind('click', function(){
+        console.log('Обработчик события click');
+        //получение доступа к елементу через $(this)
+        console.log($(this).html());
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод unbind()</h3>
+					<pre>
+						<code class="hljs">
+.unbind(eventType [, handler ])
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+$(function(){
+    $('button').bind('click', function(e){
+        console.log('Обработчик события click');
+    });
+    $('button').unbind();
+	// или 
+    $('button').unbind('click');
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод one()</h3>
+					<pre>
+						<code class="hljs">
+.one(events [, data ], handler)
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs">
+$(function(){
+    $('button').one('click', function(e){
+        console.log('Обработчик события click');
+        console.log($(this).attr('class'));
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример методов-оберток</h3>
+					<table>
+						<tr>
+							<td>.blur()</td>
+							<td>обработчик потери фокуса</td>
+						</tr>
+						<tr>
+							<td>.change()</td>
+							<td>обработчик изменения заданного элемента формы</td>
+						</tr>
+						<tr>
+							<td>.click()</td>
+							<td>обработчик нажатия мышью по элементу</td>
+						</tr>
+						<tr>
+							<td>.focus()</td>
+							<td>обработчик получения фокуса</td>
+						</tr>
+						<tr>
+							<td>.keypress()</td>
+							<td>обработчик ввода символа с клавиатуры</td>
+						</tr>
+						<tr>
+							<td>.resize()</td>
+							<td>обработчик изменения размеров окна браузера</td>
+						</tr>
+						<tr>
+							<td>.scroll()</td>
+							<td>обработчик "прокрутки" элементов документа</td>
+						</tr>
+					</table>
+				</section>
+			</section>
 
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
