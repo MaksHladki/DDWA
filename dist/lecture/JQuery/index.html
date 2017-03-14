@@ -1418,24 +1418,24 @@ $(function () {
 				</section>
 				<section>
 					<h3>Метод before()</h3>
-						<table>
-							<tr>
-								<td>.before(htmlString)</td>
-								<td>добавляет в разметку перед каждым элементом выборки элемент, создаваемый из разметки html</td>
-							</tr>
-							<tr>
-								<td>.before(element)</td>
-								<td>добавляет в разметку перед каждым элементом выборки элемент html, переданный в качестве параметра</td>
-							</tr>
-							<tr>
-								<td>.before(jQuery)</td>
-								<td>добавляет в разметку перед каждым элементом выборки объект jQuery</td>
-							</tr>
-							<tr>
-								<td>.before( function(index, value))</td>
-								<td>добавляет в разметку перед каждым элементом выборки объект, возвращаемый функцией</td>
-							</tr>
-						</table>
+					<table>
+						<tr>
+							<td>.before(htmlString)</td>
+							<td>добавляет в разметку перед каждым элементом выборки элемент, создаваемый из разметки html</td>
+						</tr>
+						<tr>
+							<td>.before(element)</td>
+							<td>добавляет в разметку перед каждым элементом выборки элемент html, переданный в качестве параметра</td>
+						</tr>
+						<tr>
+							<td>.before(jQuery)</td>
+							<td>добавляет в разметку перед каждым элементом выборки объект jQuery</td>
+						</tr>
+						<tr>
+							<td>.before( function(index, value))</td>
+							<td>добавляет в разметку перед каждым элементом выборки объект, возвращаемый функцией</td>
+						</tr>
+					</table>
 				</section>
 				<section>
 					<h3>Метод after()</h3>
@@ -1709,7 +1709,9 @@ $(function(){
 				</section>
 				<section>
 					<h3>Метод bind()</h3>
-					<p class="highlight-blue">Метод bind добавляет обработчики событий только к тем элементам, которые на момент его действия уже существуют в структуре DOM</p>
+					<p class="highlight-blue">Метод bind добавляет обработчики событий только к тем элементам, которые на момент его действия уже существуют в структуре
+						DOM
+					</p>
 					<pre>
 						<code class="hljs">
 .bind(eventType [, eventData ], handler)
@@ -1799,6 +1801,115 @@ $(function(){
 					</table>
 				</section>
 			</section>
+			<section>
+				<section>
+					<h2>Объект Event</h2>
+				</section>
+				<section>
+					<h3>Основные свойства</h3>
+					<table>
+						<tr>
+							<td>currentTarget</td>
+							<td>текущий элемент, на котором обрабатывается событие</td>
+						</tr>
+						<tr>
+							<td>data</td>
+							<td>объект, в который передаются дополнительные данные связанные с событием</td>
+						</tr>
+						<tr>
+							<td>target</td>
+							<td>элемент, инициировавший событие</td>
+						</tr>
+						<tr>
+							<td>timestamp</td>
+							<td>время наступления события</td>
+						</tr>
+						<tr>
+							<td>pageX/pageY</td>
+							<td>координаты указателя мыши относительно верхней границы документа</td>
+						</tr>
+						<tr>
+							<td>type</td>
+							<td>тип события</td>
+						</tr>
+						<tr>
+							<td>which</td>
+							<td>объект (в обработчиках событий клавиатуры или мыши), содержащий данные о нажатой клавише или кнопке</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Пример 1</h3>
+					<pre>
+						<code class="hljs" data-trim>
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;input type="text" id="fistName"&gt;
+    &lt;script src="js/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $(function () {
+            $('#fistName').bind('keydown', function (ev) {
+                //set 'hi'
+                console.log(ev.which);
+                //72 73 (коды символов)
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;						
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 2</h3>
+					<pre>
+						<code class="hljs" data-trim>
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;input type="button" value="Click"&gt;
+    &lt;script src="js/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $(function () {
+            var $elem = $('input[type="button"]');
+            var data = [1, 2, 3];
+            $elem.bind('click', data, function (ev) {
+                console.log(ev.data);
+                //[1, 2, 3]
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;							
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример 3</h3>
+					<pre>
+						<code class="hljs" data-trim>
+&lt;!DOCTYPE&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;input type="button" value="Click"&gt;
+    &lt;script src="js/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $(function () {
+            $('input[type="button"]').bind('click', function (ev) {
+                console.log(ev.type); //click
+                console.log(ev.pageX);//33
+                console.log(ev.pageY);//16
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+						</code>
+					</pre>
+				</section>
+			</section>
+
 
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
