@@ -1909,6 +1909,88 @@ $(function(){
 					</pre>
 				</section>
 			</section>
+			<section>
+				<section>
+					<h2>Всплытие событий</h2>
+				</section>
+				<section>
+					<h3>Пример html</h3>
+					<pre>
+						<code class="hljs">
+&lt;div&gt;
+    &lt;form&gt;
+        &lt;input type="button" name="send" value="Send"&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример js</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    $('input[type="button"]').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+    $('form').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+    $('div').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Результат</h3>
+					<pre>
+						<code class="hljs">
+// Событие инициировал элемент INPUT
+// Событие обрабатывается для элемента INPUT
+// Событие инициировал элемент INPUT
+// Событие обрабатывается для элемента FORM
+// Событие инициировал элемент INPUT
+// Событие обрабатывается для элемента DIV
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод stopPropagation()</h3>
+					<pre>
+						<code class="hljs">
+$(function () {
+    $('input[type="button"]').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+        e.stopPropagation(); //!!!
+    });
+    $('form').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+    $('div').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Результат</h3>
+					<pre>
+						<code class="hljs">
+// Событие инициировал элемент INPUT
+// Событие обрабатывается для элемента INPUT
+						</code>
+					</pre>
+				</section>
+			</section>
 
 
 			<section>
