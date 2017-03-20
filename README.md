@@ -21,7 +21,7 @@
 [Задание](https://makshladki.github.io/DDWA/dist/task/Task_Management/Task_Management.pdf "Задание")
 
 
-##Тема 4. Библиотека JQuery 
+## Тема 4. Библиотека JQuery 
 История создания и описание основных возможностей библиотеки. Обзор движка кросс-браузерных CSS-селекторов Sizzle. Работа со свойствами и атрибутами элементов. Работа с DOM-деревом. События и обработчики событий. Принципы и методы работы с анимацией и эффектами. Использование технологии Ajax при работе с RESTful API. Модульное тестирование компонентов.  
 [Лекция (будет дополнена)](https://makshladki.github.io/DDWA/dist/lecture/JQuery/index.html "Лекция (будет дополнена)")    
 [Задание](https://makshladki.github.io/DDWA/dist/task/Jquery/Jquery.pdf "Задание")
