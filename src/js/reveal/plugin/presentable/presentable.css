@@ -41,8 +41,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #reveal #presentable-toc ol ul, #reveal #presentable-toc ol ol,
 #presentable-toc ol ul, #presentable-toc ol ol{
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+    margin-top: 0.25em;
     margin-left: 1.5em;
 }
 
@@ -99,9 +99,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     z-index: 30;
 }
 
-#reveal #presentable-icon a:hover img,
-.reveal #presentable-icon a:hover img {
-    border-color: #13daec;
+
+#presentable-icon a{
+    color: #13daec;
+    opacity: 0.3;
+}
+#presentable-icon a:hover {
+    opacity: 1;
 }
 
 

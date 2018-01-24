@@ -7,16 +7,13 @@ const gulp = require('gulp'),
     browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
     cleanCSS = require('gulp-clean-css'),
-    csslint = require('gulp-csslint'),
-    csslintReporter = require('gulp-csslint-report'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
+    lazypipe = require('lazypipe'),
     newer = require('gulp-newer'),
     rename = require('gulp-rename'),
     pipe = require('multipipe'),
     sourcemaps = require('gulp-sourcemaps'),
-    jshint = require('gulp-jshint'),
-    jshintReporter = require('gulp-jshint-html-reporter'),
     uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
     watch = require('gulp-watch');
@@ -25,15 +22,12 @@ const gulp = require('gulp'),
 
 const srcPath = {
     'src': './src',
-    'html': ['./src/**/*.html', '!./src/code-analysis/**/*.html'],
+    'html': ['./src/**/*.html'],
     'img': './src/**/*.+(jpg|png|svg)',
     'css': ['./src/!(css|js)*/**/*.css'],
-    'cssLint': './src/**/*.css',
     'js': './src/!(js)*/**/*.js',
-    'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
-    'task': './src/task/**/*.pdf',
-    'analysis': './src/code-analysis/'
+    'task': './src/task/**/*.pdf'
 };
 
 const distPath = {
@@ -48,31 +42,26 @@ const distPath = {
 
 const pluginSettings = {
     autoprefixer: {
-        browsers: ['last 2 versions', 'ie 9', 'ie 10']
+        browsers: ['last 2 versions', 'ie 11']
     },
     cleanCSS: {
         compatibility: '*'
     },
-    csslint: {
-        filename: 'index.html',
-        directory: srcPath.analysis + '/css/'
-    },
-    jshint: {
-        filename: srcPath.analysis + '/js/index.html',
-        createMissingFolders: true
+    imagemin: {
+        optimizationLevel: 2
     }
 };
 
 //tasks
 
 gulp.task('clean', () => {
-    return del([srcPath.analysis, distPath.dist]);
+    return del([distPath.dist]);
 });
 
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
         .pipe(newer(distPath.html))
-        .pipe(useref({}, pipe(sourcemaps.init)))
+        .pipe(useref({}, lazypipe().pipe(sourcemaps.init)))
         .pipe(gulpif('*.js', pipe(
             uglify()
         )))
@@ -95,27 +84,15 @@ gulp.task('css', () => {
         .pipe(gulp.dest(distPath.css));
 });
 
-gulp.task('css:lint', () => {
-    return gulp.src(srcPath.cssLint)
-        .pipe(csslint('.csslintrc'))
-        .pipe(csslintReporter(pluginSettings.csslint));
-});
-
 gulp.task('js', () => {
     return gulp.src(srcPath.js)
         .pipe(gulp.dest(distPath.js));
 });
 
-gulp.task('js:lint', () => {
-    return gulp.src(srcPath.jsLint)
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter(jshintReporter, pluginSettings.jshint));
-});
-
 gulp.task('img', () => {
     return gulp.src(srcPath.img)
         .pipe(newer(distPath.img))
-        .pipe(imagemin())
+        .pipe(imagemin(pluginSettings.imagemin))
         .pipe(gulp.dest(distPath.img));
 });
 
@@ -127,7 +104,7 @@ gulp.task('font', () => {
 gulp.task('task', () => {
     return gulp.src(srcPath.task)
         .pipe(gulp.dest(distPath.task));
-})
+});
 
 gulp.task('serve', () => {
     browserSync.init({
@@ -138,7 +115,7 @@ gulp.task('serve', () => {
     browserSync.watch(distPath.dist).on('change', browserSync.reload);
 });
 
-gulp.task('build', gulpSequence('clean', /*['js:lint', 'css:lint'],*/ [
+gulp.task('build', gulpSequence('clean', [
     'html',
     'img',
     'js',
