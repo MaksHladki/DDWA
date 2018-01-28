@@ -15,14 +15,15 @@
 
 <body>
 	<div class="reveal">
-		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
 				<section>
 					<h1>Стандарт ECMAScript 5</h1>
 					<h3>Разработка динамичесих веб приложений</h3>
 					<p>
-						<small>Гладкий Максим Валерьевич / <a href="https://github.com/MaksHladki/DDWA/">github:MaksHladki</a></small>
+						<small>Гладкий Максим Валерьевич /
+							<a href="https://github.com/MaksHladki/DDWA/">github:MaksHladki</a>
+						</small>
 					</p>
 				</section>
 				<section>
@@ -39,7 +40,8 @@
 				<ul>
 					<li>Более строгий вариант JavaScript</li>
 					<li>Семантика, отличающаяся от обычно принятой</li>
-					<li>Старые версии браузеров игнорируют строгий режим (<span class="highlight-blue">IE 9-</span>)</li>
+					<li>Старые версии браузеров игнорируют строгий режим (
+						<span class="highlight-blue">IE 9-</span>)</li>
 					<li>Отменить действие use strict нельзя</li>
 					<li>Применяется ко всему скрипту или к отдельным функциям</li>
 					<li>Скрипт в строгом режиме + скрипт в обычном = скрипт в строгом режиме</li>
@@ -49,7 +51,8 @@
 				<h2>Строгий режим для всего скрипта</h2>
 				<pre>
 					<code class="hljs javascript" data-trim>
-						"use strict";
+"use strict";
+
 myFunction();
 
 function myFunction() {
@@ -82,10 +85,10 @@ function myFunction() {
 					<pre>
 						<code class="hljs javascript" data-trim>
 var colors = {
-	red: '#FF0000',
-	green: '#00FF00',
-	blue: '#0000FF',
-	red: '#FF0000'
+    red: '#FF0000',
+    green: '#00FF00',
+    blue: '#0000FF',
+    red: '#FF0000'
 };
 //Ex: An object literal cannot have multiple 
 //properties with the same name in strict mode.
@@ -97,7 +100,7 @@ var colors = {
 					<pre>
 						<code class="hljs javascript" data-trim>
 PI = 3.14;
-//EX: PI is not defined
+//Ex: PI is not defined
 						</code>
 					</pre>
 				</section>
@@ -110,7 +113,7 @@ function log(arg, arg) {
 }
     
 log(1, 2, 4);
-//EX: Duplicate parameter name not allowed in this context
+//Ex: Duplicate parameter name not allowed in this context
 						</code>
 					</pre>
 				</section>
@@ -127,8 +130,9 @@ delete Object.prototype;
 					<h3>Eval не добавляет новых переменных в окружающий контекст</h3>
 					<pre>
 						<code class="hljs javascript" data-trim>
-							var x = 17;
+var x = 17;
 var evalX = eval("var x = 42;x");
+
 console.log(x); //17
 console.log(evalX); //42
 						</code>
@@ -158,10 +162,11 @@ with (obj)
 					<blockquote>
 						В JavaScript все глобальные переменные и функции являются свойствами специального объекта, который называется «
 						<span class="highlight-blue">глобальный объект
-							</span>» (global object).
+						</span>» (global object).
 					</blockquote>
 					<p class="text">
-						В браузере этот объект доступен под именем <span class="highlight-blue">window</span>.
+						В браузере этот объект доступен под именем
+						<span class="highlight-blue">window</span>
 					</p>
 					<p class="text">
 						Объект window одновременно является глобальным объектом и содержит ряд свойств и методов для работы с окном браузера.
@@ -200,15 +205,15 @@ console.log(window.browser); //Opera
 					<h3>Пример</h3>
 					<pre>
 						<code class="hljs javascript" data-trim>
-// window = { f: function, log: undefined, browser: undefined }
+//window = { f: function, log: undefined, browser: undefined }
 
 var browser = 'Chrome';
-// window = { f: function, log: undefined, browser: 'Chrome' }
+//window = { f: function, log: undefined, browser: 'Chrome' }
 
 var log = function (msg) {
-        console.log(msg);
+    console.log(msg);
 }
-// window = { f: function, log: function, browser: 'Chrome' }
+//window = { f: function, log: function, browser: 'Chrome' }
 
 function f() {}
 						</code>
@@ -221,7 +226,6 @@ function f() {}
 					<ul>
 						<li>Конструкции for, if... не влияют на видимость</li>
 						<li>Повторное oбъявление переменных</li>
-						<li>Особенности при работе с window в IE8-</li>
 					</ul>
 				</section>
 				<section>
@@ -254,16 +258,19 @@ var res = N * i;
 					<ul>
 						<li>Функции имеют не динамическую, а лексическую область видимости</li>
 						<li>Вложенная функция обладает возможностью доступа ко всем аргументам и локальным переменным объемлющей функции</li>
-						<li>Все переменные внутри функции – это свойства специального внутреннего объекта <span class="highlight-blue">LexicalEnvironment</span></li>
+						<li>Все переменные внутри функции – это свойства специального внутреннего объекта
+							<span class="highlight-blue">LexicalEnvironment</span>
+						</li>
 					</ul>
 				</section>
 				<section>
 					<h3>Пример</h3>
 					<pre>
 					<code class="hljs javascript" data-trim>
-						function logger(msg) {
+function logger(msg) {
     //LexicalEnvironment = { msg: 'Test', date: undefined}
     var date = new Date().toDateString();
+	
     //LexicalEnvironment = { msg: 'Test', date: 'Sun Oct 30 2016'}
     console.log(date + ' : ' + msg);
 }
@@ -284,7 +291,7 @@ logger('Test');
 					</ul>
 					<pre>
 					<code class="hljs javascript" data-trim>
-						logger.[[Scope]] = window;
+logger.[[Scope]] = window;
 					</code>
 				</pre>
 				</section>
@@ -311,8 +318,8 @@ logger('Test');
 var date = new Date().toDateString();
 
 function logger(msg) {
-     //LexicalEnvironment = { msg: 'Test', date: 'Sun Oct 30 2016'}
-     console.log(date + ' : ' + msg);
+    //LexicalEnvironment = { msg: 'Test', date: 'Sun Oct 30 2016'}
+    console.log(date + ' : ' + msg);
 }
 
 logger('Test');
@@ -331,9 +338,9 @@ function logger(msg) {
 
 logger('Test'); //Sun Oct 30 2016 : Test
 
-date = '30.10.2016'
+date = '30.10.2016';
 
-logger('Test 2'); //30.10.2016 : Test 2						
+logger('Test 2'); //30.10.2016 : Test 2
 					</code>
 					</pre>
 				</section>
@@ -341,7 +348,7 @@ logger('Test 2'); //30.10.2016 : Test 2
 					<h3>Немного усложним</h3>
 					<pre>
 						<code class="hljs javascript" data-trim>
-							function makeCounter() {
+function makeCounter() {
     var currentCount = 1;
 
     return function () {
@@ -350,13 +357,15 @@ logger('Test 2'); //30.10.2016 : Test 2
 }
 
 var counter = makeCounter();
+
 //каждый вызов увеличивает счётчик и возвращает результат
-console.log(counter()); // 1
-console.log(counter()); // 2
-console.log(counter()); // 3
+console.log(counter()); //1
+console.log(counter()); //2
+console.log(counter()); //3
+
 //если создать другой счётчик, он будет независим от первого
 var counter2 = makeCounter();
-console.log(counter2()); // 1
+console.log(counter2()); //1
 						</code>
 					</pre>
 				</section>
@@ -365,13 +374,14 @@ console.log(counter2()); // 1
 					<pre>
 						<code class="hljs javascript" data-trim>
 window.a = 1;
+
 function getFunc() {
   var a = 2;
   var func = new Function('', 'alert(a)'); 
   return func;
 }
  
-getFunc()();// 1
+getFunc()();//1
 						</code>
 					</pre>
 				</section>
@@ -382,7 +392,7 @@ getFunc()();// 1
 					Замыкание – это функция вместе со всеми внешними переменными, которые ей доступны
 				</blockquote>
 				<ul>
-					<li>Значение переменной из внешней области берётся всегда текущее</li>
+					<li>Значение переменной из внешней области берется всегда текущее</li>
 					<li>Переменную во внешней области видимости можно не только читать, но и изменять</li>
 					<li>При создании функции с использованием new Function, [[Scope]] ссылается на window</li>
 				</ul>
@@ -393,6 +403,7 @@ getFunc()();// 1
 				<pre>
 					<code class="hljs javascript" data-trim>
 var counter = 5;
+
 var add = (function () {
     var counter = 0;
     return function () {
@@ -402,920 +413,11 @@ var add = (function () {
 
 add();
 add();
+
 console.log(add());//???
 						</code>
 				</pre>
 				<p class="fragment">counter = 3</p>
-			</section>
-			<!--Start ООП в JavaScript -->
-			<section>
-				<h1>ООП в JavaScript</h1>
-				<ul>
-					<li>ООП в функциональном стиле</li>
-					<li>ООП в прототипном стиле</li>
-				</ul>
-			</section>
-			<section>
-				<h2>Стандартные объекты</h2>
-				<small>
-				<table>
-					<tbody>
-						<tr>
-							<td>Array</td>
-							<td>массив пронумерованных элементов</td>
-						</tr>
-						<tr>
-							<td>Boolean</td>
-							<td>объект для булевых значений</td>
-						</tr>
-						<tr>
-							<td>Date</td>
-							<td>функции для работы с датой и временем</td>
-						</tr>
-						<tr>
-							<td>Error</td>
-							<td>объект для представления ошибок</td>
-						</tr>
-						<tr>
-							<td>Function</td>
-							<td>каждая функция в JS является объектом класса Function.</td>
-						</tr>
-						<tr>
-							<td>JSON</td>
-							<td>содержит методы для разбора объектной нотации JS</td>
-						</tr>
-						<tr>
-							<td>Math</td>
-							<td>константы и методы для математических вычислений.</td>
-						</tr>
-						<tr>
-							<td>Number</td>
-							<td>объект для работы с числами</td>
-						</tr>
-						<tr>
-							<td>Object</td>
-							<td>базовый объект javascript</td>
-						</tr>
-						<tr>
-							<td>RegExp</td>
-							<td>позволяет работать с регулярными выражениями.</td>
-						</tr>
-						<tr>
-							<td>String</td>
-							<td>управление, форматирование и другие операции с  текстовыми строками</td>
-						</tr>
-						<tr>
-							<td>SyntaxError</td>
-							<td>ошибка при интерпретации синтаксически неверного кода</td>
-						</tr>
-						<tr>
-							<td>window</td>
-							<td>определяет глобальный объект и окно браузера</td>
-						</tr>
-					</tbody>
-				</table>
-				</small>
-			</section>
-			<section>
-				<h1>ОПП в функциональном стиле</h1>
-			</section>
-			<section>
-				<section>
-					<h2>Определение конструктора</h2>
-					<pre>
-						<code class="hljs javascript" data-trim>
-						function Person(name, age){
-    this.name = name;
-    this.age = age;
-    this.getName = function(){
-        return this.name;
-    }
-    this.getAge = function(){
-        return this.age;
-    }
-}
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Пример создания экземпляра</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-							var person = new Person('Max', 18);
-console.log(person.getName());//Max
-console.log(person.getAge()); //18
-
-console.log(person instanceof Object);//true
-console.log(person instanceof Person);//true
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<h2>
-					Особенности
-				</h2>
-				<ul>
-					<li>Имена конструкторов всегда начинаются с прописной буквы</li>
-					<li>Объект явно не создается</li>
-					<li>Свойства и метод назначаются непосредственно объекту this</li>
-					<li>Для создания экземпляров используется оператор new</li>
-					<li>Инструкция return отсутствует</li>
-				</ul>
-			</section>
-			<section>
-				<h2>Порядок создания экземпляра</h2>
-				<ol>
-					<li class="fragment">Создание объекта</li>
-					<li class="fragment">Назначение нового объекта переменной this конструктора (после чего this указывает на новый объект)</li>
-					<li class="fragment">Выполнение кода внутри конструктора (добавление свойств к новому объекту)</li>
-					<li class="fragment">Возвращение нового объекта</li>
-				</ol>
-			</section>
-			<section>
-				<section>
-					<h2>Проблемы конструкторов</h2>
-					<img src="img/hproblem.jpg">
-				</section>
-				<section>
-					<h3>Методы создаются для каждого экземпляра</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-							function Person(name, age) {
-    this.name = name;
-    this.age = age;
-    this.getName = new Function('return this.name;');
-}
-
-var p1 = new Person('Ira', 23);
-var p2 = new Person('Max', 25);
-console.log(p1.getName());//Ira
-console.log(p2.getName());//Max
-console.log(p1.getName == p2.getName); //false
-
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Методы создаются для каждого экземпляра</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-							function Person(name, age) {
-    this.name = name;
-    this.age = age;
-    this.getName = function() {
-        return this.name;
-    }
-}
-
-var p1 = new Person('Ira', 23);
-var p2 = new Person('Max', 25);
-
-console.log(p1.getName()); //Ira
-console.log(p2.getName()); //Max
-console.log(p1.getName == p2.getName); //false
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Hot Fix</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-					
-function Person(name, age) {
-    this.name = name;
-    this.age = age;
-    this.getName = getName
-}
-
-function getName(){
-    return this.name;
-}
-
-var p1 = new Person('Ira', 23);
-var p2 = new Person('Max', 25);
-console.log(p1.getName == p2.getName); //true
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Внутренний и внешний интерфейс</h2>
-					<p>Публичное и приватное свойство</p>
-					<pre>
-						<code class="hljs javascript" data-trim>
-					function Person(name, age) {
-    var fAge = 'лет';
-    this.name = name;
-    this.getAge = function(){
-        return age + ' ' + fAge;
-    }
-}
-
-var person = new Person('Max', 20);
-person.name = 'Maxim';
-console.log(person.name);//Maxim
-console.log(person.getAge());//20 лет	
-					</code>
-						<pre>
-				</section>
-				<section>
-					<h3>Внутренний и внешний интерфейс</h3>
-					<p>Публичный и приватный метод</p>
-					<pre>
-						<code class="hljs javascript" data-trim>
-						function Person(name, age) {
-    this.name = name;
-    this.getAge = function(){
-        return formatAge(age);
-    }
-
-    function formatAge(age){
-        return age + ' лет';
-    }
-}
-
-var person = new Person('Max', 20);
-console.log(person.formatAge);//undefined
-console.log(person.getAge());//20 лет
-					</code>
-						<pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Сохранение this в замыкании</h2>
-					<pre>
-						<code class="hljs javascript" data-trim>
-function Person(name, age) {
-     this.age = age;
-     this.printAge = function () {
-         setTimeout(console.log(formatAge()), 1000);
-     }
-
-     function formatAge() {
-         return this.age + ' лет';
-     }
-}
-
-var person = new Person('Max', 20);
-person.printAge(); //undefined лет
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Сохранение this в замыкании</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-function Person(name, age) {
-   var self = this;
-   this.age = age;
-   this.printAge = function(){
-       setTimeout(console.log(formatAge()), 1000);
-   }
-   function formatAge(){
-       return self.age + ' лет';
-   }
-}
-
-var person = new Person('Max', 20);
-person.printAge(); //20 лет
-					</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<h2>Геттеры и сеттеры</h2>
-				<pre>
-					<code class="hljs javascript" data-trim>
-function Person() {
-    var _age = 0;
-    this.setAge = function (age) {
-        if (age <= 0 || age >= 100)
-            throw "Значение должно быть больше 0 и меньше 100";
-
-        _age = age;
-    }
-    this.getAge = function () {
-        return _age;
-    }
-}
-
-var person = new Person();
-person.setAge(20);
-console.log(person.getAge());//20 
-person.setAge(100);//Ex. Значение должно быть больше 0 и меньше 100
-					</code>
-				</pre>
-			</section>
-			<section>
-				<section>
-					<h2>Наследование</h2>
-					<pre>
-						<code class="hljs javascript" data-trim>
-							
-function Person(name, age){
-    this.name = name;
-    this.age = age;
-    this.getName = function(){
-        return this.name;
-    }
-    this.getAge = function(){
-        return this.age;
-    }
-}
-
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Расширяем</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-							function Student(course, group) {
-    Person.call(this);
-    this.course = course;
-    this.group = group;
-}
-
-var student = new Student(1, 1);
-student.name = 'Peter';
-student.age = 24;
-console.log(student.name);//Peter
-console.log(student.group);//1
-						</code>
-					</pre>
-					<p class="highlight-blue"> Person.call(this);</p>
-				</section>
-				<section>
-					<h3>Переопределение метода</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>		
-function Student(course, group) {
-    Person.call(this);
-    this.course = course;
-    this.group = group;
-
-     this.getAge = function () {
-        return this.age + ' лет';
-    }
-}
-
-var student = new Student(1, 1);
-student.age = 20;
-console.log(student.getAge()); //20 лет
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<h2>Запомним</h2>
-				<blockquote>
-					<b><span class="highlight-blue">THIS</span></b> в JS не привязывается к объекту, а зависит от контекста вызова. В случае
-					с конструктором <span class="highlight-blue">this</span> ссылается на созданный экземпляр при условии использования
-					ключевого слова new.
-				</blockquote>
-			</section>
-			<section>
-				<h1>ООП в прототипном стиле</h1>
-			</section>
-			<section>
-				<section>
-					<h2>Прототип Proto</h2>
-					<pre>
-						<code class="hljs javascript" data-trim>				
-var person = {
-    age: 24,
-    name: 'Alex'
-};
-
-var student = {
-    course: 1,
-    group: 6
-};
-
-student.__proto__ = person;
-console.log(student.age);//24
-console.log(student.name);//Alex
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Схема</h3>
-					<img src="img/proto.png" />
-				</section>
-			</section>
-			<section>
-				<h2>Особенности</h2>
-				<ul>
-					<li>Объекты можно организовать в цепочки (свойство, не найденное в одном объекте, автоматически ищется в другом)</li>
-					<li>Свойство __proto__ доступно во всех браузерах, кроме IE10-</li>
-					<li>Объект, на который указывает ссылка __proto__, называется «прототипом»</li>
-					<li>Все объекты, созданные объектными литералами, имеют прототип Object.prototype</li>
-					<li>Объекты, созданные с помощью new и конструктора, имеют в качестве прототипа значение свойства prototype
-					</li>
-					<li>Прототип используется только при чтении</li>
-				</ul>
-			</section>
-			<section>
-				<h2>Proto: read only</h2>
-				<pre>
-					<code class="hljs javascript" data-trim>	
-var person = {
-    age: 24,
-    name: 'Alex'
-};
-
-var student = {
-    course: 1,
-    group: 6
-};
-
-student.__proto__ = person;
-student.age = 10;
-console.log(student.age);//10
-console.log(person.age);//24
-delete student.age;
-console.log(person.age);//24
-					</code>
-				</pre>
-			</section>
-			<section>
-				<h2>Свойство prototype</h2>
-				<small>
-					<ul>
-						<li>Объекты обычно создаются функцией-конструктором через new</li>
-						<li>__proto__ не работает в IE10-</li>
-					</ul>
-				</small>
-				<p>Свойство prototype имеет смысл только у конструктора</p>
-				<pre>
-					<code class="hljs javascript" data-trim>
-var person = {
-    age: 24,
-    name: 'Alex'
-};
-
-function Student(course, group) {
-    this.course = course,
-    this.group = group;
-    //this.__proto__ = person; не работает в IE10-
-};
-
-Student.prototype = person;//!!!
-var student = new Student(1, 1);
-console.log(student.age);//24
-				</code>
-				</pre>
-			</section>
-			<section>
-				<h1>Класс Object</h1>
-			</section>
-			<section>
-				<section>
-					<h2>Конструктор</h2>
-					<ul>
-						<li>Object.length имеет значение 1</li>
-						<li>Object.prototype позволяет добавлять свойства ко всем объектам типа Object</li>
-					</ul>
-					<pre>
-						<code class="hljs javascript" data-trim>
-var o1 = new Object();
-console.log(o1);
-var o2 = {};
-console.log(o2);
-				</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Класс Object в разрезе</h3>
-					<img src="img/object.png">
-					<p>Объект Object.prototype – вершина иерархии, единственный, у которого __proto__ равно null.</p>
-				</section>
-			</section>
-			<section>
-				<h2>Метод create</h2>
-				<blockquote>
-					Cоздает новый объект с указанными объектом прототипа и свойствами
-				</blockquote>
-				<pre>
-					<code class="hljs javascript">
-Object.create(proto[, propertiesObject])
-					</code>
-				</pre>
-				<pre>
-					<code class="hljs javascript">
-var person = {
-    age: 20
-}
-
-var student = Object.create(person);
-console.log(student.age);//20
-					</code>
-				</pre>
-			</section>
-			<section>
-				<h2>Свойство prototype</h2>
-				<pre>
-					<code class="hljs javascript">
-function Person(){
-    this.age = 0;
-}
-
-Person.prototype.setAge = function(age){
-    this.age = age;
-}
-
-Person.prototype.getAge = function(){
-    return this.age;
-}
-
-var person = new Person();
-person.setAge(100);
-console.log(person.getAge());//100
-					</code>
-				</pre>
-			</section>
-			<section>
-				<h2>Метод toString</h2>
-				<pre>
-					<code class="hljs javascript">
-function Person(){
-    this.age = 0;
-}
-var person = new Person();
-alert(person);//[object Object]
-
-Person.prototype.toString = function(){
-    return this.age;
-}
-
-alert(person);//0
-					</code>
-				</pre>
-			</section>
-			<section>
-				<section>
-					<h2>Метод hasOwnProperty</h2>
-					<pre>
-						<code class="hljs javascript">
-var person = {
-    age: 24,
-    name: 'Alex'
-};
-
-var student = {
-    course: 1,
-    group: 6
-};
-
-student.__proto__ = person;
-
-for(var key in student) //course group name age
-    console.log(key);
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>hasOwnProperty</h3>
-					<pre>
-						<code class="hljs javascript">
-var person = {
-    age: 24,
-    name: 'Alex'
-};
-
-var student = {
-    course: 1,
-    group: 6
-};
-
-student.__proto__ = person;
-
-for(var key in student) //course group
-   if(student.hasOwnProperty(key)) console.log(key);
-					</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<h2>Метод keys</h2>
-				<pre>
-					<code class="hljs javascript">
-function Person(name) {
-    this.name = name;
-}
-Person.prototype.setName = function (name) {
-    this.name = name;
-}
-Person.prototype.getName = function () {
-    return this.name;
-}
-function Student(course) {
-    this.course = course;
-}
-Student.prototype = Object.create(Person.prototype);
-var student = new Student(20);
-console.log(Object.keys(student));["course"]
-					</code>
-				</pre>
-			</section>
-			<section>
-				<section>
-					<h2>Метод defineProperty</h2>
-					<pre>
-						<code class="hljs javascript" data-trim="">
-function Person(name) {
-    this.name = name;
-}
-var person = new Person(20);
-Object.defineProperty(person, 'age', {
-    enumerable: true,
-    configurable: true,
-    //writable: true, нельзя использовать совместно с get/set
-    //value: 0, нельзя использовать совместно с get/set
-    get: function(){
-        return age + ' лет';
-    },
-    set: function(newAge){
-        age = newAge;
-    }
-});
-person.age = 10;
-console.log(person.age);//10
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Еще один пример</h3>
-					<pre>
-						<code class="hljs javascript">
-function Person(name) {
-    this.name = name;
-    Object.defineProperty(this, 'age', {
-        enumerable: false,
-        configurable: true,
-        value: 0,
-    });
-}
-
-var person = new Person(20);
-console.log(Object.getOwnPropertyNames(person));//["name", "age"]
-console.log(Object.keys(person));//["name"]
-					</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Наследование</h2>
-					<pre>
-						<code class="hljs javascript" data-trim>
-function Person(name) {
-    this.name = name;
-}
-Person.prototype.setName = function (name) {
-    this.name = name;
-}
-Person.prototype.getName = function () {
-    return this.name;
-}
-function Student(course, name) {
-    Person.call(this, name);
-    this.course = course;
-}
-Student.prototype = Object.create(Person.prototype);
-Student.prototype.getCourse = function () {
-    return this.course;
-}
-var student = new Student(10, 'Anna');
-console.log(student.getName());//Anna
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Вызов метода родителя</h3>
-					<pre>
-						<code class="data-trim">
-function Person(name) {
-    this.name = name;
-}
-Person.prototype.setName = function (name) {
-    this.name = name;
-}
-Person.prototype.getName = function () {
-    return this.name;
-}
-function Student(name) {
-    Person.call(this, name);
-}
-Student.prototype = Object.create(Person.prototype);
-Student.prototype.getName = function () {
-    return 'Name: ' + Person.prototype.getName.call(this);
-}
-var student = new Student('Anna');
-console.log(student.getName());//Name: Anna  
-					</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<h2>Изменение встроенных прототипов</h2>
-				<pre>
-					<code class="hljs javascript">
-function Person(){
-     this.age = 0;
-}
-var person = new Person();
-alert(person);//[object Object]
-
-Person.prototype.toString = function(){
-     return this.age;
-}
-
-alert(person);//0
-					</code>
-				</pre>
-			</section>
-			<section>
-				<section>
-					<h2>Операторы проверки типов</h2>
-					<ul>
-						<li>typeof</li>
-						<li>instanceof</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Оператор typeof</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-function A(){}
-function B(){}
-B.prototype = Object.create(A.prototype);
-
-console.log(typeof undefined);// "undefined"
-console.log(typeof 0);// "number"
-console.log(typeof true );// "boolean"
-console.log(typeof "foo"); // "string"
-console.log(typeof {}); // "object"
-console.log(typeof null); // "object"
-console.log(typeof function(){}); // "function"
-var a = new A();
-console.log(typeof a);// "object"
-var b = new B();
-console.log(typeof b);// "object"
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Оператор instanceof</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
-function A(){}
-function B(){}
-B.prototype = Object.create(A.prototype);
-
-var a = new A();
-var b = new B();
-
-console.log(a instanceof A);//true
-console.log(b instanceof B);//true
-console.log(a instanceof B);//false
-console.log(b instanceof A);//true
-console.log(a instanceof Object);//true
-console.log(b instanceof Object);//true
-console.log(A.prototype instanceof Object);//true
-console.log(B.prototype instanceof Object);//true
-console.log(A.prototype instanceof B);//false
-console.log(B.prototype instanceof A);//true
-console.log(Object.prototype instanceof Object);//false
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<h3>Вопрос: как структурировать огромное количество функций и переменных и избежать конфликтов и перезаписи информации?</h2>
-					<img src="img/zoo.jpg" height="400" alt="">
-			</section>
-			<section>
-				<section>
-					<h2>Пространства имен</h2>
-					<pre>
-						<code class="hljs javascript">
-function Person() {}
-function Student() {}
-var some_var = 1;
-var module1 = {};
-module1.data = {a: 1, b: 2};
-var module2 = {};
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Простой пример</h3>
-					<pre>
-						<code class="hljs javascript">
-var MYAPP = {};
-
-MYAPP.Person = function () {};
-MYAPP.Student = function () {};
-
-MYAPP.some_var1 = 1;
-MYAPP.some_var2 = 2;
-
-MYAPP.modules = {};
-MYAPP.modules.modulel = {};
-MYAPP.modules.modulel.data = {
-    a: 1,
-    b: 2
-};
-MYAPP.modules.module2 = {};
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Применение пространств имен</h3>
-					<pre>
-						<code class="hljs javascript">
-//применение функции пространства имен 
-MYAPP.namespace('MYAPP.modules.module2'); 
-
-//вызов эквивалентен следующей конструкции: 
-var MYAPP = { 
-      modules: { 
-          module2: {} 
-      }
-}; 
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Способ реализации</h3>
-					<pre>
-						<code class="hljs javascript">
-var MYAPP = MYAPP || {};
-MYAPP.namespace = function (namespaceStr) {
-    var parts = namespaceStr.split('.'),
-        parent = MYAPP,
-        i;
-    // отбросить начальный префикс - имя глобального объекта 
-    if (parts[0] === "MYAPP") {
-        parts = parts.slice(1);
-    }
-    for (i = 0; i < parts.length; i += 1) {
-        // создать свойство, если оно отсутствует 
-        if (typeof parent[parts[i]] === "undefined") {
-            parent[parts[i]] = {};
-        }
-        parent = parent[parts[i]];
-    }
-    return parent;
-};
-					</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Пример работы</h3>
-					<pre>
-						<code class="hljs javascript">
-//присваиваение возвращаемого значение локальной переменной 
-var module2 = MYAPP.namespace('MYAPP.modules.module2'); 
-module2 === MYAPP.modules.module2; // true 
-//отсутствие начального префикса 'MYAPP' 
-MYAPP.namespace('modules.module51'); 
-//создание глубоко вложенных пространств имен 
-MYAPP.namespace('once.upon.a.time.there.was.this.long.nested.property'); 
-					</code>
-					</pre>
-				</section>
-			</section>
-			<section>
-				<h2>Создание библиотек и модулей</h2>
-				<pre>
-					<code class="hljs javascript">
-;(function () {
-    //приватные переменные
-    var version = '0.0.1',
-        faculties = ['EEF', 'ITF'];
-    //приватные функции
-    function Student(name) {
-        this.name = name;
-    }
-    function addStudent(student) {}
-    function assignStudentToFaculty(student, faculty) {}
-    //основная функция библиотеки
-    function bstu(params) {}
-    //публичные переменные и функции
-    bstu.Student = Student;
-    bstu.FACULTY = faculties;
-    //экспортируем публичные члены наружу из модуля
-    window.BSTU = bstu;
-}());
-var student = new BSTU.Student('Max');
-console.log(student.name);//Max
-						</code>
-				</pre>
 			</section>
 			<section>
 				<h1>this</h1>
@@ -1331,7 +433,9 @@ var student1 = {
         console.log(course);
     }
 };
-student1.print();//Ex: Uncaught ReferenceError: course is not defined
+
+student1.print();
+//Ex: Uncaught ReferenceError: course is not defined
 
 var student2 = {
     name: 'Max',
@@ -1339,6 +443,7 @@ var student2 = {
         console.log(this.name);
     }
 };
+
 student2.print();//Max
 							</code>
 					</pre>
@@ -1353,6 +458,7 @@ var student2 = {
         console.log(student2.name);
     }
 };
+
 student2.print();//Max
 							</code>
 					</pre>
@@ -1365,7 +471,7 @@ student2.print();//Max
 				<section>
 					<h3>Любая функция может иметь в себе this</h3>
 					<pre>
-						<code class="hljs javascript">
+						<code class="hljs javascript" data-trim>
 function func(){ 
     console.log(this); 
 } 
@@ -1378,12 +484,15 @@ func();//[object Window]
 					<h3>Разный контекст</h3>
 					<small>
 						<blockquote>
-						Если одну и ту же функцию запускать в контексте разных объектов, она будет получать разный this. Это значение не зависит от того, как функция была создана, оно определяется в момент вызова	
+							Если одну и ту же функцию запускать в контексте разных объектов, она будет получать разный this. Это значение не зависит
+							от того, как функция была создана, оно определяется в момент вызова
 						</blockquote>
 					</small>
 					<pre>
 						<code class="hljs javascript" data-trim>
-function print (){console.log(this.name);}
+function print (){
+    console.log(this.name);
+}
 
 var person = {
     name: 'Irina',
@@ -1414,7 +523,7 @@ student.print();//Ivan
 					<h2>Метод Call</h2>
 					<p>Вызывает функцию с указанным значением this и предоставленными аргументами</p>
 					<pre>
-						<code class="hljs javascript">
+						<code class="hljs javascript" data-trim>
 fun.call(thisArg[, arg1[, arg2[, ...]]])
 					</code>
 					</pre>
@@ -1426,16 +535,16 @@ fun.call(thisArg[, arg1[, arg2[, ...]]])
 					<pre>
 						<code class="hljs javascript" data-trim>
 function showFullName() {
-  console.log(this.firstName + " " + this.lastName);
+    console.log(this.firstName + " " + this.lastName);
 }
 
 var user = {
-  firstName: "Василий",
-  lastName: "Петров"
+    firstName: "Василий",
+    lastName: "Петров"
 };
 
 //this = user
-showFullName.call(user) // "Василий Петров"
+showFullName.call(user);//Василий Петров
 				</code>
 					</pre>
 				</section>
@@ -1445,16 +554,18 @@ showFullName.call(user) // "Василий Петров"
 					<h2>Метод Apply</h2>
 					<p>Вызывает функцию с указанным значением this и аргументами, предоставленными в виде массива</p>
 					<pre>
-						<code class="hljs javascript">
+						<code class="hljs javascript" data-trim>
 func.apply(context, [argsArray])
 					</code>
 					</pre>
 				</section>
 				<section>
 					<h3>Пример</h3>
-					<pre><code class="hljs javascript" data-trim>
-		var x = 10;
+					<pre>
+						<code class="hljs javascript" data-trim>
+var x = 10;
 var o = { x: 15 };
+
 function f(message)
 {
     console.log(message);
@@ -1463,16 +574,18 @@ function f(message)
  
 f("test");//test 10
 f.apply(o, ["test"]);//test 15
-	</code></pre>
+					</code>
+				</pre>
 				</section>
 				<section>
 					<h3>Использование со встроенными функциями</h3>
-					<pre><code class="hljs javascript">
+					<pre><code class="hljs javascript" data-trim>
 /* мин/макс числа в массиве */
 var numbers = [5, 6, 2, 3, 7];
 
 /* используем apply к Math.min/Math.max */
 var max = Math.max.apply(null, numbers); 
+
 /* Это эквивалентно Math.max(numbers[0], ...)
 или Math.max(5, 6, ...) */
 
@@ -1484,12 +597,12 @@ var min = Math.min.apply(null, numbers);
 				<section>
 					<h2>Метод Bind</h2>
 					<ul>
-						<li>Cоздаёт новую функцию, которая при вызове устанавливает в качестве контекста выполнения this предоставленное значение.
+						<li>Cоздаёт новую функцию, которая при вызове устанавливает в качестве контекста выполнения this предоставленное значение
 						</li>
-						<li>Bind не вызывает функцию, он только возвращает «обёртку»</li>
+						<li>Bind не вызывает функцию, он только возвращает «обертку»</li>
 					</ul>
 					<pre>
-						<code class="hljs javascript">
+						<code class="hljs javascript"data-trim>
 var wrapper = func.bind(context[, arg1, arg2...])
 					</code>
 					</pre>
@@ -1503,7 +616,7 @@ function f(a, b) {
 }
 
 var g = f.bind("Context");
-g(1, 2); // Context 3
+g(1, 2); //Context 3
 		</code></pre>
 				</section>
 			</section>
@@ -1512,79 +625,958 @@ g(1, 2); // Context 3
 					Карринг (currying) параметров
 				</h2>
 				<blockquote>
-					Создание новой функции путём фиксирования аргументов существующей (термин из функционального программирования)
+					Создание новой функции путем фиксирования аргументов существующей (термин из функционального программирования)
 				</blockquote>
 				<pre>
 					<code class="hljs javascript" data-trim>
 function mul(a, b) {
-  return a * b;
+    return a * b;
 }
-// double умножает только на два
-var double = mul.bind(null, 2); 
-// контекст фиксируем null, он не используется
 
-console.log(double(3));// mul(2, 3) = 6
-console.log(double(4));// mul(2, 4) = 8
-console.log(double(5));// mul(2, 5) = 10
+//double умножает только на два
+var double = mul.bind(null, 2); 
+//контекст фиксируем null, он не используется
+
+console.log(double(3));//mul(2, 3) = 6
+console.log(double(4));//mul(2, 4) = 8
+console.log(double(5));//mul(2, 5) = 10
 					</code>
 				</pre>
 			</section>
 			<section>
 				<h2>Одалживание метода</h2>
 				<pre>
-					<code>
+					<code class="hljs javascript" data-trim>
 function showArgs() {
-  //arguments.length [0] ... [n]
-  var argStr = arguments.join(':');
-  console.log(argStr); 
+    //arguments.length [0] ... [n]
+
+    var argStr = arguments.join(':');
+    console.log(argStr); 
 }
 
-showArgs(1, 2, 3);// arguments.join is not a function(…)
+showArgs(1, 2, 3);//arguments.join is not a function(…)
 	</code>
 				</pre>
 				<pre>
 					<code class="hljs javascript" data-trim>
 function showArgs() {
-  var join = [].join; // скопируем ссылку на функцию в переменную
-  // вызовем join с this = arguments,
-  // этот вызов эквивалентен arguments.join(':')
-  var argStr = join.call(arguments, ':');
-  console.log(argStr);
+    var join = [].join; //скопируем ссылку на функцию в переменную
+    //вызовем join с this = arguments,
+    //этот вызов эквивалентен arguments.join(':')
+	
+    var argStr = join.call(arguments, ':');
+    console.log(argStr);
 }
 
 showArgs(1, 2, 3);//1:2:3
 					</code>
 				</pre>
 			</section>
-			<!-- Объектная модель документа -->
+			<!--Start ООП в JavaScript -->
 			<section>
-				<h1>
-					Объектная модель документа
-				</h1>
+				<h1>ООП в JavaScript</h1>
+				<ul>
+					<li>ООП в функциональном стиле</li>
+					<li>ООП в прототипном стиле</li>
+				</ul>
 			</section>
 			<section>
-				<h2>Структура браузерных объектов</h2>
-				<img src="img/window.environment.png" alt="">
+				<h2>Стандартные объекты</h2>
+				<small>
+					<table>
+						<tbody>
+							<tr>
+								<td>Array</td>
+								<td>массив пронумерованных элементов</td>
+							</tr>
+							<tr>
+								<td>Boolean</td>
+								<td>объект для булевых значений</td>
+							</tr>
+							<tr>
+								<td>Date</td>
+								<td>функции для работы с датой и временем</td>
+							</tr>
+							<tr>
+								<td>Error</td>
+								<td>объект для представления ошибок</td>
+							</tr>
+							<tr>
+								<td>Function</td>
+								<td>каждая функция в JS является объектом класса Function</td>
+							</tr>
+							<tr>
+								<td>JSON</td>
+								<td>содержит методы для разбора объектной нотации JS</td>
+							</tr>
+							<tr>
+								<td>Math</td>
+								<td>константы и методы для математических вычислений</td>
+							</tr>
+							<tr>
+								<td>Number</td>
+								<td>объект для работы с числами</td>
+							</tr>
+							<tr>
+								<td>Object</td>
+								<td>базовый объект javascript</td>
+							</tr>
+							<tr>
+								<td>RegExp</td>
+								<td>позволяет работать с регулярными выражениями.</td>
+							</tr>
+							<tr>
+								<td>String</td>
+								<td>управление, форматирование и другие операции с текстовыми строками</td>
+							</tr>
+							<tr>
+								<td>SyntaxError</td>
+								<td>ошибка при интерпретации синтаксически неверного кода</td>
+							</tr>
+							<tr>
+								<td>window</td>
+								<td>определяет глобальный объект и окно браузера</td>
+							</tr>
+						</tbody>
+					</table>
+				</small>
+			</section>
+			<section>
+				<h1>ОПП в функциональном стиле</h1>
 			</section>
 			<section>
 				<section>
-					<h2>Пример DOM-дерева</h2>
-					<script type="text/template">
-						<!DOCTYPE HTML>
-						<html>
-
-						<head>
-							<title>Какой-то заголовок</title>
-						</head>
-
-						<body>
-							Какой-то текст
-						</body>
-
-						</html>
-					</script>
+					<h2>Определение конструктора</h2>
 					<pre>
-						<code class="hljs javascript">
+						<code class="hljs javascript" data-trim>
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+
+    this.getName = function(){
+        return this.name;
+    }
+	
+    this.getAge = function(){
+        return this.age;
+    }
+}
+					</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Пример создания экземпляра</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+var person = new Person('Max', 18);
+console.log(person.getName());//Max
+console.log(person.getAge()); //18
+
+console.log(person instanceof Object);//true
+console.log(person instanceof Person);//true
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h2>
+					Особенности
+				</h2>
+				<ul>
+					<li>Имена конструкторов обычно начинаются с прописной буквы</li>
+					<li>Объект явно не создается</li>
+					<li>Свойства и метод назначаются непосредственно объекту this</li>
+					<li>Для создания экземпляров используется оператор new</li>
+					<li>Инструкция return отсутствует</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Порядок создания экземпляра</h2>
+				<ol>
+					<li class="fragment">Создание объекта</li>
+					<li class="fragment">Назначение нового объекта переменной this конструктора (после чего this указывает на новый объект)</li>
+					<li class="fragment">Выполнение кода внутри конструктора (добавление свойств к новому объекту)</li>
+					<li class="fragment">Возвращение нового объекта</li>
+				</ol>
+			</section>
+			<section>
+				<section>
+					<h2>Проблемы конструкторов</h2>
+					<img src="img/hproblem.jpg">
+				</section>
+				<section>
+					<h3>Методы создаются для каждого экземпляра</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.getName = new Function('return this.name;');
+}
+
+var p1 = new Person('Ira', 23);
+var p2 = new Person('Max', 25);
+
+console.log(p1.getName());//Ira
+console.log(p2.getName());//Max
+console.log(p1.getName == p2.getName); //false
+
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Методы создаются для каждого экземпляра</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.getName = function() {
+        return this.name;
+    }
+}
+
+var p1 = new Person('Ira', 23);
+var p2 = new Person('Max', 25);
+
+console.log(p1.getName()); //Ira
+console.log(p2.getName()); //Max
+console.log(p1.getName == p2.getName); //false
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Hot Fix</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.getName = getName
+}
+
+function getName(){
+    return this.name;
+}
+
+var p1 = new Person('Ira', 23);
+var p2 = new Person('Max', 25);
+console.log(p1.getName == p2.getName); //true
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Внутренний и внешний интерфейс</h2>
+					<p>Публичное и приватное свойство</p>
+					<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age) {
+    var fAge = 'лет';
+    this.name = name;
+    this.getAge = function(){
+        return age + ' ' + fAge;
+    }
+}
+
+var person = new Person('Max', 20);
+person.name = 'Maxim';
+
+console.log(person.name);//Maxim
+console.log(person.getAge());//20 лет	
+					</code>
+						<pre>
+				</section>
+				<section>
+					<h3>Внутренний и внешний интерфейс</h3>
+					<p>Публичный и приватный метод</p>
+					<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age) {
+    this.name = name;
+    this.getAge = function(){
+        return formatAge(age);
+    }
+
+    function formatAge(age){
+        return age + ' лет';
+    }
+}
+
+var person = new Person('Max', 20);
+
+console.log(person.formatAge);//undefined
+console.log(person.getAge());//20 лет
+					</code>
+						<pre>
+				</section>
+			</section>
+			<section>
+				<h2>Геттеры и сеттеры</h2>
+				<pre>
+					<code class="hljs javascript" data-trim>
+function Person() {
+    var _age = 0;
+    this.setAge = function (age) {
+        if (age <= 0 || age >= 100)
+            throw "Значение должно быть больше 0 и меньше 100";
+
+        _age = age;
+    }
+    this.getAge = function () {
+        return _age;
+    }
+}
+
+var person = new Person();
+person.setAge(20);
+
+console.log(person.getAge());//20 
+person.setAge(100);//Ex. Значение должно быть больше 0 и меньше 100
+					</code>
+				</pre>
+				</section>
+				<section>
+					<section>
+						<h2>Наследование</h2>
+						<pre>
+						<code class="hljs javascript" data-trim>
+							
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+    this.getName = function(){
+        return this.name;
+    }
+    this.getAge = function(){
+        return this.age;
+    }
+}
+
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Расширяем</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function Student(course, group) {
+    Person.call(this);
+	
+    this.course = course;
+    this.group = group;
+}
+
+var student = new Student(1, 1);
+student.name = 'Peter';
+student.age = 24;
+
+console.log(student.name);//Peter
+console.log(student.group);//1
+						</code>
+					</pre>
+						<p class="highlight-blue"> Person.call(this);</p>
+					</section>
+					<section>
+						<h3>Переопределение метода</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>		
+function Student(course, group) {
+    Person.call(this);
+	
+    this.course = course;
+    this.group = group;
+
+    this.getAge = function () {
+        return this.age + ' лет';
+    }
+}
+
+var student = new Student(1, 1);
+student.age = 20;
+
+console.log(student.getAge()); //20 лет
+						</code>
+					</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Сохранение this в замыкании</h2>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age) {
+    this.age = age;
+    this.printAge = function () {
+        setTimeout(console.log(formatAge()), 1000);
+    }
+
+    function formatAge() {
+        return this.age + ' лет';
+    }
+}
+
+var person = new Person('Max', 20);
+person.printAge(); //undefined лет
+						</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Сохранение this в замыкании</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age) {
+   var self = this;
+   this.age = age;
+   this.printAge = function(){
+       setTimeout(console.log(formatAge()), 1000);
+   }
+   function formatAge(){
+       return self.age + ' лет';
+   }
+}
+
+var person = new Person('Max', 20);
+person.printAge(); //20 лет
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Запомним</h3>
+						<blockquote>
+							<b>
+								<span class="highlight-blue">THIS</span>
+							</b> в JS не привязывается к объекту, а зависит от контекста вызова. В случае с конструктором
+							<span class="highlight-blue">this</span> ссылается на созданный экземпляр при условии использования ключевого слова new.
+						</blockquote>
+					</section>
+				</section>
+				<section>
+					<h2>Статические члены</h2>
+					<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+    this.getName = function(){
+        return this.name;
+    }
+    this.getAge = function(){
+        return this.age;
+    }
+    Person.counter++;
+}
+
+Person.counter = 0;
+Person.getCount = function(){
+    return Person.counter;
+}
+
+new Person('Max', 26);
+new Person('Yulia', 21);
+console.log(Person.getCount());//2
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h1>ООП в прототипном стиле</h1>
+				</section>
+				<section>
+					<section>
+						<h2>Прототип Proto</h2>
+						<pre>
+						<code class="hljs javascript" data-trim>				
+var person = {
+    age: 24,
+    name: 'Alex'
+};
+
+var student = {
+    course: 1,
+    group: 6
+};
+
+student.__proto__ = person;
+
+console.log(student.age);//24
+console.log(student.name);//Alex
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Схема</h3>
+						<img src="img/proto.png" />
+					</section>
+				</section>
+				<section>
+					<h2>Особенности</h2>
+					<ul>
+						<li>Объекты можно организовать в цепочки (свойство, не найденное в одном объекте, автоматически ищется в другом)</li>
+						<li>Свойство __proto__ доступно во всех браузерах, кроме IE10-</li>
+						<li>Объект, на который указывает ссылка __proto__, называется «прототипом»</li>
+						<li>Все объекты, созданные объектными литералами, имеют прототип Object.prototype</li>
+						<li>Объекты, созданные с помощью new и конструктора, имеют в качестве прототипа значение свойства prototype
+						</li>
+						<li>Прототип используется только при чтении</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Proto: read only</h2>
+					<pre>
+					<code class="hljs javascript" data-trim>	
+var person = {
+    age: 24,
+    name: 'Alex'
+};
+
+var student = {
+    course: 1,
+    group: 6
+};
+
+student.__proto__ = person;
+student.age = 10;
+
+console.log(student.age);//10
+console.log(person.age);//24
+
+delete student.age;
+console.log(person.age);//24
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h2>Свойство prototype</h2>
+					<ul>
+						<li>Имеет смысл только у конструктора</li>
+						<li>Объекты обычно создаются функцией-конструктором через new</li>
+						<li>__proto__ не работает в IE10-</li>
+					</ul>
+					<pre>
+					<code class="hljs javascript" data-trim>
+var person = {
+    age: 24,
+    name: 'Alex'
+};
+
+function Student(course, group) {
+    this.course = course,
+    this.group = group;
+    //this.__proto__ = person; не работает в IE10-
+};
+
+//!!! свойство доступно через тип, а не через объект
+Student.prototype = person;
+var student = new Student(1, 1);
+console.log(student.age);//24
+				</code>
+				</pre>
+				</section>
+				<section>
+					<h2>Добавление метода через прототип</h2>
+					<pre>
+					<code class="hljs javascript" data-trim>
+function Person(age, name){
+    this.Age = age;
+    this.Name = name;
+}
+
+Person.prototype.getAge = function(){
+    return this.Age;
+}
+
+var person = new Person(20, 'Max');
+console.log(person.getAge());//20
+
+var person2 = new Person(18, 'Yulia');
+console.log(person.getAge == person2.getAge);//true
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h1>Класс Object</h1>
+				</section>
+				<section>
+					<section>
+						<h2>Конструктор</h2>
+						<ul>
+							<li>Object.length имеет значение 1</li>
+							<li>Object.prototype позволяет добавлять свойства ко всем объектам типа Object</li>
+						</ul>
+						<pre>
+						<code class="hljs javascript" data-trim>
+var o1 = new Object();
+console.log(o1);//{}
+
+var o2 = {};
+console.log(o2);//{}
+				</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Класс Object в разрезе</h3>
+						<img src="img/object.png">
+						<p>Объект Object.prototype – вершина иерархии, единственный, у которого
+							<span class="highlight-blue">__proto__ равно null</span>
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Метод create</h2>
+						<blockquote>
+							Cоздает новый объект с указанными объектом прототипа и свойствами
+						</blockquote>
+						<pre>
+					<code class="hljs javascript" data-trim>
+Object.create(proto[, propertiesObject])
+					</code>
+				</pre>
+						<pre>
+					<code class="hljs javascript" data-trim>
+var person = {
+    age: 20
+}
+
+var student = Object.create(person);
+console.log(student.age);//20
+					</code>
+				</pre>
+					</section>
+					<section>
+						<h3>Пример наследования</h3>
+						<pre>
+					<code class="hljs javascript" data-trim>
+function Person(name) {
+    this.name = name;
+}
+						
+function Student(course, name) {
+    Person.call(this, name);
+    this.course = course;
+}
+						 
+Student.prototype = Object.create(Person.prototype);
+				
+var student = new Student(5, 'Anna');
+console.log(student.name);//Anna
+console.log(student.course);//5
+					</code>
+				</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Свойство prototype</h2>
+						<pre>
+					<code class="hljs javascript" data-trim>
+function Person(){
+    this.age = 0;
+}
+
+Person.prototype.setAge = function(age){
+    this.age = age;
+}
+
+Person.prototype.getAge = function(){
+    return this.age;
+}
+
+var person = new Person();
+person.setAge(100);
+
+console.log(person.getAge());//100
+					</code>
+				</pre>
+					</section>
+					<section>
+						<h3>Наследование</h3>
+						<pre>
+					<code class="hljs javascript" data-trim>
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.setName = function (name) {
+    this.name = name;
+}
+Person.prototype.getName = function () {
+    return this.name;
+}
+function Student(course, name) {
+    Person.call(this, name);
+    this.course = course;
+}
+
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.getCourse = function () {
+    return this.course;
+}
+var student = new Student(10, 'Anna');
+console.log(student.getName());//Anna
+				</code>
+				</pre>
+					</section>
+					<section>
+						<h3>Вызов метода родителя</h3>
+						<pre>
+					<code class="hljs javascript" data-trim>
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.setName = function (name) {
+    this.name = name;
+}
+Person.prototype.getName = function () {
+    return this.name;
+}
+function Student(name) {
+    Person.call(this, name);
+}
+
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.getName = function () {
+return 'Name: ' + Person.prototype.getName.call(this);
+}
+
+var student = new Student('Anna');
+console.log(student.getName());//Name: Anna  
+				</code>
+				</pre>
+					</section>
+				</section>
+				<section>
+					<h2>Метод toString</h2>
+					<pre>
+					<code class="hljs javascript" data-trim>
+function Person(){
+    this.age = 0;
+}
+var person = new Person();
+alert(person);//[object Object]
+
+Person.prototype.toString = function(){
+    return this.age;
+}
+
+alert(person);//0
+					</code>
+				</pre>
+				</section>
+				<section>
+					<section>
+						<h2>Метод hasOwnProperty</h2>
+						<pre>
+						<code class="hljs javascript" data-trim>
+var person = {
+    age: 24,
+    name: 'Alex'
+};
+
+var student = {
+    course: 1,
+    group: 6
+};
+
+student.__proto__ = person;
+
+for(var key in student)//course group name age
+    console.log(key);
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>С использованием hasOwnProperty</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+var person = {
+    age: 24,
+    name: 'Alex'
+};
+
+var student = {
+    course: 1,
+    group: 6
+};
+
+student.__proto__ = person;
+
+for(var key in student)//course group
+   if(student.hasOwnProperty(key)) console.log(key);
+					</code>
+					</pre>
+					</section>
+				</section>
+				<section>
+					<h2>Метод keys</h2>
+					<pre>
+					<code class="hljs javascript" data-trim>
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.setName = function (name) {
+    this.name = name;
+}
+
+Person.prototype.getName = function () {
+    return this.name;
+}
+
+function Student(course) {
+    this.course = course;
+}
+
+Student.prototype = Object.create(Person.prototype);
+var student = new Student(20);
+console.log(Object.keys(student));//["course"]
+					</code>
+				</pre>
+				</section>
+				<section>
+					<section>
+						<h2>Метод defineProperty</h2>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name) {
+    this.name = name;
+}
+var person = new Person(20);
+
+Object.defineProperty(person, 'age', {
+    enumerable: true,
+    configurable: true,
+    //writable: true, нельзя использовать совместно с get/set
+    //value: 0, нельзя использовать совместно с get/set
+    get: function(){
+        return age + ' лет';
+    },
+    set: function(newAge){
+        age = newAge;
+    }
+});
+
+person.age = 10;
+console.log(person.age);//10
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Еще один пример</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function Person(name) {
+    this.name = name;
+    Object.defineProperty(this, 'age', {
+        enumerable: false,
+        configurable: true,
+        value: 0,
+    });
+}
+
+var person = new Person(20);
+
+console.log(Object.getOwnPropertyNames(person));//["name", "age"]
+console.log(Object.keys(person));//["name"]
+					</code>
+					</pre>
+					</section>
+				</section>
+				<section>
+					<h2>Изменение встроенных прототипов</h2>
+					<pre>
+					<code class="hljs javascript" data-trim>
+function Person(){
+     this.age = 0;
+}
+
+var person = new Person();
+alert(person);//[object Object]
+
+Person.prototype.toString = function(){
+     return this.age;
+}
+
+alert(person);//0
+					</code>
+				</pre>
+				</section>
+				<section>
+					<section>
+						<h2>Операторы проверки типов</h2>
+						<ul>
+							<li>typeof</li>
+							<li>instanceof</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Оператор typeof</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function A(){}
+function B(){}
+
+B.prototype = Object.create(A.prototype);
+
+console.log(typeof undefined);//undefined
+console.log(typeof 0);//number
+console.log(typeof true );//boolean
+console.log(typeof "foo"); //string
+console.log(typeof {}); //object
+console.log(typeof null); //object
+console.log(typeof function(){}); //function
+
+var a = new A();
+console.log(typeof a);//object
+
+var b = new B();
+console.log(typeof b);//object
+						</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Оператор instanceof</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function A(){}
+function B(){}
+
+B.prototype = Object.create(A.prototype);
+
+var a = new A();
+var b = new B();
+
+console.log(a instanceof A);//true
+console.log(b instanceof B);//true
+console.log(a instanceof B);//false
+console.log(b instanceof A);//true
+console.log(a instanceof Object);//true
+console.log(b instanceof Object);//true
+
+console.log(A.prototype instanceof Object);//true
+console.log(B.prototype instanceof Object);//true
+console.log(A.prototype instanceof B);//false
+console.log(B.prototype instanceof A);//true
+console.log(Object.prototype instanceof Object);//false
+						</code>
+					</pre>
+					</section>
+				</section>
+				<!-- Объектная модель документа -->
+				<section>
+					<h1>
+						Объектная модель документа
+					</h1>
+				</section>
+				<section>
+					<h2>Структура браузерных объектов</h2>
+					<img src="img/window.environment.png" alt="">
+				</section>
+				<section>
+					<section>
+						<h2>Пример DOM-дерева</h2>
+						<pre>
+						<code class="hljs html" data-trim>
 &lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1596,30 +1588,30 @@ showArgs(1, 2, 3);//1:2:3
 &lt;/html&gt;
 						</code>
 					</pre>
+					</section>
+					<section>
+						<h3>Вид документа</h3>
+						<img src="img/dom-view.png">
+					</section>
+					<section>
+						<h3>Типы узлов в примере</h3>
+						<ol>
+							<li>Теги образуют узлы-элементы (element node). Одни узлы могут быть вложены в другие. Дерево образуется исключительно
+								за счет них</li>
+							<li>Текст внутри элементов образует текстовые узлы (text node, #text). Текстовый узел содержит исключительно строку текста
+								и не может иметь потомков, то есть он всегда на самом нижнем уровне</li>
+						</ol>
+						<blockquote>
+							Пробелы и переводы строки – это тоже текст, полноправные символы, которые учитываются в DOM
+						</blockquote>
+					</section>
 				</section>
 				<section>
-					<h3>Вид документа</h3>
-					<img src="img/dom-view.png">
-				</section>
-				<section>
-					<h3>Типы узлов в примере</h3>
-					<ol>
-						<li>Теги образуют узлы-элементы (element node). Одни узлы могут быть вложены в другие. Дерево образуется исключительно
-							за счет них</li>
-						<li>Текст внутри элементов образует текстовые узлы (text node, #text). Текстовый узел содержит исключительно строку текста
-							и не может иметь потомков, то есть он всегда на самом нижнем уровне</li>
-					</ol>
-					<blockquote>
-						Пробелы и переводы строки – это тоже текст, полноправные символы, которые учитываются в DOM
-					</blockquote>
-				</section>
-			</section>
-			<section>
-				<h2>Типы узлов</h2>
-				<pre>
-					<code class="hljs javascript">
+					<h2>Типы узлов (w3.org)</h2>
+					<pre>
+					<code class="hljs javascript" data-trim>
 interface Node {
-  // Всевозможные значения nodeType
+  //Всевозможные значения nodeType
   const unsigned short ELEMENT_NODE = 1;
   const unsigned short ATTRIBUTE_NODE = 2;
   const unsigned short TEXT_NODE = 3;
@@ -1636,16 +1628,78 @@ interface Node {
 }
 					</code>
 				</pre>
-			</section>
-			<section>
-				<section>
-					<h2>Навигация по DOM-элементам</h2>
-					<img src="img/dom-links.png" alt="" height="500">
 				</section>
 				<section>
-					<h3>Пример</h3>
-					<pre>
+					<section>
+						<h2>HTMLCollection</h2>
+						<blockquote>
+							Интерфейс HTMLCollection является обобщённой коллекцией (объектом, ведущим себя подобно массиву) элементов (в порядке упоминания
+							в документе) и предоставляет методы и свойства для получения хранящихся в нём элементов
+						</blockquote>
+					</section>
+					<section>
+						<h3>Методы HTMLCollection</h3>
+						<table>
+							<tr>
+								<td>item</td>
+								<td>возвращает узел с порядковым номером index; отсчёт ведётся от нуля. Возвращает null, если index выходит за границы
+									допустимого диапазона</td>
+							</tr>
+							<tr>
+								<td>namedItem</td>
+								<td>возвращает узел, идентификатор или имя которого совпадает со строкой, переданной в аргументе name. Возвращает null,
+									если элемент отсутствует</td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h3>Свойства HTMLCollection</h3>
+						<table>
+							<tr>
+								<td>length</td>
+								<td>возвращает количество элементов в коллекции</td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h3>HTMLCollection - живые коллекции</h3>
+						<pre>
 						<code class="hljs javascript" data-trim>
+var images = document.images;
+console.log(images.length);//1
+
+var img = document.createElement('img');
+document.body.appendChild(img);
+
+console.log(images.length);//2
+						</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Расширяем горизонты (forEach для HtmlCollection)</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function foreach(){
+    var collections = document.body.childNodes;
+	
+    [].forEach.call(collections, function(item, index){
+        console.log(item);
+        console.log(index);
+    });
+}
+						</code>
+					</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Навигация по DOM-элементам</h2>
+						<img src="img/dom-links.png" alt="" height="500">
+					</section>
+					<section>
+						<h3>Пример</h3>
+						<pre>
+						<code class="hljs html" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1679,17 +1733,17 @@ interface Node {
 &lt;/html&gt;
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>document.body</h3>
-					<p>Запись запрещена, только чтение</p>
-					<img src="img/document-body.png" alt="">
-				</section>
-				<section>
-					<h3>document.head</h3>
-					<img src="img/document-head.png" alt="">
-					<p>Только getter, запись без сохранения результата</p>
-					<pre>
+					</section>
+					<section>
+						<h3>document.body</h3>
+						<p>Запись запрещена, только чтение</p>
+						<img src="img/document-body.png" alt="">
+					</section>
+					<section>
+						<h3>document.head</h3>
+						<img src="img/document-head.png" alt="">
+						<p>Только getter, запись без сохранения результата</p>
+						<pre>
 						<code class="hljs javascript" data-trim>			
 function head() {
     console.log(document.head);
@@ -1698,12 +1752,12 @@ function head() {
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>document.title</h3>
-					<img src="img/document-head.png" alt="">
-					<p>Getter + Setter</p>
-					<pre>
+					</section>
+					<section>
+						<h3>document.title</h3>
+						<img src="img/document-head.png" alt="">
+						<p>Getter + Setter</p>
+						<pre>
 						<code class="hljs javascript" data-trim>		
     function title() {
         console.log(document.title);//Navigation
@@ -1712,101 +1766,89 @@ function head() {
     }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>document.links</h3>
-					<img src="img/document-links.png" alt="">
-					<p>Только getter, запись без сохранения результата</p>
-					<pre>
+					</section>
+					<section>
+						<h3>document.links</h3>
+						<img src="img/document-links.png" alt="">
+						<p>Только getter, запись без сохранения результата</p>
+						<pre>
 						<code class="hljs javascript" data-trim>		
- function links(){
+function links(){
     console.log(document.links);
     document.links = [];
     console.log(document.links);
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>document.images</h3>
-					<img src="img/document-images.png" alt="">
-					<p>Только getter, запись без сохранения результата</p>
-					<pre>
+					</section>
+					<section>
+						<h3>document.images</h3>
+						<img src="img/document-images.png" alt="">
+						<p>Только getter, запись без сохранения результата</p>
+						<pre>
 						<code class="hljs javascript" data-trim>		
- function images(){
+function images(){
     console.log(document.images);
     document.images = [];
     console.log(document.images);
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>document.documentElement</h3>
-					<img src="img/document-documentelement.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>document.documentElement</h3>
+						<img src="img/document-documentelement.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>		
 console.log(document.documentElement);
 //root element in document (html)
 					</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Элементы DOM-дерева</h2>
-					<p class="text"><span class="highlight-blue">Дочерние элементы (дети)</span> – элементы, которые лежат непосредственно внутри данного.
-						Например, внутри &lt;HTML&gt; обычно лежат &lt;HEAD&gt; и &lt;BODY&gt;.</p>
-					<p class="text"><span class="highlight-blue">Потомки</span> – все элементы, которые лежат внутри данного, вместе с их детьми, детьми
-						их детей и так далее. То есть, всё поддерево DOM.</p>
+					</section>
 				</section>
 				<section>
-					<h2>Дочерние элементы</h2>
-					<ul>
-						<li>DOM-коллекции не являются JavaScript-массивами</li>
-						<li>В них нет методов массивов (forEach, map, push, pop и т.д)</li>
-						<li>Нельзя перебирать коллекцию через for..in</li>
-						<li>В мире DOM в качестве значения, обозначающего «нет такого элемента» или «узел не найден», используется не undefined,
-							а null.</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Расширяем горизонты (forEach для HtmlCollection)</h3>
-					<pre>
-						<code class="hljs javascript">
-function foreach(){
-    var collections = document.body.childNodes;
-    [].forEach.call(collections, function(item, index){
-         console.log(item);
-        console.log(index);
-    });
-}
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Свойство Node.childNodes</h3>
-					<img src="img/childnodes1.png" alt="">
-					<pre>
-						<code class="hljs javascript">
+					<section>
+						<h2>Элементы DOM-дерева</h2>
+						<p class="text">
+							<span class="highlight-blue">Дочерние элементы (дети)</span> – элементы, которые лежат непосредственно внутри данного. Например, внутри &lt;HTML&gt;
+							обычно лежат &lt;HEAD&gt; и &lt;BODY&gt;</p>
+						<p class="text">
+							<span class="highlight-blue">Потомки</span> – все элементы, которые лежат внутри данного, вместе с их детьми, детьми их детей и так далее. То есть,
+							всё поддерево DOM</p>
+					</section>
+					<section>
+						<h2>Дочерние элементы</h2>
+						<ul>
+							<li>DOM-коллекции (HTMLCollection) не являются JavaScript-массивами. В них нет методов forEach, map, push, pop и т.д.</li>
+							<li>Нельзя перебирать коллекцию через for..in</li>
+							<li>В качестве значения, обозначающего «нет такого элемента» или «узел не найден», используется не undefined, а
+								<span class="highlight-blue">null</span>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Свойство Node.childNodes</h3>
+						<img src="img/childnodes1.png" alt="">
+						<pre>
+						<code class="hljs javascript" data-trim>
  console.log(document.body.childNodes);
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Свойство Node.childNodes</h3>
-					<img src="img/childnodes2.png" alt="">
-					<pre>
-						<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Свойство Node.childNodes</h3>
+						<img src="img/childnodes2.png" alt="">
+						<pre>
+						<code class="hljs javascript" data-trim>
  console.log(document.body.childNodes[1].childNodes);
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Свойство Node.childNodes</h3>
-					<img src="img/childnodes2.png" alt="">
-					<pre>
-						<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Свойство Node.childNodes</h3>
+						<img src="img/childnodes2.png" alt="">
+						<pre>
+						<code class="hljs javascript" data-trim>
 for (var i = 0; i < document.body.childNodes.length; i++) {
       console.log( document.body.childNodes[i] ); 
 }
@@ -1817,111 +1859,111 @@ for (var i = 0; i < container.childNodes.length; i++) {
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Свойство Node.firstChild</h3>
-					<ul>
-						<li>Свойство только для чтения</li>
-						<li>Возвращающее первый потомок узла в древе или null, если узел является бездетным</li>
-						<li>Если узел это документ, он возвращает первый узел в списке своих прямых детей</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Свойство Node.firstChild: пример</h3>
-					<img src="img/document-firstchild.png" alt="">
-					<pre>
-						<code class="hljs javascript">
- function firstChild() {
+					</section>
+					<section>
+						<h3>Свойство Node.firstChild</h3>
+						<ul>
+							<li>Свойство только для чтения</li>
+							<li>Возвращающее первый потомок узла в древе или null, если узел является бездетным</li>
+							<li>Если узел это документ, он возвращает первый узел в списке своих прямых детей</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Свойство Node.firstChild</h3>
+						<img src="img/document-firstchild.png" alt="">
+						<pre>
+						<code class="hljs javascript" data-trim>
+function firstChild() {
     console.log(document.body.firstChild);
     console.log(document.body.childNodes.firstChild);
     console.log(document.body.childNodes[1].firstChild);
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Свойство Node.lastChild</h3>
-					<img src="img/document-lastchild.png" alt="">
-					<pre>
-						<code class="hljs javascript">
- function firstChild() {
+					</section>
+					<section>
+						<h3>Свойство Node.lastChild</h3>
+						<img src="img/document-lastchild.png" alt="">
+						<pre>
+						<code class="hljs javascript" data-trim>
+function firstChild() {
     console.log(document.body.lastChild);
     console.log(document.body.childNodes.lastChild);
     console.log(document.body.childNodes[1].lastChild);
 }
 						</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Соседние элементы и родительский элемент</h2>
-					<ul>
-						<li>children – только дочерние узлы-элементы, то есть соответствующие тегам</li>
-						<li>firstElementChild, lastElementChild – соответственно, первый и последний дети-элементы</li>
-						<li>previousElementSibling, nextElementSibling – соседи-элементы</li>
-						<li>parentElement – родитель-элемент.</li>
-					</ul>
+					</section>
 				</section>
 				<section>
-					<h3>Свойство children</h3>
-					<p>В отличии от childNodes, children удаляет текстовые узлы и комментарии</p>
-					<img src="img/children.png" alt="" height="250">
-					<pre>
+					<section>
+						<h2>Соседние элементы и родительский элемент</h2>
+						<ul>
+							<li>children – только дочерние узлы-элементы, то есть соответствующие тегам</li>
+							<li>firstElementChild, lastElementChild – соответственно, первый и последний дети-элементы</li>
+							<li>previousElementSibling, nextElementSibling – соседи-элементы</li>
+							<li>parentElement – родитель-элемент</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Свойство children</h3>
+						<p>В отличии от childNodes, children удаляет текстовые узлы и комментарии</p>
+						<img src="img/children.png" alt="" height="250">
+						<pre>
 						<code class="hljs javascript" data-trim>
-	function children(){
-        console.log(document.body.children);
-        console.log(document.body.children[0].children);
-    }
+function children(){
+    console.log(document.body.children);
+    console.log(document.body.children[0].children);
+}
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h2>firstElementChild</h2>
-					<p>Доступное только для чтения свойство ParentNode.firstElementChild возвращает первый дочерний элемент объекта (Element)
-						или null если дочерних элементов нет</p>
-					<img src="img/firstElementChild.png" alt="">
-					<pre><code class="hljs javascript" data-trim>  
-	function firstElementChild(){
+					</section>
+					<section>
+						<h3>firstElementChild</h3>
+						<p>Доступное только для чтения свойство, возвращает первый дочерний элемент объекта (Element) или null, если дочерних
+							элементов нет</p>
+						<img src="img/firstElementChild.png" alt="">
+						<pre><code class="hljs javascript" data-trim>  
+function firstElementChild(){
     console.log(document.body.firstElementChild);
     console.log(document.body.childNodes.firstElementChild);
     console.log(document.body.childNodes[1].firstElementChild);
 }
 
 	</code></pre>
-				</section>
-				<section>
-					<h2>lastElementChild</h2>
-					<p>Доступное только для чтения свойство ParentNode.firstElementChild возвращает первый дочерний элемент объекта (Element)
-						или null если дочерних элементов нет</p>
-					<img src="img/lastelementchild.png" alt="">
-					<pre><code class="hljs javascript" data-trim>  
- function lastElementChild() {
+					</section>
+					<section>
+						<h3>lastElementChild</h3>
+						<p>Доступное только для чтения свойство, возвращает первый дочерний элемент объекта (Element) или null, если дочерних
+							элементов нет</p>
+						<img src="img/lastelementchild.png" alt="">
+						<pre><code class="hljs javascript" data-trim>  
+function lastElementChild() {
     console.log(document.body.lastElementChild);
     console.log(document.body.childNodes.lastElementChild);
     console.log(document.body.childNodes[1].lastElementChild);
 }
 	</code>
 	</pre>
-				</section>
-				<section>
-					<h2>nextElementSibling (get only)</h2>
-					<p>Содержит узел, который следует сразу за узлом, вызвавшим это свойство или null, если такового не существует</p>
-					<img src="img/nextElementSibling.png" alt="" height="200">
-					<pre><code class="hljs javascript" data-trim>  
- function nextElement() {
+					</section>
+					<section>
+						<h3>nextElementSibling (get only)</h3>
+						<p>Содержит узел, который следует сразу за узлом, вызвавшим это свойство или null, если такового не существует</p>
+						<img src="img/nextElementSibling.png" alt="" height="200">
+						<pre><code class="hljs javascript" data-trim>  
+function nextElement() {
     console.log(document.body.nextElementSibling);
     console.log(document.getElementById('container').children[0].nextElementSibling);
     console.log(document.body.childNodes[1].childNodes[2].nextElementSibling);
 }
 	</code>
 	</pre>
-				</section>
-				<section>
-					<h2>previousElementSibling (get only)</h2>
-					<p>Содержит узел, который следует перед узлом, вызвавшим это свойство или null, если такового не существует</p>
-					<img src="img/previousElementSibling.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>previousElementSibling (get only)</h3>
+						<p>Содержит узел, который следует перед узлом, вызвавшим это свойство или null, если такового не существует</p>
+						<img src="img/previousElementSibling.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>  
 function prevElement() {
     console.log(document.body.previousElementSibling);
@@ -1930,144 +1972,144 @@ function prevElement() {
 }
 	</code>
 	</pre>
-				</section>
-				<section>
-					<h2>parentElement (get only)</h2>
-					<p>
-						Возвращает родителя узла DOM Element, или null если узел не имеет родителя, или его родитель не DOM Element
-					</p>
-					<img src="img/parentelement.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>parentElement (get only)</h3>
+						<p>
+							Возвращает родителя узла DOM Element, или null если узел не имеет родителя, или его родитель не DOM Element
+						</p>
+						<img src="img/parentelement.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim="">
 function parentElement(){
-        console.log(document.getElementById('container').children[1].parentElement);
-        console.log(document.body.childNodes[1].firstElementChild.parentElement);
+    console.log(document.getElementById('container').children[1].parentElement);
+    console.log(document.body.childNodes[1].firstElementChild.parentElement);
 }
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Особые ссылки для таблиц</h2>
-					<small>
-				<table>
-					<tbody>
-						<tr>
-							<td>table.rows </td>
-							<td> коллекция строк TR таблицы</td>
-						</tr>
-						<tr>
-							<td>table.caption/tHead/tFoot</td>
-							<td>ссылки на элементы таблицы CAPTION, THEAD, TFOOT</td>
-						</tr>
-						<tr>
-							<td>table.tBodies</td>
-							<td>коллекция элементов таблицы TBODY, по спецификации их может быть несколько.</td>
-						</tr>
-						<tr>
-							<td>tbody.rows</td>
-							<td>коллекция строк TR секции.</td>
-						</tr>
-						<tr>
-							<td>tr.cells </td>
-							<td>коллекция ячеек TD/TH</td>
-						</tr>
-						<tr>
-							<td>tr.sectionRowIndex </td>
-							<td>номер строки в текущей секции THEAD/TBODY</td>
-						</tr>
-						<tr>
-							<td>tr.rowIndex  </td>
-							<td>номер строки в таблице</td>
-						</tr>
-						<tr>
-							<td>td.cellIndex</td>
-							<td>номер ячейки в строке</td>
-						</tr>
-					</tbody>
-				</table>
-				</small>
+					</section>
 				</section>
 				<section>
-					<h3>Пример таблицы</h3>
-					<pre>
-					<code class="hljs javascript" data-trim="">
-						 &lt;table id="table"&gt;
-        &lt;thead&gt;
-            &lt;tr&gt;
-                &lt;th&gt;Key&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;
-            &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tfoot&gt;
-            &lt;tr&gt;
-                &lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;
-            &lt;/tr&gt;
-        &lt;/tfoot&gt;
-        &lt;tbody&gt;
-            &lt;tr&gt;
-                &lt;td&gt;A&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;
-            &lt;/tr&gt;
-        &lt;/tbody&gt;
+					<section>
+						<h2>Особые ссылки для таблиц</h2>
+						<small>
+							<table>
+								<tbody>
+									<tr>
+										<td>table.rows </td>
+										<td> коллекция строк TR таблицы</td>
+									</tr>
+									<tr>
+										<td>table.caption/tHead/tFoot</td>
+										<td>ссылки на элементы таблицы CAPTION, THEAD, TFOOT</td>
+									</tr>
+									<tr>
+										<td>table.tBodies</td>
+										<td>коллекция элементов таблицы TBODY, по спецификации их может быть несколько.</td>
+									</tr>
+									<tr>
+										<td>tbody.rows</td>
+										<td>коллекция строк TR секции.</td>
+									</tr>
+									<tr>
+										<td>tr.cells </td>
+										<td>коллекция ячеек TD/TH</td>
+									</tr>
+									<tr>
+										<td>tr.sectionRowIndex </td>
+										<td>номер строки в текущей секции THEAD/TBODY</td>
+									</tr>
+									<tr>
+										<td>tr.rowIndex </td>
+										<td>номер строки в таблице</td>
+									</tr>
+									<tr>
+										<td>td.cellIndex</td>
+										<td>номер ячейки в строке</td>
+									</tr>
+								</tbody>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>Пример таблицы</h3>
+						<pre>
+					<code class="hljs html" data-trim="">
+&lt;table id="table"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Key&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;A&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
 &lt;/table&gt;
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>table.rows</h3>
-					<img src="img/table.rows.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>table.rows</h3>
+						<img src="img/table.rows.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
-						 function rows(){
+function rows(){
     var table = document.getElementById('table');
     console.log(table.rows);
 }
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>table.tBodies</h3>
-					<img src="img/table.tbody.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>table.tBodies</h3>
+						<img src="img/table.tbody.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
-  function tbody() {
+function tbody() {
     var table = document.getElementById('table');
     console.log(table.tBodies);
 }
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>row.cells</h3>
-					<img src="img/table.cells.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>row.cells</h3>
+						<img src="img/table.cells.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
- function cells(){
+function cells(){
     var row = document.getElementById('table').rows[0];
     console.log(row.cells);
 }
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Поиск элементов</h2>
-					<ul>
-						<li>getElementById</li>
-						<li>getElementsByTagName</li>
-						<li>getElementsByName</li>
-						<li>getElementsByClassName</li>
-						<li>querySelectorAll</li>
-						<li>querySelector</li>
-						<li>closest</li>
-					</ul>
+					</section>
 				</section>
 				<section>
-					<h3>getElementById</h3>
-					<p>Оптимизация баузера (работает быстро). Внутреннее соответствие id -> элемент</p>
-					<img src="img/document-getElementById.png" alt="">
-					<pre>
+					<section>
+						<h2>Поиск элементов</h2>
+						<ul>
+							<li>getElementById</li>
+							<li>getElementsByTagName</li>
+							<li>getElementsByName</li>
+							<li>getElementsByClassName</li>
+							<li>querySelectorAll</li>
+							<li>querySelector</li>
+							<li>closest</li>
+						</ul>
+					</section>
+					<section>
+						<h3>getElementById</h3>
+						<p>Оптимизация баузера (работает быстро). Внутреннее соответствие id -> элемент</p>
+						<img src="img/document-getElementById.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>
 function getElementById(){
     console.log(document.getElementById('container'));
@@ -2075,12 +2117,12 @@ function getElementById(){
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>getElementsByTagName</h3>
-					<p>При изменении документа – изменяется и результат запроса</p>
-					<img src="img/document-getElementsByTagName.png" alt="" height="300">
-					<pre>
+					</section>
+					<section>
+						<h3>getElementsByTagName</h3>
+						<p>При изменении документа – изменяется и результат запроса</p>
+						<img src="img/document-getElementsByTagName.png" alt="" height="300">
+						<pre>
 											<code class="hljs javascript" data-trim>
 function getElementsByTagName(){
     console.log(document.getElementsByTagName('img'));
@@ -2089,24 +2131,24 @@ function getElementsByTagName(){
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>getElementsByName</h3>
-					<img src="img/document-getElementsByName.png" alt="">
-					<pre>
-											<code class="hljs javascript" data-trim>
-  function getElementsByName() {
+					</section>
+					<section>
+						<h3>getElementsByName</h3>
+						<img src="img/document-getElementsByName.png" alt="">
+						<pre>
+						<code class="hljs javascript" data-trim>
+function getElementsByName() {
     console.log(document.getElementsByName('title__1'));
     console.log(document.getElementsByName('content'));
     console.log(document.getElementsByName('img'));
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>getElementsByClassName</h3>
-					<img src="img/document-getelementbyclassname.png" alt="" height="350">
-					<pre>
+					</section>
+					<section>
+						<h3>getElementsByClassName</h3>
+						<img src="img/document-getelementbyclassname.png" alt="" height="350">
+						<pre>
 						<code class="hljs javascript" data-trim>
 function getElementsByClassName() {
     console.log(document.getElementsByClassName('content'));
@@ -2115,18 +2157,18 @@ function getElementsByClassName() {
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Оптимизация запросов getElementsBy...</h3>
-					<p>Firefox + IE + Edge</p>
-					<ol>
-						<li>Перебрать подэлементы document.body в порядке их появления в поддереве</li>
-						<li>Запоминать все найденные элементы во внутренней структуре данных, чтобы при повторном обращении обойтись без поиска</li>
-					</ol>
-				</section>
-				<section>
-					<h3>Пример</h3>
-					<pre>
+					</section>
+					<section>
+						<h3>Оптимизация запросов getElementsBy...</h3>
+						<p>Firefox + IE + Edge</p>
+						<ol>
+							<li>Перебрать подэлементы document.body в порядке их появления в поддереве</li>
+							<li>Запоминать все найденные элементы во внутренней структуре данных, чтобы при повторном обращении обойтись без поиска</li>
+						</ol>
+					</section>
+					<section>
+						<h3>Пример</h3>
+						<pre>
 						<code class="hljs javascript" data-trim>
 var elems = document.getElementsByTagName('div');
 console.log(elems[0]);
@@ -2135,34 +2177,34 @@ console.log(elems[500]);
 console.log(elems.length);
 						</code>
 					</pre>
-					<small>
-					<ol>
-						<li>Браузер создаёт пустую «живую коллекцию» elems, но ничего не ищет</li>
-						<li>Перебирает элементы, пока не найдёт первый div. Запоминает его и возвращает</li>
-						<li>Перебирает элементы дальше, пока не найдёт элемент с индексом 995. Запоминает все найденные</li>
-						<li>Возвращает ранее заполненный элемент с индексом 500, без дополнительного поиска</li>
-						<li>Продолжает обход поддерева с элемента, на котором остановился (995) и до конца. Запоминает найденные элементы и возвращает
-							их количество</li>
-					</ol>
-					</small>
-				</section>
-				<section>
-					<h3>Оптимизация запросов getElementsBy...</h3>
-					<p>Webkit (Chrome + Safari + Opera)</p>
-					<blockquote>
-						Перебирает подэлементы body. Запоминает только последний найденный элемент, а также, по окончании перебора – длину коллекции
-					</blockquote>
-					<p>Отличия от предыдущего способа</p>
-					<ul>
-						<li>Кеширование используется меньше</li>
-						<li>Запоминает только последний элемент</li>
-						<li>Требует меньше памяти, но менее эффективнее при повторном доступе к предыдущим элементам</li>
-						<li>Одинаково хорошо работает при последовательном переборе коллекции, без возврата к ранее выбранным</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Пример</h3>
-					<pre>
+						<small>
+							<ol>
+								<li>Браузер создаёт пустую «живую коллекцию» elems, но ничего не ищет</li>
+								<li>Перебирает элементы, пока не найдёт первый div. Запоминает его и возвращает</li>
+								<li>Перебирает элементы дальше, пока не найдёт элемент с индексом 995. Запоминает все найденные</li>
+								<li>Возвращает ранее заполненный элемент с индексом 500, без дополнительного поиска</li>
+								<li>Продолжает обход поддерева с элемента, на котором остановился (995) и до конца. Запоминает найденные элементы и возвращает
+									их количество</li>
+							</ol>
+						</small>
+					</section>
+					<section>
+						<h3>Оптимизация запросов getElementsBy...</h3>
+						<p>Webkit (Chrome + Safari + Opera)</p>
+						<blockquote>
+							Перебирает подэлементы body. Запоминает только последний найденный элемент, а также, по окончании перебора – длину коллекции
+						</blockquote>
+						<p>Отличия от предыдущего способа</p>
+						<ul>
+							<li>Кеширование используется меньше</li>
+							<li>Запоминает только последний элемент</li>
+							<li>Требует меньше памяти, но менее эффективнее при повторном доступе к предыдущим элементам</li>
+							<li>Одинаково хорошо работает при последовательном переборе коллекции, без возврата к ранее выбранным</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Пример</h3>
+						<pre>
 						<code class="hljs javascript" data-trim>
 var elems = document.getElementsByTagName('div');
 console.log(elems[0]);
@@ -2171,22 +2213,27 @@ console.log(elems[500]);
 console.log(elems.length);
 						</code>
 					</pre>
-					<small>
-<ol>
-	<li>Браузер создаёт пустую «живую коллекцию» elems. Пока ничего не ищет.</li>
-	<li>Перебирает элементы, пока не найдёт первый div. Запоминает его и возвращает.</li>
-	<li>Перебирает элементы дальше, пока не найдёт элемент с индексом 995. Запоминает его и возвращает.</li>
-	<li>Браузер запоминает только последний найденный, поэтому не помнит об элементе 500. Нужно найти его перебором поддерева. Этот перебор можно начать либо с начала – вперед по поддереву, 500-й по счету) либо с элемента 995 – назад по поддереву, 495-й по счету. Так как назад разница в индексах меньше, то браузер выбирает второй путь и идёт от 995-го назад 495 раз. Запоминает теперь уже 500-й элемент и возвращает его.</li>
-	<li>Продолжает обход поддерева с 500-го (не 995-го!) элемента и до конца. Запоминает число найденных элементов и возвращает его.</li>
-</ol>
-</small>
-				</section>
-				<section>
-					<h3>querySelectorAll</h3>
-					<p>Перебирает все подэлементы внутри элемента и проверяет каждый элемент на соответствие запросу</p>
-					<p></p>
-					<img src="img/document-queryAll.png" alt="" height="250">
-					<pre>
+						<small>
+							<ol>
+								<li>Браузер создаёт пустую «живую коллекцию» elems. Пока ничего не ищет.</li>
+								<li>Перебирает элементы, пока не найдёт первый div. Запоминает его и возвращает.</li>
+								<li>Перебирает элементы дальше, пока не найдёт элемент с индексом 995. Запоминает его и возвращает.</li>
+								<li>Браузер запоминает только последний найденный, поэтому не помнит об элементе 500. Нужно найти его перебором поддерева.
+									Этот перебор можно начать либо с начала – вперед по поддереву, 500-й по счету) либо с элемента 995 – назад по поддереву,
+									495-й по счету. Так как назад разница в индексах меньше, то браузер выбирает второй путь и идёт от 995-го назад
+									495 раз. Запоминает теперь уже 500-й элемент и возвращает его.</li>
+								<li>Продолжает обход поддерева с 500-го (не 995-го!) элемента и до конца. Запоминает число найденных элементов и возвращает
+									его.
+								</li>
+							</ol>
+						</small>
+					</section>
+					<section>
+						<h3>querySelectorAll</h3>
+						<p>Перебирает все подэлементы внутри элемента и проверяет каждый элемент на соответствие запросу</p>
+						<p></p>
+						<img src="img/document-queryAll.png" alt="" height="250">
+						<pre>
 						<code class="hljs javascript" data-trim>
 //Результаты поиска сохраняются в кеше пока документ не изменится
 function querySelectorAll(){
@@ -2195,107 +2242,107 @@ function querySelectorAll(){
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>querySelector</h3>
-					<img src="img/document-query.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>querySelector</h3>
+						<img src="img/document-query.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>
-	function querySelector(){
-         console.log(document.querySelector('#container'));
-         console.log(document.querySelector('div.content .title'));
-    }
+function querySelector(){
+    console.log(document.querySelector('#container'));
+    console.log(document.querySelector('div.content .title'));
+}
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>closest</h3>
-					<img src="img/element-closest.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>closest</h3>
+						<img src="img/element-closest.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>
- function closest() {
+function closest() {
     var link = document.getElementsByTagName('a')[0];
     console.log(link.closest('.content'));
     console.log(document.querySelector('#container'));
 }
 						</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Основные свойства элементов</h2>
-					<small>
-				<table>
-					<tbody>
-						<tr>
-							<td>attributes</td>
-							<td>возвращает все атрибуты элемента</td>
-						</tr>
-						<tr>
-							<td>classList</td>
-							<td>возвращает псевдомассив DOMTokenList</td>
-						</tr>
-							<tr>
-							<td>className</td>
-							<td>возвращает/задает атрибута class элемента</td>
-						</tr>
-							<tr>
-							<td>clientHeight</td>
-							<td>CSSheight + CSSpadding - horizontalScrollHeight</td>
-						</tr>
-							<tr>
-							<td>clientWidth</td>
-							<td>CSSwidth + CSSpadding - horizontalScrollWidth</td>
-						</tr>
-<tr>
-	<td>data</td>
-	<td>содержимое тестового узла</td>
-</tr>
-<tr>
-	<td>firstElementChild</td>
-	<td>возвращает первый дочерний элемент объекта</td>
-</tr>
-	<tr>
-							<td>id</td>
-							<td>возвращает идентификатор элемента в DOM</td>
-						</tr>
-							<tr>
-							<td>innerHTML</td>
-							<td>возвращает/задает HTML-содержимое в виде строки</td>
-						</tr>
-						<tr>
-							<td>hidden</td>
-							<td>возвращает/задает видимость узла</td>
-						</tr>
-							<tr>
-							<td>name</td>
-							<td>возвращает/задает атрибут name</td>
-						</tr>
-<tr>
-	<td>outerHTML</td>
-	<td>возвращает HTML (при записи заменяется на новый)</td>
-</tr>
-							<tr>
-							<td>scroll[Height...]</td>
-							<td>высота контента, включая содержимое, невидимое из-за прокрутки</td>
-						</tr>
-<tr>
-	<td>shadowRoot</td>
-	<td>внутренний DOM элемента</td>
-</tr>
-							<tr>
-							<td>tagName</td>
-							<td>возвращает HTML-тег элемента</td>
-						</tr>
-					</tbody>
-				</table>
-			</small>
+					</section>
 				</section>
 				<section>
-					<h3>attributes</h3>
-					<img src="img/element-attributes.png" alt="">
-					<pre>
+					<section>
+						<h2>Основные свойства элементов</h2>
+						<small>
+							<table>
+								<tbody>
+									<tr>
+										<td>attributes</td>
+										<td>возвращает все атрибуты элемента</td>
+									</tr>
+									<tr>
+										<td>classList</td>
+										<td>возвращает псевдомассив DOMTokenList</td>
+									</tr>
+									<tr>
+										<td>className</td>
+										<td>возвращает/задает атрибута class элемента</td>
+									</tr>
+									<tr>
+										<td>clientHeight</td>
+										<td>CSSheight + CSSpadding - horizontalScrollHeight</td>
+									</tr>
+									<tr>
+										<td>clientWidth</td>
+										<td>CSSwidth + CSSpadding - horizontalScrollWidth</td>
+									</tr>
+									<tr>
+										<td>data</td>
+										<td>содержимое тестового узла</td>
+									</tr>
+									<tr>
+										<td>firstElementChild</td>
+										<td>возвращает первый дочерний элемент объекта</td>
+									</tr>
+									<tr>
+										<td>id</td>
+										<td>возвращает идентификатор элемента в DOM</td>
+									</tr>
+									<tr>
+										<td>innerHTML</td>
+										<td>возвращает/задает HTML-содержимое в виде строки</td>
+									</tr>
+									<tr>
+										<td>hidden</td>
+										<td>возвращает/задает видимость узла</td>
+									</tr>
+									<tr>
+										<td>name</td>
+										<td>возвращает/задает атрибут name</td>
+									</tr>
+									<tr>
+										<td>outerHTML</td>
+										<td>возвращает HTML (при записи заменяется на новый)</td>
+									</tr>
+									<tr>
+										<td>scroll[Height...]</td>
+										<td>высота контента, включая содержимое, невидимое из-за прокрутки</td>
+									</tr>
+									<tr>
+										<td>shadowRoot</td>
+										<td>внутренний DOM элемента</td>
+									</tr>
+									<tr>
+										<td>tagName</td>
+										<td>возвращает HTML-тег элемента</td>
+									</tr>
+								</tbody>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>attributes</h3>
+						<img src="img/element-attributes.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>
 function attributes() {
     var container = document.getElementById('container');
@@ -2305,81 +2352,85 @@ function attributes() {
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>innerHTML & outerHTML</h3>
-					<pre>
+					</section>
+					<section>
+						<h3>innerHTML & outerHTML</h3>
+						<pre>
 						<code class="hljs javascript" data-trim>
- function html() {
+function html() {
     var container = document.getElementById('container');
     console.log(container.innerHTML);
     console.log(container.outerHTML);
+	
     container.outerHTML = '<span>Text</span>';
     console.log(container.outerHTML);//empty
     console.log(document.getElementById('container'));//null
 }
 						</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Основные методы элемента</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>hasAttribute</td>
-								<td>проверяет наличие атрибута</td>
-							</tr>
-							<tr>
-								<td>getAttribute</td>
-								<td>получает значение атрибута</td>
-							</tr>
-							<tr>
-								<td>setAttribute</td>
-								<td>устанавливает атрибут</td>
-							</tr>
-							<tr>
-								<td>removeAttribute</td>
-								<td>удаляет атрибут</td>
-							</tr>
-							<tr>
-								<td>contains</td>
-								<td>проверка вложенности элементов</td>
-							</tr>
-							<tr>
-								<td>matches</td>
-								<td>проверка соответствия указанному css-селектору</td>
-							</tr>
-							<tr>
-								<td>remove</td>
-								<td>удаляет узел из дерева DOM</td>
-							</tr>
-						</tbody>
-					</table>
+					</section>
 				</section>
 				<section>
-					<h3>Работа с аттрибутами</h3>
-					<pre>
+					<section>
+						<h2>Основные методы элемента</h2>
+						<table>
+							<tbody>
+								<tr>
+									<td>hasAttribute</td>
+									<td>проверяет наличие атрибута</td>
+								</tr>
+								<tr>
+									<td>getAttribute</td>
+									<td>получает значение атрибута</td>
+								</tr>
+								<tr>
+									<td>setAttribute</td>
+									<td>устанавливает атрибут</td>
+								</tr>
+								<tr>
+									<td>removeAttribute</td>
+									<td>удаляет атрибут</td>
+								</tr>
+								<tr>
+									<td>contains</td>
+									<td>проверка вложенности элементов</td>
+								</tr>
+								<tr>
+									<td>matches</td>
+									<td>проверка соответствия указанному css-селектору</td>
+								</tr>
+								<tr>
+									<td>remove</td>
+									<td>удаляет узел из дерева DOM</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Работа с аттрибутами</h3>
+						<pre>
 						<code class="hljs javascript" data-trim>
 function attribute() {
     var link = document.getElementsByTagName('a')[0];
+	
     console.log(link.hasAttribute('href'));//true
     console.log(link.getAttribute('href'));//http://google.com
     console.log(link.getAttribute('class'));//link
+	
     link.setAttribute('href', 'habrahabr.ru');
     console.log(link.getAttribute('href'));//habrahabr.ru
     link.removeAttribute('href');
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Пример matches</h3>
-					<pre>
+					</section>
+					<section>
+						<h3>Пример matches</h3>
+						<pre>
 						<code class="hljs javascript" data-trim>
- function matches() {
+function matches() {
     var link = document.getElementsByTagName('a')[0];
+	
     console.log(link.matches('a'));//true
     console.log(link.matches('.link'));//true
     console.log(link.matches('#container a'));//true
@@ -2388,12 +2439,11 @@ function attribute() {
 }
 						</code>
 					</pre>
+					</section>
 				</section>
-			</section>
-			<section>
 				<section>
-					<h2>Добавление и удаление узлов</h2>
-					<small>
+					<section>
+						<h2>Добавление и удаление узлов</h2>
 						<table>
 							<tbody>
 								<tr>
@@ -2426,14 +2476,13 @@ function attribute() {
 								</tr>
 							</tbody>
 						</table>
-					</small>
-				</section>
-				<section>
-					<h3>Добавление элемента</h3>
-					<img src="img/element-appendchild.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>Добавление элемента</h3>
+						<img src="img/element-appendchild.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>
- function create(){
+function create(){
     var div = document.createElement('div');
     div.className = 'test';
     div.id = 'test';
@@ -2442,11 +2491,11 @@ function attribute() {
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Клонирование элемента</h3>
-					<img src="img/element-clone.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>Клонирование элемента</h3>
+						<img src="img/element-clone.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>
 function clone(){
     var title = document.querySelector('.title');
@@ -2455,15 +2504,16 @@ function clone(){
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Замена элемента</h3>
-					<img src="img/element-replace.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>Замена элемента</h3>
+						<img src="img/element-replace.png" alt="">
+						<pre>
 						<code class="hljs javascript" data-trim>
 function replace() {
     var title = document.querySelector('.title'),
         h3 = title.firstElementChild;
+		
     var div = document.createElement('div');
     div.className = 'test';
     div.id = 'test';
@@ -2473,52 +2523,52 @@ function replace() {
 }
 						</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<h1>События</h1>
-			</section>
-			<section>
-				<h2>Браузерные события</h2>
-				<small>
-				<ul>
-					<li>Событие – сигнал от браузера о том, что что-то произошло</li>
-					<li>Тип события - строка, определяющая тип действия, вызвавшего событие (mousemove, click..)</li>
-					<li>Цель события - объект, в котором возникло событие или с которым это событие связано(Window, Document и Element)</li>
-					<li>Обработчик события - функция, которая обрабатывает, или откликается на событие</li>
-					<li>Объект события - объект, связанный с определенным событием и содержащий информацию об этом событии. Объекты событий
-						передаются функции обработчика события в виде аргумента</li>
-					<li>Распространение события - процесс, в ходе которого браузер решает, в каких объектах следует вызвать обработчики событий
-					</li>
-				</ul>	
-				</small>
-			</section>
-			<section>
-				<section>
-					<h2>Обработчик события</h2>
-					<blockquote>
-						Событию можно назначить обработчик, то есть функцию, которая сработает, как только событие произошло. Именно благодаря обработчикам
-						JavaScript-код может реагировать на действия посетителя
-					</blockquote>
-					<p>Существует несколько способов назначения обработчика события</p>
+					</section>
 				</section>
 				<section>
-					<h3>
-						Использование атрибута HTML
-					</h3>
-					<pre>
-						<code class="hljs javascript">
+					<h1>События</h1>
+				</section>
+				<section>
+					<h2>Браузерные события</h2>
+					<small>
+						<ul>
+							<li>Событие – сигнал от браузера о том, что что-то произошло</li>
+							<li>Тип события - строка, определяющая тип действия, вызвавшего событие (mousemove, click..)</li>
+							<li>Цель события - объект, в котором возникло событие или с которым это событие связано(Window, Document и Element)</li>
+							<li>Обработчик события - функция, которая обрабатывает, или откликается на событие</li>
+							<li>Объект события - объект, связанный с определенным событием и содержащий информацию об этом событии. Объекты событий
+								передаются функции обработчика события в виде аргумента</li>
+							<li>Распространение события - процесс, в ходе которого браузер решает, в каких объектах следует вызвать обработчики событий
+							</li>
+						</ul>
+					</small>
+				</section>
+				<section>
+					<section>
+						<h2>Обработчик события</h2>
+						<blockquote>
+							Событию можно назначить обработчик, то есть функцию, которая сработает, как только событие произошло. Именно благодаря обработчикам
+							JavaScript-код может реагировать на действия посетителя
+						</blockquote>
+						<p>Существует несколько способов назначения обработчика события</p>
+					</section>
+					<section>
+						<h3>
+							Использование атрибута HTML
+						</h3>
+						<pre>
+						<code class="hljs html" data-trim>
 <element onclick="script"></element>
 
 </code>
 					</pre>
-					<pre>
-						<code class="hljs javascript">
+						<pre>
+						<code class="hljs html" data-trim>
 <input value="click me" onclick="alert('Click!')" type="button">
 						</code>
 					</pre>
-					<pre>
-						<code class="hljs javascript">
+						<pre>
+						<code class="hljs html" data-trim>
 <p id="text" onclick="setColor()">Click me to change my text color</p>
 
 function myFunction() {
@@ -2526,12 +2576,12 @@ function myFunction() {
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Использование свойства DOM-объекта</h3>
-					<pre>
-						<code class="hljs javascript">
-<input id="elem" type="button" value="Нажми меня" />
+					</section>
+					<section>
+						<h3>Использование свойства DOM-объекта</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+<input id="elem" type="button" value="Нажми" />
 <script>
   elem.onclick = function() {
     alert( 'Спасибо' );
@@ -2539,47 +2589,47 @@ function myFunction() {
 </script>
 						</code>
 					</pre>
-					<pre>
-						<code class="hljs javascript">
-<input type="button" id="elem" onclick="alert('До')" value="Нажми меня" />
+						<pre>
+						<code class="hljs javascript" data-trim>
+<input type="button" id="elem" onclick="alert('До')" value="Нажми" />
 <script>
-  elem.onclick = function() { // перезапишет существующий обработчик
-    alert( 'После' ); // выведется только это
+  elem.onclick = function() { //перезапишет существующий обработчик
+    alert( 'После' ); //выведется только это
   };
 </script>
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Доступ к элементу через this</h3>
-					<p class="text">Внутри обработчика события this ссылается на текущий элемент, то есть на тот, на котором он сработал. Это можно использовать,
-						чтобы получить свойства или изменить элемент.</p>
-					<pre>
-						<code class="hljs javascript">
-<button onclick="alert(this.innerHTML)">Нажми меня</button>//Нажми меня
+					</section>
+					<section>
+						<h3>Доступ к элементу через this</h3>
+						<p class="text">Внутри обработчика события this ссылается на текущий элемент, то есть на тот, на котором он сработал. Это можно использовать,
+							чтобы получить свойства или изменить элемент</p>
+						<pre>
+						<code class="hljs html" data-trim>
+<button onclick="alert(this.innerHTML)">Нажми</button>//Нажми
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>addEventListener</h3>
-					<pre>
-						<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>addEventListener</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
 element.addEventListener(event, handler[, phase]);
 						</code>
 					</pre>
-					<ul>
-						<li>event - имя события, например click</li>
-						<li>handler- ссылка на функцию, которую надо поставить обработчиком</li>
-						<li>phase - необязательный аргумент, «фаза», на которой обработчик должен сработать</li>
-					</ul>
-					<pre>
+						<ul>
+							<li>event - имя события, например click</li>
+							<li>handler- ссылка на функцию, которую надо поставить обработчиком</li>
+							<li>phase - необязательный аргумент, «фаза», на которой обработчик должен сработать</li>
+						</ul>
+						<pre>
 						<code class="hljs javascript" data-trim>
 elem.addEventListener( "click" , function() {
 	console.log('Thank you!');
 });
 						</code>
 					</pre>
-					<pre>
+						<pre>
 						<code class="hljs javascript" data-trim>
 function thanks(){
 	console.log('Thank you!');
@@ -2587,12 +2637,12 @@ function thanks(){
 elem.addEventListener( "click" ,  thanks);
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Еще пример addEventListener</h3>
-					<pre>
+					</section>
+					<section>
+						<h3>Еще пример addEventListener</h3>
+						<pre>
 						<code class="javascript hljs javascript" data-trim>
-							&lt;input id="elem" type="button" value="Нажми меня"/&gt;
+&lt;input id="elem" type="button" value="Нажми"/&gt;
 &lt;script&gt;
   function handler1() {
     alert('Спасибо!');
@@ -2603,85 +2653,86 @@ elem.addEventListener( "click" ,  thanks);
   }
 
   elem.onclick = function() { alert("Привет"); };
-  elem.addEventListener("click", handler1); // Спасибо!
-  elem.addEventListener("click", handler2); // Спасибо ещё раз!
+  elem.addEventListener("click", handler1); //Спасибо!
+  elem.addEventListener("click", handler2); //Спасибо ещё раз!
 &lt;/script&gt;
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>removeEventListener</h3>
-					<p>Передается таже функция-обработчик, которая была назначена на событие</p>
-					<pre>
-						<code class="hljs javascript">
-// передать те же аргументы, что были у addEventListener
+					</section>
+					<section>
+						<h3>removeEventListener</h3>
+						<p>Передается таже функция-обработчик, которая была назначена на событие</p>
+						<pre>
+						<code class="hljs javascript" data-trim>
+//передать те же аргументы, что были у addEventListener
 element.removeEventListener(event, handler[, phase]);
 						</code>
 					</pre>
-					<pre>
-						<code class="hljs javascript">
+						<pre>
+						<code class="hljs javascript" data-trim>
 elem.addEventListener( "click" , function() {alert('Спасибо!')});
-// ....не сработает
+//....не сработает
 elem.removeEventListener( "click", function() {alert('Спасибо!')});
 						</code>
 					</pre>
-					<pre>
-						<code class="hljs javascript">
+						<pre>
+						<code class="hljs javascript" data-trim>
 function handler() {
   alert( 'Спасибо!' );
 }
 input.addEventListener("click", handler);
-// ....
+//....
 input.removeEventListener("click", handler);
 						</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Создание события</h2>
-					<ul>
-						<li>Event()</li>
-						<li>EventTarget.dispatchEvent()</li>
-						<li>CustomEvent()</li>
-					</ul>
+					</section>
 				</section>
 				<section>
-					<h3>Event</h3>
-					<pre>
-						<code class="hljs javascript">
+					<section>
+						<h2>Создание события</h2>
+						<ul>
+							<li>Event()</li>
+							<li>EventTarget.dispatchEvent()</li>
+							<li>CustomEvent()</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Event</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
 event = new Event(typeArg, eventInit);
 						</code>
 					</pre>
-					<ul>
-						<li>Тип события – может быть как своим, так и встроенным, к примеру "click"</li>
-						<li>Флаги – объект вида { bubbles: true/false, cancelable: true/false }...</li>
-					</ul>
-					<pre>
-						<code class="hljs javascript">
+						<ul>
+							<li>Тип события – может быть как своим, так и встроенным, к примеру "click"</li>
+							<li>Флаги – объект вида { bubbles: true/false, cancelable: true/false }...</li>
+						</ul>
+						<pre>
+						<code class="hljs javascript" data-trim>
 var ev = new Event("look", {"bubbles":true, "cancelable":false});
 document.dispatchEvent(ev);
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>dispatchEvent</h3>
-					<ul>
-						<li>Отправляет событие в общую систему событий</li>
-						<li>Cобытие подчиняется тем же правилам поведения (захват и всплытие) как и непосредственно инициированные события</li>
-					</ul>
-					<pre>
+					</section>
+					<section>
+						<h3>dispatchEvent</h3>
+						<ul>
+							<li>Отправляет событие в общую систему событий</li>
+							<li>Cобытие подчиняется тем же правилам поведения (захват и всплытие) как и непосредственно инициированные события</li>
+						</ul>
+						<pre>
 					<code class="hljs javascript" data-trim>
-						cancelled = !target.dispatchEvent(event)
+cancelled = !target.dispatchEvent(event)
 //event - объект события, который инициализируется
 //target - используется для инициализации Event.target 
 //и установки события, которое обработчик вызывает
+
 //return - false если хотя бы один из обработчиков 
 //этого события вызовал preventDefault
 					</code>
 	</pre>
-					<pre>
-						<code class="hljs javascript" data-trim="">
+						<pre>
+						<code class="hljs html" data-trim="">
 &lt;button id="elem" onclick="alert('Клик');"&gt;Автоклик&lt;/button&gt;
 &lt;script&gt;
   var event = new Event("click");
@@ -2689,15 +2740,15 @@ document.dispatchEvent(ev);
 &lt;/script&gt;
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>CustomEvent</h3>
-					<p>
-						Идентичен Event(), НО у второго аргумента-объекта есть дополнительное свойство detail, в котором можно указывать дополнительную
-						информацию
-					</p>
-					<pre>
-						<code class="hljs javascript" data-trim>							
+					</section>
+					<section>
+						<h3>CustomEvent</h3>
+						<p>
+							Идентичен Event(), НО у второго аргумента-объекта есть дополнительное свойство detail, в котором можно указывать дополнительную
+							информацию
+						</p>
+						<pre>
+						<code class="hljs html" data-trim>							
 &lt;h1 id="elem"&gt;Element&lt;/h1&gt;
 
 &lt;script&gt;
@@ -2714,30 +2765,31 @@ var elem = document.getElementById('elem');
 &lt;/script&gt;
 						</code>
 					</pre>
+					</section>
 				</section>
-			</section>
-			<section>
-				<h2>Типы событий</h2>
-				<ul>
-					<li>События мыши</li>
-					<li>События документа Window</li>
-					<li>События клавиатуры</li>
-					<li>События формы и ЭУ</li>
-					<li>События буфера обмена</li>
-					<li>События перетаскивания</li>
-					<li>События медиа</li>
-					<li>События CSS</li>
-				</ul>
-			</section>
-			<section>
 				<section>
-					<h2>Объект события</h2>
-					<img src="img/event.png" alt="">
-					<pre>
+					<h2>Типы событий</h2>
+					<ul>
+						<li>События мыши</li>
+						<li>События документа Window</li>
+						<li>События клавиатуры</li>
+						<li>События формы и ЭУ</li>
+						<li>События буфера обмена</li>
+						<li>События перетаскивания</li>
+						<li>События медиа</li>
+						<li>События CSS</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h2>Объект события</h2>
+						<img src="img/event.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
 <form id="el1">
     <input type="submit" id="el2" value="Save">
 </form>
+
 <script>
 function onClick(e) {
     console.log(e);
@@ -2746,66 +2798,67 @@ document.getElementById('el1').addEventListener('click', onClick);
 </script>	
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Основные свойства и методы</h3>
-					<small>
-					<table>
-						<tbody>
-							<tr>
-								<td>type</td>
-								<td>тип события</td>
-							</tr>
-							<tr>
-								<td>currentTarget</td>
-								<td>элемент, на котором сработал обработчик</td>
-							</tr>
-							<tr>
-								<td>target</td>
-								<td>целевой элемент (там, где произошло событие)</td>
-							</tr>
-							<tr>
-								<td>bubbles</td>
-								<td>является ли данное событие всплывающим</td>
-							</tr>
-							<tr>
-								<td>cancelable</td>
-								<td>является ли событие отменяемым</td>
-							</tr>
-							<tr>
-								<td>isTrusted</td>
-								<td>было ли событие инициировано действиями пользователя</td>
-							</tr>
-							<tr>
-								<td>preventDefault()</td>
-								<td>останавливает событие (если оно cancelable) без остановки всплытия</td>
-							</tr>
-							<tr>
-								<td>stopImmediatePropagation()</td>
-								<td>останавливает цепочку вызова событий для последующих слушателей DOM элемента и текущих событий</td>
-							</tr>
-							<tr>
-								<td>stopPropagation()</td>
-								<td>останавливает цепочку вызова событий для последующих слушателей DOM элемента (на текущем элементе все обработчики
-									отработают)
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					</small>
-				</section>
-				<section>
-					<h3>Всплытие событий</h3>
-					<img src="img/event-bubling.jpg" alt="" height="400">
-				</section>
-				<section>
-					<h3>Пример всплытия событий</h3>
-					<img src="img/event5.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>Основные свойства и методы</h3>
+						<small>
+							<table>
+								<tbody>
+									<tr>
+										<td>type</td>
+										<td>тип события</td>
+									</tr>
+									<tr>
+										<td>currentTarget</td>
+										<td>элемент, на котором сработал обработчик</td>
+									</tr>
+									<tr>
+										<td>target</td>
+										<td>целевой элемент (там, где произошло событие)</td>
+									</tr>
+									<tr>
+										<td>bubbles</td>
+										<td>является ли данное событие всплывающим</td>
+									</tr>
+									<tr>
+										<td>cancelable</td>
+										<td>является ли событие отменяемым</td>
+									</tr>
+									<tr>
+										<td>isTrusted</td>
+										<td>было ли событие инициировано действиями пользователя</td>
+									</tr>
+									<tr>
+										<td>preventDefault()</td>
+										<td>останавливает событие (если оно cancelable) без остановки всплытия</td>
+									</tr>
+									<tr>
+										<td>stopImmediatePropagation()</td>
+										<td>останавливает цепочку вызова событий для последующих слушателей DOM элемента и текущих событий</td>
+									</tr>
+									<tr>
+										<td>stopPropagation()</td>
+										<td>останавливает цепочку вызова событий для последующих слушателей DOM элемента (на текущем элементе все обработчики
+											отработают)
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>Всплытие событий</h3>
+						<img src="img/event-bubling.jpg" alt="" height="400">
+					</section>
+					<section>
+						<h3>Пример всплытия событий</h3>
+						<img src="img/event5.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
 <form id="el1">
     <input type="button" id="el2" value="Save">
 </form>
+
 <script>
 function onClick(e) {
     console.log(e);
@@ -2817,15 +2870,16 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Метод stopImmediatePropagation</h3>
-					<img src="img/event3.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>Метод stopImmediatePropagation</h3>
+						<img src="img/event3.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
 <form id="el1">
     <input type="button" id="el2" value="Save">
 </form>
+
 <script>
 function onClick(e) {
     console.log(e);
@@ -2837,11 +2891,11 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Метод stopPropagation</h3>
-					<img src="img/event4.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>Метод stopPropagation</h3>
+						<img src="img/event4.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
 <form id="el1">
     <input type="button" id="el2" value="Save">
@@ -2858,11 +2912,11 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Метод preventDefault</h3>
-					<img src="img/event2.png" alt="">
-					<pre>
+					</section>
+					<section>
+						<h3>Метод preventDefault</h3>
+						<img src="img/event2.png" alt="">
+						<pre>
 					<code class="hljs javascript" data-trim>
 <form id="el1">
 	<input type="submit" id="el2" value="Save">
@@ -2878,54 +2932,54 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>События мыши</h2>
-					<small>
-				<table>
-					<tbody>
-						<tr>
-							<td>click</td>
-							<td>нажатие на элемент левой кнопкой мыши</td>
-						</tr>
-						<tr>
-							<td>dblclick</td>
-							<td>двойное нажатие на элемент левой кнопкой мыши</td>
-						</tr>
-						<tr>
-							<td>contextmenu</td>
-							<td>нажатие на элемент правой кнопкой мыши</td>
-						</tr>
-						<tr>
-							<td>mouseover</td>
-							<td>при наведении мыши на элемент</td>
-						</tr>
-						<tr>
-							<td>mousedown</td>
-							<td>при нажатии мышью на элемент</td>
-						</tr>
-						<tr>
-							<td>mouseup </td>
-							<td>при отжатии мыши на элементе</td>
-						</tr>
-						<tr>
-							<td>mousemove</td>
-							<td>при движении мыши</td>
-						</tr>
-						<tr>
-							<td>onwheel</td>
-							<td>при передвижении колеса мыши над элементом</td>
-						</tr>
-					</tbody>
-				</table>
-				</small>
+					</section>
 				</section>
 				<section>
-					<h3>Простой пример</h3>
-					<pre>
-					<code class="hljs javascript" data-trim>
+					<section>
+						<h2>События мыши</h2>
+						<small>
+							<table>
+								<tbody>
+									<tr>
+										<td>click</td>
+										<td>нажатие на элемент левой кнопкой мыши</td>
+									</tr>
+									<tr>
+										<td>dblclick</td>
+										<td>двойное нажатие на элемент левой кнопкой мыши</td>
+									</tr>
+									<tr>
+										<td>contextmenu</td>
+										<td>нажатие на элемент правой кнопкой мыши</td>
+									</tr>
+									<tr>
+										<td>mouseover</td>
+										<td>при наведении мыши на элемент</td>
+									</tr>
+									<tr>
+										<td>mousedown</td>
+										<td>при нажатии мышью на элемент</td>
+									</tr>
+									<tr>
+										<td>mouseup </td>
+										<td>при отжатии мыши на элементе</td>
+									</tr>
+									<tr>
+										<td>mousemove</td>
+										<td>при движении мыши</td>
+									</tr>
+									<tr>
+										<td>onwheel</td>
+										<td>при передвижении колеса мыши над элементом</td>
+									</tr>
+								</tbody>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>Простой пример</h3>
+						<pre>
+					<code class="hljs html" data-trim>
 <div id="test"></div>
 
 <script>
@@ -2936,11 +2990,11 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Модификаторы shift, alt, ctrl, meta (Mac)</h3>
-					<pre>
-					<code class="hljs javascript" data-trim>	
+					</section>
+					<section>
+						<h3>Модификаторы shift, alt, ctrl, meta (Mac)</h3>
+						<pre>
+					<code class="hljs html" data-trim>	
 <button>Alt+Shift+Кликни меня!</button>
 
 <script>
@@ -2951,10 +3005,10 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Координаты</h3>
-					<pre>	
+					</section>
+					<section>
+						<h3>Координаты</h3>
+						<pre>	
 					<code class"hljs javascript" data-trim>
 <input type="button" id="click" value="Click me">
 <script>
@@ -2968,61 +3022,63 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Client[X,Y] vs Page[X, Y]</h3>
-					<img src="img/pagevsclient.png" alt="">
-				</section>
-				<section>
-					<h3>Получение информации о кнопке</h3>
-					<pre><code class="hljs javascript" data-trim>
+					</section>
+					<section>
+						<h3>Client[X,Y] vs Page[X, Y]</h3>
+						<img src="img/pagevsclient.png" alt="">
+					</section>
+					<section>
+						<h3>Получение информации о кнопке</h3>
+						<pre><code class="hljs hyml" data-trim>
 <input type="button" id="click" value="Click me">
 <script>
 	function onClick(e) {
         console.log(e.which);
         /*
-		event.which == 1 – левая кнопка
-		event.which == 2 – средняя кнопка
-		event.which == 3 – правая кнопка
+        event.which == 1 – левая кнопка
+        event.which == 2 – средняя кнопка
+        event.which == 3 – правая кнопка
         */
     }
-    document.getElementById('click').addEventListener('click', onClick);
+
+    document.getElementById('click')
+    .addEventListener('click', onClick);
 </script>
 	</code>
 	</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>События документа Window</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>DOMContentLoaded</td>
-								<td>HTML загружен и обработан, DOM полностью построена и доступна</td>
-							</tr>
-							<tr>
-								<td>load</td>
-								<td>браузер загрузил все ресурсы</td>
-							</tr>
-							<tr>
-								<td>beforeunload/unload</td>
-								<td>при уходе со страницы</td>
-							</tr>
-							<tr>
-								<td>resize</td>
-								<td>браузер изменил размеры окна</td>
-							</tr>
-							<tr>
-								<td>error</td>
-								<td>при запуске/загрузке ресурса происходит ошибка</td>
-							</tr>
-						</tbody>
-					</table>
+					</section>
 				</section>
 				<section>
-					<h3>Пример DOMContentLoaded</h3>
-					<pre>
+					<section>
+						<h2>События документа Window</h2>
+						<table>
+							<tbody>
+								<tr>
+									<td>DOMContentLoaded</td>
+									<td>HTML загружен и обработан, DOM полностью построена и доступна</td>
+								</tr>
+								<tr>
+									<td>load</td>
+									<td>браузер загрузил все ресурсы</td>
+								</tr>
+								<tr>
+									<td>beforeunload/unload</td>
+									<td>при уходе со страницы</td>
+								</tr>
+								<tr>
+									<td>resize</td>
+									<td>браузер изменил размеры окна</td>
+								</tr>
+								<tr>
+									<td>error</td>
+									<td>при запуске/загрузке ресурса происходит ошибка</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Пример DOMContentLoaded</h3>
+						<pre>
 					<code class="hljs javascript" data-trim>
 &lt;script&gt;
   function ready() {
@@ -3030,7 +3086,7 @@ document.getElementById('el2').addEventListener('click', onClick);
     console.log( "Размеры картинки: " 
 		+ img.offsetWidth + "x" 
 		+ img.offsetHeight );
-//не дожидаемся загрузки картинки ( 0x0 )
+    //не дожидаемся загрузки картинки ( 0x0 )
   }
 
   document.addEventListener("DOMContentLoaded", ready);
@@ -3038,47 +3094,49 @@ document.getElementById('el2').addEventListener('click', onClick);
 &lt;img id="img" src="/logos/doodles/2016/holidays-2016-2748273943.gif"&gt;
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Пример load</h3>
-					<pre>
-					<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Пример load</h3>
+						<pre>
+					<code class="hljs html" data-trim>
 &lt;script&gt;
   window.onload = function() {
     console.log('Документ и все ресурсы загружены');
   };
 &lt;/script&gt;
+
 &lt;iframe src="https://example.com/" style="height:60px"&gt;&lt;/iframe&gt;
 &lt;script src="index.js"&gt;&lt;/script&gt;
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>События клавиатуры</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>keyup</td>
-								<td>отпускание клавиши</td>
-							</tr>
-							<tr>
-								<td>keydown</td>
-								<td>нажатие клавиши</td>
-							</tr>
-							<tr>
-								<td>keypress</td>
-								<td>приводит к появлению символа</td>
-							</tr>
-						</tbody>
-					</table>
+					</section>
 				</section>
 				<section>
-					<h3>Пример keydown</h3>
-					<pre>
-					<code class="hljs javascript" data-trim>
-						 <input type="text" id="text">
+					<section>
+						<h2>События клавиатуры</h2>
+						<table>
+							<tbody>
+								<tr>
+									<td>keyup</td>
+									<td>отпускание клавиши</td>
+								</tr>
+								<tr>
+									<td>keydown</td>
+									<td>нажатие клавиши</td>
+								</tr>
+								<tr>
+									<td>keypress</td>
+									<td>приводит к появлению символа</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Пример keydown</h3>
+						<pre>
+					<code class="hljs html" data-trim>
+<input type="text" id="text">
+
 <script>
     function onKeyUp(e) {
         e.target.style.background = (e.keyCode == 32)
@@ -3089,73 +3147,74 @@ document.getElementById('el2').addEventListener('click', onClick);
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Кроссбраузерный подход</h3>
-					<pre>
-					<code class="hljs javascript">
-// event.type должен быть keypress
+					</section>
+					<section>
+						<h3>Кроссбраузерный подход</h3>
+						<pre>
+					<code class="hljs javascript" data-trim>
+//event.type должен быть keypress
 function getChar(event) {
-  if (event.which == null) { // IE
-    if (event.keyCode < 32) return null; // спец. символ
+  if (event.which == null) { //IE
+    if (event.keyCode < 32) return null; //спец. символ
     return String.fromCharCode(event.keyCode)
   }
 
-  if (event.which != 0 && event.charCode != 0) { // все кроме IE
-    if (event.which < 32) return null; // спец. символ
-    return String.fromCharCode(event.which); // остальные
+  if (event.which != 0 && event.charCode != 0) { //все кроме IE
+    if (event.which < 32) return null; //спец. символ
+    return String.fromCharCode(event.which); //остальные
   }
 
-  return null; // спец. символ
+  return null; //спец. символ
 }
-//Код символа хранится в свойствах: charCode и which. Не совместимость
+//Код символа хранится в свойствах: charCode и which. 
+//Не совместимость
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>События форм и ЭУ</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>blur</td>
-								<td>при потере элементов фокуса</td>
-							</tr>
-							<tr>
-								<td>change</td>
-								<td>по окончании изменении значения элемента формы</td>
-							</tr>
-							<tr>
-								<td>focus</td>
-								<td>при получении элементов фокуса</td>
-							</tr>
-							<tr>
-								<td>invalid</td>
-								<td>при получении элементом статуса invalid</td>
-							</tr>
-							<tr>
-								<td>select</td>
-								<td>при выборе пользователем элемента</td>
-							</tr>
-							<tr>
-								<td>submit</td>
-								<td>при отправке формы на сервер</td>
-							</tr>
-							<tr>
-								<td>input</td>
-								<td>срабатывает тут же при изменении значения текстового элемента</td>
-							</tr>
-						</tbody>
-					</table>
+					</section>
 				</section>
 				<section>
-					<h3>Change</h3>
-					<blockquote>
-						Для текстовых элементов означает, что событие произойдёт не при каждом вводе, а при потере фокуса
-					</blockquote>
-					<pre>
-					<code class="hljs javascript">
+					<section>
+						<h2>События форм и ЭУ</h2>
+						<table>
+							<tbody>
+								<tr>
+									<td>blur</td>
+									<td>при потере элементов фокуса</td>
+								</tr>
+								<tr>
+									<td>change</td>
+									<td>по окончании изменении значения элемента формы</td>
+								</tr>
+								<tr>
+									<td>focus</td>
+									<td>при получении элементов фокуса</td>
+								</tr>
+								<tr>
+									<td>invalid</td>
+									<td>при получении элементом статуса invalid</td>
+								</tr>
+								<tr>
+									<td>select</td>
+									<td>при выборе пользователем элемента</td>
+								</tr>
+								<tr>
+									<td>submit</td>
+									<td>при отправке формы на сервер</td>
+								</tr>
+								<tr>
+									<td>input</td>
+									<td>срабатывает тут же при изменении значения текстового элемента</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Change</h3>
+						<blockquote>
+							Для текстовых элементов означает, что событие произойдёт не при каждом вводе, а при потере фокуса
+						</blockquote>
+						<pre>
+					<code class="hljs html" data-trim>
 <input type="text" id="text">
 <script>
     function onChange(e) {
@@ -3165,14 +3224,14 @@ function getChar(event) {
 </script>
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Invalid</h3>
-					<pre>
-					<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Invalid</h3>
+						<pre>
+					<code class="hljs html" data-trim>
 <form>
     <input type="text" id="text" pattern=".{6,}" required>
-	<input type="submit" value="Save">
+    <input type="submit" value="Save">
 </form>
     
 <script>
@@ -3183,54 +3242,54 @@ function getChar(event) {
 </script>
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>События буфера обмена</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>copy</td>
-								<td>копирование значения</td>
-							</tr>
-							<tr>
-								<td>paste</td>
-								<td>вставки значения</td>
-							</tr>
-							<tr>
-								<td>cut</td>
-								<td>вырезании значения</td>
-							</tr>
-						</tbody>
-					</table>
+					</section>
 				</section>
 				<section>
-					<h3>DataTransfer</h3>
-					<p>clipboardData использует объект dataTransfer</p>
-					<pre>
-					<code class="hljs javascript">
+					<section>
+						<h2>События буфера обмена</h2>
+						<table>
+							<tbody>
+								<tr>
+									<td>copy</td>
+									<td>копирование значения</td>
+								</tr>
+								<tr>
+									<td>paste</td>
+									<td>вставки значения</td>
+								</tr>
+								<tr>
+									<td>cut</td>
+									<td>вырезании значения</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>DataTransfer</h3>
+						<p>clipboardData использует объект dataTransfer</p>
+						<pre>
+					<code class="hljs javascript" data-trim>
 void dataTransfer.setData(format, data);
 //text/plain
 //text/uri-list
 //text/html
 					</code>
 				</pre>
-					<pre>
-					<code class="hljs javascript">
+						<pre>
+					<code class="hljs javascript" data-trim>
 DataTransfer.clearData([format]);
 					</code>
 				</pre>
-					<pre>
-					<code class="hljs javascript">
+						<pre>
+					<code class="hljs javascript" data-trim>
 DOMString dataTransfer.getData(format);
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>Пример</h3>
-					<pre>
-						<code class="hljs javascript" data-trim>
+					</section>
+					<section>
+						<h3>Пример</h3>
+						<pre>
+						<code class="hljs html" data-trim>
 &lt;input type="text" id="text"&gt;
 &lt;script&gt;
     function onCopy(e) {
@@ -3240,108 +3299,108 @@ DOMString dataTransfer.getData(format);
 &lt;/script&gt;
 						</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>
-						События перетаскивания
-					</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>drag</td>
-								<td>при перетаскивании элемента</td>
-							</tr>
-							<tr>
-								<td>dragstart</td>
-								<td>когда элемент начинает перемещаться</td>
-							</tr>
-							<tr>
-								<td>dragenter</td>
-								<td>когда перемещаемый элемент попадает на элемент-назначение</td>
-							</tr>
-							<tr>
-								<td>drop</td>
-								<td>после отпускания элемента</td>
-							</tr>
-							<tr>
-								<td>DataTransfer</td>
-								<td>объект используется для хранения данных, перетаскиваемых мышью во время операции drag and drop</td>
-							</tr>
-						</tbody>
-					</table>
+					</section>
 				</section>
 				<section>
-					<h3>Алгоритм Drag’n’Drop</h3>
-					<ol>
-						<li>Отслеживаем нажатие кнопки мыши на переносимом элементе при помощи события mousedown</li>
-						<li>При нажатии – подготовить элемент к перемещению</li>
-						<li>Отслеживаем движение мыши через mousemove</li>
-						<li>Передвигаем переносимый элемент на новые координаты путём смены left/top и position:absolute</li>
-						<li>При отпускании кнопки мыши (mouseup) – остановить перенос элемента</li>
-						<li>Дополнительные действия, связанные с окончанием Drag’n’Drop</li>
-					</ol>
-				</section>
-				<section>
-					<h3>Пример</h3>
-					<pre>
-					<code class="js" data-trim>
+					<section>
+						<h2>
+							События перетаскивания
+						</h2>
+						<table>
+							<tbody>
+								<tr>
+									<td>drag</td>
+									<td>при перетаскивании элемента</td>
+								</tr>
+								<tr>
+									<td>dragstart</td>
+									<td>когда элемент начинает перемещаться</td>
+								</tr>
+								<tr>
+									<td>dragenter</td>
+									<td>когда перемещаемый элемент попадает на элемент-назначение</td>
+								</tr>
+								<tr>
+									<td>drop</td>
+									<td>после отпускания элемента</td>
+								</tr>
+								<tr>
+									<td>DataTransfer</td>
+									<td>объект используется для хранения данных, перетаскиваемых мышью во время операции drag and drop</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Алгоритм Drag’n’Drop</h3>
+						<ol>
+							<li>Отслеживаем нажатие кнопки мыши на переносимом элементе при помощи события mousedown</li>
+							<li>При нажатии – подготовить элемент к перемещению</li>
+							<li>Отслеживаем движение мыши через mousemove</li>
+							<li>Передвигаем переносимый элемент на новые координаты путём смены left/top и position:absolute</li>
+							<li>При отпускании кнопки мыши (mouseup) – остановить перенос элемента</li>
+							<li>Дополнительные действия, связанные с окончанием Drag’n’Drop</li>
+						</ol>
+					</section>
+					<section>
+						<h3>Пример</h3>
+						<pre>
+					<code class="hljs html" data-trim>
 &lt;div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"&gt;&lt;/div&gt;
 &lt;img id="drag1" src="img.gif" draggable="true" ondragstart="drag(event)"&gt;
 
 &lt;script&gt;
-function allowDrop(ev) {
-    ev.preventDefault();
-}
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
 
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-}
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
 &lt;/script&gt;
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>События медиа (video, image, audio...)</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>onpause </td>
-								<td>медиа-объект приостанавливает выполнение программно или в ответ на действие пользователя</td>
-							</tr>
-							<tr>
-								<td>play</td>
-								<td>медиа-объект готов к началу выполнению</td>
-							</tr>
-							<tr>
-								<td>playing</td>
-								<td>медиа-объект выполняется</td>
-							</tr>
-							<tr>
-								<td>progress</td>
-								<td>возникает при изменении состояния получения данных медиа-объектом</td>
-							</tr>
-							<tr>
-								<td>volumechange</td>
-								<td>возникает при изменении уровня громкости</td>
-							</tr>
-						</tbody>
-					</table>
+					</section>
 				</section>
 				<section>
-					<h3>Pause</h3>
-					<pre>
-					<code class="hljs javascript" data-trim="">
-						&lt;video id="myVideo" width="320" height="176" controls&gt;
+					<section>
+						<h2>События медиа (video, image, audio...)</h2>
+						<table>
+							<tbody>
+								<tr>
+									<td>onpause </td>
+									<td>медиа-объект приостанавливает выполнение программно или в ответ на действие пользователя</td>
+								</tr>
+								<tr>
+									<td>play</td>
+									<td>медиа-объект готов к началу выполнению</td>
+								</tr>
+								<tr>
+									<td>playing</td>
+									<td>медиа-объект выполняется</td>
+								</tr>
+								<tr>
+									<td>progress</td>
+									<td>возникает при изменении состояния получения данных медиа-объектом</td>
+								</tr>
+								<tr>
+									<td>volumechange</td>
+									<td>возникает при изменении уровня громкости</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Pause</h3>
+						<pre>
+					<code class="hljs html" data-trim>
+&lt;video id="myVideo" width="320" height="176" controls&gt;
   &lt;source src="mov_bbb.mp4" type="video/mp4"&gt;
   &lt;source src="mov_bbb.ogg" type="video/ogg"&gt;
   Your browser does not support HTML5 video.
@@ -3355,11 +3414,11 @@ vid.onpause = function() {
 &lt;/script&gt; 
 					</code>
 				</pre>
-				</section>
-				<section>
-					<h3>volumechange</h3>
-					<pre>
-					<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>volumechange</h3>
+						<pre>
+					<code class="hljs html" data-trim>
 &lt;video controls id="myVideo"&gt;
   &lt;source src="mov_bbb.mp4" type="video/mp4"&gt;
   &lt;source src="mov_bbb.ogg" type="video/ogg"&gt;
@@ -3376,19 +3435,19 @@ function myFunction(e) {
 &lt;/script&gt;
 					</code>
 				</pre>
+					</section>
 				</section>
-			</section>
-			<section>
-				<h2>События CSS</h2>
-				<table>
-					<tbody>
-						<tr>
-							<td>transitionend </td>
-							<td>при завершении CSS-анимации</td>
-						</tr>
-					</tbody>
-				</table>
-				<pre>
+				<section>
+					<h2>События CSS</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td>transitionend</td>
+								<td>при завершении CSS-анимации</td>
+							</tr>
+						</tbody>
+					</table>
+					<pre>
 						<code class="hljs javascript" data-trim>
 /*
  * Прослушиваем событие transitionend на определенном элементе, 
@@ -3402,32 +3461,161 @@ var element = document.getElementById("slidingMenu");
 element.addEventListener("transitionend", showMessage, false);
 						</code>
 					</pre>
-			</section>
-			<section>
-				<h1>Event loop</h1>
-			</section>
-			<section>
-				<h2>JS vs Потоки</h2>
-				<blockquote>Javascript работает в одном потоке</blockquote>
-				<ul>
-					<li>Текущая функция не может быть приостановлена</li>
-					<li>Текущая функция должна завершить свое выполнение до начала выполнения другой функции</li>
-				</ul>
-			</section>
-			<section>
-				<section>
-					<h2>Модель событийного цикла</h2>
-					<img src="img/lifecircle.svg" alt="" height="450">
 				</section>
 				<section>
-					<h3>Общий стек вызовов функций</h3>
-					<ul>
-						<li>Вызов любой функции создает контекст выполнения</li>
-						<li>При вызове вложенной функции создается новый контекст</li>
-						<li>Старый контекст сохраняется в специальной структуре</li>
-					</ul>
+					<h3>Вопрос: как структурировать огромное количество функций и переменных и избежать конфликтов и перезаписи информации?</h2>
+						<img src="img/zoo.jpg" height="400" alt="">
+				</section>
+				<section>
+					<section>
+						<h2>Пространства имен</h2>
+						<pre>
+						<code class="hljs javascript" data-trim>
+function Person() {}
+function Student() {}
+
+var some_var = 1;
+var module1 = {};
+
+module1.data = {a: 1, b: 2};
+var module2 = {};
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Простой пример</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+var MYAPP = {};
+
+MYAPP.Person = function () {};
+MYAPP.Student = function () {};
+
+MYAPP.some_var1 = 1;
+MYAPP.some_var2 = 2;
+
+MYAPP.modules = {};
+MYAPP.modules.modulel = {};
+MYAPP.modules.modulel.data = {
+    a: 1,
+    b: 2
+};
+MYAPP.modules.module2 = {};
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Применение пространств имен</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+//применение функции пространства имен 
+MYAPP.namespace('MYAPP.modules.module2'); 
+
+//вызов эквивалентен следующей конструкции: 
+var MYAPP = { 
+    modules: { 
+        module2: {} 
+    }
+}; 
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Способ реализации</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+var MYAPP = MYAPP || {};
+MYAPP.namespace = function (namespaceStr) {
+    var parts = namespaceStr.split('.'),
+        parent = MYAPP,
+		i;
+		
+    //отбросить начальный префикс - имя глобального объекта 
+    if (parts[0] === "MYAPP") {
+        parts = parts.slice(1);
+	}
+	
+    for (i = 0; i < parts.length; i += 1) {
+        //создать свойство, если оно отсутствует 
+        if (typeof parent[parts[i]] === "undefined") {
+            parent[parts[i]] = {};
+        }
+        parent = parent[parts[i]];
+    }
+    return parent;
+};
+					</code>
+					</pre>
+					</section>
+					<section>
+						<h3>Пример работы</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
+//присваиваение возвращаемого значение локальной переменной 
+var module2 = MYAPP.namespace('MYAPP.modules.module2'); 
+module2 === MYAPP.modules.module2; //true 
+
+//отсутствие начального префикса 'MYAPP' 
+MYAPP.namespace('modules.module51'); 
+
+//создание глубоко вложенных пространств имен 
+MYAPP.namespace('very.long.nested.property'); 
+					</code>
+					</pre>
+					</section>
+				</section>
+				<section>
+					<h2>Создание библиотек и модулей</h2>
 					<pre>
-				<code class="hljs javascript">
+					<code class="hljs javascript" data-trim>
+;(function () {
+    //приватные переменные
+    var version = '0.0.1',
+        faculties = ['EEF', 'ITF'];
+    //приватные функции
+    function Student(name) {
+        this.name = name;
+    }
+    function addStudent(student) {}
+    function assignStudentToFaculty(student, faculty) {}
+    //основная функция библиотеки
+    function bstu(params) {}
+    //публичные переменные и функции
+    bstu.Student = Student;
+    bstu.FACULTY = faculties;
+    //экспортируем публичные члены наружу из модуля
+    window.BSTU = bstu;
+}());
+var student = new BSTU.Student('Max');
+console.log(student.name);//Max
+						</code>
+				</pre>
+				</section>
+				<section>
+					<h1>Event loop</h1>
+				</section>
+				<section>
+					<h2>JS vs Потоки</h2>
+					<blockquote>Javascript работает в одном потоке</blockquote>
+					<ul>
+						<li>Текущая функция не может быть приостановлена</li>
+						<li>Текущая функция должна завершить свое выполнение до начала выполнения другой функции</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h2>Модель событийного цикла</h2>
+						<img src="img/lifecircle.svg" alt="" height="450">
+					</section>
+					<section>
+						<h3>Общий стек вызовов функций</h3>
+						<ul>
+							<li>Вызов любой функции создает контекст выполнения</li>
+							<li>При вызове вложенной функции создается новый контекст</li>
+							<li>Старый контекст сохраняется в специальной структуре</li>
+						</ul>
+						<pre>
+				<code class="hljs javascript" data-trim>
 function f(b) {
   var a = 12;
   return a + b + 35;
@@ -3441,105 +3629,110 @@ function g(x) {
 g(21);
 				</code>
 			</pre>
-				</section>
-				<section>
-					<h3>Алгоритм работы со стеком</h3>
-					<ol>
-						<li>При вызове <span class="highlight-blue">g</span>, создаётся область видимости, содержащая аргументы g и локальные переменные.
-						</li>
-						<li>При вызове <span class="highlight-blue">f</span>, создаётся вторая область видимости и помещается в стэк вперед первой,
-							которая содержит аргументы f и её локальные переменные.</li>
-						<li>Когда <span class="highlight-blue">f</span> возвращает результат, верхний элемент из стека удаляется.</li>
-						<li>Когда <span class="highlight-blue">g</span> возвращает результат, контекст функции удаляется, и стэк будет пуст.</li>
-					</ol>
-				</section>
-				<section>
-					<h2>Куча</h2>
-					<p>Объекты размещаются в куче. Куча — это ссылка на определённую неструктурированную области памяти.</p>
-				</section>
-				<section>
-					<h3>Очередь событий</h3>
-					<blockquote>
-						Очередь событий — это список событий, подлежащих обработке
-					</blockquote>
-					<ul>
-						<li>Каждое событие связано с некоторой функцией</li>
-						<li>Когда на стэке освобождается достаточно места, событие извлекается из очереди и обрабатывается</li>
-						<li>Обработка события состоит в вызове этой функции (создание начального контекста выполнения)</li>
-						<li>Обработка события заканчивается, когда стек становится пустым.</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Очередь событий</h3>
-					<pre>
-					<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Алгоритм работы со стеком</h3>
+						<ol>
+							<li>При вызове
+								<span class="highlight-blue">g</span>, создаётся область видимости, содержащая аргументы g и локальные переменные.
+							</li>
+							<li>При вызове
+								<span class="highlight-blue">f</span>, создаётся вторая область видимости и помещается в стэк вперед первой, которая содержит аргументы f и её
+								локальные переменные.</li>
+							<li>Когда
+								<span class="highlight-blue">f</span> возвращает результат, верхний элемент из стека удаляется.</li>
+							<li>Когда
+								<span class="highlight-blue">g</span> возвращает результат, контекст функции удаляется, и стэк будет пуст.</li>
+						</ol>
+					</section>
+					<section>
+						<h2>Куча</h2>
+						<p>Объекты размещаются в куче. Куча — это ссылка на определённую неструктурированную области памяти</p>
+					</section>
+					<section>
+						<h3>Очередь событий</h3>
+						<blockquote>
+							Очередь событий — это список событий, подлежащих обработке
+						</blockquote>
+						<ul>
+							<li>Каждое событие связано с некоторой функцией</li>
+							<li>Когда на стэке освобождается достаточно места, событие извлекается из очереди и обрабатывается</li>
+							<li>Обработка события состоит в вызове этой функции (создание начального контекста выполнения)</li>
+							<li>Обработка события заканчивается, когда стек становится пустым</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Очередь событий</h3>
+						<pre>
+					<code class="hljs javascript" data-trim>
 while(queue.waitForMessage()){
     queue.processNextMessage();
 }
 					</code>
 				</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Особенности event loop</h2>
+					</section>
 				</section>
 				<section>
-					<h3>Нулевые задержки</h3>
-					<blockquote>
-						Задержка – это минимальное время, которое требуется среде выполнения на обработку запроса
-					</blockquote>
-					<ul>
-						<li>Нулевая задержка не дает гарантии, что обработчик выполнится через 0 миллисекунд</li>
-						<li>Вызов setTimeout с аргументом 0 не завершится за указанное время</li>
-						<li>Выполнение зависит от количества ожидающих в очереди задач</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Никогда не блокируется</h3>
-					<ul>
-						<li>Поток выполнения никогда не блокируется</li>
-						<li>Обработка I/O осуществляется с помощью событий и/или функций обратного вызова</li>
-						<li>В момент ожидания события могут обрабатываться другие процессы (пользовательский ввод)</li>
-						<li>Страница в браузере работает в одном потоке. Это значит, что браузер либо выполняет JS, либо рисует страницу (CSS-анимации,
-							render, reflow)</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Пример с timeline работы браузера</h3>
-					<img src="img/network-panel.png" alt="">
-				</section>
-				<section>
-					<h3>Смягчающее действие</h3>
-					<p class="text">Если событие обрабатывается слишком долго, то приложение в это время не имеет возможности обработать действия пользователя
-						(например, скролл, или клик). Internet Explorer, в таком случае, выводит сообщение "A script on this page is causing
-						Internet Explorer to run slowly"</p>
-				</section>
-				<section>
-					<h3>Таймеры в js</h3>
-					<blockquote>
-						Таймеры - это не sleep(), они создают события, которые используют Event Loop
-					</blockquote>
-					<ul>
-						<li>setTimeout(function, timeout) - не ранее чем через timeout</li>
-						<li>setInterval(function, timeout) - не чаще чем через timeout</li>
-						<li>Точность интервалов не гарантирована</li>
-						<li>Если таймер содержит долгие вычисления <span class="highlight-blue">while (true) {i++;}</span>, то он задержит Event
-							Loop
-						</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Пример</h3>
-					<pre>
+					<section>
+						<h2>Особенности event loop</h2>
+					</section>
+					<section>
+						<h3>Нулевые задержки</h3>
+						<blockquote>
+							Задержка – это минимальное время, которое требуется среде выполнения на обработку запроса
+						</blockquote>
+						<ul>
+							<li>Нулевая задержка не дает гарантии, что обработчик выполнится через 0 миллисекунд</li>
+							<li>Вызов setTimeout с аргументом 0 не завершится за указанное время</li>
+							<li>Выполнение зависит от количества ожидающих в очереди задач</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Никогда не блокируется</h3>
+						<ul>
+							<li>Поток выполнения никогда не блокируется</li>
+							<li>Обработка I/O осуществляется с помощью событий и/или функций обратного вызова</li>
+							<li>В момент ожидания события могут обрабатываться другие процессы (пользовательский ввод)</li>
+							<li>Страница в браузере работает в одном потоке. Это значит, что браузер либо выполняет JS, либо рисует страницу (CSS-анимации,
+								render, reflow)</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Пример с timeline работы браузера</h3>
+						<img src="img/network-panel.png" alt="">
+					</section>
+					<section>
+						<h3>Смягчающее действие</h3>
+						<p class="text">Если событие обрабатывается слишком долго, то приложение в это время не имеет возможности обработать действия пользователя
+							(например, скролл, или клик). Internet Explorer, в таком случае, выводит сообщение "A script on this page is causing
+							Internet Explorer to run slowly"</p>
+					</section>
+					<section>
+						<h3>Таймеры в js</h3>
+						<blockquote>
+							Таймеры - это не sleep(), они создают события, которые используют Event Loop
+						</blockquote>
+						<ul>
+							<li>setTimeout(function, timeout) - не ранее чем через timeout</li>
+							<li>setInterval(function, timeout) - не чаще чем через timeout</li>
+							<li>Точность интервалов не гарантирована</li>
+							<li>Если таймер содержит долгие вычисления
+								<span class="highlight-blue">while (true) {i++;}</span>, то он задержит Event Loop
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Пример</h3>
+						<pre>
 						<code class="hljs javascript" data-trim="">
-							var timeMark = new Date;
+var timeMark = new Date;
 setTimeout(function go() {
-    // выполнится через 100 мс
+    //выполнится через 100 мс
     var diff = new Date - timeMark;
     console.log(diff);
     timeMark = new Date; 
-    setTimeout(go, 100); // снова в очередь
+	
+    setTimeout(go, 100); //снова в очередь
 }, 100); //положили go() в очередь через 100 мс
 //101
 //100
@@ -3549,28 +3742,28 @@ setTimeout(function go() {
 //100
 						</code>
 					</pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>Event Loop простыми словами</h3>
-					<img src="img/event-loop.png" alt="" height="550">
+					</section>
 				</section>
 				<section>
-					<h3>Особенности</h3>
-					<ul>
-						<li>Основан на событиях</li>
-						<li>События складываются в очередь</li>
-						<li>Ждем события, затем его выполняем</li>
-						<li>События могут генерировать события</li>
-						<li>Завершается при опустошении очереди</li>
-					</ul>
+					<section>
+						<h3>Event Loop простыми словами</h3>
+						<img src="img/event-loop.png" alt="" height="550">
+					</section>
+					<section>
+						<h3>Особенности</h3>
+						<ul>
+							<li>Основан на событиях</li>
+							<li>События складываются в очередь</li>
+							<li>Ждем события, затем его выполняем</li>
+							<li>События могут генерировать события</li>
+							<li>Завершается при опустошении очереди</li>
+						</ul>
+					</section>
 				</section>
-			</section>
-			<section>
 				<section>
-					<h2>Пример event loop</h2>
-					<pre>
+					<section>
+						<h2>Пример event loop</h2>
+						<pre>
 						<code class="hljs javascript" data-trim>
 $.get('/api/data.json', function(data) {
     getFile(data.filename, function() {
@@ -3578,106 +3771,111 @@ $.get('/api/data.json', function(data) {
     });
     showLoading('reading file');
 });
+
 showLoading('loading data');
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Пример event loop: Запрос к серверу</h3>
-					<pre>
-						<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Пример event loop: Запрос к серверу</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
 $.get('/api/data.json', function(data) {//выполняется
     getFile(data.filename, function() {
         alert('tada!');
     });
     showLoading('reading file');
 });
+
 showLoading('loading data');//выполняется
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Пример event loop: Ответ получен, функция читает файл</h3>
-					<pre>
-						<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Пример event loop: Ответ получен, функция читает файл</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
 $.get('/api/data.json', function(data) {
     getFile(data.filename, function() {//выполняется
         alert('tada!');
     });
     showLoading('reading file');//выполняется
 });
+
 showLoading('loading data');
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Пример event loop: Файл прочитан</h3>
-					<pre>
-						<code class="hljs javascript">
+					</section>
+					<section>
+						<h3>Пример event loop: Файл прочитан</h3>
+						<pre>
+						<code class="hljs javascript" data-trim>
 $.get('/api/data.json', function(data) {
     getFile(data.filename, function() {
         alert('tada!');//выполняется
     });
     showLoading('reading file');
 });
+
 showLoading('loading data')
 						</code>
 					</pre>
+					</section>
 				</section>
-			</section>
-			<section>
-				<h2>Плюсы и минусы</h2>
-				<table>
-					<thead>
-						<tr>
-							<th>+</th>
-							<th>-</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td style="width: 50%;">отсутствие состояния "гонки"</td>
-							<td>процессороемкие задачи блокируют работу event loop</td>
-						</tr>
-						<tr>
-							<td>веб-приложения тратят время на ожидание ввода-вывода</td>
-							<td>выполняется на 1 ядре, а остальные ядра простаивают</td>
-						</tr>
-						<tr>
-							<td>относительно проста для освоения</td>
-							<td>утечки памяти</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-			<section>
-				<h2>Если не хватает параллельности</h2>
-			</section>
-			<section>
-				<h2>параллельное выполнение кода JavaScript</h2>
-				<ul>
-					<li>Dedicated workers (выделенные)</li>
-					<li>SharedWorker (общие)</li>
-				</ul>
-			</section>
+				<section>
+					<h2>Плюсы и минусы</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>+</th>
+								<th>-</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="width: 50%;">отсутствие состояния "гонки"</td>
+								<td>процессороемкие задачи блокируют работу event loop</td>
+							</tr>
+							<tr>
+								<td>веб-приложения тратят время на ожидание ввода-вывода</td>
+								<td>выполняется на 1 ядре, а остальные ядра простаивают</td>
+							</tr>
+							<tr>
+								<td>относительно проста для освоения</td>
+								<td>утечки памяти</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h2>Если не хватает параллельности</h2>
+				</section>
+				<section>
+					<h2>параллельное выполнение кода JavaScript</h2>
+					<ul>
+						<li>Dedicated workers (выделенные)</li>
+						<li>SharedWorker (общие)</li>
+					</ul>
+				</section>
 			</section>
 			<section>
 				<section>
 					<h2>Dedicated workers</h2>
 				</section>
 				<section>
-					<h2>Особенности</h2>
+					<h3>Особенности</h3>
 					<ul>
 						<li>Объекты запускаются в изолированном потоке</li>
 						<li>Выполняемый код должен храниться в отдельном файле</li>
 						<li>Создается путем вызова конструктора</li>
+						<li>Использует DedicatedWorkerGlobalScope</li>
 						<li>Если указанный файл существует, то браузер создаст новый поток объекта Worker, загружаемый асинхронно</li>
 					</ul>
 				</section>
 				<section>
 					<h3>Алгоритм работы</h3>
 					<pre>
-						<code class="hljs javascript">
+						<code class="hljs javascript" data-trim>
 var worker = new Worker('task.js');//инициализация
 						</code>
 					</pre>
@@ -3695,85 +3893,181 @@ worker.postMessage('Hello World');//отправление сообщения в
 						<code class="hljs javascript" data-trim>
 worker.terminate()//завершение работы
 //или
-this.close()// внутри объекта
+this.close()//внутри объекта
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>Обмен сообщениями</h3>
-					<p>Основной скрипт</p>
+					<p>Основной скрипт main.js</p>
 					<pre>
 						<code class="hljs javascript" data-trim>
-							var worker = new Worker('doWork.js');
-
+var commandStop = 'Stop';
+var worker = new Worker("worker.js");
+					
 worker.addEventListener('message', function(e) {
-  console.log('Worker said: ', e.data);
+    console.log('Worker said: ', e.data);
+
+    if(e.data === commandStop){
+        worker.terminate();
+    }
 }, false);
 
-worker.postMessage('Hello World'); // Send data to our worker.
+worker.postMessage('Hello World'); 
 						</code>
 					</pre>
-					<p>Второй скрипт</p>
+				</section>
+				<section>
+					<h3>Обмен сообщениями</h3>
+					<p>Второй скрипт worker.js</p>
 					<pre>
 						<code class="hljs javascript" data-trim>
-							self.addEventListener('message', function(e) {
-  self.postMessage(e.data);
+var self = this;
+
+self.addEventListener('message', function(e) {
+  console.log('Main said: ', e.data);
 }, false);
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+setInterval(function(){
+    var number = getRandomInt(0, 10);
+    if(number === 5){
+        self.postMessage('Stop');
+        //self.close();
+    }else{
+        self.postMessage(number);
+    }
+}, 1000);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Результат</h3>
+					<pre>
+						<code class="hljs html" data-trim>
+Main said:  Hello World
+Worker said:  8
+Worker said:  0
+Worker said:  1
+Worker said:  7
+Worker said:  Stop
 						</code>
 					</pre>
 				</section>
 			</section>
 			<section>
 				<section>
-					<h3>SharedWorker</h3>
+					<h2>SharedWorker</h2>
+					<blockquote>
+						Воркеры, которые могут использоваться несколькими скриптами совместно, работающими в разных окнах, IFrames и т.д. в пределах одного домена, что и воркер. Они должны связываться через активный порт (MessagePort)
+					</blockquote>
 					<ul>
 						<li>Создается путем вызова конструктора</li>
 						<li>Идентифицируется по URL. Можно создать второй воркер из одного файла, добавив параметр в URL (worker.js?random=100)</li>
 						<li>Работает с различными окнами, фреймами и файлами</li>
+						<li>Используют SharedWorkerGlobalScope</li>
 					</ul>
 				</section>
 				<section>
 					<h3>Алгоритм работы</h3>
 					<pre>
 						<code class="hljs javascript" data-trim>
-var myWorker = new SharedWorker("worker.js");
+var worker = new SharedWorker("worker.js");
 						</code>
 					</pre>
 					<pre>
 						<code class="hljs javascript" data-trim>
-myWorker.port.start();  //вызывается в главном потоке
-port.start();  //вызывается в рабочем потоке
+worker.port.start();//вызывается в главном потоке
+this.port.start();//вызывается в рабочем потоке
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
+worker.port.postMessage('Hello World');
+//отправление сообщения воркеру
+
+this.port.postMessage('Hello World');
+//отправление сообщения основному потоку
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
+worker.port.close()//завершение работы
+//или
+this.port.close()//внутри объекта
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>Передача сообщений</h3>
-					<pre>
-						<code class="hljs javascript">
-squareNumber.onchange = function() {
-  myWorker.port.postMessage([squareNumber.value,squareNumber.value]);
-  console.log('Message posted to worker');
-}
-						</code>
-					</pre>
+					<p>Основной скрипт main.js</p>
 					<pre>
 						<code class="hljs javascript" data-trim>
-self.addEventListener('connect', function(e) {
-  var port = e.ports[0];
-  port.onmessage = function(e) {
-    var workerResult = 'Result: ' + (e.data[0] * e.data[1]);
-    port.postMessage(workerResult);
-  }
-  port.start();
+var commandStop = 'Stop';
+var worker = new SharedWorker("worker.js");
+
+worker.port.addEventListener('message', function(e) {
+    console.log('Worker said: ', e.data);
+		  
+    if(e.data === commandStop){
+        worker.port.close();
+    }
+}, false);
+
+worker.port.start();
+worker.port.postMessage('Hello world');
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Передача сообщений</h3>
+					<p>Второй скрипт worker.js</p>
+					<pre>
+						<code class="hljs javascript" data-trim>
+var self = this, port = null;
+
+self.addEventListener("connect", function (e) {
+    port = e.ports[0];
+
+    port.addEventListener('message', function (e) {
+        console.log('Main said: ', e.data);
+    }, false);
+
+    setInterval(sendMessage, 1000);
 });
+
+function sendMessage() {
+    var number = getRandomInt(0, 10);
+
+    if (number === 5) {
+        port.postMessage('Stop');
+        //port.close();
+    } else {
+        port.postMessage(number);
+    }
+}
+
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min)) + min;
+};
 						</code>
 					</pre>
+				</section>
+				<section>
+					<h3>Результат</h3>
 					<pre>
 						<code class="hljs javascript" data-trim>
-myWorker.port.onmessage = function(e) {
-  result2.textContent = e.data[0];
-  console.log('Message received from worker');
-}
+Worker said:  2
+Worker said:  4
+Worker said:  2
+Worker said:  9
+Worker said:  3
+Worker said:  0
+Worker said:  7
+Worker said:  Stop
 						</code>
 					</pre>
 				</section>

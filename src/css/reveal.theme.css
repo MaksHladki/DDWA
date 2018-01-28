@@ -189,9 +189,9 @@ section.has-light-background h6 {
 
 .reveal pre code {
   display: block;
-  padding: 0 10px;
+  padding: 5px 10px;
   overflow: auto;
-  max-height: 500px;
+  max-height: 520px; /* 20 lines of code */
   word-wrap: normal;
   line-height: 1.1em;
 }
