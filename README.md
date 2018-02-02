@@ -5,14 +5,14 @@
 
 ## Тема 1. Стандарт ECMAScript 5 и его реализация в языке программирования Javascript
 История создания и развития стандарта. Реализация объектно-ориентированной методологии в прототипном и функциональном стиле. Методы объектов и контекст вызова. Объектная модель документа: навигация и манипулирование элементами. Обработка и перехват браузерных событий. Понятие модели событийного цикла Event Loop.  
-[Лекция](https://makshladki.github.io/DDWA/dist/lecture/ECMAScript_5/index.html "Лекция")  
-[Задание](https://makshladki.github.io/DDWA/dist/task/ECMAScript_5/ECMAScript_5.pdf "Задание")  
+[Лекция](https://makshladki.github.io/DDWA/lecture/ECMAScript_5/index.html "Лекция")  
+[Задание](https://makshladki.github.io/DDWA/task/ECMAScript_5/ECMAScript_5.pdf "Задание")  
   
   
 ## Тема 2. Стандарт ECMAScript 6 
 Обзор основных возможностей и отличий спецификации ECMAScript 6. Интерполяция строк. Использование константных переменных. Особенности блочной области видимости. Реализация механизма promises. Состояния promise: ожидание, выполнено, отклонено. Конструкции then, catch, all, race, resolve, reject. Стрелочные функции. Понятие деструктуризации. Принципы работы с коллекциями Map и Set. Генераторы и итераторы. Понятие класса и объекта. Использование полей, методов, свойств и средств контроля доступа к членам класса. Наследование классов.  
-[Лекция](https://makshladki.github.io/DDWA/dist/lecture/ECMAScript_6/index.html "Лекция")  
-[Задание](https://makshladki.github.io/DDWA/dist/task/ECMAScript_6/ECMAScript_6.pdf "Задание")
+[Лекция](https://makshladki.github.io/DDWA/lecture/ECMAScript_6/index.html "Лекция")  
+[Задание](https://makshladki.github.io/DDWA/task/ECMAScript_6/ECMAScript_6.pdf "Задание")
 
 
 ## Тема 3. Стандарт ECMAScript 7 и ECMAScript 8 
