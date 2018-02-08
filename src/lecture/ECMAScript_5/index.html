@@ -82,6 +82,7 @@ function myFunction() {
 				</section>
 				<section>
 					<h3>Дублирование ключей в объекте</h3>
+					<p class="highlight-red">Удалено в спецификации ES2015</p>
 					<pre>
 						<code class="hljs javascript" data-trim>
 var colors = {
@@ -231,7 +232,8 @@ function f() {}
 				<section>
 					<h3>for, while, if... не влияют на видимость</h3>
 					<pre>
-						<code class="hljs javascript" data-trim> 
+						<code class="hljs javascript" data-trim>
+var N = 10;
 var i;
 for (i = 0; i < N; i++) {}
 
