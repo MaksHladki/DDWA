@@ -1370,6 +1370,7 @@ alert(person);//0
 						<h2>Метод hasOwnProperty</h2>
 						<pre>
 						<code class="hljs javascript" data-trim>
+//Вывод ключей без использования метода hasOwnProperty
 var person = {
     age: 24,
     name: 'Alex'
@@ -1391,6 +1392,7 @@ for(var key in student)//course group name age
 						<h3>С использованием hasOwnProperty</h3>
 						<pre>
 						<code class="hljs javascript" data-trim>
+//Вывод ключей с использованием метода hasOwnProperty
 var person = {
     age: 24,
     name: 'Alex'
@@ -1701,7 +1703,7 @@ function foreach(){
 					<section>
 						<h3>Пример</h3>
 						<pre>
-						<code class="hljs html" data-trim>
+							<code class="hljs html" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1709,9 +1711,9 @@ function foreach(){
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div id="container"&gt;
-        &lt;div class="content"&gt;
+        &lt;div class="content" name="content"&gt;
             &lt;div class="title"&gt;
-                &lt;h3&gt;Title 1&lt;/h3&gt;
+                &lt;h3 name="title_1"&gt;Title 1&lt;/h3&gt;
             &lt;/div&gt;
             &lt;div class="message"&gt;
                 &lt;a href="google.com"&gt;google&lt;/a&gt;
@@ -1733,8 +1735,8 @@ function foreach(){
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-						</code>
-					</pre>
+							</code>
+						</pre>
 					</section>
 					<section>
 						<h3>document.body</h3>
@@ -1998,8 +2000,8 @@ function parentElement(){
 							<table>
 								<tbody>
 									<tr>
-										<td>table.rows </td>
-										<td> коллекция строк TR таблицы</td>
+										<td>table.rows</td>
+										<td>коллекция строк TR таблицы</td>
 									</tr>
 									<tr>
 										<td>table.caption/tHead/tFoot</td>
@@ -2007,22 +2009,22 @@ function parentElement(){
 									</tr>
 									<tr>
 										<td>table.tBodies</td>
-										<td>коллекция элементов таблицы TBODY, по спецификации их может быть несколько.</td>
+										<td>коллекция элементов таблицы TBODY, по спецификации их может быть несколько</td>
 									</tr>
 									<tr>
 										<td>tbody.rows</td>
-										<td>коллекция строк TR секции.</td>
+										<td>коллекция строк TR секции TBODY</td>
 									</tr>
 									<tr>
-										<td>tr.cells </td>
+										<td>tr.cells</td>
 										<td>коллекция ячеек TD/TH</td>
 									</tr>
 									<tr>
-										<td>tr.sectionRowIndex </td>
+										<td>tr.sectionRowIndex</td>
 										<td>номер строки в текущей секции THEAD/TBODY</td>
 									</tr>
 									<tr>
-										<td>tr.rowIndex </td>
+										<td>tr.rowIndex</td>
 										<td>номер строки в таблице</td>
 									</tr>
 									<tr>
@@ -2571,9 +2573,11 @@ function replace() {
 					</pre>
 						<pre>
 						<code class="hljs html" data-trim>
-<p id="text" onclick="setColor()">Click me to change my text color</p>
+<p id="text" onclick="setColor()">
+    Click me to change my text color
+</p>
 
-function myFunction() {
+function setColor() {
     document.getElementById("text").style.color = "red";
 }
 						</code>
@@ -2622,19 +2626,19 @@ element.addEventListener(event, handler[, phase]);
 						<ul>
 							<li>event - имя события, например click</li>
 							<li>handler- ссылка на функцию, которую надо поставить обработчиком</li>
-							<li>phase - необязательный аргумент, «фаза», на которой обработчик должен сработать</li>
+							<li>phase - необязательный аргумент, «фаза» (перехват/всплытие), на которой обработчик должен сработать</li>
 						</ul>
 						<pre>
 						<code class="hljs javascript" data-trim>
 elem.addEventListener( "click" , function() {
-	console.log('Thank you!');
+    console.log('Thank you!');
 });
 						</code>
 					</pre>
 						<pre>
 						<code class="hljs javascript" data-trim>
 function thanks(){
-	console.log('Thank you!');
+    console.log('Thank you!');
 }
 elem.addEventListener( "click" ,  thanks);
 						</code>
@@ -2927,7 +2931,8 @@ document.getElementById('el2').addEventListener('click', onClick);
 function onClick(e) {
     console.log(e);
     e.preventDefault();
-    return false;//любое значение кроме false
+    //return false;//любое значение кроме false
+    //эквивалентно preventDefault + stopPropagation
 }
 document.getElementById('el1').addEventListener('click', onClick);
 document.getElementById('el2').addEventListener('click', onClick);
@@ -3270,16 +3275,21 @@ function getChar(event) {
 						<h3>DataTransfer</h3>
 						<p>clipboardData использует объект dataTransfer</p>
 						<pre>
-					<code class="hljs javascript" data-trim>
+							<code class="hljs javascript" data-trim>
 void dataTransfer.setData(format, data);
 //text/plain
 //text/uri-list
 //text/html
-					</code>
-				</pre>
-						<pre>
-					<code class="hljs javascript" data-trim>
+							</code>
+						</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
 DataTransfer.clearData([format]);
+						</code>
+				</pre>
+				<pre>
+					<code class="hljs javascript" data-trim>
+void dataTransfer.setData(format, data);
 					</code>
 				</pre>
 						<pre>
@@ -3473,6 +3483,7 @@ element.addEventListener("transitionend", showMessage, false);
 						<h2>Пространства имен</h2>
 						<pre>
 						<code class="hljs javascript" data-trim>
+//Без пространства имен
 function Person() {}
 function Student() {}
 
@@ -3535,7 +3546,7 @@ MYAPP.namespace = function (namespaceStr) {
     //отбросить начальный префикс - имя глобального объекта 
     if (parts[0] === "MYAPP") {
         parts = parts.slice(1);
-	}
+    }
 	
     for (i = 0; i < parts.length; i += 1) {
         //создать свойство, если оно отсутствует 
