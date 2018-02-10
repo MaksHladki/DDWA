@@ -1338,7 +1338,7 @@ function Student(name) {
 
 Student.prototype = Object.create(Person.prototype);
 Student.prototype.getName = function () {
-return 'Name: ' + Person.prototype.getName.call(this);
+    return 'Name: ' + Person.prototype.getName.call(this);
 }
 
 var student = new Student('Anna');
@@ -1461,7 +1461,7 @@ Object.defineProperty(person, 'age', {
 });
 
 person.age = 10;
-console.log(person.age);//10
+console.log(person.age);//10 лет
 					</code>
 					</pre>
 					</section>
