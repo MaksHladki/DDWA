@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>ECMAScript 7/8</title>
+    <meta name="description" content="ECMAScript 7/8">
+    <meta name="keywords" content="ECMAScript 7/8">
+    <meta name="author" content="Maks Hladki">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="../../img/js-icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/bundle.min.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section>
+                    <h1>Стандарт ECMAScript 7/8</h1>
+                    <h3>Разработка динамичесих веб приложений</h3>
+                    <p>
+                        <small>
+                            Гладкий Максим Валерьевич /
+                            <a href="https://github.com/MaksHladki">github:MaksHladki</a>
+                        </small>
+                    </p>
+                </section>
+                <section>
+                    <h2>Содержание лекции</h2>
+                    <nav id="presentable-toc" class="table-content"></nav>
+                </section>
+            </section>
+
+            <!-- Содержимое лекции -->
+            <!-- Стандарт ECMAScript 7 -->
+            <section>
+                <h1>Стандарт ECMAScript 7</h1>
+            </section>
+            <section>
+                <h2>Названия</h2>
+                <ul>
+                    <li>ECMA-262 7th edition</li>
+                    <li>ECMAScript 2016</li>
+                    <li>ECMAScript 7</li>
+                    <li>ES7</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Оператор **</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+var a = 10;
+var b = 2;
+console.log(a ** b);//100
+console.log(Math.pow(a, b));//100
+                    </code>
+                </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+var a = 10.5;
+var b = 2.5;
+    
+console.log(a ** b);//357.2508309997333
+console.log(Math.pow(a, b));//357.2508309997333
+                    </code>
+                </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+var a = 'test';
+var b = 2;
+    
+console.log(a ** b);//NaN
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <section>
+                    <h2>Метод includes для Array</h2>
+                    <blockquote>
+                        Определяет, содержит ли массив определенный элемент, возвращая в зависимости от этого true/false
+                    </blockquote>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+arr.includes(searchElement[, fromIndex])
+                        </code>
+                </pre>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+console.log([1, 2, 3].includes(2));//true
+console.log([1, 2, 3].includes(4));//false
+console.log([1, 2, 3].includes(3, 3));//false
+console.log([1, 2, NaN].includes(NaN));//true
+var arr = ['a', 'b', 'c'];
+console.log(arr.includes('c', 1));//true
+console.log(arr.includes('c', 3));//false
+console.log(arr.includes('c', 100));//false
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Еще пример</h3>
+                    <p>При отрицательных значениях поиск производится начиная с индекса array.length - fromIndex по возрастанию</p>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+//длина массива равна 3
+//fromIndex равен -1
+//вычисленный индекс равен 3 + (-2) = 1
+var arr = ['a', 'b', 'c'];
+console.log(arr.includes('a', -2));//false
+console.log(arr.includes('b', -2));//true
+console.log(arr.includes('c', -2));//true
+                        </code>
+                    </pre>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+//длина массива равна 3
+//fromIndex равен -100
+//вычисленный индекс равен 3 + (-100) = -97
+var arr = ['a', 'b', 'c'];
+console.log(arr.includes('a', -100));//true
+console.log(arr.includes('b', -100));//true
+console.log(arr.includes('c', -100));//true
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <h2>Метод includes для TypedArray</h2>
+                <pre>
+                <code class="hljs javascript" data-trim>
+typedArr.includes(searchElement[, fromIndex])
+                    </code>
+                </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+const uint8 = new Uint8Array([10, 20, 30, 40, 50]);
+console.log(uint8.includes(20));//true
+console.log(uint8.includes(60));//false
+console.log(uint8.includes(20, 3));//false
+console.log(uint8.includes(40, 3));//true
+console.log(uint8.includes(20, -5));//true
+                    </code>
+                </pre>
+            </section>
+            <!-- Стандарт ECMAScript 8 -->
+            <section>
+                <h1>Стандарт ECMAScript 8</h1>
+            </section>
+            <section>
+                <h2>Названия</h2>
+                <ul>
+                    <li>ECMA-262 8th edition</li>
+                    <li>ECMAScript 2017 </li>
+                    <li>ECMAScript 8</li>
+                    <li>ES8</li>
+                </ul>
+            </section>
+            <section>
+                <h1>Паддинги строк</h1>
+            </section>
+            <section>
+                <section>
+                    <h2>Метод padStart</h2>
+                    <blockquote>
+                        Заполняет текущую строку другой сторокой так, что итоговая строка достигает заданной длины. Заполнение осуществляется слева
+                        текущей строки
+                    </blockquote>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+str.padStart(targetLength [, padString])
+//targetLength - длина итоговой строки после дополнения текущей.
+//Если значение меньше, чем длина текущей строки, 
+//текущая строка будет возвращена без изменений.
+//padString - cтрока для заполнения текущей строки. 
+//Если эта строка слишком длинная для заданной длины, 
+//она будет обрезана. Значение по умолчанию - " "
+</code>
+                </pre>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+console.log('abc'.padStart(10));//"       abc"
+console.log('abc'.padStart(10, "foo"));//"foofoofabc"
+console.log('abc'.padStart(6,"123465"));//"123abc"
+console.log('abc'.padStart(8, "0"));//"00000abc"
+console.log('abc'.padStart(1));//"abc"
+console.log('abc'.padStart(-1));//"abc"
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Метод padEnd</h2>
+                    <blockquote>
+                        Заполняет текущую строку с помощью заданной строки, так чтобы результирующая строка достигла заданной длины. Дополнение применяется
+                        справа текущей строки
+                    </blockquote>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+str.padEnd(targetLength [, padString])
+//targetLength - длина результирующей строки, 
+//после того как текущая строка была дополнена. 
+//Если параметр меньше длины текущей строки, 
+//то будет возвращена текущая строка.
+//padString - строка для дополнения текущей строки. 
+//Если строка слишком длинная, 
+//она будет урезана и будет применяться ее левая часть.
+//" " - значение по умолчанию.
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h2>Пример</h2>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+console.log('abc'.padEnd(10));//"abc       "
+console.log('abc'.padEnd(10, "foo"));//"abcfoofoof"
+console.log('abc'.padEnd(6,"123465"));//"abc123"
+console.log('abc'.padEnd(8, "0"));//"abc00000"
+console.log('abc'.padEnd(1));//"abc"
+console.log('abc'.padEnd(-1));//"abc"
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <h1>Асинхронные функции</h1>
+            </section>
+            <section>
+                <section>
+                    <h2>Callback Hell</h2>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    getData(function(a){  
+        getMoreData(a, function(b){
+            getMoreData(b, function(c){ 
+                getMoreData(c, function(d){ 
+                    getMoreData(d, function(e){ 
+                        ...
+                    });
+                });
+            });
+        });
+    });
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Promise Hell</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    getData().then((data) => {
+        return getMoreData(data).then((moredata) => {
+            return getMoreData(moredata).then(result => {
+                ...
+            })
+        })
+    });
+                            </code>
+                        </pre>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    getData()
+        .then(resolve, reject)
+        .then(resolve, reject)
+        .then(resolve, reject)
+        .then(resolve, reject)
+        .catch(err);
+                            </code>
+                        </pre>
+                </section>
+            </section>
+            <section>
+                <h2>Цель внедрения в стандарт</h2>
+                <blockquote>
+                    Упросить использование promises синхронно и воспроизвести некоторое действие над группой Promises. Точно так же как Promises
+                    подобны структурированным callback-ам, async/await подобна комбинации генераторов и promises
+                </blockquote>
+            </section>
+            <section>
+                <section>
+                    <h2>Объявление async function</h2>
+                    <blockquote>
+                        Определяет асинхронную функцию, которая возвращает объект AsyncFunction
+                    </blockquote>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function name([param[, param[, ... param]]]) {
+        //function's body
+    }
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    //анонимная асинхронная функция
+    let main = (async function() {
+        let value = await fetch('/');
+    })();
+                            </code>
+                        </pre>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    //асинхронная функция
+    async function main() {
+        let value = await fetch('/');
+    };
+                            </code>
+                        </pre>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    //сохранение асинхронной функции в переменную
+    let main = async function() {
+        let value = await fetch('/');
+    };
+    
+    //асинхронная стрелочная функция
+    let main = async () => {let value = await fetch('/');};
+                            </code>
+                        </pre>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    //передача асинхронной функции в качестве параметра
+    document.body.addEventListener('click', async function() {
+        let value = await fetch('/');
+    });        
+                            </code>
+                        </pre>
+                </section>
+            </section>
+            <section>
+            <section>
+                <h2>Конструктор AsyncFunction</h2>
+                <blockquote>
+                    Cоздает новый объект async function. В JS любая асинхронная функция фактически является объектом AsyncFunction
+                </blockquote>
+                <pre>
+                <code class="hljs javascript" data-trim>
+    new AsyncFunction([arg1[, arg2[, ...argN]],] functionBody)
+                        </code>
+                    </pre>
+            </section>
+            <section>
+                <h3>Пример</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+function resolveAfter2Seconds(x) {
+    return new Promise(resolve => {
+        setTimeout(() => {resolve(x);}, 2000);
+    });
+}
+
+var AsyncFunction = Object
+    .getPrototypeOf(async function(){})
+    .constructor;
+
+var a = new AsyncFunction(
+    'a', 
+    'b', 
+    'return await resolveAfter2Seconds(a) 
+          + await resolveAfter2Seconds(b);'
+);
+
+a(10, 20).then(v => {
+  console.log(v);//напечатает 30 через 4 секунды
+});
+                    </code>
+                </pre>
+            </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Пример 1</h2>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+        async function test()
+        {
+            console.log(this);
+            //Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+        }
+        
+        const result = test();
+        console.log(result instanceof Promise);//true
+        console.log(result);
+        //Promise&nbsp;{&lt;resolved&gt;: undefined}
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 2</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+        async function pow(a, b)
+        {
+            return a ** b;
+        }
+        
+        const result = pow(2, 3);
+        console.log(result);
+        //Promise&nbsp;{&lt;resolved&gt;: 8}
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 3</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+        async function pow(a, b)
+        {
+            return a ** b;
+        }
+        
+        const promise = pow(2, 3);
+        promise.then(
+            (result) => console.log(result)//8
+        );
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 4</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+        async function pow(a, b)
+        {
+            return a ** b;
+        }
+        
+        console.log('Begin');
+        const promise = pow(2, 3);
+        promise.then(
+            (result) => console.log(`Result: ${result}`)
+        );
+        console.log('End');
+        
+        //Begin
+        //End
+        //Result: 8
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 5</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+        async function timeout(message, delay = 0) {
+            return new Promise(done => {
+                setTimeout(() => done(message), delay * 1000);
+            });
+        }
+        
+        timeout('Ждем 2 секунды', 2)
+            .then(
+                message => console.log(message)
+            );
+        //Ждем 2 секунды
+                            </code>
+                        </pre>
+                </section>
+            </section>
+            <section>
+                <h2>Особенности</h2>
+                <ul>
+                    <li>После вызова, функция async возвращает Promise</li>
+                    <li>Когда результат был получен, Promise завершается, возвращая полученное значение</li>
+                    <li>Когда функция async выбрасывает исключение, Promise ответит отказом с выброшенным (throws) значением</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Оператор await</h2>
+                <blockquote>
+                    Используется для ожидания окончания Promise. Может быть использован только внутри async function
+                </blockquote>
+                <pre>
+                <code class="hljs javascript" data-trim>
+    [result] = await expression;
+    
+    //expression - Promise или любое другое ожидаемое значение
+    
+    //result - полученное из Promise значение, либо само значение, 
+    //если оно не является Promise
+                        </code>
+                    </pre>
+            </section>
+            <section>
+                <h2>Особенности</h2>
+                <ul>
+                    <li>Заставляет async-функцию ждать выполнения Promise и продолжать выполнение после возвращения Promise значения</li>
+                    <li>Впоследствии возвращает полученное из Promise значение</li>
+                    <li>
+                        Если типом значения, к которому был применен оператор await, является не Promise, то значение приводится к успешно выполненному
+                        Promise
+                    </li>
+                    <li>Если Promise отклоняется, то await генерирует исключение с отклонённым значением</li>
+                </ul>
+            </section>
+            <section>
+                <section>
+                    <h2>Пример 1</h2>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function test(n) {
+        var result = await Promise.resolve(n);
+        console.log(result);//10
+        return result;
+    }
+    
+    console.log(test(10));//Promise&nbsp;{&lt;pending&gt;}
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 2</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function pow(a, b)
+    {
+        var result = await Math.pow(a, b);
+        console.log(result);//8
+        return result;
+    }
+    
+    console.log(pow(2, 3));//Promise&nbsp;{&lt;pending&gt;}
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 3</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function pow(a, b)
+    {
+        console.log(2);
+        var result = await Math.pow(a, b);
+        
+        console.log(3);
+        return result;
+    }
+    
+    console.log(1);
+    pow(2, 3);
+    console.log(4);
+    
+    //1 2 4 3
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 4</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function pow(a, b)
+    {
+        var result = await Math.pow(a, b);
+        return result;
+    }
+    
+    pow(2, 3).then((result) => console.log(result));//8
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 5</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    function fetchNumber(maxNumber = 10, delay = 0) {
+        return new Promise(resolve => { 
+            setTimeout(
+                () => resolve(Math.floor(Math.random() * maxNumber)),
+                delay * 1000
+            );
+        });
+    }
+    
+    async function sum(){
+        let x = await fetchNumber(10, 1);
+        let y = await fetchNumber(10, 2);
+        console.log(`(${x}, ${y})`);//(4,7)
+        return x + y;
+    }
+    
+    sum().then((result) => console.log(result));//11
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 6</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    function fetchNumber(maxNumber = 10, delay = 0) {
+        return new Promise(resolve => { 
+            setTimeout(
+                () => resolve(Math.floor(Math.random() * maxNumber)),
+                delay * 1000
+            );
+        });
+    }
+    
+    async function sum(){
+        let [x, y, z] = await Promise.all([
+            fetchNumber(10, 1),
+            fetchNumber(10, 2),
+            fetchNumber(10, 3)
+        ]);
+        console.log(`(${x}, ${y}, ${z})`);//(2,2,1)
+        return x + y + z;
+    }
+    
+    sum().then((result) => console.log(result));//5
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 7</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function test(n) {
+        var result = await Promise.reject(n);
+        console.log(result);//Promise&nbsp;{&lt;pending&gt;}
+        return result;
+    }
+    
+    console.log(test(10));
+    //Ex: Uncaught (in promise) 10
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 8</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function test(n) {
+        try
+        {
+            var result = await Promise.reject(n);
+        }
+        catch(e){
+            console.log(`Ошибка: ${n}`);//Ошибка: 10
+        }
+        return result;
+    }
+        
+    console.log(test(10));
+                                </code>
+                            </pre>
+                </section>
+                <section>
+                    <h3>Пример 9</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function test(n) {
+        console.log(1);
+        
+        try
+        {
+            console.log(2);
+            var result = await Promise.reject(n);
+            console.log(3);
+        }
+        catch(e){
+            console.log(4);
+            console.log(`Ошибка: ${n}`);//Ошибка: 10
+        }
+        
+        console.log(5);
+        return result;
+    }
+        
+    console.log(test(10));
+    //1 2 4 5
+                                </code>
+                            </pre>
+                </section>
+                <section>
+                    <h3>Пример 10</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function fetchPostContent(postId) {
+        
+        try{
+            const post = await fetch(`/post/${postId}`);
+        }
+        catch(e){
+            console.log(e);
+            return null;
+        }
+        
+        return post;
+    }
+    
+    const promise = fetchPostContent('68bb1d77')
+        .then((data) => console.log(data));
+    //GET http://localhost:4000/post/68bb1d77 404 (Not Found)
+    //Uncaught (in promise) ReferenceError: post is not defined
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 11</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function fetchPostContent(postId) {
+        try{
+            const response = await fetch(`/post/${postId}`);
+            if (!response.ok)
+                throw new Error(response.statusText);
+                
+            const post = await response.json();
+        }
+        catch(e){
+            console.log(e);
+            return null;
+        }
+        return post;
+    }
+    
+    const promise = fetchPostContent('68bb1d77')
+        .then((data) => console.log(data));
+    //GET http://localhost:4000/post/68bb1d77 404 (Not Found)
+    //Error: Not Found
+    //null
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Пример 12</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+    async function fetchPostContent(postId) {
+        const postResponse = await fetch(`/post/${postId}`);
+        const post = await postResponse.json();
+        const userResponse = await fetch(`/user/${post.userId}`);
+        const user = await userResponse.json();
+      
+        return {
+            post,
+            user
+        };
+    }
+    
+    const promise = fetchPostContent('68bb1d77')
+        .then((data) => ...);
+                            </code>
+                        </pre>
+                </section>
+            </section>
+            <section>
+                <h2>Асинхронные функции и классы</h2>
+                <pre>
+                <code class="hljs javascript" data-trim>
+    class MyClass {
+        async myMethod() {
+            let value = await fetch('/');
+        }
+    }            
+                        </code>
+                    </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+    let obj = {
+        async method() {
+            let value = await fetch('/');
+        }
+    };
+                        </code>
+                    </pre>
+            </section>
+            <section>
+                <h1>Разделение памяти и объект Atomics</h1>
+                <p class="highlight-red">Не поддерживается браузерами</p>
+            </section>
+            <section>
+                <h2>Разделение памяти</h2>
+                <blockquote>
+                    Позволяет обеспечить необходимый порядок выполнения операций при одновременном использовании общей памяти несколькими потоками
+                </blockquote>
+            </section>
+            <section>
+                <section>
+                    <h2>Объект SharedArrayBuffer</h2>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+        var buffer = new SharedArrayBuffer(length);
+        //length - размер, в байтах, default = 0
+                            </code>
+                        </pre>
+                    <blockquote>
+                        Разделенная память может быть создана и изменена одновременно в workers или основном потоке. В зависимости от системы (ЦПУ,
+                        ОС, браузер) может уйти время пока изменения будут распространены по всем контекстам. Для синхронизации
+                        необходимы атомарные операции
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Позитивные моменты</h3>
+                    <ul>
+                        <li>Повышается скорость обмена данными между воркерами</li>
+                        <li>Координация между воркерами становится быстрее и проще (по сравнению с postMessage)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+        var buffer = new SharedArrayBuffer(1024);
+        worker.postMessage(buffer);
+                                </code>
+                            </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Объект Atomics</h2>
+                    <blockquote>
+                        Предоставляет атомарные операции как статические методы при работе с объектом SharedArrayBuffer
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Методы</h3>
+                    <small>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>add</td>
+                                    <td>добавляет представленное значение к текущему по указанной позиции в массиве</td>
+                                </tr>
+                                <tr>
+                                    <td>and</td>
+                                    <td>вычисляет побитовое AND в указанной позиции массива</td>
+                                </tr>
+                                <tr>
+                                    <td>compareExchange</td>
+                                    <td>сохраняет представленное значение в указанную позицию массива, если оно эквивалентно
+                                        представленному значению</td>
+                                </tr>
+                                <tr>
+                                    <td>exchange</td>
+                                    <td>сохраняет представленное значение в указанную позицию массива. Возвращает предыдущее
+                                        значение</td>
+                                </tr>
+                                <tr>
+                                    <td>load</td>
+                                    <td>возвращает значение из указаной позиции массива</td>
+                                </tr>
+                                <tr>
+                                    <td>or</td>
+                                    <td>вычисляет побитовое OR в указанной позиции массивая</td>
+                                </tr>
+                                <tr>
+                                    <td>store</td>
+                                    <td>сохраняет представленное значение в указанную позицию массива</td>
+                                </tr>
+                                <tr>
+                                    <td>sub</td>
+                                    <td>вычитает представленное значение из текущего по указанной позиции в массиве</td>
+                                </tr>
+                                <tr>
+                                    <td>xor</td>
+                                    <td>вычисляет побитовое XOR в указанной позиции массива</td>
+                                </tr>
+                                <tr>
+                                    <td>wait</td>
+                                    <td>
+                                        проверяет, содержится ли в указанной позиции массива представленное значение. Ожидает определенное время и завершает работу,
+                                        если событие не произошло
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>wake</td>
+                                    <td>пробуждает слушателей, которые спят в очереди ожидания в указанной позиции массива</td>
+                                </tr>
+                                <tr>
+                                    <td>isLockFree</td>
+                                    <td>
+                                        оптимизационный примитив, который может быть использован для определения использовать ли блокирующие операции или атомарные
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </small>
+                </section>
+            </section>
+            <section>
+                <h1>Прочие особенности</h1>
+            </section>
+            <section>
+                <h2>Метод Object.values</h2>
+                <blockquote>
+                    Возвращает массив значений перечисляемых свойств объекта в том же порядке что и цикл
+                    <span class="highlight-blue">for...in</span>
+                </blockquote>
+                <pre>
+                <code class="hljs javascript" data-trim>
+Object.values(obj)
+                    </code>
+                </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+let obj = { foo: "bar", baz: 42 };
+console.log(Object.values(obj));//["bar", 42]
+let obj1 = { 100: 3, 10: 2, 0: 1 };
+console.log(Object.values(obj1));//[1, 2, 3]
+let obj2 = { 100: "a", test: "b", 2: 10 };
+console.log(Object.values(obj2));//[10, "a", "b"]
+let obj3 = {test: 1, obj : {name : 'test'}};
+console.log(Object.values(obj3));//[1, {name : "test"}]
+console.log(Object.values("foo"));//["f", "o", "o"]
+console.log(Object.values(1000));//[]
+console.log(Object.values([1, 2, 3]));//[1, 2, 3]
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <section>
+                    <h2>Метод Object.entries</h2>
+                    <blockquote>
+                        Возвращает массив собственных перечисляемых свойств указанного объекта в формате [key, value], в том же порядке, что и в
+                        цикле
+                        <span class="highlight-blue">for...in</span>
+                    </blockquote>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+Object.entries(obj)
+                    </code>
+                </pre>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+let obj = { foo: "bar", baz: 42 };
+console.log(Object.entries(obj));
+//[["foo", "bar"], ["baz", 42]]
+let obj1 = { 100: 3, 10: 2, 0: 1 };
+console.log(Object.entries(obj1));
+//[["0", 1], ["10", 2], ["100", 3]]
+let obj2 = { 100: "a", test: "b", 2: 10 };
+console.log(Object.entries(obj2));
+//[["2", 10], ["100", "a"], ["test", "b"]]
+                    </code>
+                </pre>
+                </section>
+                <section>
+                    <h3>Еще пример</h3>
+                    <pre>
+                    <code class="hljs javascript" data-trim>
+let obj3 = {test: 1, obj : {name : 'test'}};
+console.log(Object.entries(obj3));
+//[["test", 1], ["obj", [{name : "test"}]]
+    
+console.log(Object.entries("foo"));
+//[["0", "f"], ["1", "o"], ["2", "o"]]
+console.log(Object.entries(1000));//[]
+console.log(Object.entries([1, 2, 3]));
+//[["0", 1], ["1", 2], ["2", 3]]
+                    </code>
+                </pre>
+                </section>
+            </section>
+            <section>
+                <h2>'Висячие' запятые в параметрах функций</h2>
+                <pre>
+                <code class="hljs javascript" data-trim>
+function test(var1, var2, var3, ) {
+    console.log(var1);//1
+    console.log(var2);//2
+    console.log(var3);//3
+    console.log(arguments);//[1, 2, 3]
+}
+test(1, 2, 3);
+                    </code>
+                </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+function test(var1, , ) {
+    console.log(var1);
+    console.log(arguments);
+}
+test(1, 2, 3);
+//Ex. Uncaught SyntaxError: Unexpected token ,
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>'Висячие' запятые при вызове функций</h2>
+                <pre>
+                <code class="hljs javascript" data-trim>
+function test(var1, var2, var3) {
+    console.log(var1);//1
+    console.log(var2);//2
+    console.log(var3);//3
+    console.log(arguments);//[1, 2, 3]
+}
+test(1, 2, 3, );
+                    </code>
+                </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+function test(var1) {
+    console.log(var1);
+    console.log(arguments);
+}
+test(1, , , );
+//Ex. Uncaught SyntaxError: Unexpected token ,
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>'Висячие' запятые и...</h2>
+                <pre>
+                <code class="hljs javascript" data-trim>
+let obj = { a:'b', b: 'c', }
+console.log(obj);//{a: "b", b: "c"}
+const obj1 = {
+    print: function (){console.log(this);}
+    , 
+}
+obj1.print();//{print: ƒ}
+var arr =[1, 2, 3, ];//length = 3
+console.log(arr);//[1, 2, 3]
+console.log(arr[3]);//undefined
+var arr1 = [1, 2, 3, , , ];//length = 5
+console.log(arr1);//[1, 2, 3, empty × 2]
+console.log(arr1[4]);//undefined
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Метод Object.getOwnPropertyDescriptors</h2>
+                <blockquote>
+                    Возвращает дескриптор свойства переданного объекта. Свойство должно быть определено непосредственно в объекте, а не получено
+                    через цепочку прототипов
+                </blockquote>
+                <pre>
+                <code class="hljs javascript" data-trim>
+Object.getOwnPropertyDescriptor(obj, prop)
+                    </code>
+                </pre>
+                <pre>
+                <code class="hljs javascript" data-trim>
+const obj = {
+    name: 'Test',
+    get getName() { 
+        return this.name; 
+    } 
+};
+console.log(Object.getOwnPropertyDescriptor(obj, 'getName'));
+//{
+//   configurable: true,
+//   enumerable: true,
+//   get: ƒ getName(),
+//   set: undefined
+//}
+                    </code>
+                </pre>
+            </section>
+
+
+            <section>
+                <h2 class="header-hide">Спасибо за внимание</h2>
+                <img src="img/thanks.jpg" alt="" height="600">
+            </section>
+        </div>
+    </div>
+
+    <aside id="presentable-icon" class="revealjs">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x"></i>
+        </a>
+    </aside>
+
+    <script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>
