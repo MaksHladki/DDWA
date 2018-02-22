@@ -2701,7 +2701,7 @@ let proxy = new Proxy(dictionary, {
 delete proxy['Hello'];
 console.log("Hello" in dictionary);//true
 //так как нет ловушки has, операция in сработает на исходном объекте
-console("Hello" in proxy);//true
+console.log("Hello" in proxy);//true
                         </code>
                     </pre>
                 </section>
