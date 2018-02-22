@@ -1012,13 +1012,24 @@ String.raw`templateString`
                         </code>
                     </pre>
                     <pre>
-                        <code class="hljs javascript">
+                        <code class="hljs javascript" data-trim>
+String.raw`Привет\n Ответ = ${2+3}!`;
+//"Привет\n Ответ = 5!"
+
+//Экранирующие символы не имеют особого значения и
+//обратные слеши будут присутствовать в выходной строке.
+//Можно убедиться в этом, проверив свойство .length
+                        </code>
+                    </pre>
+                    <pre>
+                        <code class="hljs javascript" data-trim>
 function tag(strings, ...values) {
   return strings.raw[0];
 }
 
 tag`string text line 1 \n string text line 2`;
-//"string text line 1 \\n string text line 2"
+//"string text line 1 \n string text line 2"
+//'\' и 'n' - это два символа
                         </code>
                     </pre>
                 </section>
