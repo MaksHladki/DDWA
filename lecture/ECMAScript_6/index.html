@@ -645,13 +645,27 @@ console.log(f.name);//ReferenceError: f is not defined
                         <code class="hljs javascript" data-trim>
 var something = false;
 if(something){
-    getRandomInt(0, 10);//4
+    console.log(getRandomInt(0, 10));
     function getRandomInt(min, max) {
        return Math.floor(Math.random() * (max - min)) + min;
     }
 }
 
-getRandomInt(0, 10);//ReferenceError: getRandomInt is not defined
+console.log(getRandomInt(0, 10));
+//Uncaught TypeError: getRandomInt is not a function
+                        </code>
+                    </pre>
+                    <pre>
+                        <code class="hljs javascript" data-trim>
+var something = true;
+if(something){
+    console.log(getRandomInt(0, 10));//2
+    function getRandomInt(min, max) {
+       return Math.floor(Math.random() * (max - min)) + min;
+    }
+}
+
+console.log(getRandomInt(0, 10));//9
                         </code>
                     </pre>
                 </section>
