@@ -10,10 +10,8 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" href="../../img/js-icon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
-	<!--[if lt IE 9]>
-		<script src="../../js/html5shiv.min.js"></script>
-	<![endif]-->
 </head>
 
 <body>
@@ -24,7 +22,9 @@
 					<h1>Пакетные менеджеры и системы сборки модулей</h1>
 					<h3>Разработка динамичесих веб приложений</h3>
 					<p>
-						<small>Гладкий Максим Валерьевич / <a href="https://github.com/MaksHladki/DDWA/">github:MaksHladki</a></small>
+						<small>Гладкий Максим Валерьевич /
+							<a href="https://github.com/MaksHladki/DDWA/">github:MaksHladki</a>
+						</small>
 					</p>
 				</section>
 				<section>
@@ -60,7 +60,6 @@
 						<li>Превращает V8 в мощную машину для серверных приложений</li>
 						<li>Сохраняет философию JavaScript </li>
 						<li>Event loop - неблокирующий ввод/вывод</li>
-						<li>Все выполняется параллельно, кроме вашего кода </li>
 					</ul>
 				</section>
 				<section>
@@ -86,7 +85,7 @@
 				<section>
 					<h3>Пример кода</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 // Загружаем модуль http
 var http = require('http');
 
@@ -109,7 +108,9 @@ server.listen(2002, "127.0.0.1", function () {
 				</section>
 				<section>
 					<h3>C чего начать</h3>
-					<p><a href="https://nodejs.org/">https://nodejs.org/</a></p>
+					<p>
+						<a href="https://nodejs.org/">https://nodejs.org/</a>
+					</p>
 					<ul>
 						<li>LTS - расширенная поддержка</li>
 						<li>Current - новый функционал</li>
@@ -118,20 +119,20 @@ server.listen(2002, "127.0.0.1", function () {
 				<section>
 					<h3>Hello world</h3>
 					<pre>
-						<code class="hljs">
->node -v // 7.2.1
->node --version //7.2.1
+						<code class="hljs javascript" data-trim>
+>node -v //9.5.0
+>node --version //9.5.0
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >node
 >console.log('Hello world');
 //Hello world
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 //создаем файл index.js
 console.log('Hello World');
 
@@ -161,7 +162,8 @@ console.log('Hello World');
 					<h3>Минусы NPM</h3>
 					<ul>
 						<li>Установка небольшого пакета может привести к скачиванию еще 5-10 пакетов, на которые ссылается данный пакет</li>
-						<li>Удаление автором пакета может привести к "бездействию" программистов, зависимые пакеты нельзя будет скачать/обновить</li>
+						<li>Удаление автором пакета может привести к "бездействию" программистов, зависимые пакеты нельзя будет скачать/обновить
+							(до 2016г.)</li>
 					</ul>
 				</section>
 				<section>
@@ -175,82 +177,82 @@ console.log('Hello World');
 				<section>
 					<h3>Команды</h3>
 					<small>
-					<table>
-					<tr>
-						<td>install</td>
-						<td>установка пакета</td>
-					</tr>
-					<tr>
-						<td>search</td>
-						<td>поиск пакета</td>
-					</tr>
-					<tr>
-						<td>view</td>
-						<td>просмотр информации о пакете</td>
-					</tr>
-					<tr>
-						<td>uninstall</td>
-						<td>удаление пакета</td>
-					</tr>
-					<tr>
-						<td>link</td>
-						<td>устанавливает связь между пакетами</td>
-					</tr>
-					<tr>
-						<td>unlink</td>
-						<td>удаляет связь между пакетами</td>
-					</tr>
-					<tr>
-						<td>init</td>
-						<td>инициализация нового пакета</td>
-					</tr>
-					<tr>
-						<td>publish</td>
-						<td>публикация пакета в репозитории	</td>
-					</tr>
-					<tr>
-						<td>unpublish</td>
-						<td>удаление пакета из репозитория</td>
-					</tr>
-					<tr>
-						<td>owner</td>
-						<td>изменение прав доступа к пакету в репозитории</td>
-					</tr>
-					<tr>
-						<td>adduser</td>
-						<td>добавление нового пользователя</td>
-					</tr>
-					<tr>
-						<td>list</td>
-						<td>список установленных пакетов</td>
-					</tr>
-					<tr>
-						<td>update</td>
-						<td>обновление пакета либо самого npm</td>
-					</tr>
-					<tr>
-						<td>config</td>
-						<td>установка параметров конфигурации</td>
-					</tr>
-					</table>
+						<table>
+							<tr>
+								<td>install</td>
+								<td>установка пакета</td>
+							</tr>
+							<tr>
+								<td>search</td>
+								<td>поиск пакета</td>
+							</tr>
+							<tr>
+								<td>view</td>
+								<td>просмотр информации о пакете</td>
+							</tr>
+							<tr>
+								<td>uninstall</td>
+								<td>удаление пакета</td>
+							</tr>
+							<tr>
+								<td>link</td>
+								<td>устанавливает связь между пакетами</td>
+							</tr>
+							<tr>
+								<td>unlink</td>
+								<td>удаляет связь между пакетами</td>
+							</tr>
+							<tr>
+								<td>init</td>
+								<td>инициализация нового пакета</td>
+							</tr>
+							<tr>
+								<td>publish</td>
+								<td>публикация пакета в репозитории </td>
+							</tr>
+							<tr>
+								<td>unpublish</td>
+								<td>удаление пакета из репозитория</td>
+							</tr>
+							<tr>
+								<td>owner</td>
+								<td>изменение прав доступа к пакету в репозитории</td>
+							</tr>
+							<tr>
+								<td>adduser</td>
+								<td>добавление нового пользователя</td>
+							</tr>
+							<tr>
+								<td>list</td>
+								<td>список установленных пакетов</td>
+							</tr>
+							<tr>
+								<td>update</td>
+								<td>обновление пакета либо самого npm</td>
+							</tr>
+							<tr>
+								<td>config</td>
+								<td>установка параметров конфигурации</td>
+							</tr>
+						</table>
 					</small>
 				</section>
 				<section>
 					<h3>Команда install</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install 'package name'
 >npm install -g 'package name'	
 >npm install --global 'package name'
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install -g gulp
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install gulp@3.9.1
 						</code>
 					</pre>
@@ -258,7 +260,7 @@ console.log('Hello World');
 				<section>
 					<h3>Еще пример</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 > npm install uglify-js --global
 └─┬ uglify-js@2.6.2
   ├── async@0.2.10
@@ -285,7 +287,7 @@ console.log('Hello World');
 				<section>
 					<h3>Команда search</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm search 'package name'
 //не удобно		
 
@@ -297,12 +299,12 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Команда view</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm view 'package name'
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 >npm view gulp
 
  { name: 'gulp',
@@ -329,12 +331,12 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Команда update</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm update [-g] 'package name' //latest version
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm update -g gulp
 >npm update -g npm						
 						</code>
@@ -343,7 +345,7 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Команда config</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm config set 'key' 'value' [--global] 
 >npm config get 'key' 
 >npm config delete 'key' 
@@ -354,7 +356,7 @@ https://www.npmjs.com/search?q=gulp
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm set init.author.name "maks"
 >npm set init.author.email "test@gmail.com"
 >npm set init.author.url "https://google.com"
@@ -364,14 +366,14 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Команда uninstall</h3>
 					<pre>
-						<code class="hljs">
->npm uninstall 'package name' [@version] [--save| [--save-dev] [--global]
+						<code class="hljs javascript" data-trim>
+>npm uninstall 'package name' [@ver] [--save| [--save-dev] [--global]
 //--save пакет будет удален из dependencies
 //--save-dev пакет будет удален из devDependencies
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm uninstall sax --save
 >npm uninstall gulp --global
 >npm uninstall node-tap --save-dev
@@ -382,12 +384,12 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Команда list</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm list [--global] [--depth]
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm list -g --depth=0
 //без лишних зависимостей
 ├── npm@3.7.5
@@ -459,14 +461,14 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Пример</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 {
   "name": "ddwa",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp build"
   },
   "author": "Maksim Hladki",
   "license": "MIT",
@@ -485,8 +487,14 @@ https://www.npmjs.com/search?q=gulp
 				</section>
 				<section>
 					<h3>Спецификация версий пакетов</h3>
+					<a href="https://semver.org/">Semantic Versioning</a>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
+MAJOR.MINOR.PATCH
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
 { "dependencies" :
   { 
     "foo" : "1.0.0 - 2.9999.9999",
@@ -509,16 +517,40 @@ https://www.npmjs.com/search?q=gulp
 				</section>
 			</section>
 			<section>
+				<h2>package-lock.json (npm 5+)</h2>
+				<pre>
+					<code class="hljs javascript" data-trim>
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "ansi-gray": {
+      "version": "0.1.1",
+      "resolved": "https://registry.npmjs.org/ansi-gray/-/ansi-gray-0.1.1.tgz",
+      "integrity": "sha1-KWLPVOyXksSFEKPetSRDaGHvclE=",
+      "dev": true,
+      "requires": {
+        "ansi-wrap": "0.1.0"
+      }
+    },
+    "ansi-regex": {
+      "version": "2.1.1",
+      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.1.1.tgz",
+      "integrity": "sha1-w7M6te42DYbg5ijwRorn7yfWVN8=",
+      "dev": true
+	},
+............................
+					</code>
+				</pre>
+			</section>
+			<section>
 				<section>
 					<h2>NPM и VS Code</h2>
 					<ul>
-						<li>ext install vscode-npm (npm - Florian Knop)</li>
-						<li>ext install vscode-npm-script (npm - egamma)</li>
-						<li>ext install npm-intellisense (npm Intellisense - Christian Kohler)</li>
+						<li>npm - Florian Knop</li>
+						<li>npm - egamma</li>
+						<li>npm Intellisense - Christian Kohler</li>
 					</ul>
-				</section>
-				<section>
-					<h3>Пример</h3>
 					<img src="img/vs-code-npm.png" alt="">
 				</section>
 			</section>
@@ -534,12 +566,12 @@ https://www.npmjs.com/search?q=gulp
 						и фреймворков
 					</blockquote>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install -g bower
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 //установка пакета angular
 >bower install angular
 
@@ -551,7 +583,7 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Пример</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >bower install jquery
 >bower cloning git://github.com/components/jquery.git
 >bower cached git://github.com/components/jquery.git
@@ -567,11 +599,23 @@ https://www.npmjs.com/search?q=gulp
 					<ul>
 						<li>Делает установку зависимостей более легкой</li>
 						<li>Легкая настройка с использованием bower.json</li>
-						<li>Все пакеты загружаются в единую директорию /bower_components (если зависимость уже загружена, заново она не загружается
-							в отличии от npm)</li>
+						<li>Все пакеты загружаются в единую директорию /bower_components (если зависимость уже загружена, заново она не загружается)</li>
 						<li>Механизм разрешения конфликтных ситуаций</li>
 					</ul>
 				</section>
+			</section>
+			<section>
+				<h2>Bower vs npm</h2>
+				<blockquote>
+					Главное отличие — подход к установке зависимостей пакетов. Npm устанавливает зависимости для каждого пакета отдельно, в папку
+					этого пакета, потом так же ставит зависимости зависимостей и так далее. В frontend-разработке это недопустимо: нельзя
+					подключить на страницу две версии библиотеки
+				</blockquote>
+				<blockquote>
+					В Бовере каждый пакет устанавливается один раз, и в случае конфликта зависимостей Бовер просто не станет устанавливать пакет,
+					несовместимый с уже установленными
+				</blockquote>
+				<p class="highlight-red">Данное ограничение npm было устранено в 2016 году</p>
 			</section>
 			<section>
 				<section>
@@ -606,7 +650,7 @@ https://www.npmjs.com/search?q=gulp
 				<section>
 					<h3>Команда search</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >bower search jquery
 Search results:
     jQuery https://github.com/jquery/jquery.git
@@ -628,7 +672,7 @@ Search results:
 				<section>
 					<h3>Команда install</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >bower install jquery#2.0.0
 //result
 bower jquery#2.0.0  not-cached https://github.com/jquery/jquery-dist.git#2.0.0
@@ -643,7 +687,7 @@ jquery#2.0.0 bower_components\jquery
 				<section>
 					<h3>Команда list</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >bower list
 //result
 bower check-new  Checking for new versions of the project dependencies...
@@ -655,7 +699,7 @@ HP C:\Users\HP
 				<section>
 					<h3>Команда uninstall</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >bower uninstall jquery
 						</code>
 					</pre>
@@ -663,7 +707,7 @@ HP C:\Users\HP
 				<section>
 					<h3>Команда init</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 >bower init
 //bower.json
 {
@@ -690,8 +734,339 @@ HP C:\Users\HP
 			</section>
 			<section>
 				<h2>Bower и VS Code</h2>
-				<p>ext install bower (Bower - Don Jayamanne)</p>
+				<ul>
+					<li>Bower - Don Jayamanne</li>
+				</ul>
 				<img src="img/vs-code-bower.png" alt="">
+			</section>
+			<section>
+				<h2>Стоит ли использовать?</h2>
+				<blockquote>
+					psst! While Bower is maintained, we recommend using Yarn and Webpack for front-end projects read how to migrate!
+				</blockquote>
+			</section>
+			<section>
+				<h1>Менеджер пакетов yarn</h1>
+			</section>
+			<section>
+				<h2>Yarn</h2>
+				<blockquote>
+					Менеджер пакетов, совместно созданный Facebook, Google, Exponent и Tilde. Является современной альтернативой пакетного менеджера
+					npm, отличается высокой скоростью, надежностью и безопасностью
+				</blockquote>
+			</section>
+			<section>
+				<h2>Преимущества над npm</h2>
+				<ul>
+					<li>Распараллеливание операций для быстрой установки пакетов</li>
+					<li>Устойчивость к сбоям во время установки. В случае ошибки yarn отправит повторный запрос</li>
+					<li>Проверка целостности пакетов</li>
+					<li>Одинаковая установка и работа на разных системах</li>
+					<li>Поддержка эмодзи (и с котиками тоже)</li>
+					<li>Пакеты скачиваются с npm-репозитория (npm.org)</li>
+					<li>Кеширование всех скачанных пакетов локально, что в будущем дает их установку без подключения к сети</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Сравнение скорости установки</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Пакет</th>
+							<th>npm 4</th>
+							<th>npm 5</th>
+							<th>Yarn</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>express</td>
+							<td>8 сек.</td>
+							<td>6 сек.</td>
+							<td>5.5 сек.</td>
+						</tr>
+						<tr>
+							<td>gulp</td>
+							<td>11 сек.</td>
+							<td>9 сек.</td>
+							<td>8 сек.</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+
+
+				<section>
+					<h2>Популярные команды</h2>
+					<small>
+						<table>
+							<tr>
+								<td>init</td>
+								<td>инициализация нового пакета (создает файл package.json)</td>
+							</tr>
+							<tr>
+								<td>install</td>
+								<td>устанавливает все зависимости из файла package.json</td>
+							</tr>
+							<tr>
+								<td>add</td>
+								<td>добавляет пакет и устанавливает зависимости</td>
+							</tr>
+							<tr>
+								<td>upgrade</td>
+								<td>обновляет пакеты до последней/определенной версии</td>
+							</tr>
+							<tr>
+								<td>remove</td>
+								<td>удяляет пакет и зависимости из package.json и yarn.lock</td>
+							</tr>
+							<tr>
+								<td>licenses</td>
+								<td>выводит список лицензий всех установленных в проекте пакетов</td>
+							</tr>
+							<tr>
+								<td>why</td>
+								<td>проверяет граф зависимостей и выясняет, почему указанный пакет установлен в проекте</td>
+							</tr>
+							<tr>
+								<td>generate-lock-entry</td>
+								<td>генерирует файл yarn.lock на основе зависимостей из package.json (похоже на npm shrinkwrap)</td>
+							</tr>
+							<tr>
+								<td>config</td>
+								<td>устанавливает конфигурационные значения в виде пар ключ-значение</td>
+							</tr>
+							<tr>
+								<td>list</td>
+								<td>выводит список зависимостей</td>
+							</tr>
+							<tr>
+								<td>pack</td>
+								<td>создает gzip-архив зависимостей</td>
+							</tr>
+							<tr>
+								<td>publish</td>
+								<td>позволяет опубликовать пакет в npmjs.com</td>
+							</tr>
+							<tr>
+								<td>global</td>
+								<td>позволяет выполнять команды add, bin, list и remove в глобальной области</td>
+							</tr>
+						</table>
+					</small>
+				</section>
+				<section>
+					<h3>Команда init</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+yarn init [--yes]						
+						</code>
+					</pre>
+					<pre>
+					<code class="hljs javascript" data-trim>
+>yarn init
+
+yarn init v1.3.2
+question name (DDWA): DDWA
+question version (1.0.0): 0.0.7
+question description: Development of dynamic web applications
+question entry point (index.js): index.js
+question repository url: https://github.com/MaksHladki/DDWA
+question author: Maksim Hladki
+question license (MIT): MIT
+question private: without private key
+success Saved package.json
+Done in 19.30s.
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Команда install</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+yarn install [--check-files] [--ignore-scripts] [--force]
+						</code>
+					</pre>
+					<pre>
+					<code class="hljs javascript" data-trim>
+>yarn install
+
+yarn install v1.3.2
+info No lockfile found.
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+info Lockfile not saved, no dependencies.
+Done in 0.34s.
+
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Команда add</h3>
+					<pre>
+					<code class="hljs javascript" data-trim>
+yarn add [package-name] [--dev/-D]
+yarn add [package]@[version]
+					</code>
+				</pre>
+					<pre>
+					<code class="hljs javascript" data-trim>
+>yarn add gulp --dev
+
+yarn add v1.3.2
+[1/4] Resolving packages...
+warning gulp > gulp-util@3.0.8: gulp-util is deprecated
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 200 new dependencies.
+├─ ansi-regex@2.1.1
+├─ ansi-wrap@0.1.0
+├─ archy@1.0.0
+....
+├─ vinyl-fs@0.3.14
+├─ vinyl@0.4.6
+├─ which@1.3.0
+└─ xtend@4.0.1
+Done in 16.12s.
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Команда upgrade</h3>
+					<pre>
+					<code class="hljs javascript" data-trim>
+yarn upgrade [package]
+yarn upgrade [package]@[version]
+					</code>
+				</pre>
+					<pre>
+					<code class="hljs javascript" data-trim>
+>yarn upgrade gulp@3.9.0
+
+yarn upgrade v1.3.2
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Rebuilding all packages...
+success Saved lockfile.
+success Saved 2 new dependencies.
+├─ gulp@3.9.0
+└─ interpret@0.6.6
+Done in 4.18s.
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Команда remove</h3>
+					<pre>
+					<code class="hljs javascript" data-trim>
+yarn remove [package] --[flag]
+					</code>
+				</pre>
+					<pre>
+					<code class="hljs javascript" data-trim>
+>yarn remove gulp
+
+yarn remove v1.3.2
+[1/2] Removing module gulp...
+[2/2] Regenerating lockfile and installing missing dependencies...
+success Uninstalled packages.
+Done in 1.78s.
+					</code>
+				</pre>
+				</section>
+				<section>
+					<h3>Команда global</h3>
+					<pre>
+					<code class="hljs javascript" data-trim>
+yarn global add/bin/list/remove/upgrade [--prefix]
+					</code>
+				</pre>
+					<pre>
+					<code class="hljs javascript" data-trim>
+>yarn global add gulp
+
+yarn global v1.3.2
+[1/4] Resolving packages...
+warning gulp > gulp-util@3.0.8: gulp-util is deprecated
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Installed "gulp@3.9.1" with binaries:
+      - gulp
+Done in 9.05s.
+					</code>
+				</pre>
+				</section>
+			</section>
+			<section>
+				<h2>Режим offline</h2>
+				<pre>
+					<code class="hljs javascript" data-trim>
+>yarn add jquery
+					</code>
+				</pre>
+				<pre>
+					<code class="hljs javascript" data-trim>
+>yarn add jquery
+
+yarn add v1.3.2
+[1/4] Resolving packages...
+error An unexpected error occurred: 
+"https://registry.yarnpkg.com/jquery:
+getaddrinfo ENOENT registry.yarnpkg.com:443".	
+					</code>
+				</pre>
+				<pre>
+					<code class="hljs javascript" data-trim>
+>yarn add jquery --offline
+
+yarn add v1.3.2
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved 1 new dependency.
+└─ jquery@3.3.1
+Done in 0.58s.				
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h2>Файл yarn.lock</h2>
+				<blockquote>
+					Позволяет получить согласованную установку зависимостей на разных машинах путем фиксации конкретной версии каждого пакета
+				</blockquote>
+				<pre>
+					<code class="hljs javascript" data-trim>
+# THIS IS AN AUTOGENERATED FILE. DO NOT EDIT THIS FILE DIRECTLY.
+# yarn lockfile v1
+
+
+jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h2>Варианты установки</h2>
+				<ul>
+					<li>Использование установщика под конкретную ОС</li>
+					<li>npm</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Yarn и VS Code</h2>
+				<ul>
+					<li>yarn - Gamunu Balagalla</li>
+				</ul>
+				<img src="img/vs-code-yarn.png" alt="">
 			</section>
 			<!-- Cистема сборки и задач -->
 			<section>
@@ -765,7 +1140,7 @@ HP C:\Users\HP
 				</section>
 				<section>
 					<h3>Различия</h3>
-					<small>
+
 					<table>
 						<thead>
 							<tr>
@@ -796,7 +1171,6 @@ HP C:\Users\HP
 							</tr>
 						</tbody>
 					</table>
-					</small>
 				</section>
 			</section>
 			<section>
@@ -806,7 +1180,7 @@ HP C:\Users\HP
 				<section>
 					<h2>Структура проекта</h2>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 ├── app/
       ├── css/
       ├── fonts/
@@ -824,7 +1198,7 @@ HP C:\Users\HP
 				<section>
 					<h3>Еще пример</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 ├── .tmp
 │   ├── app.css
 │   ├── app.js
@@ -849,7 +1223,7 @@ HP C:\Users\HP
 			</section>
 			<section>
 				<section>
-					<h2>Подробнее о преимуществах</h2>
+					<h2>Особенности</h2>
 					<ul>
 						<li>Легок в использовании</li>
 						<li>Эффективен</li>
@@ -863,7 +1237,7 @@ HP C:\Users\HP
 						Предпочитая код конфигурации, Gulp оставляет простые задачи простыми, а из сложных делает управляемые
 					</blockquote>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       coffee = require('gulp-coffee'),
       concat = require('gulp-concat'),
@@ -886,7 +1260,7 @@ gulp.task('coffee', () => {
 				<section>
 					<h3>Пример</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('html', () => {
     return gulp.src(srcPath.html)// Считываем файл с диска
         .pipe(useref()) //Обрабатываем в оперативной памяти
@@ -911,13 +1285,18 @@ gulp.task('html', () => {
 						Все плагины для Gulp пишутся по специальным правилам. Этот процесс позволяет задачам оставаться простыми и работать так,
 						как этого ожидает разработчик
 					</blockquote>
-					<p>Общее количество плагинов на декабрь 2016: <span class="highlight-blue">1100+</span></p>
+					<p>Общее количество плагинов на декабрь 2016:
+						<span class="highlight-blue">1100+</span>
+					</p>
 				</section>
 				<section>
 					<h3>Прост в изучении</h3>
 					<blockquote>
 						Можно начать работать с Gulp с минимальными знаниями API. Нужно всего лишь понимать принцип работы основных четырех функций:
-						<span class="highlight-blue">task</span>, <span class="highlight-blue">watch</span>, <span class="highlight-blue">src</span>						и <span class="highlight-blue">dest</span>
+						<span class="highlight-blue">task</span>,
+						<span class="highlight-blue">watch</span>,
+						<span class="highlight-blue">src</span> и
+						<span class="highlight-blue">dest</span>
 					</blockquote>
 				</section>
 			</section>
@@ -932,7 +1311,7 @@ gulp.task('html', () => {
 						<li>Выполнить команду gulp</li>
 					</ol>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --global gulp
 
 >npm install --save-dev gulp
@@ -942,7 +1321,7 @@ gulp.task('html', () => {
 				<section>
 					<h3>Пример gulpfile.js</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 var gulp  = require('gulp');
 
 gulp.task('default', function() {
@@ -951,7 +1330,7 @@ gulp.task('default', function() {
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >gulp
 
 [16:20:01] Using gulpfile G:\test\gulpfile.js
@@ -964,7 +1343,7 @@ Gulp is running!
 				<section>
 					<h3>Еще пример</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >gulp default
 //если имя задачи не установлено, вызывается задача с именем default
 [16:21:17] Using gulpfile G:\test\gulpfile.js
@@ -982,7 +1361,7 @@ Gulp is running!
 				<section>
 					<h3>Метод task</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task(name[, deps], fn)
 //name - required
 //deps - массив зависимых зависимостей
@@ -990,7 +1369,7 @@ gulp.task(name[, deps], fn)
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('hello', function() {
    console.log('Hello world!'); 
 }); 
@@ -1010,21 +1389,21 @@ gulp.task('default', function () {
 				<section>
 					<h3>Метод watch</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.watch(glob[, opts, fn])
 //globs - строка или массив
 //options - доп. параметры или callback
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.watch('js/**/*.js', function(event) {
   console.log('File ' + event.path + ' type ' + event.type);
 });
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('watch', function(){
     gulp.watch('app/scss/**/*.scss', ['sass']); 
 	gulp.watch('app/css/**/*.css', ['css']); 
@@ -1037,7 +1416,7 @@ gulp.task('watch', function(){
 				<section>
 					<h3>Метод src</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.src(globs[, options])
 //globs - строка или массив
 //options - доп. параметры
@@ -1045,7 +1424,7 @@ gulp.src(globs[, options])
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.src('./*.jade')
 gulp.src('*.+(js|css)')
 gulp.src('*.{jpg,jpeg,png,gif}')
@@ -1056,20 +1435,20 @@ gulp.src(['js/**/*.js', '!js/**/*.min.js'])
 				<section>
 					<h3>Метод dest</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.dest(path, [,options])
 //принимает путь к файлу и возвращает исходящий поток
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('css', () => {
     return gulp.src(srcPath.css)
-	 	.on('data', (file) => {
+        .on('data', (file) => {
             console.log({
-				path:file.path,
-				basename: file.basename
-			});
+                path:file.path,
+                basename: file.basename
+            });
         })
         .pipe(sourcemaps.init())
         .pipe(autoprefixer(autoprefixerSettings))
@@ -1083,14 +1462,14 @@ gulp.task('css', () => {
 				<section>
 					<h3>Метод pipe</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 .pipe(destination)
 //возвращает поток
 //destination - тоже поток
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.src('./client/templates/*.jade')
     .pipe(jade())
     .pipe(gulp.dest('./app'))
@@ -1108,12 +1487,12 @@ gulp.src('./client/templates/*.jade')
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install browser-sync gulp --save-dev
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       browserSync = require('browser-sync').create();
 gulp.task('html', () => {
@@ -1139,7 +1518,7 @@ gulp.task('default', ['serve', 'watch']);
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('serve', () => {
     browserSync.init({
         server: distPath.dist,
@@ -1154,7 +1533,7 @@ gulp.task('serve', () => {
 				<section>
 					<h3>Метод reload</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 browserSync.reload();
 
 browserSync.reload("styles.css");
@@ -1168,7 +1547,7 @@ browserSync.reload("*.css");
 				<section>
 					<h3>Метод stream</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 //возвращает трансформированный поток данных, 
 //автоматически вставляемых в браузер
 
@@ -1182,14 +1561,14 @@ gulp.task('sass', function () {
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 .pipe(browserSync.stream({once: true}));
 // перегружает только один раз для потока данных 
 //(исходных файлов может быть несколько)
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 .pipe(browserSync.stream({match: "**/*.css"}));
 //фильтр обновления только определенных файлов
 						</code>
@@ -1198,7 +1577,7 @@ gulp.task('sass', function () {
 				<section>
 					<h3>Метод exit</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 var browserSync = require("browser-sync").create();
 
 // запускаем сервер
@@ -1214,7 +1593,7 @@ setTimeout(function () {
 				<section>
 					<h3>Метод init</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 browserSync.init({
     server: "./dist",
     port: 8000,
@@ -1233,12 +1612,12 @@ browserSync.init({
 				<section>
 					<h3>Пример</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-connect
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
     connect = require('gulp-connect');
 
@@ -1265,7 +1644,7 @@ gulp.task('default', ['serve', 'watch']);
 				<section>
 					<h3>Запуск и остановка</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('something', function() {
   connect.server({
     port: 8888
@@ -1281,7 +1660,7 @@ gulp.task('something', function() {
 				<section>
 					<h3>Параметры инициализации</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascirpt" data-trim>
 gulp.task('serve', ['html'], () => {
     connect.server({
         name: 'Test application',
@@ -1302,12 +1681,12 @@ gulp.task('serve', ['html'], () => {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-autoprefixer
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       autoprefixer = require('gulp-autoprefixer');
  
@@ -1321,7 +1700,7 @@ gulp.task('css', () =>
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 a {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1334,7 +1713,7 @@ a {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       sourcemaps = require('gulp-sourcemaps'),
       autoprefixer = require('gulp-autoprefixer'),
@@ -1354,7 +1733,7 @@ gulp.task('css', () =>
 				<section>
 					<h3>Параметры инициализации</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 autoprefixer(
 	{
         browsers: ['last 2 versions', 'ie 9', '> 1%'],
@@ -1439,12 +1818,12 @@ autoprefixer(
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install gulp-clean-css --save-dev
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       cleanCSS = require('gulp-clean-css');
 
@@ -1459,7 +1838,7 @@ gulp.task('css', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       cleanCSS = require('gulp-clean-css');
 
@@ -1477,10 +1856,10 @@ gulp.task('css', function() {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       cleanCSS = require('gulp-clean-css'),
-	  sourcemaps = require('gulp-sourcemaps');
+      sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('css', function() {
     return gulp.src('app/styles/*.css')
@@ -1501,12 +1880,12 @@ gulp.task('css', function() {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install gulp-sass --save-dev
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       sass = require('gulp-sass');
  
@@ -1525,14 +1904,14 @@ gulp.task('watch', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       sass = require('gulp-sass');
  
 gulp.task('sass', () => {
   return gulp.src('./sass/**/*.scss')
     .pipe(sass.sync().on('error', sass.logError))
-	//выполняется синхронно
+     //выполняется синхронно
     .pipe(gulp.dest('./css'));
 });
  
@@ -1545,7 +1924,7 @@ gulp.task('watch', () => {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       sass = require('gulp-sass'),
       sourcemaps = require('gulp-sourcemaps');
@@ -1568,12 +1947,12 @@ gulp.task('sass', function () {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install gulp-less --save-dev
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       less = require('gulp-less');
 
@@ -1588,7 +1967,7 @@ gulp.task('less', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       less = require('gulp-less'),
       LessAutoprefix = require('less-plugin-autoprefix');
@@ -1608,7 +1987,7 @@ gulp.task('less', () => {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       less = require('gulp-less'),
       sourcemaps = require('gulp-sourcemaps');
@@ -1631,12 +2010,12 @@ return gulp.src('./less/**/*.less')
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-concat
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       concat = require('gulp-concat');
  
@@ -1651,7 +2030,7 @@ gulp.task('scripts', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       concat = require('gulp-concat'),
 	  sourcemaps = require('gulp-sourcemaps');
@@ -1674,12 +2053,12 @@ gulp.task('css', () => {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-imagemin
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       imagemin = require('gulp-imagemin');
  
@@ -1694,7 +2073,7 @@ gulp.task('img', () =>
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       imagemin = require('gulp-imagemin');
  
@@ -1748,6 +2127,26 @@ gulp.task('img', () =>
 						</tr>
 					</table>
 				</section>
+				<section>
+					<h3>Конфигурация плагинов</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+…
+.pipe(imagemin([
+    imagemin.gifsicle({interlaced: true}),
+    imagemin.jpegtran({progressive: true}),
+    imagemin.optipng({optimizationLevel: 5}),
+    imagemin.svgo({
+        plugins: [
+            {removeViewBox: true},
+            {cleanupIDs: false}
+        ]
+    })
+]))
+…
+						</code>
+					</pre>
+				</section>
 			</section>
 			<section>
 				<section>
@@ -1756,12 +2155,12 @@ gulp.task('img', () =>
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install gulp-rename --save-dev
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       rename = require("gulp-rename");
 
@@ -1776,7 +2175,7 @@ gulp.task('rename', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       rename = require("gulp-rename");
 
@@ -1788,7 +2187,7 @@ gulp.task('rename', () => {
                      path.extname = '.css'
                 }))
                .pipe(gulp.dest('./dist')); 
-               //dist/css/base/ciao/main-bundle.css
+               //dist/css/base/main-bundle.css
 });
 						</code>
 					</pre>
@@ -1796,7 +2195,7 @@ gulp.task('rename', () => {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       rename = require("gulp-rename");
 
@@ -1824,15 +2223,17 @@ gulp.task('rename', () => {
 				</section>
 				<section>
 					<h3>Пример 1</h3>
-					<p><a href="https://babeljs.io/">https://babeljs.io/</a></p>
+					<p>
+						<a href="https://babeljs.io/">https://babeljs.io/</a>
+					</p>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-babel
 >npm install --save-dev babel-preset-es2015 //*
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       babel = require('gulp-babel');
 
@@ -1849,7 +2250,7 @@ gulp.task('default', () =>
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       sourcemaps = require('gulp-sourcemaps'),
       babel = require('gulp-babel'),
@@ -1871,12 +2272,12 @@ gulp.task('default', () =>
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev babel-plugin-transform-runtime
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       babel = require('gulp-babel');
 
@@ -1898,12 +2299,12 @@ gulp.task('default', () =>
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-uglify
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       uglify = require('gulp-uglify');
 
@@ -1918,7 +2319,7 @@ gulp.task('compress', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       uglify = require('gulp-uglify');
 
@@ -1944,7 +2345,7 @@ gulp.task('compress', () => {
 				<section>
 					<h3>Параметры output</h3>
 					<pre>
-						<code class="hljs">	
+						<code class="hljs javascript" data-trim>	
 indent_start : 0,    //start indentation on every line
 indent_level : 4,    //indentation level
 quote_keys   : false,//quote all keys in object literals?
@@ -1965,7 +2366,7 @@ semicolons   : true, //use semicolons to separate statements?
 				<section>
 					<h3>Параметры compressor</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 sequences    : true, //join consecutive statemets with “comma operator”
 properties   : true, //optimize property access: a["foo"] → a.foo
 dead_code    : true, //discard unreachable code
@@ -1996,12 +2397,12 @@ global_defs  : {}    //global definitions
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save del
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       del = require('del');
 
@@ -2014,7 +2415,7 @@ gulp.task('clean', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       del = require('del');
 
@@ -2038,18 +2439,18 @@ gulp.task('clean', () => {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install gulp-if --save-dev
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       gulpif = require('gulp-if'),
-	  uglify = require('gulp-uglify');
+      uglify = require('gulp-uglify');
  
 var condition = true; 
-// условие, может быть функция, паттерн и т.д
+//условие, может быть функция, паттерн и т.д
 
 gulp.task('task', function() {
   gulp.src('./src/*.js')
@@ -2062,13 +2463,15 @@ gulp.task('task', function() {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       gulpIgnore = require('gulp-ignore'),
       gulpif = require('gulp-if'),
       autoprefixer = require('gulp-autoprefixer'),
       cleanCSS = require('gulp-clean-css'),
-	  uglify = require('gulp-uglify');
+      uglify = require('gulp-uglify');
+const autoprefixerSettings = {};
+const cleanCSSSettings = {};
 
 gulp.task('html', () => {
     return gulp.src('src/**/*.*')
@@ -2092,12 +2495,12 @@ gulp.task('html', () => {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-useref
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       useref = require('gulp-useref');
  
@@ -2112,7 +2515,7 @@ gulp.task('html', function () {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       useref = require('gulp-useref'),
       gulpif = require('gulp-if'),
@@ -2132,14 +2535,14 @@ gulp.task('html', function () {
 				<section>
 					<h3>Изменения в html</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 <!-- build:<type>(alternate search path) <path> <parameters> -->
 ...список js или css файлов
 <!-- endbuild -->
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 &lt;!-- build:css css/bundle.min.css --&gt;
     &lt;link rel="stylesheet" href="css/reveal.css"&gt;
     &lt;link rel="stylesheet" href="css/reveal.font.css"&gt;
@@ -2157,12 +2560,12 @@ gulp.task('html', function () {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-sequence
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       gulpSequence = require('gulp-sequence');
  
@@ -2187,7 +2590,7 @@ gulp.task('sequence-3', (cb) => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('build', gulpSequence('clean', [
     'html',
     'img',
@@ -2197,7 +2600,7 @@ gulp.task('build', gulpSequence('clean', [
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('default', gulpSequence('build', ['watch', 'connect']));
 						</code>
 					</pre>
@@ -2210,12 +2613,12 @@ gulp.task('default', gulpSequence('build', ['watch', 'connect']));
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-watch
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       watch = require('gulp-watch');
 
@@ -2237,7 +2640,7 @@ gulp.task('callback', () => {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 gulp.task('watch', () => {
     watch(srcPath.css, () => gulp.start('css'));
     watch(srcPath.html, () => gulp.start('html'));
@@ -2257,12 +2660,12 @@ gulp.task('watch', () => {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install jshint gulp-jshint --save-dev
 						</code>
 					</pre>
 					<pre>
-							<code class="hljs">
+							<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       jshint = require('gulp-jshint');
  
@@ -2281,7 +2684,7 @@ src\js\classList.min.js: line 2, col 1492, 'self' is not defined.
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-							<code class="hljs">
+							<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       jshint = require('gulp-jshint');
 
@@ -2292,6 +2695,7 @@ gulp.task('js:lint', () => {
 });
 [22:00:39] Using gulpfile C:\Projects\DDWA\gulpfile.js
 [22:00:39] Starting 'js:lint'...
+
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;checkstyle version="4.3"&gt;
         &lt;file name="src\js\classList.min.js"&gt;
@@ -2306,7 +2710,7 @@ gulp.task('js:lint', () => {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-							<code class="hljs">
+							<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       jshint = require('gulp-jshint');
 
@@ -2322,7 +2726,7 @@ gulp.task('js:hint', () => {
 				<section>
 					<h3>Пример 4</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       jshint = require('gulp-jshint'),
 	  jshintReporter = require('gulp-jshint-html-reporter');
@@ -2340,9 +2744,11 @@ gulp.task('js:hint', () => {
 				</section>
 				<section>
 					<h3>Файл .jshintrc</h3>
-					<p><a href="http://jshint.com/docs/options/">Описание параметров</a></p>
+					<p>
+						<a href="http://jshint.com/docs/options/">Описание параметров</a>
+					</p>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 {
     "bitwise": true,
     "camelcase": true,
@@ -2415,12 +2821,12 @@ gulp.task('js:hint', () => {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install --save-dev gulp-csslint
 						</code>
 					</pre>
 					<pre>
-							<code class="hljs">
+							<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       csslint = require('gulp-csslint');
 	  			
@@ -2442,7 +2848,7 @@ Rule doesn't have all its properties in alphabetical order.
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-							<code class="hljs">	
+							<code class="hljs javascript" data-trim>	
 const gulp = require('gulp'),
       csslint = require('gulp-csslint');
 
@@ -2457,7 +2863,7 @@ gulp.task('css:lint', () => {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-							<code class="hljs">
+							<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       csslint = require('gulp-csslint');
 
@@ -2472,77 +2878,9 @@ gulp.task('css:lint', () => {
 				</section>
 			</section>
 			<section>
-				<section>
-					<h2>gulp-util</h2>
-				</section>
-				<section>
-					<h3>Пример 1</h3>
-					<pre>
-						<code class="hljs">
->npm install gulp-util --save-dev
-						</code>
-					</pre>
-					<pre>
-						<code class="hljs">
-const gutil = require('gulp-util');
-
-gutil.log('something happened', 'in js:hint', gutil.colors.magenta('123'));
-
-gutil.replaceExtension('file.coffee', '.js'); // file.js
-
-var opt = {
-  name: 'todd',
-  file:   {
-        path: 'hi.js'
-      }
-};
-gutil.template('test <%= name %> <%= file.path %>', opt) // test todd hi.js
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Пример 2</h3>
-					<pre>
-						<code class="hljs">
-const gutil = require('gulp-util');
-
-var err = new gutil.PluginError('test', {
-  message: 'something broke'
-});
-
-var err = new gutil.PluginError({
-  plugin: 'test',
-  message: 'something broke'
-});
-
-var err = new gutil.PluginError('test', 'something broke');
-var err = new gutil.PluginError('test', 'something broke', {showStack: true});
-
-var existingError = new Error('Error');
-var err = new gutil.PluginError('test', existingError, {showStack: true});
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Пример 3</h3>
-					<pre>
-						<code class="hljs">
-const gutil = require('gulp-util');
-
-gulp.task('scripts', function() {
-  gulp.src('./src/**/*.js')
-    .pipe(concat('script.js'))
-    .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())//*
-    .pipe(gulp.dest('dist/'));
-});
-						</code>
-					</pre>
-				</section>
-			</section>
-			<section>
 				<h2>Большой пример</h2>
 				<pre>
-					<code class="hljs" data-trim>
+					<code class="hljs javascript" data-trim>
 //modules
 
 const gulp = require('gulp'),
@@ -2552,16 +2890,13 @@ const gulp = require('gulp'),
     browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
     cleanCSS = require('gulp-clean-css'),
-    csslint = require('gulp-csslint'),
-    csslintReporter = require('gulp-csslint-report'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
+    lazypipe = require('lazypipe'),
     newer = require('gulp-newer'),
     rename = require('gulp-rename'),
     pipe = require('multipipe'),
     sourcemaps = require('gulp-sourcemaps'),
-    jshint = require('gulp-jshint'),
-    jshintReporter = require('gulp-jshint-html-reporter'),
     uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
     watch = require('gulp-watch');
@@ -2570,15 +2905,12 @@ const gulp = require('gulp'),
 
 const srcPath = {
     'src': './src',
-    'html': './src/**/*.html',
-    'img': './src/**/*.+(jpg|png|svg)',
+    'html': ['./src/**/*.html'],
+    'img': './src/**/*.+(jpg|png|svg|ico)',
     'css': ['./src/!(css|js)*/**/*.css'],
-    'cssLint': './src/**/*.css',
     'js': './src/!(js)*/**/*.js',
-    'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
-    'task': './src/task/**/*.pdf',
-    'analysis': './src/code-analysis/',
+    'task': './src/task/**/*.pdf'
 };
 
 const distPath = {
@@ -2593,30 +2925,26 @@ const distPath = {
 
 const pluginSettings = {
     autoprefixer: {
-        browsers: ['last 2 versions', 'ie 9', 'ie 10']
+        browsers: ['last 2 versions', 'ie 11']
     },
     cleanCSS: {
         compatibility: '*'
     },
-    csslint: {
-        filename: 'index.html',
-        directory: srcPath.analysis + '/css/'
-    },
-    jshint: {
-        filename: srcPath.analysis + '/js/index.html',
-        createMissingFolders: true
+    imagemin: {
+        optimizationLevel: 2
     }
 };
 
 //tasks
 
 gulp.task('clean', () => {
-    return del([srcPath.analysis, distPath.dist]);
+    return del([distPath.dist]);
 });
 
 gulp.task('html', () => {
     return gulp.src(srcPath.html)
-        .pipe(useref({}, pipe(sourcemaps.init)))
+        .pipe(newer(distPath.html))
+        .pipe(useref({}, lazypipe().pipe(sourcemaps.init)))
         .pipe(gulpif('*.js', pipe(
             uglify()
         )))
@@ -2639,27 +2967,15 @@ gulp.task('css', () => {
         .pipe(gulp.dest(distPath.css));
 });
 
-gulp.task('css:lint', () => {
-    return gulp.src(srcPath.cssLint)
-        .pipe(csslint('.csslintrc'))
-        .pipe(csslintReporter(pluginSettings.csslint));
-});
-
 gulp.task('js', () => {
     return gulp.src(srcPath.js)
         .pipe(gulp.dest(distPath.js));
 });
 
-gulp.task('js:lint', () => {
-    return gulp.src(srcPath.jsLint)
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter(jshintReporter, pluginSettings.jshint));
-});
-
 gulp.task('img', () => {
     return gulp.src(srcPath.img)
         .pipe(newer(distPath.img))
-        .pipe(imagemin())
+        .pipe(imagemin(pluginSettings.imagemin))
         .pipe(gulp.dest(distPath.img));
 });
 
@@ -2671,7 +2987,7 @@ gulp.task('font', () => {
 gulp.task('task', () => {
     return gulp.src(srcPath.task)
         .pipe(gulp.dest(distPath.task));
-})
+});
 
 gulp.task('serve', () => {
     browserSync.init({
@@ -2682,7 +2998,7 @@ gulp.task('serve', () => {
     browserSync.watch(distPath.dist).on('change', browserSync.reload);
 });
 
-gulp.task('build', gulpSequence('clean', ['js:lint', 'css:lint'], [
+gulp.task('build', gulpSequence('clean', [
     'html',
     'img',
     'js',
@@ -2708,7 +3024,7 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 			<section>
 				<h1>Webpack</h1>
 			</section>
-			<section data-transition="slide" data-background="#b5533c">
+			<section>
 				<h2>Как работает webpack</h2>
 				<img src="img/webpack.png" alt="" height="500">
 			</section>
@@ -2730,8 +3046,8 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 				<h2>Минусы</h2>
 				<ul>
 					<li>Тяжел в освоении</li>
-					<li>Плохая документация</li>
-					<li>Вначале был ориентирован только на работу с JS-файлами</li>
+					<li>Ориентирован только на работу с JS-файлами (до версии 1.0)</li>
+					<li>Плохая документация (до версии 3.0)</li>
 				</ul>
 			</section>
 			<section>
@@ -2740,6 +3056,8 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 					<li>AMD & CommomJS</li>
 					<li>Entry points</li>
 					<li>Webpack dev server</li>
+					<li>Plugins</li>
+					<li>Loaders</li>
 					<li>Hash</li>
 					<li>Chunk</li>
 				</ul>
@@ -2771,7 +3089,7 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 			<section>
 				<h2>Начало работы</h2>
 				<pre>
-					<code class="hljs">
+					<code class="hljs javascript" data-trim>
 >npm install webpack -g
 
 >npm install webpack --save-dev
@@ -2785,10 +3103,10 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 				<section>
 					<h3>Список файлов</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 ├── index.html
 ├── index.js
-├── home.js
+├── util.js
 ├── package.json
 └── webpack.config.js
 						</code>
@@ -2797,12 +3115,15 @@ gulp.task('default', gulpSequence('build', ['watch', 'serve']));
 				<section>
 					<h3>webpack.config.js</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 module.exports ={
     entry: "./index.js",
     output: {
         path: __dirname + "/dist",
         filename: "bundle.js"
+    },
+    optimization: {
+        minimize: false
     }
 }
 						</code>
@@ -2810,25 +3131,26 @@ module.exports ={
 				</section>
 				<section>
 					<h3>Другие файлы</h3>
-					<p>home.js</p>
+					<p>util.js</p>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 function logger(msg) {
-    console.log('home.js: ' + msg);
+    console.log('util.js: ' + msg);
 }
+
 exports.logger = logger;
 						</code>
 					</pre>
 					<p>index.js</p>
 					<pre>
-						<code class="hljs" data-trim>
-const home = require('./home.js');
-home.logger('test message!');	
+						<code class="hljs javascript" data-trim>
+const util = require('./util.js');
+util.logger('test message!');	
 						</code>
 					</pre>
 					<p>index.html</p>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 &lt;body&gt;
@@ -2841,66 +3163,143 @@ home.logger('test message!');
 				<section>
 					<h3>Выполнение</h3>
 					<pre>
-							<code class="hljs">
+							<code class="hljs javascript" data-trim>
 >webpack
-Hash: ae054f410e21ea4e91af
-Version: webpack 1.14.0
-Time: 57ms
-    Asset     Size  Chunks             Chunk Names
-bundle.js  1.63 kB       0  [emitted]  main
-   [0] ./index.js 69 bytes {0} [built]
-   [1] ./home.js 90 bytes {0} [built]
+Hash: d6d2f71e8c9a06fc28da
+Version: webpack 4.0.1
+Time: 837ms
+Built at: 3/2/2018 10:45:39 AM
+    Asset       Size  Chunks             Chunk Names
+bundle.js  639 bytes       0  [emitted]  main
+Entrypoint main = bundle.js
+   [0] ./util.js 88 bytes {0} [built]
+   [1] ./index.js 65 bytes {0} [built]
 							</code>
 					</pre>
 					<pre>
-							<code class="hljs">
-//index.html
-home.js: test message!
+							<code class="hljs javascript" data-trim>
+//index.html console
+util.js: test message!
 							</code>
 					</pre>
 				</section>
 				<section>
 					<h3>bundle.js</h3>
 					<pre>
-						<code class="hljs" data-trim>
-(function(modules) { 
+						<code class="hljs javascript" data-trim>
+  (function(modules) { // webpackBootstrap
+ 	// The module cache
  	var installedModules = {};
+
+ 	// The require function
  	function __webpack_require__(moduleId) {
- 		if(installedModules[moduleId])
+
+ 		// Check if module is in cache
+ 		if(installedModules[moduleId]) {
  			return installedModules[moduleId].exports;
+ 		}
+ 		// Create a new module (and put it into the cache)
  		var module = installedModules[moduleId] = {
- 			exports: {},id: moduleId,loaded: false
+ 			i: moduleId,
+ 			l: false,
+ 			exports: {}
  		};
- 		modules[moduleId].call(module.exports, module, module.exports);
- 		module.loaded = true;
+
+ 		// Execute the module function
+ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+ 		// Flag the module as loaded
+ 		module.l = true;
+
+ 		// Return the exports of the module
  		return module.exports;
  	}
- 	return __webpack_require__(0);
+
+
+ 	// expose the modules object (__webpack_modules__)
+ 	__webpack_require__.m = modules;
+
+ 	// expose the module cache
+ 	__webpack_require__.c = installedModules;
+
+ 	// define getter function for harmony exports
+ 	__webpack_require__.d = function(exports, name, getter) {
+ 		if(!__webpack_require__.o(exports, name)) {
+ 			Object.defineProperty(exports, name, {
+ 				configurable: false,
+ 				enumerable: true,
+ 				get: getter
+ 			});
+ 		}
+ 	};
+
+ 	// define __esModule on exports
+ 	__webpack_require__.r = function(exports) {
+ 		Object.defineProperty(exports, '__esModule', { value: true });
+ 	};
+
+ 	// getDefaultExport function for compatibility with non-harmony modules
+ 	__webpack_require__.n = function(module) {
+ 		var getter = module && module.__esModule ?
+ 			function getDefault() { return module['default']; } :
+ 			function getModuleExports() { return module; };
+ 		__webpack_require__.d(getter, 'a', getter);
+ 		return getter;
+ 	};
+
+ 	// Object.prototype.hasOwnProperty.call
+ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
+ 	// __webpack_public_path__
+ 	__webpack_require__.p = "";
+
+
+ 	// Load entry module and return exports
+ 	return __webpack_require__(__webpack_require__.s = 1);
  })
-/*********************************************************************/
+/************************************************************************/
  ([
- // LIST OF MUDULES ***
- ]);	
+/* 0 */
+/***/ (function(module, exports) {
+
+function logger(msg) {
+    console.log('util.js: ' + msg);
+}
+
+exports.logger = logger;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const util = __webpack_require__(0);
+util.logger('test message!');
+
+/***/ })
+ ]);
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>Массив модулей</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
-	const home = __webpack_require__(1);
-	home.logger('test message!');
-/***/ },
+/***/ (function(module, exports) {
+function logger(msg) {
+    console.log('util.js: ' + msg);
+}
+exports.logger = logger;
+
+/***/ }),
+
 /* 1 */
-/***/ function(module, exports) {
-	function logger(msg) {
-	    console.log('home.js: ' + msg);
-	}
-	exports.logger = logger;
-/***/ }
+/***/ (function(module, exports, __webpack_require__) {
+const util = __webpack_require__(0);
+util.logger('test message!');
+/***/ })
+
  ]);
 						</code>
 					</pre>
@@ -2913,25 +3312,28 @@ home.js: test message!
 				<section>
 					<h3>webpack.config.js</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 module.exports ={
     entry: "./index.js",
     output: {
         path: __dirname + "/dist",
         filename: "bundle.js",
         library: 'webpack' //*
+    },
+    optimization: {
+        minimize: false
     }
-}	
+}
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>JS файлы</h3>
-					<p>home.js</p>
+					<p>util.js</p>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 function logger(msg) {
-    console.log('home.js: ' + msg);
+    console.log('util.js: ' + msg);
 }
 
 exports.logger = logger;
@@ -2939,18 +3341,18 @@ exports.logger = logger;
 					</pre>
 					<p>index.js</p>
 					<pre>
-						<code class="hljs">
-const home = require('./home.js');
-home.logger('test message!');
+						<code class="hljs javascript" data-trim>
+const util = require('./util.js');
+util.logger('test message!');
 
-exports.logger = home.logger; //*	
+exports.logger = util.logger; //*	
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>index.html</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 
@@ -2968,28 +3370,30 @@ exports.logger = home.logger; //*
 				<section>
 					<h3>Выполнение</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >webpack
-Hash: 8cb5e92b5543b1c3cd00
-Version: webpack 1.14.0
-Time: 65ms
-    Asset     Size  Chunks             Chunk Names
-bundle.js  1.68 kB       0  [emitted]  main
-   [0] ./index.js 102 bytes {0} [built]
-   [1] ./home.js 90 bytes {0} [built]
+Hash: bb56f76f21d37cb07dec
+Version: webpack 4.0.1
+Time: 207ms
+Built at: 3/2/2018 1:59:39 PM
+    Asset      Size  Chunks             Chunk Names
+bundle.js  2.89 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+   [0] ./util.js 90 bytes {0} [built]
+   [1] ./index.js 102 bytes {0} [built]
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
-home.js: test message!
-home.js: index.html
+						<code class="hljs javascript" data-trim>
+util.js: test message!
+util.js: index.html
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>Изменения в bundle.js</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 var webpack =  //*** добавилась внешняя переменная
  (function(modules) {
  	// The module cache
@@ -3010,22 +3414,22 @@ var webpack =  //*** добавилась внешняя переменная
 			<section>
 				<h2>Несколько точек входа</h2>
 				<pre>
-					<code class="hljs">
-const webpack = require('webpack');
-
-module.exports = {
-    context: __dirname + '/src',
+					<code class="hljs javascript" data-trim>
+module.exports ={
+    context: __dirname,
     entry: {
-        index: './index/index',
-        about: './about/about'
+        index: './index',
+        about: './about'
     },
     output: {
-        path: 'dist',
+        publicPath: '/dist',
         filename: "[name].js",
         library: '[name]'
     },
-//.............................
-}	
+    optimization: {
+        minimize: false
+    }
+}
 					</code>
 				</pre>
 			</section>
@@ -3036,24 +3440,29 @@ module.exports = {
 				<section>
 					<h3>Свойство watch</h3>
 					<blockquote>
-						Опция позволяет автоматически пересобирать приложение, модули, файлы и запускать задачи при обнаружении изменений
+						Позволяет автоматически пересобирать приложение и запускать задачи при обнаружении изменений
 					</blockquote>
 					<pre>
-						<code class="js">
+						<code class="hljs javascript" data-trim>
 module.exports ={
-    entry: "./index.js",
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
     output: {
-        path: __dirname + "/dist",
-        filename: "bundle.js",
-        library: 'webpack'
+        publicPath: '/dist',
+        filename: "[name].js"
     },
     watch: true,
     watchOptions :{//не обязательные свойства
-        aggregateTimeout: 300,
+        aggregateTimeout: 300,//мс
         ignored: './node_modules/',
-        poll: 1000
+        poll: 1000//мс
+    },
+    optimization: {
+        minimize: false
     }
-}	
+}
 						</code>
 					</pre>
 				</section>
@@ -3072,14 +3481,14 @@ module.exports ={
 				</section>
 				<section>
 					<h3>Проблема отладки</h3>
-					<p>До</p>
+					<p>До включения devtool</p>
 					<img src="img/webpack-debugger-false.png" alt="">
 					<p>После</p>
 					<img src="img/webpack-debugger-true.png" alt="">
 				</section>
 				<section>
 					<h3>devtool</h3>
-					<img src="img/webpack-devtool.png" alt="">
+					<img src="img/webpack-devtool.png" alt="" height="550">
 				</section>
 				<section>
 					<h3>Краткое описание</h3>
@@ -3089,25 +3498,32 @@ module.exports ={
 							<li>source-map - генерируются отладочные карты кода (файл *.js.map)</li>
 							<li>hidden-source-map - то же, что и source-map, но не добавляется ссылка в JS-файл</li>
 							<li>inline-source-map - карта добавляется как sourceMappingURL в JS-файлы/li>
-							<li>eval-source-map - каждый модуль выполняется с использованием eval, карта добавляется как sourceMappingURL в eval</li>
-							<li>cheap-source-map - то же, что и source-map, но номера строк некорректные (номера строк модифицированных файлов вместо оригинальных). Карты кода, подгружаемые загрузчиком (для внешних модулей), не используются</li>
-							<li>cheap-module-source-map - то же, что и source-map, но при сопоставлении данных корректные номера имеют только строки. Загружает карты кода для внешних модулей</li>
+								<li>eval-source-map - каждый модуль выполняется с использованием eval, карта добавляется как sourceMappingURL в eval</li>
+								<li>cheap-source-map - то же, что и source-map, но номера строк некорректные (номера строк модифицированных файлов вместо
+									оригинальных). Карты кода, подгружаемые загрузчиком (для внешних модулей), не используются</li>
+								<li>cheap-module-source-map - то же, что и source-map, но при сопоставлении данных корректные номера имеют только строки.
+									Загружает карты кода для внешних модулей</li>
 						</ul>
 					</small>
 				</section>
 				<section>
 					<h3>Пример</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 module.exports ={
-    entry: "./index.js",
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
     output: {
-        path: __dirname + "/dist",
-        filename: "bundle.js",
-        library: 'webpack'
+        publicPath: '/dist',
+        filename: "bundle.js"
     },
     watch: true,
-    devtool: 'source-map'
+    devtool: 'source-map',
+    optimization: {
+        minimize: false,
+    }
 }
 						</code>
 					</pre>
@@ -3120,7 +3536,7 @@ module.exports ={
 				<section>
 					<h3>Установка</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 >npm install babel-loader babel-core babel-preset-es2015 
          babel-plugin-transform-runtime webpack --save-dev
 // или
@@ -3135,10 +3551,10 @@ module.exports ={
 				<section>
 					<h3>Список файлов</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 ├── index.html
 ├── index.js
-├── home.js
+├── util.js
 ├── package.json
 └── webpack.config.js
 						</code>
@@ -3147,19 +3563,22 @@ module.exports ={
 				<section>
 					<h3>webpack.config.js</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 module.exports = {
-    entry: "./index.js",
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
     output: {
-        path: __dirname + "/dist",
-        filename: "bundle.js",
-        library: 'webpack'
+        filename: 'bundle.js',
+		path: __dirname + '/dist',
+		library: 'webpack'
     },
     devtool: 'source-map',
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
+            exclude: /(node_modules)/,
             loader: 'babel-loader',
             query: {
                 presets: ['es2015']
@@ -3172,20 +3591,18 @@ module.exports = {
 				</section>
 				<section>
 					<h3>JS файлы</h3>
-					<p>home.js</p>
+					<p>util.js</p>
 					<pre>
-						<code class="hljs" data-trim>
-function logger(msg) {
-    console.log('home.js: ' + msg);
+						<code class="hljs javascript" data-trim>
+export default function logger(msg) {
+    console.log('util.js: ' + msg);
 }
-
-export {logger};
 						</code>
 					</pre>
 					<p>index.js</p>
 					<pre>
-						<code class="hljs" data-trim>
-import {logger} from './home.js';
+						<code class="hljs javascript" data-trim>
+import {logger} from './util';
 logger('test message!');
 
 export {logger};
@@ -3196,7 +3613,7 @@ export {logger};
 					<h3>index.html</h3>
 					<p>index.html</p>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 
@@ -3214,84 +3631,153 @@ export {logger};
 				<section>
 					<h3>Выполнение</h3>
 					<pre>
-							<code class="hljs">
->webpack
-Hash: 85b7bbe08c21bd59f07e
-Version: webpack 1.14.0
-Time: 927ms
-        Asset     Size  Chunks             Chunk Names
-    bundle.js  1.94 kB       0  [emitted]  main
-bundle.js.map  1.96 kB       0  [emitted]  main
-    + 2 hidden modules
+							<code class="hljs javascript" data-trim>
+Hash: 353c157e6aec3bb683bb
+Version: webpack 4.0.1
+Time: 1339ms
+Built at: 3/3/2018 12:33:20 PM
+        Asset       Size  Chunks             Chunk Names
+bundle.js  864 bytes       0  [emitted]  index
+bundle.js.map   3.46 KiB       0  [emitted]  index
+Entrypoint index = bundle.js bundle.js.map
+   [0] ./util.js 168 bytes {0} [built]
+   [1] ./index.js 208 bytes {0} [built]
 							</code>
 					</pre>
 					<pre>
-							<code class="hljs">
-//index.html
-home.js: test message!
+							<code class="hljs javascript" data-trim>
+util.js: test message!
+util.js: index.html
 							</code>
 					</pre>
 				</section>
 				<section>
 					<h3>bundle.js (фрагмент)</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
+"use strict";
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.logger = undefined;
-	
-	var _home = __webpack_require__(1);
-	(0, _home.logger)('test message!');
-	
-	exports.logger = _home.logger;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = logger;
+function logger(msg) {
+    console.log('util.js: ' + msg);
+}
 
-/***/ },
+/***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.logger = undefined;
+
+var _util = __webpack_require__(0);
+
+(0, _util.logger)('test message!');
+
+exports.logger = _util.logger;
+
+/***/ })
+/******/ ]);
 						</code>
 					</pre>
 				</section>
 			</section>
 			<section>
-				<h2>uglifyJS</h2>
+				<h2>UglifyJsPlugin</h2>
 				<pre>
-						<code class="hljs" data-trim>
-const webpack = require('webpack');//*
+					<code class="hljs javascript" data-trim>
+npm i uglifyjs-webpack-plugin --save-dev
+					</code>
+				</pre>
+				<pre>
+					<code class="hljs javascript" data-trim>
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
-    entry: "./index.js",
-    output: {
-        path: __dirname + "/dist",
-        filename: "bundle.js",
-        library: 'webpack'
+    context: __dirname,
+    entry: {
+        index: './index'
     },
+    output: {
+        publicPath: '/dist',
+        filename: "bundle.js"
+    },
+    watch: true,
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
+        new UglifyJsPlugin({
+            cache: true,
+            exclude: /\/node_modules/,
+            uglifyOptions: {
+                ecma: 8,
                 warnings: false,
-                drop_debugger: true,
-                unsafe: false,
-                drop_console: true
-            },
-            comments: false,
-            beautify: true
-    })]
+                parse: {},
+                compress: {
+                    warnings: false,
+                    drop_debugger: true,
+                    unsafe: false,
+                    drop_console: true
+                },
+                output: {
+                    comments: false,
+                    beautify: false
+                }
+            }
+        })
+    ]
 }
-						</code>
+					</code>
 				</pre>
 			</section>
 			<section>
 				<section>
-					<h2>Обнаружение общих модулей</h2>
+					<h2>DefinePlugin</h2>
+					<pre>
+							<code class="hljs javascript" data-trim>
+const webpack = require('webpack');
+module.exports = {
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
+    output: {
+        publicPath: '/dist',
+        filename: "bundle.js"
+    },
+    watch: true,
+    plugins: [
+        new webpack.DefinePlugin({
+            DEBUG: JSON.stringify(true)
+        })
+    ]
+}			
+							</code>
+					</pre>
 				</section>
 				<section>
-					<h3>Свойство chunkFilename</h3>
+					<h2>index.js</h2>
 					<pre>
-						<code class="hljs">
+							<code class="hljs javascript" data-trim>
+const util = require('./util.js');
+util.logger('test message!');
+
+console.log(DEBUG ? "true" : "false");//*
+							</code>
+						</pre>
+				</section>
+			</section>
+			<!-- <section>
+				<section>
+					<h2>Обнаружение общих модулей</h2>
+					<p>Свойство chunkFilename</p>
+					<pre>
+						<code class="hljs javascript" data-trim>
 output: {
     path: 'dist/',
     filename: "[name]/[name].js",
@@ -3304,7 +3790,7 @@ output: {
 				<section>
 					<h3>Плагин CommonsChunkPlugin</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 plugins: [
     new webpack.optimize.CommonsChunkPlugin({
         name: "commons",
@@ -3314,19 +3800,212 @@ plugins: [
 						</code>
 					</pre>
 				</section>
+			</section> -->
+			<section>
+				<h2>CopyWebpackPlugin</h2>
+				<pre>
+					<code class="hljs javascript" data-trim>
+npm i copy-webpack-plugin --save-dev			
+					</code>
+				</pre>
+				<pre>
+					<code class="hljs javascript" data-trim>	
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+module.exports = {
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
+    output: {
+        publicPath: '/dist',
+        filename: "bundle.js"
+    },
+    watch: true,
+    plugins: [
+        new CopyWebpackPlugin([
+            { from: 'index.html', to: 'html/' },//dist/html
+            { from: '**/*.txt', to: 'txt/'}//dist/txt
+        ])
+    ]
+}		
+					</code>
+				</pre>
+			</section>
+			<section>
+				<section>
+					<h2>CleanWebpackPlugin</h2>
+					<pre>
+						<code class="hljs javascript" data-trim>
+>npm i clean-webpack-plugin --save-dev
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const pathsToClean = [
+    'dist',
+    'build'
+];
+
+module.exports = {
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
+    output: {
+        filename: 'bundle.js',
+        path: __dirname + '/dist'
+    },
+    plugins: [
+        new CleanWebpackPlugin(pathsToClean)
+    ]
+}
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>HtmlWebpackPlugin</h2>
+					<pre>
+						<code class="hljs javascript" data-trim>
+npm install --save-dev html-webpack-plugin
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
+    output: {
+        filename: 'bundle.js',
+        path: __dirname + '/dist'
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'test app'
+        }),
+    ]
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Результат</h2>
+					<pre>
+						<code class="hljs javascript" data-trim>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;test app&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;script type="text/javascript" src="bundle.js"&gt;&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Использование шаблона</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const templatePath = path.join(__dirname, 'templates', 'index.html');
+
+module.exports = {
+    context: __dirname,
+    entry: {
+        index: './index'
+    },
+    output: {
+        filename: 'bundle.js',
+        path: __dirname + '/dist'
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: templatePath
+        }),
+    ]
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Минификация</h3>
+					<pre>
+							<code class="hljs javascript" data-trim>
+new HtmlWebpackPlugin({
+    minify:{
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+        html5: true,
+        minifyCSS: false,
+        removeComments: true,
+        removeEmptyAttributes: true
+    }
+}),
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h3>Несколько файлов</h3>
+					<pre>
+							<code class="hljs javascript" data-trim>
+ plugins: [
+    new HtmlWebpackPlugin(), //index.html
+    new HtmlWebpackPlugin({  //test.html
+      filename: 'test.html',
+      template: 'src/assets/test.html'
+    })
+]
+							</code>
+						</pre>
+				</section>
 			</section>
 			<section>
 				<section>
 					<h2>Работа со стилями</h2>
-				</section>
-				<section>
-					<h3>Структура проекта</h3>
-					<img src="img/webpack-style-structure.png" alt="">
+					<p>style.css</p>
+					<pre>
+						<code class="hljs" data-trim>
+body{
+    background: red;
+}
+						</code>
+					</pre>
+					<p>index.js</p>
+					<pre>
+						<code class="hljs javascript" data-trim>
+import style from './style.css';
+
+import {logger} from './util';
+logger('test message!');
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
+ERROR in ./style.css
+Module parse failed: Unexpected token (1:4)
+You may need an appropriate loader to handle this file type.
+| body{
+|     background: red;
+| }
+ @ ./index.js 3:13-35
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Установка зависимостей</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 npm install style-loader css-loader postcss-loader 
           postcss-smart-import --save-dev
 
@@ -3343,7 +4022,7 @@ npm install postcss-smart-import --save-dev
 						postcss.config.js
 					</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 module.exports = {
   plugins: [
     require('postcss-smart-import')({ /* ...options */ }),
@@ -3359,71 +4038,66 @@ module.exports = {
 				<section>
 					<h3>Изменения в webpack.config.js</h3>
 					<pre>
-						<code class="hljs" data-trim>
-module.exports = {
-    context: path.resolve(__dirname, 'src'),
+						<code class="hljs javascript" data-trim>
 //........................................................
-    module: {
-        loaders: [
-            {
-                test: /\.css$/,
-                loaders: [
-                    'style-loader',
-                    'css-loader?importLoaders=1&sourceMap',
-                    'postcss-loader'
-                ]
+module: {
+    rules: [{
+            test: /\.js$/,
+            exclude: /(node_modules)/,
+            loader: 'babel-loader',
+            query: {
+                presets: ['es2015']
             }
+        },
+        {
+            test: /\.css$/,
+            loaders: [
+                'style-loader',
+                'css-loader?importLoaders=1&sourceMap',
+                'postcss-loader'
+            ]
+        }
+    ]
+},
 //........................................................
-        ]
-    }
-}
 						</code>
 					</pre>
 				</section>
 				<section>
-					<h3>Пример js-файла</h3>
+					<h3>Выполнение</h3>
 					<pre>
-						<code class="hljs">
-import style from './index.css';
-import logger from '../common/logger';
-
-logger('about.js');
-
-const build = (text) =>{
-
-    let header = document.createElement('h1');
-    header.className = 'header';
-    header.innerHTML = text;
-
-    document.body.insertBefore(header, document.body.firstChild);
-}
-
-export {build}
-
+						<code class="hljs javascript" data-trim>
+Hash: c7d1247fe4e9733684b3
+Version: webpack 4.0.1
+Time: 2242ms
+Built at: 3/3/2018 12:47:03 PM
+        Asset      Size  Chunks             Chunk Names
+bundle.js  19.1 KiB       0  [emitted]  index
+bundle.js.map    24 KiB       0  [emitted]  index
+Entrypoint index = bundle.js bundle.js.map
+   [0] ./util.js 168 bytes {0} [built]
+   [4] ./node_modules/css-loader?importLoaders=1&sourceMap!./node_modules/postcss-loader/lib!./style.css 396 bytes {0} [built]
+   [5] ./style.css 1.25 KiB {0} [built]
+   [6] ./index.js 264 bytes {0} [built]
+    + 3 hidden modules
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>После выполнения....</h3>
 					<pre>
-						<code class="hljs">
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
+						<code class="hljs javascript" data-trim>
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-	
-	// module
-	exports.push([module.id, 
-		"body {\r\n  background-color: red;\r......,
-		"sourcesContent":["body {\r\n  background-color:........."
-	}]);
-	
-	// exports
+exports = module.exports = __webpack_require__(3)(true);
+// imports
 
-/***/ }
-/******/ ]);
-//# sourceMappingURL=index.js.map
+// module
+exports.push([module.i, "body{\r\n    background: red;\r\n}", "", {"version":3,"sources":["C:/Users/HP/Desktop/webpack/style.css"],"names":[],"mappings":"AAAA;IACI,gBAAgB;CACnB","file":"style.css","sourcesContent":["body{\r\n    background: red;\r\n}"],"sourceRoot":""}]);
+
+// exports
+/***/ }),
 						</code>
 					</pre>
 				</section>
@@ -3431,11 +4105,43 @@ export {build}
 			<section>
 				<section>
 					<h2>Работа с изображениями</h2>
+					<p>style.css</p>
+					<pre>
+						<code class="hljs" data-trim>
+body{
+    background: red;
+    background-image: url('background.png');
+}
+						</code>
+					</pre>
+					<p>index.js</p>
+					<pre>
+						<code class="hljs javascript" data-trim>
+import style from './style.css';
+import {logger} from './util';
+logger('test message!');
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
+//при условии, что style-loader и css-loader установлены
+ERROR in ./background.png
+Module parse failed: Unexpected character '�' (1:0)
+You may need an appropriate loader to handle this file type.
+(Source code omitted for this binary file)
+ @ ./node_modules/css-loader?importLoaders=1&sourceMap!./node_modules/postcss-loader/lib!./style.css 7:96-123
+ @ ./style.css
+ @ ./index.js
+						</code>
+					</pre>
 				</section>
 				<section>
 					<h3>Установка зависимостей</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
+>npm install file-loader image-webpack-loader --save-dev
+
+//или
 >npm install file-loader --save-dev
 >npm install image-webpack-loader --save-dev
 						</code>
@@ -3444,60 +4150,69 @@ export {build}
 				<section>
 					<h3>Изменения в webpack.config.js</h3>
 					<pre>
-						<code class="hljs" data-trim>
-module.exports = {
-//........................................  
-    module: {
-        loaders: [
+						<code class="hljs javascript" data-trim>
 //........................................       
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                loaders: [
-                    'file?name=[path][name].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=5'
-                ]
-            },
-//........................................
+module: {
+    rules: [
+    {
+        test: /\.css$/,
+        loaders: [
+            'style-loader',
+            'css-loader?importLoaders=1&sourceMap',
+            'postcss-loader'
         ]
+    },
+    {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+           'file-loader',
+            //'file-loader?name=[name].[ext]',
+            {
+                loader: 'image-webpack-loader',
+                options: {
+                    bypassOnDebug: true,
+                    mozjpeg: {
+                        progressive: true,
+                        quality: 65
+                    },
+                    optipng: {
+                        enabled: false,
+                        optimizationLevel: 5
+                    }
+                },
+            },
+        ],
     }
-}
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Пример файла стилей</h3>
-					<pre>
-						<code class="hljs">
-							
-.main {
-    height: 100px;
-    margin: 50px;
-    border-radius: 5px;
-    background-image: url('logo.png');
-}
+    ]
+},
+//........................................
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>После выполнения</h3>
 					<pre>
-						<code class="hljs" data-trim>
-/* 8 */
-function(module, exports, __webpack_require__) {
-    exports = module.exports = __webpack_require__(3)();
-	
-	// module
-exports.push([module.id, "body {\r\n background-color: 
-	red;\r\n}\r\n\r\n.main {\r\n height: 100px;\r\n    
-	margin: 50px;\r\n    border-radius: 5px;\r\n    
-	background-image: url(" + __webpack_require__(9) + ");
-	\r\n}"]); //***
-	
-},
-/* 9 */
-function(module, exports, __webpack_require__) {
-    module.exports = __webpack_require__.p + "index/logo.png";
-},
+						<code class="hljs javascript" data-trim>
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "69070e565786768e1dcf6b933da514b2.png";
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(5);
+exports = module.exports = __webpack_require__(4)(true);
+// imports
+
+
+// module
+exports.push([module.i, "body{\r\n    background: red;\r\n    background-image: url(" + escape(__webpack_require__(3)) + ");\r\n}", "", {"version":3,"sources":["C:/Users/HP/Desktop/webpack/style.css"],"names":[],"mappings":"AAAA;IACI,gBAAgB;IAChB,gDAAwC;CAC3C","file":"style.css","sourcesContent":["body{\r\n    background: red;\r\n    background-image: url('background.png');\r\n}"],"sourceRoot":""}]);
+
+// exports
+
+/***/ }),
 						</code>
 					</pre>
 				</section>
@@ -3505,165 +4220,376 @@ function(module, exports, __webpack_require__) {
 			<section>
 				<section>
 					<h2>Webpack Dev Server</h2>
-				</section>
-				<section>
-					<h3>Установка</h3>
 					<pre>
-						<code class="hljs">
->npm install webpack-dev-server -g
->npm install webpack-dev-server
+						<code class="hljs javascript" data-trim>
+	>npm install webpack-cli -g
+	>npm install webpack-dev-server -g
+	>npm install webpack-dev-server --save-dev
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Изменения в webpack.config.js</h3>
 					<pre>
-						<code class="hljs" data-trim>
-module.exports = {
-    context: path.resolve(__dirname, 'src'),
-    entry: {
-        index: ['webpack-dev-server/client',
-            'webpack/hot/only-dev-server',
-            './index/index'
-        ],
-        about: ['webpack-dev-server/client',
-            'webpack/hot/only-dev-server',
-            './about/about'
-        ]
-    },
-   //............................................
-    devServer: {
-        host: '127.0.0.1',
-        port: 5000,
-        contentBase: __dirname + '/dist',
-        hot: true
-    }
-}
+						<code class="hljs javascript" data-trim>
+	const path = require('path');
+	module.exports = {
+		context: __dirname,
+		entry: { index: './index' },
+		output: {
+			filename: 'bundle.js',
+			path: __dirname + '/dist'
+		},
+		devServer: {
+			contentBase:  path.resolve(__dirname, 'dist'),
+			compress: false,
+			port: 9000,
+			historyApiFallback: true,
+			hot: false,
+			inline: true,
+			stats: 'errors-only',
+			host: process.env.HOST,
+		}
+	}
 						</code>
 					</pre>
 				</section>
 				<section>
 					<h3>Выполнение</h3>
 					<pre>
-						<code class="hljs" data-trim>
->webpack-dev-server
-http://127.0.0.1:5000/webpack-dev-server/
-Hash: 4dbf5d282f7ba349b2db
-Version: webpack 1.14.0
-Time: 2512ms
-             Asset       Size  Chunks             Chunk Names
-  about/about.html  146 bytes          [emitted]
-    index/logo.png    24.5 kB          [emitted]
-  index/index.html  146 bytes          [emitted]
-    about/about.js    13.5 kB       0  [emitted]  about
-    index/index.js    13.8 kB       1  [emitted]  index
-about/about.js.map    17.2 kB       0  [emitted]  about
-index/index.js.map    17.6 kB       1  [emitted]  index
-chunk    {0} about/about.js, about/about.js.map (about) 11.4 kB [rendered]
-    [0] ./src/about/about.js 784 bytes {0} [built]
-    [1] ./src/about/about.css 1.13 kB {0} [built]
-//.......................................................................
+							<code class="hljs javascript" data-trim>
+	//режим errors-only
+	>webpack-dev-server
+	i ｢wds｣: Project is running at http://localhost:9000/
+	i ｢wds｣: webpack output is served from /
+	i ｢wds｣: Content not from webpack is served from C:\Users\HP\Desktop\webpack\dist
+	i ｢wds｣: 404s will fallback to /index.html
+	‼ ｢wdm｣:
+	i ｢wdm｣: Compiled with warnings.
+							</code>
+						</pre>
+				</section>
+				<section>
+					<h3>NPM Scripts</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+	"scripts": {
+	  "start": "webpack-dev-server"
+	}
+	
+	>npm run start
+						</code>
+					</pre>
+					<pre>
+						<code class="hljs javascript" data-trim>
+	{
+	  "name": "webpack-test",
+	  "version": "1.0.0",
+	  "main": "index.js",
+	  "scripts": {
+		"start": "webpack-dev-server"
+	  },
+	  "license": "ISC",
+	  "devDependencies": {
+		"webpack": "^4.0.1",
+		"webpack-cli": "^2.0.10",
+		"webpack-dev-server": "^3.1.0"
+	  }
+	}
+	
 						</code>
 					</pre>
 				</section>
 			</section>
 			<section>
-				<h2>Большой пример</h2>
-				<pre>
-					<code class="hljs" data-trim>
-const webpack = require('webpack'),
-    path = require("path");
-
-module.exports = {
-    context: path.resolve(__dirname, 'src'),
-    entry: {
-        index: ['webpack-dev-server/client',
-            'webpack/hot/only-dev-server',
-            './index/index'
-        ],
-        about: ['webpack-dev-server/client',
-            'webpack/hot/only-dev-server',
-            './about/about'
-        ]
-    },
-    output: {
-        path: 'dist/',
-        filename: "[name]/[name].js",
-        library: '[name]',
-        chunkFilename: "[id].chunk.js"
-    },
-    watch: true,
-    watchOptions: {
-        aggregateTimeout: 300,
-        ignored: './node_modules/',
-        poll: 1000
-    },
-    devtool: 'source-map',
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                drop_debugger: false,
-                unsafe: false,
-                drop_console: false
-            },
-            comments: false,
-            beautify: true
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "commons",
-            filename: "[name].js"
-        })
-    ],
-    module: {
-        loaders: [{
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015'],
-                    plugins: ['transform-runtime']
-                }
-            },
-            {
-                test: /\.css$/,
-                loaders: [
-                    'style-loader',
-                    'css-loader?importLoaders=1&sourceMap',
-                    'postcss-loader'
-                ]
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                loaders: [
-                    'file?name=[path][name].[ext]?[hash]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=5'
-                ]
-            },
-            {
-                test: /\.html$/,
-                loader: 'file?name=[path][name].[ext]'
-            }
-        ]
-    },
-    devServer: {
-        host: '127.0.0.1',
-        port: 5000,
-        contentBase: __dirname + '/dist',
-        hot: true
-    }
-}
-					</code>
-				</pre>
+				<section>
+					<h2>Hot Module Replacement</h2>
+					<blockquote>
+						Позволяет применять изменения (обновлять, добавлять, удалять модули) без полной перезагрузки приложения
+					</blockquote>
+					<p>Схема работы</p>
+					<ol>
+						<li>Приложение запрашивает изменения у HMR runtime</li>
+						<li>HRM асинхронно загружает изменения</li>
+						<li>Приложение запрашивает HRM применить изменения</li>
+						<li>HRM синхронно применяет изменения</li>
+					</ol>
+					<p class="highlight-blue">DEVELOPMENT ONLY</p>
+					<p class="highlight-blue">WITH webpack-dev-server</p>
+				</section>
+				<section>
+					<h3>HotModuleReplacementPlugin</h3>
+					<pre>
+							<code class="hljs javascript" data-trim>
+	>npm install webpack-cli -g		
+	>npm install webpack-dev-server --save-dev			
+	>webpack-dev-server
+							</code>
+						</pre>
+					<pre>
+							<code class="hljs javascript" data-trim>
+	const webpack = require('webpack');
+	module.exports = {
+		context: __dirname,
+		entry: {
+			index: './index'
+		},
+		output: {
+			filename: 'bundle.js',
+			path: __dirname + '/dist'
+		},
+		watch: true,
+		devServer: {
+			contentBase: '/dist',
+			hot: true
+		},
+		plugins: [
+			new webpack.HotModuleReplacementPlugin()
+		]
+	}
+							</code>
+						</pre>
+				</section>
 			</section>
 			<section>
 				<section>
-					<h2>Gulp и Webpack</h2>
+					<h2>Большой пример</h2>
+					<a href="https://github.com/MaksHladki/Test.TodoMVC.Redux">Redux TodoMVC</a>
+					<br>
+					<img src="img/qr-code-webpack-todomvc.png" alt="">
 				</section>
 				<section>
-					<h3>Пример 1</h3>
+					<h3>package.json</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
+{
+  "name": "todo-mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env DEBUG=false webpack --config webpack.prod.js",
+    "start": "cross-env DEBUG=true webpack-dev-server --open --config webpack.dev.js",
+    "lint": "eslint . --ext .js --ext .jsx"
+  },
+  "author": "Maksim Hladki",
+  "license": "ISC",
+  "devDependencies": {
+    "autobind-decorator": "^2.1.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-array-includes": "^2.0.3",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "classnames": "^2.2.5",
+    "clean-webpack-plugin": "^0.1.17",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.15.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-react": "^7.5.1",
+    "html-webpack-plugin": "^3.0.4",
+    "style-loader": "^0.19.0",
+    "uuid": "^3.1.0",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0",
+    "webpack-merge": "^4.1.1"
+  },
+  "dependencies": {
+    "keycode-js": "^1.0.0",
+    "normalize.css": "^7.0.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-define": "^1.1.1",
+    "redux-localstorage": "^0.4.1",
+    "redux-logger": "^3.0.6",
+    "todomvc-app-css": "^2.1.0"
+  }
+}		
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>webpack.common.js</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+const path = require('path'),
+    webpack = require('webpack'),
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const baseDir = 'src';
+const PATH = {
+    app: path.join(__dirname, baseDir),
+    template: path.join(__dirname, baseDir, 'templates', 'index.html'),
+    build: path.join(__dirname, 'build')
+};
+
+const DEBUG = JSON.parse(process.env.DEBUG || 'false');
+const devFlagPlugin = new webpack.DefinePlugin({
+    DEBUG: JSON.stringify(DEBUG)
+});
+
+const config = {
+    entry: {
+        app: PATH.app
+    },
+    output: {
+        path: PATH.build,
+        filename: '[name].bundle.js'
+    },
+    module: {
+        rules: [{
+            test: /\.css$/,
+            use: [
+            {
+                loader: 'style-loader',
+            }, 
+            {
+                loader: 'css-loader',
+                options: {
+                    minimize: !DEBUG,
+                    sourceMap: DEBUG
+                }
+            }]
+        },
+        {
+            test: /\.jsx?$/,
+            include: PATH.app,
+            use: [{
+                loader: 'babel-loader',
+                options: {
+                    cacheDirectory: true
+                }
+            }]
+        },
+        {
+            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    mimetype: 'application/font-woff',
+                    name: '[name].[ext]',
+                    outputPath: PATH.font,
+                }
+            }]
+        },
+        {
+            test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: PATH.font
+                }
+            }]
+        }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin([PATH.build]),
+        new HtmlWebpackPlugin({
+            template: PATH.template,
+            minify: DEBUG ? false : {
+                removeAttributeQuotes: true,
+                collapseWhitespace: true,
+                html5: true,
+                minifyCSS: false,
+                removeComments: true,
+                removeEmptyAttributes: true,
+              }
+        }),
+        devFlagPlugin
+    ]
+};
+
+module.exports = {
+    config,
+    path: PATH
+};
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>webpack.dev.js</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+const webpack = require('webpack'),
+    merge = require('webpack-merge'),
+    common = require('./webpack.common.js');
+
+const PATH = common.path,
+    config = common.config;
+
+module.exports = merge(config, {
+    module: {
+        rules: [
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                include: PATH.app,
+                loader: 'eslint-loader',
+                options: {}
+            },
+        ],
+    },
+    devtool: 'eval-source-map',
+    devServer: {
+        contentBase: PATH.build,
+        compress: false,
+        port: 9000,
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        stats: 'normal',
+        host: process.env.HOST,
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>webpack.prod.js</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+const webpack = require('webpack'),
+    merge = require('webpack-merge'),
+    UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+    common = require('./webpack.common.js');
+
+const config = common.config;
+
+module.exports = merge(config, {
+    plugins: [
+        new UglifyJSPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        })
+    ]
+});
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
+				<h2>Gulp и Webpack</h2>
+			</section>
+			<section>
+				<h3>Пример 1</h3>
+				<pre>
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       webpack = require('webpack-stream');
 
@@ -3674,11 +4600,11 @@ gulp.task('default', function() {
 });
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h3>Пример 2</h3>
-					<pre>
-						<code class="hljs" data-trim>
+			</section>
+			<section>
+				<h3>Пример 2</h3>
+				<pre>
+						<code class="hljs javascript" data-trim>
 const gulp = require('gulp'),
       webpack = require('webpack-stream');
 
@@ -3697,7 +4623,7 @@ gulp.task('default', function() {
 });
 						</code>
 					</pre>
-				</section>
+			</section>
 			</section>
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
