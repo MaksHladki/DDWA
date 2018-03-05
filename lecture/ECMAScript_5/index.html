@@ -2929,13 +2929,13 @@ document.getElementById('el2').addEventListener('click', onClick);
 <form id="el1">
 	<input type="submit" id="el2" value="Save">
 </form>
+
 <script>
 function onClick(e) {
     console.log(e);
     e.preventDefault();
-    //return false;//любое значение кроме false
-    //эквивалентно preventDefault + stopPropagation
 }
+
 document.getElementById('el1').addEventListener('click', onClick);
 document.getElementById('el2').addEventListener('click', onClick);
 </script>
