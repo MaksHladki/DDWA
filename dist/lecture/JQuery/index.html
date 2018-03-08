@@ -10,10 +10,8 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" href="../../img/js-icon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
-	<!--[if lt IE 9]>
-		<script src="../../js/html5shiv.min.js"></script>
-	<![endif]-->
 </head>
 
 <body>
@@ -43,6 +41,10 @@
 				</blockquote>
 			</section>
 			<section>
+				<h2>Тренды</h2>
+				<img src="img/trends.png" alt="" height="550">
+			</section>
+			<section>
 				<h2>Преимущества использования</h2>
 				<ul>
 					<li>Отделение кода разметки от поведения - вынесение js из разметки позволяет сделать саму разметку более чистой и понятной.
@@ -56,7 +58,7 @@
 			<section>
 				<h2>Ветки</h2>
 				<ul>
-					<li>jQuery 3.11 поддержка IE 9+</li>
+					<li>jQuery 3.3 поддержка IE 9+</li>
 					<li>jQuery 2.2 - поддержка IE 9+</li>
 					<li>jQuery 1.12 - поддержка IE 6+</li>
 				</ul>
@@ -80,12 +82,12 @@
 				</ul>
 			</section>
 			<section>
-				<h2>Версии jQuery 3.1</h2>
+				<h2>Версии jQuery 3.3</h2>
 				<ul>
 					<li>Commpressed - 85KB</li>
-					<li>UnCommpressed - 261KB</li>
-					<li>Commpressed Slim - 68KB</li>
-					<li>UnCommpressed Slim - 209KB</li>
+					<li>UnCommpressed - 276KB</li>
+					<li>Commpressed Slim - 69KB</li>
+					<li>UnCommpressed Slim - 222KB</li>
 				</ul>
 			</section>
 			<section>
@@ -93,7 +95,7 @@
 				<p class="highlight-blue">Удалено:</p>
 				<ul>
 					<li>Устаревший код</li>
-					<li>Ajax-функционал ($.ajax, $.get, $.post, $.ajaxSetup, .load, .ajaxStart и т.д.</li>
+					<li>Ajax-функционал ($.ajax, $.get, $.post, $.ajaxSetup, .load, .ajaxStart и т.д.)</li>
 					<li>Работа с XML и JSONP</li>
 					<li>Анимация ($.easing, $.Animation, $.speed)</li>
 				</ul>
@@ -101,43 +103,43 @@
 			<section>
 				<h2>Подключение библиотеки</h2>
 				<pre>
-					<code class="hljs">
+					<code class="hljs" data-trim>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;jQuery Hello World&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="jquery-3.3.1.min.js"&gt;&lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 					</code>
 				</pre>
 				<p>Использование CDN</p>
 				<pre>
-					<code class="hljs">
-&lt;script src="https://code.jquery.com/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+					<code class="hljs javascript" data-trim>
+&lt;script src="https://code.jquery.com/jquery-3.3.1.min.js"&gt;&lt;/script&gt;
 					</code>
 				</pre>
 			</section>
 			<section>
 				<h2>Функция jQuery</h2>
 				<pre>
-					<code class="hljs">
+					<code class="hljs javascript" data-trim>
 jQuery(document).ready(function(){
   // code
 });
 					</code>
 				</pre>
 				<pre>
-					<code class="hljs">
+					<code class="hljs javascript" data-trim>
 $(document).ready(function(){
   // code
 });
 					</code>
 				</pre>
 				<pre>
-					<code class="hljs">
+					<code class="hljs javascript" data-trim>
 $(function(){
   // code
 });
@@ -472,15 +474,15 @@ $(function(){
 				<h2>Поиск в выборке</h2>
 				<table>
 					<tr>
-						<td>find(селектор)</td>
+						<td>.find(селектор)</td>
 						<td>поиск в выборке объектов, соответствующих селектору</td>
 					</tr>
 					<tr>
-						<td>find(элемент)</td>
+						<td>.find(элемент)</td>
 						<td>поиск в выборке объектов, соответствующих данному элементу html</td>
 					</tr>
 					<tr>
-						<td>find(jQuery)</td>
+						<td>.find(jQuery)</td>
 						<td>поиск в выборке объектов, соответствующих объекту jQuery</td>
 					</tr>
 				</table>
@@ -490,44 +492,41 @@ $(function(){
 					<h2>Навигация по странице</h2>
 				</section>
 				<section>
-					<h3>Часть 1</h3>
 					<table>
 						<tr>
-							<td>children([selector])</td>
+							<td>.children([selector])</td>
 							<td>возвращает набор элементов, состоящий из прямых потомков каждого элемента исходного набора</td>
 						</tr>
 						<tr>
-							<td>closest(selector[,context])</td>
+							<td>.closest(selector[,context])</td>
 							<td>возвращает ближайшего родителя, соответствующему селектору</td>
 						</tr>
 						<tr>
-							<td>next([selector])</td>
+							<td>.next([selector])</td>
 							<td>получает следующий элемент, находящийся на одном уровне с текущим</td>
 						</tr>
 						<tr>
-							<td>nextAll([selector])</td>
+							<td>.nextAll([selector])</td>
 							<td>получает все следующие элементы одного уровня по отношению к текущему</td>
 						</tr>
-
 					</table>
 				</section>
 				<section>
-					<h3>Часть 2</h3>
 					<table>
 						<tr>
-							<td>prev([selector])</td>
+							<td>.prev([selector])</td>
 							<td>получает предыдущий элемент по отношению к текущему</td>
 						</tr>
 						<tr>
-							<td>prevAll([selector])</td>
+							<td>.prevAll([selector])</td>
 							<td>получает все предыдущие элементы по отношению к текущему</td>
 						</tr>
 						<tr>
-							<td>siblings([selector])</td>
+							<td>.siblings([selector])</td>
 							<td>позволяет получить все элементы уровня, на котором находится текущий (комбинация nextAll и prevAll)</td>
 						</tr>
 						<tr>
-							<td>parent([selector])</td>
+							<td>.parent([selector])</td>
 							<td>получение родителя элемента</td>
 						</tr>
 					</table>
@@ -565,7 +564,7 @@ $(function(){
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/section&gt;
-    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="jquery-3.3.1.min.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 						</code>
@@ -574,7 +573,7 @@ $(function(){
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var newsElement = $('#news');
     console.log(newsElement);
@@ -586,7 +585,7 @@ $(function(){
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var newsElement = $('.news');
     console.log(newsElement);
@@ -598,7 +597,7 @@ $(function(){
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
  $(function () {
     var headers = $('.header');
     console.log(headers);
@@ -613,7 +612,7 @@ $(function(){
 				<section>
 					<h3>Пример 4</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var headers = $('#article_main .header');
     console.log(headers);
@@ -628,7 +627,7 @@ $(function(){
 				<section>
 					<h3>Пример 5</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var articles = $('#news > .article');
     console.log(articles);
@@ -640,7 +639,7 @@ $(function(){
 				<section>
 					<h3>Пример 6</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var headers = $('#news > .header');
     console.log(headers);
@@ -652,7 +651,7 @@ $(function(){
 				<section>
 					<h3>Пример 7</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
 	var elements = $('div[class*="eade"]');
     console.log(elements);
@@ -664,7 +663,7 @@ $(function(){
 				<section>
 					<h3>Пример 8</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var article = $('*[data-article-id="101"]');
     console.log(article);
@@ -678,7 +677,7 @@ $(function(){
 				<section>
 					<h3>Пример 9</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var article = $('.article:eq(1)');
     console.log(article);
@@ -690,7 +689,7 @@ $(function(){
 				<section>
 					<h3>Пример 10</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var articles = $('.article:not(#article_main)');
     console.log(articles);
@@ -702,7 +701,7 @@ $(function(){
 				<section>
 					<h3>Пример 11</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var body = $('.body:last');
     console.log(body);
@@ -714,7 +713,7 @@ $(function(){
 				<section>
 					<h3>Пример 12</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var body = $('.article .body>p:contains("Hey")').parent()[0];
     console.log(body);
@@ -726,7 +725,7 @@ $(function(){
 				<section>
 					<h3>Пример 13</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var articles = $('div').filter(function(){
         return $(this).hasClass('article');
@@ -740,7 +739,7 @@ $(function(){
 				<section>
 					<h3>Пример 14</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var articles = $('.article');
     var headers = articles.find('.header');
@@ -753,7 +752,7 @@ $(function () {
 				<section>
 					<h3>Пример 15</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.children());
@@ -765,7 +764,7 @@ $(function () {
 				<section>
 					<h3>Пример 16</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.children('.body'));
@@ -777,7 +776,7 @@ $(function () {
 				<section>
 					<h3>Пример 17</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var pharagraps = $('.header > p');
     console.log(pharagraps.closest('.news'));
@@ -789,7 +788,7 @@ $(function () {
 				<section>
 					<h3>Пример 18</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var mainArticle = $('#article_main');
     console.log(mainArticle.next()[0]);
@@ -801,7 +800,7 @@ $(function () {
 				<section>
 					<h3>Пример 19</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var mainArticle = $('#article_main');
     var secondArticle = $('.article[data-article-id="101"]');
@@ -815,7 +814,7 @@ $(function () {
 				<section>
 					<h3>Пример 20</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var mainArticle = $('#article_main');
     //нет родителя с тегом body
@@ -835,7 +834,7 @@ $(function () {
 					<h2>Атрибуты и свойства элементов</h2>
 				</section>
 				<section>
-					<h3>Метод attr()</h3>
+					<h3>Метод attr</h3>
 					<table>
 						<tr>
 							<td>.attr(attrName)</td>
@@ -851,7 +850,7 @@ $(function () {
 						</tr>
 						<tr>
 							<td>.attr(attrName, function(index, value))</td>
-							<td>присваивает атрибуту значение, возвращаемое функцией (если ничего не вернет, то атрибут не будет изменен). Index —
+							<td>присваивает атрибуту значение, возвращаемое функцией. Index —
 								позиция элемента в наборе</td>
 						</tr>
 						<tr>
@@ -861,7 +860,7 @@ $(function () {
 					</table>
 				</section>
 				<section>
-					<h3>Метод prop()</h3>
+					<h3>Метод prop</h3>
 					<table>
 						<tr>
 							<td>.prop(propName)</td>
@@ -907,7 +906,7 @@ $(function () {
 					</blockquote>
 				</section>
 				<section>
-					<h3>Метод data()</h3>
+					<h3>Метод data</h3>
 					<p>Если выбрано несколько элементов, то функция будет работать только с первым из них</p>
 					<table>
 						<tr>
@@ -929,7 +928,6 @@ $(function () {
 					</table>
 				</section>
 			</section>
-
 			<section>
 				<section>
 					<h2>Изменение стилей</h2>
@@ -964,7 +962,7 @@ $(function () {
 					</table>
 				</section>
 				<section>
-					<h3>Метод css()</h3>
+					<h3>Метод css</h3>
 					<table>
 						<tr>
 							<td>.css(property)</td>
@@ -1011,7 +1009,7 @@ $(function () {
 					<h2>Содержимое элементов</h2>
 				</section>
 				<section>
-					<h3>Метод html()</h3>
+					<h3>Метод html</h3>
 					<table>
 						<tr>
 							<td>.html()</td>
@@ -1028,11 +1026,11 @@ $(function () {
 					</table>
 				</section>
 				<section>
-					<h3>Метод text()</h3>
+					<h3>Метод text</h3>
 					<table>
 						<tr>
 							<td>.text()</td>
-							<td> получает текст первого элемента в наборе</td>
+							<td>получает текст первого элемента в наборе</td>
 						</tr>
 						<tr>
 							<td>.text(text)</td>
@@ -1052,7 +1050,7 @@ $(function () {
 				<section>
 					<h3>Код страницы</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1079,7 +1077,7 @@ $(function () {
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/section&gt;
-    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="jquery-3.3.1.min.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 						</code>
@@ -1088,7 +1086,7 @@ $(function () {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.attr('class'));//article
@@ -1105,7 +1103,7 @@ $(function () {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.prop('class'));//article
@@ -1122,7 +1120,7 @@ $(function () {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var checkbox = $('.article input[type="checkbox"]');
     console.log(checkbox.prop('checked'));//true
@@ -1139,7 +1137,7 @@ $(function () {
 				<section>
 					<h3>Пример 4</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var checkbox = $('.article input[type="checkbox"]');
     console.log(checkbox.prop('custom'));//undefined
@@ -1156,7 +1154,7 @@ $(function () {
 				<section>
 					<h3>Пример 5</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('.article').eq(1);
     console.log(article.data());
@@ -1174,7 +1172,7 @@ $(function () {
 				<section>
 					<h3>Пример 6</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.css('margin'));//0px
@@ -1193,7 +1191,7 @@ $(function () {
 				<section>
 					<h3>Пример 7</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.height());//72
@@ -1211,7 +1209,7 @@ $(function () {
 				<section>
 					<h3>Пример 8</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.attr('class')); //article
@@ -1234,7 +1232,7 @@ $(function () {
 				<section>
 					<h3>Пример 9</h3>
 					<pre>
-					<code class="hljs">
+					<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.offset()); //left: 8; top: 8;
@@ -1254,7 +1252,7 @@ $(function () {
 				<section>
 					<h3>Пример 10</h3>
 					<pre>
-					<code class="hljs">
+					<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('#article_main');
     console.log(article.offset()); //left: 8; top: 8;
@@ -1271,7 +1269,7 @@ $(function () {
 				<section>
 					<h3>Пример 11</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var header = $('#article_main .header > p');
     console.log(header.text());
@@ -1286,7 +1284,7 @@ $(function () {
 				<section>
 					<h3>Пример 12</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var header = $('#article_main .header');
     console.log(header.html());// <p>article #2</p>
@@ -1306,7 +1304,7 @@ $(function () {
 					<h2>Создание и добавление дочерних элементов</h2>
 				</section>
 				<section>
-					<h3>Метод append()</h3>
+					<h3>Метод append</h3>
 					<table>
 						<tr>
 							<td>.append(htmlString)</td>
@@ -1327,7 +1325,7 @@ $(function () {
 					</table>
 				</section>
 				<section>
-					<h3>Метод prepend()</h3>
+					<h3>Метод prepend</h3>
 					<table>
 						<tr>
 							<td>.prepend(htmlString)</td>
@@ -1374,7 +1372,7 @@ $(function () {
 					<h2>Обертывание элементов</h2>
 				</section>
 				<section>
-					<h3>Метод wrap()</h3>
+					<h3>Метод wrap</h3>
 					<table>
 						<tr>
 							<td>.wrap(htmlString)</td>
@@ -1417,7 +1415,7 @@ $(function () {
 					<h2>Добавление сестринских элементов</h2>
 				</section>
 				<section>
-					<h3>Метод before()</h3>
+					<h3>Метод before</h3>
 					<table>
 						<tr>
 							<td>.before(htmlString)</td>
@@ -1438,7 +1436,7 @@ $(function () {
 					</table>
 				</section>
 				<section>
-					<h3>Метод after()</h3>
+					<h3>Метод after</h3>
 					<table>
 						<tr>
 							<td>.after(htmlString)</td>
@@ -1459,7 +1457,7 @@ $(function () {
 					</table>
 				</section>
 				<section>
-					<h3>Метод insertBefore()</h3>
+					<h3>Метод insertBefore</h3>
 					<table>
 						<tr>
 							<td>.insertBefore(htmlString)</td>
@@ -1480,7 +1478,7 @@ $(function () {
 					</table>
 				</section>
 				<section>
-					<h3>Метод insertAfter()</h3>
+					<h3>Метод insertAfter</h3>
 					<table>
 						<tr>
 							<td>.insertAfter(htmlString)</td>
@@ -1538,7 +1536,7 @@ $(function () {
 				<section>
 					<h3>Код страницы</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1555,7 +1553,7 @@ $(function () {
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/section&gt;
-    &lt;script src="jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="jquery-3.3.1.min.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 						</code>
@@ -1564,7 +1562,7 @@ $(function () {
 				<section>
 					<h3>Пример 1</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function () {
     var article = $(
         `<div class="article">
@@ -1584,7 +1582,7 @@ $(function () {
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var template = 
         `<div class="article">
@@ -1604,7 +1602,7 @@ $(function () {
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     var article = $('.article');
     var clone = article.clone();
@@ -1617,7 +1615,7 @@ $(function () {
 				<section>
 					<h3>Пример 4</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     var  textarea = $('textarea');
     textarea.wrap('<div class="text"></div>');
@@ -1630,7 +1628,7 @@ $(function(){
 				<section>
 					<h3>Пример 5</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     var  paragraph = $('.header > p');
     paragraph.wrapInner('<span></span>');
@@ -1643,7 +1641,7 @@ $(function(){
 				<section>
 					<h3>Пример 6</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
  $(function(){
     var  paragraph = $('.header > p');
     var dateItem = document.createElement('span');
@@ -1659,7 +1657,7 @@ $(function(){
 				<section>
 					<h3>Пример 7</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     var paragraph = $('.header > p');
     var template = '<span class="date">01.03.2017</span>';
@@ -1673,7 +1671,7 @@ $(function(){
 				<section>
 					<h3>Пример 8</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     var template = `<div>
             <span>(@_@)</span>
@@ -1688,7 +1686,7 @@ $(function(){
 				<section>
 					<h3>Пример 9</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     var article = $('.article');
     article.find('.header').remove();
@@ -1708,17 +1706,17 @@ $(function(){
 					<h2>Регистрация и удаление обработчиков</h2>
 				</section>
 				<section>
-					<h3>Метод bind()</h3>
+					<h3>Метод bind</h3>
 					<p class="highlight-blue">Метод bind добавляет обработчики событий только к тем элементам, которые на момент его действия уже существуют в структуре
 						DOM
 					</p>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 .bind(eventType [, eventData ], handler)
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     $('button').bind('click', function(){
         console.log('Обработчик события click');
@@ -1730,14 +1728,14 @@ $(function(){
 					</pre>
 				</section>
 				<section>
-					<h3>Метод unbind()</h3>
+					<h3>Метод unbind</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 .unbind(eventType [, handler ])
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     $('button').bind('click', function(e){
         console.log('Обработчик события click');
@@ -1750,14 +1748,14 @@ $(function(){
 					</pre>
 				</section>
 				<section>
-					<h3>Метод one()</h3>
+					<h3>Метод one</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 .one(events [, data ], handler)
 						</code>
 					</pre>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function(){
     $('button').one('click', function(e){
         console.log('Обработчик события click');
@@ -1834,7 +1832,7 @@ $(function(){
 						</tr>
 						<tr>
 							<td>which</td>
-							<td>объект (в обработчиках событий клавиатуры или мыши), содержащий данные о нажатой клавише или кнопке</td>
+							<td>объект, содержащий данные о нажатой клавише или кнопке</td>
 						</tr>
 					</table>
 				</section>
@@ -1846,7 +1844,7 @@ $(function(){
 &lt;html&gt;
 &lt;body&gt;
     &lt;input type="text" id="fistName"&gt;
-    &lt;script src="js/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/jquery-3.3.1.min.js"&gt;&lt;/script&gt;
     &lt;script&gt;
         $(function () {
             $('#fistName').bind('keydown', function (ev) {
@@ -1864,12 +1862,12 @@ $(function(){
 				<section>
 					<h3>Пример 2</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 &lt;body&gt;
     &lt;input type="button" value="Click"&gt;
-    &lt;script src="js/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/jquery-3.3.1.min.js"&gt;&lt;/script&gt;
     &lt;script&gt;
         $(function () {
             var $elem = $('input[type="button"]');
@@ -1888,12 +1886,12 @@ $(function(){
 				<section>
 					<h3>Пример 3</h3>
 					<pre>
-						<code class="hljs" data-trim>
+						<code class="hljs javascript" data-trim>
 &lt;!DOCTYPE&gt;
 &lt;html&gt;
 &lt;body&gt;
     &lt;input type="button" value="Click"&gt;
-    &lt;script src="js/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/jquery-3.3.1.min.js"&gt;&lt;/script&gt;
     &lt;script&gt;
         $(function () {
             $('input[type="button"]').bind('click', function (ev) {
@@ -1916,7 +1914,7 @@ $(function(){
 				<section>
 					<h3>Пример html</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 &lt;div&gt;
     &lt;form&gt;
         &lt;input type="button" name="send" value="Send"&gt;
@@ -1928,7 +1926,7 @@ $(function(){
 				<section>
 					<h3>Пример js</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     $('input[type="button"]').bind('click', function (e) {
         console.log('Событие инициировал элемент ' + e.target.tagName);
@@ -1949,20 +1947,20 @@ $(function () {
 				<section>
 					<h3>Результат</h3>
 					<pre>
-						<code class="hljs">
-// Событие инициировал элемент INPUT
-// Событие обрабатывается для элемента INPUT
-// Событие инициировал элемент INPUT
-// Событие обрабатывается для элемента FORM
-// Событие инициировал элемент INPUT
-// Событие обрабатывается для элемента DIV
+						<code class="hljs" data-trim>
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента INPUT
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента FORM
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента DIV
 						</code>
 					</pre>
 				</section>
 				<section>
-					<h3>Метод stopPropagation()</h3>
+					<h3>Метод stopPropagation</h3>
 					<pre>
-						<code class="hljs">
+						<code class="hljs javascript" data-trim>
 $(function () {
     $('input[type="button"]').bind('click', function (e) {
         console.log('Событие инициировал элемент ' + e.target.tagName);
@@ -1984,15 +1982,79 @@ $(function () {
 				<section>
 					<h3>Результат</h3>
 					<pre>
-						<code class="hljs">
-// Событие инициировал элемент INPUT
-// Событие обрабатывается для элемента INPUT
+						<code class="hljs javascript" data-trim>
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента INPUT
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод stopImmediatePropagation</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+$(function () {
+    $('input[type="button"]').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+        e.stopImmediatePropagation();
+    });
+    $('form').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+    $('div').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Результат</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента INPUT
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Метод preventDefault</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+$(function () {
+    $('input[type="button"]').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+        e.preventDefault();
+    });
+    $('form').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+    $('div').bind('click', function (e) {
+        console.log('Событие инициировал элемент ' + e.target.tagName);
+        console.log('Событие обрабатывается для элемента ' + e.currentTarget.tagName);
+    });
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Результат</h3>
+					<pre>
+						<code class="hljs javascript" data-trim>
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента INPUT
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента FORM
+//Событие инициировал элемент INPUT
+//Событие обрабатывается для элемента DIV
 						</code>
 					</pre>
 				</section>
 			</section>
-
-
 			<section>
 				<h2 class="header-hide">Спасибо за внимание</h2>
 				<img src="img/thanks.png" alt="" height="600">
